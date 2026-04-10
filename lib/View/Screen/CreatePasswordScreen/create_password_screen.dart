@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../helper/shared_preference_helper.dart';
-import '../DashboardScreen/dashboard_screen.dart';
+import '../Traveler-Roll/DashboardScreen/dashboard_screen.dart';
 
 class CreatePasswordScreen extends StatefulWidget {
   const CreatePasswordScreen({super.key});

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../../Utils/AppIcons/app_icons.dart';
-import '../../../Utils/AppImg/app_img.dart';
-import '../../Widget/custom_bottom_nav_bar.dart';
+import '../../../../Utils/AppIcons/app_icons.dart';
+import '../../../../Utils/AppImg/app_img.dart';
+import '../../../Widget/custom_bottom_nav_bar.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -17,9 +17,7 @@ class DashboardScreen extends StatelessWidget {
       backgroundColor: isDarkMode
           ? const Color(0xFF121212)
           : const Color(0xFFF8F9FE),
-      bottomNavigationBar: const CustomBottomNavBar(
-        selectedIndex: 0,
-      ),
+      bottomNavigationBar: const CustomBottomNavBar(selectedIndex: 0),
       body: SingleChildScrollView(
         child: Column(
           children: [
