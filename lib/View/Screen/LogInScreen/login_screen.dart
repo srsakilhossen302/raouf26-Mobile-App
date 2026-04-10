@@ -6,6 +6,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../../Utils/AppIcons/app_icons.dart';
 import '../EnterPasswordScreen/enter_password_screen.dart';
 import '../SignUpScreen/signup_screen.dart';
+import '../IssueWithNumberScreen/issue_with_number_screen.dart';
 
 class LogInScreen extends StatelessWidget {
   const LogInScreen({super.key});
@@ -113,6 +114,21 @@ class LogInScreen extends StatelessWidget {
               dropdownTextStyle: TextStyle(
                 color: isDarkMode ? Colors.white : Colors.black,
                 fontSize: 16.sp,
+              ),
+            ),
+            SizedBox(height: 12.h),
+            Align(
+              alignment: Alignment.centerRight,
+              child: GestureDetector(
+                onTap: () => Get.to(() => const IssueWithNumberScreen()),
+                child: Text(
+                  "Issue with number?",
+                  style: TextStyle(
+                    color: const Color(0xFF4A80F0),
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 12.h),
