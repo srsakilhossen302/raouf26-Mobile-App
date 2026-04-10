@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../../helper/shared_preference_helper.dart';
+import '../DashboardScreen/dashboard_screen.dart';
 
 class CreatePasswordScreen extends StatefulWidget {
   const CreatePasswordScreen({super.key});
@@ -105,8 +107,13 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               width: double.infinity,
               height: 55.h,
               child: ElevatedButton(
-                onPressed: () {
-                  // Final confirmation logic
+                onPressed: () async {
+                  String? role = await SharedPreferenceHelper.getUserRole();
+                  if (role == "Traveler") {
+                    Get.offAll(() => const DashboardScreen());
+                  } else {
+                    // Logic for other roles will be added later
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
@@ -165,13 +172,12 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
           borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide.none,
         ),
-        contentPadding: EdgeInsets.symmetric(
-          horizontal: 16.w,
-          vertical: 16.h,
-        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         suffixIcon: IconButton(
           icon: Icon(
-            isVisible ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+            isVisible
+                ? Icons.visibility_off_outlined
+                : Icons.visibility_outlined,
             color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
           ),
           onPressed: onToggle,

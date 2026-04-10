@@ -1,0 +1,424 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import '../../../Utils/AppIcons/app_icons.dart';
+import '../../../Utils/AppImg/app_img.dart';
+
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    return Scaffold(
+      backgroundColor: isDarkMode
+          ? const Color(0xFF121212)
+          : const Color(0xFFF8F9FE),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Top Blue Section with Background Image
+            Stack(
+              children: [
+                Container(
+                  height: 220.h,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(color: Color(0xFF4A80F0)),
+                  child: Image.asset(
+                    AppImg.dashboardBg,
+                    fit: BoxFit.cover,
+                    color: Colors.white.withOpacity(0.2),
+                    colorBlendMode: BlendMode.dstIn,
+                  ),
+                ),
+                SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                      vertical: 10.h,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "9:42",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.signal_cellular_alt,
+                                  color: Colors.white,
+                                  size: 16.sp,
+                                ),
+                                SizedBox(width: 4.w),
+                                Icon(
+                                  Icons.wifi,
+                                  color: Colors.white,
+                                  size: 16.sp,
+                                ),
+                                SizedBox(width: 4.w),
+                                Icon(
+                                  Icons.battery_full,
+                                  color: Colors.white,
+                                  size: 16.sp,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20.h),
+                        // Dashboard Card
+                        Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.all(24.r),
+                          decoration: BoxDecoration(
+                            color: isDarkMode
+                                ? const Color(0xFF1E1E1E)
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(24.r),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.05),
+                                blurRadius: 20,
+                                offset: const Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Dashboard",
+                                style: TextStyle(
+                                  fontSize: 24.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 4.h),
+                              Text(
+                                "Overview of your shipments and trips",
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: isDarkMode
+                                      ? Colors.white60
+                                      : Colors.grey.shade600,
+                                ),
+                              ),
+                              SizedBox(height: 24.h),
+                              Text(
+                                "Quick Actions",
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
+                              SizedBox(height: 16.h),
+                              Row(
+                                children: [
+                                  _quickActionCard(
+                                    title: "Send Package",
+                                    subtitle: "Ship with a traveler",
+                                    icon: AppIcons.sendPackage,
+                                    isDarkMode: isDarkMode,
+                                  ),
+                                  SizedBox(width: 16.w),
+                                  _quickActionCard(
+                                    title: "Carry Package",
+                                    subtitle: "Earn on your trip",
+                                    icon: AppIcons.carryPackage,
+                                    isDarkMode: isDarkMode,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            // Statistics Section
+            Padding(
+              padding: EdgeInsets.all(20.r),
+              child: Column(
+                children: [
+                  _sectionHeader("Statistics", isDarkMode),
+                  SizedBox(height: 16.h),
+                  Container(
+                    padding: EdgeInsets.all(20.r),
+                    decoration: BoxDecoration(
+                      color: isDarkMode
+                          ? const Color(0xFF1E1E1E)
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Column(
+                      children: [
+                        _statsRow(
+                          icon: AppIcons.totalEarnings,
+                          label: "Total Earnings",
+                          value: "€1,240",
+                          isDarkMode: isDarkMode,
+                        ),
+                        Divider(
+                          height: 32.h,
+                          color: isDarkMode
+                              ? Colors.white10
+                              : Colors.grey.shade100,
+                        ),
+                        _statsRow(
+                          icon: AppIcons.clients,
+                          label: "Clients",
+                          value: "42",
+                          isDarkMode: isDarkMode,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 24.h),
+                  _sectionHeader("Total Earnings", isDarkMode),
+                  SizedBox(height: 16.h),
+                  // Chart Placeholder
+                  Container(
+                    padding: EdgeInsets.all(20.r),
+                    decoration: BoxDecoration(
+                      color: isDarkMode
+                          ? const Color(0xFF1E1E1E)
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _chartYLabel("€500"),
+                            _chartYLabel("€200"),
+                            _chartYLabel("€100"),
+                            _chartYLabel("€50"),
+                            _chartYLabel("0"),
+                          ],
+                        ),
+                        SizedBox(height: 20.h),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            _chartBar(40.h),
+                            _chartBar(80.h),
+                            _chartBar(60.h),
+                            _chartBar(120.h),
+                            _chartBar(80.h),
+                            _chartBar(30.h),
+                            _chartBar(70.h),
+                          ],
+                        ),
+                        SizedBox(height: 8.h),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            _chartXLabel("Mon"),
+                            _chartXLabel("Tue"),
+                            _chartXLabel("Wed"),
+                            _chartXLabel("Thu"),
+                            _chartXLabel("Fri"),
+                            _chartXLabel("Sat"),
+                            _chartXLabel("Sun"),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _quickActionCard({
+    required String title,
+    required String subtitle,
+    required String icon,
+    required bool isDarkMode,
+  }) {
+    return Expanded(
+      child: Container(
+        padding: EdgeInsets.all(16.r),
+        decoration: BoxDecoration(
+          color: isDarkMode
+              ? Colors.white.withOpacity(0.03)
+              : const Color(0xFFF8F9FE),
+          borderRadius: BorderRadius.circular(16.r),
+          border: Border.all(
+            color: isDarkMode ? Colors.white12 : Colors.grey.shade100,
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: EdgeInsets.all(8.r),
+              decoration: BoxDecoration(
+                color: const Color(0xFF4A80F0).withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: SvgPicture.asset(
+                icon,
+                height: 20.r,
+                colorFilter: const ColorFilter.mode(
+                  Color(0xFF4A80F0),
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+            SizedBox(height: 12.h),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.bold,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
+            SizedBox(height: 4.h),
+            Text(
+              subtitle,
+              style: TextStyle(
+                fontSize: 10.sp,
+                color: isDarkMode ? Colors.white54 : Colors.grey.shade500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _sectionHeader(String title, bool isDarkMode) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+          decoration: BoxDecoration(
+            color: isDarkMode ? Colors.white10 : Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+          child: Row(
+            children: [
+              Text(
+                "Weekly",
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  color: isDarkMode ? Colors.white70 : Colors.black87,
+                ),
+              ),
+              Icon(Icons.keyboard_arrow_down, size: 16.sp, color: Colors.grey),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _statsRow({
+    required String icon,
+    required String label,
+    required String value,
+    required bool isDarkMode,
+  }) {
+    return Row(
+      children: [
+        Container(
+          padding: EdgeInsets.all(10.r),
+          decoration: BoxDecoration(
+            color: isDarkMode
+                ? Colors.white.withOpacity(0.05)
+                : Colors.grey.shade50,
+            shape: BoxShape.circle,
+          ),
+          child: SvgPicture.asset(
+            icon,
+            colorFilter: ColorFilter.mode(
+              isDarkMode ? Colors.white70 : Colors.black54,
+              BlendMode.srcIn,
+            ),
+            height: 20.sp,
+            width: 20.sp,
+          ),
+        ),
+        SizedBox(width: 16.w),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 15.sp,
+            color: isDarkMode ? Colors.white70 : Colors.grey.shade700,
+          ),
+        ),
+        const Spacer(),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _chartYLabel(String label) {
+    return Text(
+      label,
+      style: TextStyle(fontSize: 10.sp, color: Colors.grey),
+    );
+  }
+
+  Widget _chartXLabel(String label) {
+    return Text(
+      label,
+      style: TextStyle(fontSize: 10.sp, color: Colors.grey),
+    );
+  }
+
+  Widget _chartBar(double height) {
+    return Container(
+      width: 15.w,
+      height: height,
+      decoration: BoxDecoration(
+        color: const Color(0xFF4A80F0),
+        borderRadius: BorderRadius.circular(4.r),
+      ),
+    );
+  }
+}
