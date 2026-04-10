@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../ForgotPasswordScreen/forgot_password_screen.dart';
+import '../VerifyEmailScreen/verify_email_screen.dart';
 
-class EnterPasswordScreen extends StatefulWidget {
-  const EnterPasswordScreen({super.key});
-
-  @override
-  State<EnterPasswordScreen> createState() => _EnterPasswordScreenState();
-}
-
-class _EnterPasswordScreenState extends State<EnterPasswordScreen> {
-  bool _isObscure = true;
+class ForgotPasswordScreen extends StatelessWidget {
+  const ForgotPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +23,7 @@ class _EnterPasswordScreenState extends State<EnterPasswordScreen> {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          "Enter Password",
+          "Forgot Password",
           style: TextStyle(
             color: isDarkMode ? Colors.white : Colors.black,
             fontSize: 18.sp,
@@ -38,19 +31,6 @@ class _EnterPasswordScreenState extends State<EnterPasswordScreen> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(
-              isDarkMode ? Icons.light_mode : Icons.dark_mode,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
-            onPressed: () {
-              Get.changeThemeMode(
-                isDarkMode ? ThemeMode.light : ThemeMode.dark,
-              );
-            },
-          ),
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -59,7 +39,7 @@ class _EnterPasswordScreenState extends State<EnterPasswordScreen> {
           children: [
             SizedBox(height: 20.h),
             Text(
-              "Enter Your Password",
+              "Forgot Password?",
               style: TextStyle(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
@@ -68,7 +48,7 @@ class _EnterPasswordScreenState extends State<EnterPasswordScreen> {
             ),
             SizedBox(height: 8.h),
             Text(
-              "Enter your password to access your account.",
+              "Enter your registered email to receive a 4 digit OTP.",
               style: TextStyle(
                 fontSize: 16.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
@@ -76,7 +56,7 @@ class _EnterPasswordScreenState extends State<EnterPasswordScreen> {
             ),
             SizedBox(height: 32.h),
             Text(
-              "Password",
+              "Email",
               style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
@@ -85,13 +65,12 @@ class _EnterPasswordScreenState extends State<EnterPasswordScreen> {
             ),
             SizedBox(height: 12.h),
             TextField(
-              obscureText: _isObscure,
               style: TextStyle(
                 color: isDarkMode ? Colors.white : Colors.black,
                 fontSize: 16.sp,
               ),
               decoration: InputDecoration(
-                hintText: 'Enter Your Password',
+                hintText: 'Email',
                 hintStyle: TextStyle(
                   color: isDarkMode ? Colors.white24 : Colors.grey.shade400,
                   fontSize: 14.sp,
@@ -104,35 +83,9 @@ class _EnterPasswordScreenState extends State<EnterPasswordScreen> {
                   borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide.none,
                 ),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _isObscure
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
-                    color: isDarkMode ? Colors.white54 : Colors.grey.shade600,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _isObscure = !_isObscure;
-                    });
-                  },
-                ),
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: 16.w,
                   vertical: 16.h,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () => Get.to(() => const ForgotPasswordScreen()),
-                child: Text(
-                  "Forgot Password?",
-                  style: TextStyle(
-                    color: const Color(0xFF4A80F0),
-                    fontSize: 14.sp,
-                  ),
                 ),
               ),
             ),
@@ -141,7 +94,7 @@ class _EnterPasswordScreenState extends State<EnterPasswordScreen> {
               width: double.infinity,
               height: 55.h,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Get.to(() => const VerifyEmailScreen()),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   shape: RoundedRectangleBorder(
@@ -150,7 +103,7 @@ class _EnterPasswordScreenState extends State<EnterPasswordScreen> {
                   elevation: 0,
                 ),
                 child: Text(
-                  "Log In",
+                  "Continue",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16.sp,
