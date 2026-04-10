@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import '../../Utils/AppIcons/app_icons.dart';
 import '../Screen/DashboardScreen/dashboard_screen.dart';
+import '../Screen/MyParcelsScreen/my_parcels_screen.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -20,7 +21,7 @@ class CustomBottomNavBar extends StatelessWidget {
         Get.offAll(() => const DashboardScreen());
         break;
       case 1:
-        // Get.offAll(() => const MyParcelsScreen());
+        Get.offAll(() => const MyParcelsScreen());
         break;
       case 2:
         // Get.offAll(() => const SearchScreen());
