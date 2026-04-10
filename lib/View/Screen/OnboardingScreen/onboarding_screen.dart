@@ -6,6 +6,7 @@ import '../../../Utils/AppIcons/app_icons.dart';
 import '../../../Utils/AppImg/app_img.dart';
 import '../LogInScreen/login_screen.dart';
 import '../SignUpScreen/signup_screen.dart';
+import '../ChooseRoleScreen/choose_role_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -207,7 +208,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               height: 55.h,
                               child: ElevatedButton(
                                 onPressed: () =>
-                                    Get.to(() => const SignUpScreen()),
+                                    Get.to(() => const ChooseRoleScreen()),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF4A80F0),
                                   shape: RoundedRectangleBorder(
