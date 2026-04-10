@@ -14,4 +14,9 @@ class AppIcons {
   static const String location = "$basePath/Location-icons.svg";
   static const String recent = "$basePath/Recent-icons.svg";
   static const String upcoming = "$basePath/Upcoming Trips.svg";
+  static const String dashboardNavbar = "$basePath/Dashboard-navbar.svg";
+  static const String messagesNavbar = "$basePath/Messages-navbar.svg";
+  static const String myParcelsNavbar = "$basePath/My Parcels-navbar.svg";
+  static const String publishTripsNavbar = "$basePath/Publish Trips-navbar.svg";
+  static const String searchNavbar = "$basePath/sarch-navbar.svg";
 }
