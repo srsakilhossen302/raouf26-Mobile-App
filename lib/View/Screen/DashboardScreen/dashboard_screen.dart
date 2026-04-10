@@ -308,12 +308,280 @@ class DashboardScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: 24.h),
+                  _sectionHeaderWithAction(
+                    "Today's Trip",
+                    "See all",
+                    isDarkMode,
+                  ),
+                  SizedBox(height: 16.h),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        _todayTripCard(isDarkMode),
+                        SizedBox(width: 16.w),
+                        _todayTripCard(isDarkMode),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 24.h),
+                  _sectionHeaderWithAction("Upcoming Trips", "", isDarkMode),
+                  SizedBox(height: 16.h),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        _upcomingTripItem("Tunis", "Paris", isDarkMode),
+                        SizedBox(width: 16.w),
+                        _upcomingTripItem("Alger", "Marseille", isDarkMode),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 24.h),
+                  _sectionHeaderWithAction("Recent Activity", "", isDarkMode),
+                  SizedBox(height: 16.h),
+                  Container(
+                    padding: EdgeInsets.all(20.r),
+                    decoration: BoxDecoration(
+                      color: isDarkMode
+                          ? const Color(0xFF1E1E1E)
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Column(
+                      children: [
+                        _recentActivityItem(
+                          "Trip Completed",
+                          "Tunis -> Paris",
+                          "2h ago",
+                          isDarkMode,
+                        ),
+                        Divider(
+                          height: 32.h,
+                          color: isDarkMode
+                              ? Colors.white10
+                              : Colors.grey.shade100,
+                        ),
+                        _recentActivityItem(
+                          "New Message",
+                          "From Client",
+                          "5h ago",
+                          isDarkMode,
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 30.h),
                 ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _sectionHeaderWithAction(
+    String title,
+    String action,
+    bool isDarkMode,
+  ) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
+        if (action.isNotEmpty)
+          Text(
+            action,
+            style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+          ),
+      ],
+    );
+  }
+
+  Widget _todayTripCard(bool isDarkMode) {
+    return Container(
+      width: 280.w,
+      padding: EdgeInsets.all(16.r),
+      decoration: BoxDecoration(
+        color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: isDarkMode
+            ? []
+            : [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.02),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Tunis \u2192 Paris",
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.bold,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
+              Text(
+                "€25",
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.bold,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 4.h),
+          Text(
+            "14 Jan \u2022 2:30 PM",
+            style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+          ),
+          SizedBox(height: 16.h),
+          Divider(
+            height: 1,
+            color: isDarkMode ? Colors.white10 : Colors.grey.shade100,
+          ),
+          SizedBox(height: 16.h),
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 15.r,
+                backgroundImage: const NetworkImage(
+                  "https://i.pravatar.cc/150?img=11",
+                ),
+              ),
+              SizedBox(width: 8.w),
+              Text(
+                "Ahmed B.",
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
+              SizedBox(width: 4.w),
+              Icon(
+                Icons.check_circle,
+                color: const Color(0xFF4A80F0),
+                size: 14.sp,
+              ),
+              const Spacer(),
+              Text(
+                "5h ago",
+                style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _upcomingTripItem(String from, String to, bool isDarkMode) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+      decoration: BoxDecoration(
+        color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: Row(
+        children: [
+          Container(
+            padding: EdgeInsets.all(8.r),
+            decoration: BoxDecoration(
+              color: isDarkMode
+                  ? Colors.white.withOpacity(0.05)
+                  : Colors.grey.shade50,
+              shape: BoxShape.circle,
+            ),
+            child: SvgPicture.asset(
+              AppIcons.upcoming,
+              height: 16.r,
+              colorFilter: ColorFilter.mode(
+                isDarkMode ? Colors.white70 : Colors.grey.shade700,
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Text(
+            "$from \u2192 $to",
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _recentActivityItem(
+    String title,
+    String subtitle,
+    String time,
+    bool isDarkMode,
+  ) {
+    return Row(
+      children: [
+        Container(
+          padding: EdgeInsets.all(10.r),
+          decoration: BoxDecoration(
+            color: isDarkMode
+                ? Colors.white.withOpacity(0.05)
+                : Colors.grey.shade50,
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            Icons.check,
+            color: isDarkMode ? Colors.white70 : Colors.black54,
+            size: 18.sp,
+          ),
+        ),
+        SizedBox(width: 16.w),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
+              SizedBox(height: 2.h),
+              Text(
+                subtitle,
+                style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+              ),
+            ],
+          ),
+        ),
+        Text(
+          time,
+          style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+        ),
+      ],
     );
   }
 

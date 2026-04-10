@@ -10,4 +10,8 @@ class AppIcons {
   static const String carryPackage = "$basePath/Carry Package.svg";
   static const String clients = "$basePath/Clients.svg";
   static const String totalEarnings = "$basePath/Total Earnings.svg";
+  static const String date = "$basePath/Date-icons.svg";
+  static const String location = "$basePath/Location-icons.svg";
+  static const String recent = "$basePath/Recent-icons.svg";
+  static const String upcoming = "$basePath/Upcoming Trips.svg";
 }
