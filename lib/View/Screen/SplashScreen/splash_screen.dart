@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../OnboardingScreen/onboarding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,12 +14,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    // ৩ সেকেন্ড পর হোম স্ক্রিনে যাবে (যখন হোম পেজ থাকবে)
-    /*
+    // ৩ সেকেন্ড পর OnboardingScreen-এ যাবে
     Timer(const Duration(seconds: 3), () {
-      // Get.offAll(() => HomePage()); 
+      Get.offAll(() => const OnboardingScreen());
     });
-    */
   }
 
   @override
@@ -30,17 +29,9 @@ class _SplashScreenState extends State<SplashScreen> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/Home.png'),
-            fit: BoxFit.cover, // পুরো স্ক্রিন জুড়ে থাকবে
+            fit: BoxFit.cover,
           ),
         ),
-        // যদি ইমেজের ওপর কোনো লোডিং বা টেক্সট দিতে চান, এখানে দিতে পারেন
-        /*
-        child: const Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-          ),
-        ),
-        */
       ),
     );
   }
