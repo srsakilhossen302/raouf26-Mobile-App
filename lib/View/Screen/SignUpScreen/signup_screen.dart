@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../../Utils/AppIcons/app_icons.dart';
 import '../LogInScreen/login_screen.dart';
+import '../AgreeToTermsScreen/agree_to_terms_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -120,7 +121,7 @@ class SignUpScreen extends StatelessWidget {
               width: double.infinity,
               height: 55.h,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Get.to(() => const AgreeToTermsScreen()),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   shape: RoundedRectangleBorder(
