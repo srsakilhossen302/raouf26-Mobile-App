@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../Utils/AppIcons/app_icons.dart';
 import '../../../Utils/AppImg/app_img.dart';
+import '../LogInScreen/login_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -52,7 +53,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 children: [
                   SvgPicture.asset(
                     AppIcons.logo,
-                    height: 24,
+                    height: 30,
                     colorFilter: ColorFilter.mode(
                       isDarkMode ? Colors.white : Colors.black,
                       BlendMode.srcIn,
@@ -146,8 +147,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ? const Color(0xFF1E1E1E)
                               : Colors.white,
                           borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(24),
-                            topRight: Radius.circular(24),
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
                           ),
                           boxShadow: [
                             BoxShadow(
@@ -201,7 +202,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             // Buttons
                             SizedBox(
                               width: double.infinity,
-                              height: 48,
+                              height: 55,
                               child: ElevatedButton(
                                 onPressed: () {},
                                 style: ElevatedButton.styleFrom(
@@ -224,9 +225,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             const SizedBox(height: 12),
                             SizedBox(
                               width: double.infinity,
-                              height: 48,
+                              height: 55,
                               child: OutlinedButton(
-                                onPressed: () {},
+                                onPressed: () =>
+                                    Get.to(() => const LogInScreen()),
                                 style: OutlinedButton.styleFrom(
                                   side: BorderSide(
                                     color: isDarkMode

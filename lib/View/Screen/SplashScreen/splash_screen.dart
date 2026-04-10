@@ -22,7 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDarkMode = Get.isDarkMode;
+
     return Scaffold(
+      backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.white,
       body: Container(
         width: Get.width,
         height: Get.height,
