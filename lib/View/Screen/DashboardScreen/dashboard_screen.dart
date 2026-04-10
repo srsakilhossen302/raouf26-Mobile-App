@@ -26,7 +26,10 @@ class DashboardScreen extends StatelessWidget {
                   height: 220.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
                     color: const Color(0xFF4A80F0),
                     image: DecorationImage(
                       image: AssetImage(AppImg.dashboardBg),
@@ -197,7 +200,6 @@ class DashboardScreen extends StatelessWidget {
                   SizedBox(height: 24.h),
                   _sectionHeader("Total Earnings", isDarkMode),
                   SizedBox(height: 16.h),
-                  // Chart Placeholder
                   Container(
                     padding: EdgeInsets.all(20.r),
                     decoration: BoxDecoration(
@@ -208,42 +210,100 @@ class DashboardScreen extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            _chartYLabel("€500"),
-                            _chartYLabel("€200"),
-                            _chartYLabel("€100"),
-                            _chartYLabel("€50"),
-                            _chartYLabel("0"),
-                          ],
+                        SizedBox(
+                          height: 180.h,
+                          child: Row(
+                            children: [
+                              // Y-Axis Labels
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  _chartYLabel("€500"),
+                                  _chartYLabel("€200"),
+                                  _chartYLabel("€100"),
+                                  _chartYLabel("€50"),
+                                  _chartYLabel("0"),
+                                ],
+                              ),
+                              SizedBox(width: 10.w),
+                              // Chart Area with Grid Lines
+                              Expanded(
+                                child: Stack(
+                                  children: [
+                                    // Grid Lines
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: List.generate(
+                                        5,
+                                        (index) => Divider(
+                                          height: 1,
+                                          thickness: 0.5,
+                                          color: isDarkMode
+                                              ? Colors.white10
+                                              : Colors.grey.shade200,
+                                        ),
+                                      ),
+                                    ),
+                                    // Vertical Grid Lines (Optional, but matches image style)
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: List.generate(
+                                        7,
+                                        (index) => VerticalDivider(
+                                          width: 1,
+                                          thickness: 0.5,
+                                          color: isDarkMode
+                                              ? Colors.white10
+                                              : Colors.grey.shade100,
+                                        ),
+                                      ),
+                                    ),
+                                    // Bars
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 10.w,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          _chartBar(70.h),
+                                          _chartBar(130.h),
+                                          _chartBar(110.h),
+                                          _chartBar(170.h),
+                                          _chartBar(130.h),
+                                          _chartBar(50.h),
+                                          _chartBar(110.h),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        SizedBox(height: 20.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            _chartBar(40.h),
-                            _chartBar(80.h),
-                            _chartBar(60.h),
-                            _chartBar(120.h),
-                            _chartBar(80.h),
-                            _chartBar(30.h),
-                            _chartBar(70.h),
-                          ],
-                        ),
-                        SizedBox(height: 8.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            _chartXLabel("Mon"),
-                            _chartXLabel("Tue"),
-                            _chartXLabel("Wed"),
-                            _chartXLabel("Thu"),
-                            _chartXLabel("Fri"),
-                            _chartXLabel("Sat"),
-                            _chartXLabel("Sun"),
-                          ],
+                        SizedBox(height: 12.h),
+                        // X-Axis Labels
+                        Padding(
+                          padding: EdgeInsets.only(left: 45.w),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              _chartXLabel("Mon"),
+                              _chartXLabel("Tue"),
+                              _chartXLabel("Wed"),
+                              _chartXLabel("Thu"),
+                              _chartXLabel("Fri"),
+                              _chartXLabel("Sat"),
+                              _chartXLabel("Sun"),
+                            ],
+                          ),
                         ),
                       ],
                     ),
