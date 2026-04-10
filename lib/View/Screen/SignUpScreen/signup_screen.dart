@@ -4,11 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../../Utils/AppIcons/app_icons.dart';
-import '../EnterPasswordScreen/enter_password_screen.dart';
-import '../SignUpScreen/signup_screen.dart';
+import '../LogInScreen/login_screen.dart';
 
-class LogInScreen extends StatelessWidget {
-  const LogInScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class LogInScreen extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          "Log In",
+          "Sign Up",
           style: TextStyle(
             color: isDarkMode ? Colors.white : Colors.black,
             fontSize: 18.sp,
@@ -43,7 +42,7 @@ class LogInScreen extends StatelessWidget {
           children: [
             SizedBox(height: 20.h),
             Text(
-              "Welcome Back",
+              "Create Your Account",
               style: TextStyle(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
@@ -52,21 +51,22 @@ class LogInScreen extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             Text(
-              "Sign in to manage your trips and shipments.",
+              "Send packages or earn on your trips.",
               style: TextStyle(
                 fontSize: 16.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
               ),
             ),
             SizedBox(height: 32.h),
-            Text(
-              "Phone Number",
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
-            ),
+            _inputLabel(label: "Full Name", isDarkMode: isDarkMode),
+            SizedBox(height: 12.h),
+            _textField(hint: "Full Name", isDarkMode: isDarkMode),
+            SizedBox(height: 20.h),
+            _inputLabel(label: "Email", isDarkMode: isDarkMode),
+            SizedBox(height: 12.h),
+            _textField(hint: "Email", isDarkMode: isDarkMode),
+            SizedBox(height: 20.h),
+            _inputLabel(label: "Phone Number", isDarkMode: isDarkMode),
             SizedBox(height: 12.h),
             IntlPhoneField(
               decoration: InputDecoration(
@@ -102,12 +102,12 @@ class LogInScreen extends StatelessWidget {
                 fontSize: 16.sp,
               ),
             ),
-            SizedBox(height: 12.h),
+            SizedBox(height: 32.h),
             SizedBox(
               width: double.infinity,
               height: 55.h,
               child: ElevatedButton(
-                onPressed: () => Get.to(() => const EnterPasswordScreen()),
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   shape: RoundedRectangleBorder(
@@ -116,7 +116,7 @@ class LogInScreen extends StatelessWidget {
                   elevation: 0,
                 ),
                 child: Text(
-                  "Log In",
+                  "Sign Up",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16.sp,
@@ -136,7 +136,7 @@ class LogInScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Text(
-                    "Log In With",
+                    "Sign Up With",
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
@@ -174,17 +174,17 @@ class LogInScreen extends StatelessWidget {
             SizedBox(height: 20.h),
             Center(
               child: GestureDetector(
-                onTap: () => Get.to(() => const SignUpScreen()),
+                onTap: () => Get.back(),
                 child: RichText(
                   text: TextSpan(
-                    text: "Don't have an account? ",
+                    text: "Already have an account? ",
                     style: TextStyle(
                       color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
                       fontSize: 14.sp,
                     ),
                     children: [
                       TextSpan(
-                        text: "Sign Up",
+                        text: "Log In",
                         style: TextStyle(
                           color: const Color(0xFF4A80F0),
                           fontSize: 14.sp,
@@ -196,9 +196,45 @@ class LogInScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 30.h),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _inputLabel({required String label, required bool isDarkMode}) {
+    return Text(
+      label,
+      style: TextStyle(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w600,
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+    );
+  }
+
+  Widget _textField({required String hint, required bool isDarkMode}) {
+    return TextField(
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: TextStyle(
+          color: isDarkMode ? Colors.white24 : Colors.grey.shade400,
+          fontSize: 14.sp,
+        ),
+        filled: true,
+        fillColor: isDarkMode
+            ? Colors.white.withOpacity(0.05)
+            : Colors.grey.shade100,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide.none,
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+      ),
+      style: TextStyle(
+        color: isDarkMode ? Colors.white : Colors.black,
+        fontSize: 16.sp,
       ),
     );
   }
@@ -235,7 +271,7 @@ class LogInScreen extends StatelessWidget {
               style: TextStyle(
                 color: isDarkMode ? Colors.white : Colors.black,
                 fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],

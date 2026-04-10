@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../Utils/AppIcons/app_icons.dart';
 import '../../../Utils/AppImg/app_img.dart';
 import '../LogInScreen/login_screen.dart';
+import '../SignUpScreen/signup_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -47,22 +49,22 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           children: [
             // Top Logo and Language Selector
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SvgPicture.asset(
                     AppIcons.logo,
-                    height: 30,
+                    height: 30.h,
                     colorFilter: ColorFilter.mode(
                       isDarkMode ? Colors.white : Colors.black,
                       BlendMode.srcIn,
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 5,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 10.w,
+                      vertical: 5.h,
                     ),
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -70,20 +72,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ? Colors.white24
                             : Colors.grey.shade300,
                       ),
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(20.r),
                     ),
                     child: Row(
                       children: [
                         Icon(
                           Icons.translate,
-                          size: 16,
+                          size: 16.sp,
                           color: isDarkMode ? Colors.white : Colors.black,
                         ),
-                        const SizedBox(width: 5),
+                        SizedBox(width: 5.w),
                         Text(
                           "EN / FR",
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 12.sp,
                             color: isDarkMode ? Colors.white : Colors.black,
                           ),
                         ),
@@ -96,21 +98,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
             // Page Indicator
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
               child: Row(
                 children: List.generate(
                   onboardingData.length,
                   (index) => Expanded(
                     child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 2),
-                      height: 4,
+                      margin: EdgeInsets.symmetric(horizontal: 2.w),
+                      height: 4.h,
                       decoration: BoxDecoration(
                         color: _currentPage == index
                             ? const Color(0xFF4A80F0)
                             : (isDarkMode
                                   ? Colors.white24
                                   : Colors.grey.shade200),
-                        borderRadius: BorderRadius.circular(2),
+                        borderRadius: BorderRadius.circular(2.r),
                       ),
                     ),
                   ),
@@ -134,29 +136,29 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       const Spacer(),
                       Image.asset(
                         onboardingData[index]["image"]!,
-                        height: Get.height * 0.35,
+                        height: 320.h,
                         fit: BoxFit.contain,
                       ),
                       const Spacer(),
                       // Bottom Sheet Style Content
                       Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.all(30),
+                        padding: EdgeInsets.all(30.r),
                         decoration: BoxDecoration(
                           color: isDarkMode
                               ? const Color(0xFF1E1E1E)
                               : Colors.white,
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            topRight: Radius.circular(30),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30.r),
+                            topRight: Radius.circular(30.r),
                           ),
                           boxShadow: [
                             BoxShadow(
                               color: isDarkMode
                                   ? Colors.black54
                                   : Colors.black12,
-                              blurRadius: 20,
-                              offset: const Offset(0, -5),
+                              blurRadius: 20.r,
+                              offset: Offset(0, -5.h),
                             ),
                           ],
                         ),
@@ -166,66 +168,67 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           children: [
                             Center(
                               child: Container(
-                                width: 40,
-                                height: 4,
+                                width: 40.w,
+                                height: 4.h,
                                 decoration: BoxDecoration(
                                   color: isDarkMode
                                       ? Colors.white24
                                       : Colors.grey.shade300,
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(2),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(2.r),
                                   ),
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            SizedBox(height: 20.h),
                             Text(
                               onboardingData[index]["title"]!,
                               style: TextStyle(
-                                fontSize: 24,
+                                fontSize: 24.sp,
                                 fontWeight: FontWeight.bold,
                                 color: isDarkMode ? Colors.white : Colors.black,
                               ),
                             ),
-                            const SizedBox(height: 10),
+                            SizedBox(height: 10.h),
                             Text(
                               onboardingData[index]["desc"]!,
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 color: isDarkMode
                                     ? Colors.white70
                                     : Colors.grey.shade600,
                                 height: 1.5,
                               ),
                             ),
-                            const SizedBox(height: 30),
+                            SizedBox(height: 30.h),
                             // Buttons
                             SizedBox(
                               width: double.infinity,
-                              height: 55,
+                              height: 55.h,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () =>
+                                    Get.to(() => const SignUpScreen()),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF4A80F0),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
+                                    borderRadius: BorderRadius.circular(12.r),
                                   ),
                                   elevation: 0,
                                 ),
-                                child: const Text(
+                                child: Text(
                                   "Create Account",
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 12),
+                            SizedBox(height: 12.h),
                             SizedBox(
                               width: double.infinity,
-                              height: 55,
+                              height: 55.h,
                               child: OutlinedButton(
                                 onPressed: () =>
                                     Get.to(() => const LogInScreen()),
@@ -236,7 +239,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                         : Colors.grey.shade300,
                                   ),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
+                                    borderRadius: BorderRadius.circular(12.r),
                                   ),
                                 ),
                                 child: Text(
@@ -245,7 +248,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                     color: isDarkMode
                                         ? Colors.white
                                         : Colors.black,
-                                    fontSize: 16,
+                                    fontSize: 16.sp,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
