@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../Utils/AppImg/app_img.dart';
+import '../CreatePasswordScreen/create_password_screen.dart';
 
 class AgreeToTermsScreen extends StatelessWidget {
   const AgreeToTermsScreen({super.key});
@@ -96,9 +97,7 @@ class AgreeToTermsScreen extends StatelessWidget {
               width: double.infinity,
               height: 55.h,
               child: ElevatedButton(
-                onPressed: () {
-                  // Final logic after agreement
-                },
+                onPressed: () => Get.to(() => const CreatePasswordScreen()),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   shape: RoundedRectangleBorder(
