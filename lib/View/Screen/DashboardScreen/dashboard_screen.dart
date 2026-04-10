@@ -25,12 +25,13 @@ class DashboardScreen extends StatelessWidget {
                 Container(
                   height: 220.h,
                   width: double.infinity,
-                  decoration: const BoxDecoration(color: Color(0xFF4A80F0)),
-                  child: Image.asset(
-                    AppImg.dashboardBg,
-                    fit: BoxFit.cover,
-                    color: Colors.white.withOpacity(0.2),
-                    colorBlendMode: BlendMode.dstIn,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+                    color: const Color(0xFF4A80F0),
+                    image: DecorationImage(
+                      image: AssetImage(AppImg.dashboardBg),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 SafeArea(
