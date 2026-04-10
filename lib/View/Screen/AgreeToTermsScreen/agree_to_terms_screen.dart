@@ -9,7 +9,7 @@ class AgreeToTermsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDarkMode = Get.isDarkMode;
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
       backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.white,
@@ -56,7 +56,9 @@ class AgreeToTermsScreen extends StatelessWidget {
                   height: 1.5,
                 ),
                 children: [
-                  const TextSpan(text: "To continue, please agree to Sendit's "),
+                  const TextSpan(
+                    text: "To continue, please agree to Sendit's ",
+                  ),
                   TextSpan(
                     text: "Terms of Use",
                     style: const TextStyle(
