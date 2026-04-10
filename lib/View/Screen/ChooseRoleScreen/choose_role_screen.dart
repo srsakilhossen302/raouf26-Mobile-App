@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../Utils/AppIcons/app_icons.dart';
+import '../../../helper/shared_preference_helper.dart';
 import '../SignUpScreen/signup_screen.dart';
 
 class ChooseRoleScreen extends StatefulWidget {
@@ -95,7 +96,10 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
               width: double.infinity,
               height: 55.h,
               child: ElevatedButton(
-                onPressed: () => Get.to(() => const SignUpScreen()),
+                onPressed: () async {
+                  await SharedPreferenceHelper.saveUserRole(selectedRole);
+                  Get.to(() => const SignUpScreen());
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   shape: RoundedRectangleBorder(
@@ -137,7 +141,9 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
         decoration: BoxDecoration(
-          color: isDarkMode ? Colors.white.withOpacity(0.05) : Colors.grey.shade50,
+          color: isDarkMode
+              ? Colors.white.withOpacity(0.05)
+              : Colors.grey.shade50,
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: isSelected
@@ -190,7 +196,9 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: isSelected ? const Color(0xFF4A80F0) : Colors.grey.shade300,
+                  color: isSelected
+                      ? const Color(0xFF4A80F0)
+                      : Colors.grey.shade300,
                   width: 2,
                 ),
               ),
