@@ -7,4 +7,5 @@ class AppImg {
       "$basePath/Turn Your Trips Into Earnings.png";
   static const String agreeTerms = "$basePath/Agree to Terms.png";
   static const String dashboardBg = "$basePath/home-img2coto.png";
+  static const String publishTrip = "$basePath/Publish a New Trip.png";
 }

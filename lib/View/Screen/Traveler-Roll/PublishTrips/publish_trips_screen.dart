@@ -1,0 +1,711 @@
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../../../../Utils/AppIcons/app_icons.dart';
+import '../../../../Utils/AppImg/app_img.dart';
+import '../../../Widget/custom_bottom_nav_bar.dart';
+import 'publish_trips_controller.dart';
+
+class PublishTripsScreen extends StatelessWidget {
+  const PublishTripsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put(PublishTripsController());
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    return Scaffold(
+      backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        title: Obx(() {
+          String title = "Publish Trips";
+          if (controller.selectedTab.value == 1) title = "Trips";
+          if (controller.selectedTab.value == 2) title = "Requests";
+          return Text(
+            title,
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w700,
+              color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+            ),
+          );
+        }),
+        actions: [
+          Obx(
+            () => controller.selectedTab.value == 1
+                ? IconButton(
+                    onPressed: () {
+                      // Filter action for My Trips
+                    },
+                    icon: SvgPicture.asset(
+                      AppIcons.filters,
+                      width: 24.w,
+                      height: 24.w,
+                      colorFilter: ColorFilter.mode(
+                        isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          ),
+          SizedBox(width: 8.w),
+        ],
+      ),
+      body: Column(
+        children: [
+          _buildTabBar(controller, isDarkMode),
+          Expanded(
+            child: Obx(() {
+              switch (controller.selectedTab.value) {
+                case 0:
+                  return _buildPublishTab(context, isDarkMode);
+                case 1:
+                  return _buildMyTripsTab(context, isDarkMode);
+                case 2:
+                  return _buildRequestsTab(context, isDarkMode);
+                default:
+                  return const SizedBox();
+              }
+            }),
+          ),
+        ],
+      ),
+      bottomNavigationBar: const CustomBottomNavBar(selectedIndex: 4),
+    );
+  }
+
+  Widget _buildTabBar(PublishTripsController controller, bool isDarkMode) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+      padding: EdgeInsets.all(4.w),
+      decoration: BoxDecoration(
+        color: isDarkMode ? const Color(0xFF1E1E1E) : const Color(0xFFF5F7FA),
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: Row(
+        children: [
+          _buildTabItem("Publish", 0, controller, isDarkMode),
+          _buildTabItem("My Trips", 1, controller, isDarkMode),
+          _buildTabItem("Requests (3)", 2, controller, isDarkMode),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTabItem(
+    String label,
+    int index,
+    PublishTripsController controller,
+    bool isDarkMode,
+  ) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => controller.changeTab(index),
+        child: Obx(() {
+          bool isSelected = controller.selectedTab.value == index;
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 10.h),
+            decoration: BoxDecoration(
+              color: isSelected ? const Color(0xFF4A80F0) : Colors.transparent,
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+            child: Text(
+              label,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 14.sp,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                color: isSelected
+                    ? Colors.white
+                    : (isDarkMode ? Colors.white70 : const Color(0xFF9E9E9E)),
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+  }
+
+  Widget _buildPublishTab(BuildContext context, bool isDarkMode) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(AppImg.publishTrip, width: 250.w, height: 250.w),
+          SizedBox(height: 24.h),
+          Text(
+            "Publish a New Trip",
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 22.sp,
+              fontWeight: FontWeight.w700,
+              color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+            ),
+          ),
+          SizedBox(height: 12.h),
+          Text(
+            "Turn your journey into earning opportunities by carrying parcels along the way.",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 14.sp,
+              color: isDarkMode ? Colors.white70 : const Color(0xFF666666),
+              height: 1.5,
+            ),
+          ),
+          SizedBox(height: 40.h),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () => _showHowItWorks(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF4A80F0),
+                padding: EdgeInsets.symmetric(vertical: 16.h),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                elevation: 0,
+              ),
+              child: Text(
+                "Publish Trip",
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMyTripsTab(BuildContext context, bool isDarkMode) {
+    // For now, showing a simple list as seen in the image
+    return Column(
+      children: [
+        _buildSubTabBar(isDarkMode),
+        Expanded(
+          child: ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+            itemCount: 2,
+            itemBuilder: (context, index) {
+              return _buildTripCard(isDarkMode);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSubTabBar(bool isDarkMode) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+      child: Row(
+        children: [
+          _buildSubTabItem("All", true, isDarkMode),
+          SizedBox(width: 10.w),
+          _buildSubTabItem("Publish", false, isDarkMode),
+          SizedBox(width: 10.w),
+          _buildSubTabItem("Drafts", false, isDarkMode),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSubTabItem(String label, bool isSelected, bool isDarkMode) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
+      decoration: BoxDecoration(
+        color: isSelected
+            ? (isDarkMode ? Colors.white : Colors.black)
+            : Colors.transparent,
+        borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(
+          color: isSelected
+              ? (isDarkMode ? Colors.white : Colors.black)
+              : (isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0)),
+        ),
+      ),
+      child: Text(
+        label,
+        style: GoogleFonts.plusJakartaSans(
+          fontSize: 14.sp,
+          fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+          color: isSelected
+              ? (isDarkMode ? Colors.black : Colors.white)
+              : (isDarkMode ? Colors.white70 : const Color(0xFF9E9E9E)),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTripCard(bool isDarkMode) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.all(20.w),
+      decoration: BoxDecoration(
+        color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Route",
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w700,
+                  color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE7F6EC),
+                  borderRadius: BorderRadius.circular(20.r),
+                ),
+                child: Text(
+                  "Active",
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF039855),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20.h),
+          _buildRoutePoint(
+            icon: AppIcons.departure,
+            city: "Tunisia",
+            date: "20 Jan",
+            time: "08:30 AM",
+            isFirst: true,
+            isDarkMode: isDarkMode,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 12.w),
+            child: SvgPicture.asset(
+              AppIcons.partion,
+              height: 30.h,
+              colorFilter: ColorFilter.mode(
+                isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+          _buildRoutePoint(
+            icon: AppIcons.location,
+            city: "France",
+            date: "20 Jan",
+            time: "10:45 PM",
+            isFirst: false,
+            isDarkMode: isDarkMode,
+          ),
+          SizedBox(height: 24.h),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton(
+              onPressed: () {},
+              style: OutlinedButton.styleFrom(
+                padding: EdgeInsets.symmetric(vertical: 12.h),
+                side: BorderSide(
+                  color: isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+              ),
+              child: Text(
+                "View Details",
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRoutePoint({
+    required String icon,
+    required String city,
+    required String date,
+    required String time,
+    required bool isFirst,
+    required bool isDarkMode,
+  }) {
+    return Row(
+      children: [
+        Container(
+          padding: EdgeInsets.all(8.w),
+          decoration: BoxDecoration(
+            color: isDarkMode
+                ? const Color(0xFF2C2C2C)
+                : const Color(0xFFF5F7FA),
+            shape: BoxShape.circle,
+          ),
+          child: SvgPicture.asset(
+            icon,
+            width: 16.w,
+            height: 16.w,
+            colorFilter: ColorFilter.mode(
+              isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+              BlendMode.srcIn,
+            ),
+          ),
+        ),
+        SizedBox(width: 16.w),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                city,
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                ),
+              ),
+              Text(
+                date,
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 12.sp,
+                  color: isDarkMode ? Colors.white60 : const Color(0xFF9E9E9E),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Text(
+          time,
+          style: GoogleFonts.plusJakartaSans(
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w500,
+            color: isDarkMode ? Colors.white70 : const Color(0xFF666666),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRequestsTab(BuildContext context, bool isDarkMode) {
+    return ListView.builder(
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+      itemCount: 3,
+      itemBuilder: (context, index) {
+        return _buildRequestCard(isDarkMode);
+      },
+    );
+  }
+
+  Widget _buildRequestCard(bool isDarkMode) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.all(20.w),
+      decoration: BoxDecoration(
+        color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+        borderRadius: BorderRadius.circular(16.r),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              CircleAvatar(
+                radius: 20.r,
+                backgroundColor: const Color(0xFF4A80F0),
+                child: Text(
+                  "ZM",
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              SizedBox(width: 12.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Zain Malik",
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                        color: isDarkMode
+                            ? Colors.white
+                            : const Color(0xFF1A1A1A),
+                      ),
+                    ),
+                    Text(
+                      "Sent a booking request",
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 12.sp,
+                        color: isDarkMode
+                            ? Colors.white60
+                            : const Color(0xFF9E9E9E),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                "2h ago",
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 12.sp,
+                  color: isDarkMode ? Colors.white38 : const Color(0xFF9E9E9E),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20.h),
+          Row(
+            children: [
+              _buildInfoItem("Package", "Electronics", isDarkMode),
+              SizedBox(width: 24.w),
+              _buildInfoItem("Weight", "2.5 kg", isDarkMode),
+              SizedBox(width: 24.w),
+              _buildInfoItem("Fee", "€45.00", isDarkMode),
+            ],
+          ),
+          SizedBox(height: 20.h),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    side: BorderSide(
+                      color: isDarkMode
+                          ? Colors.white24
+                          : const Color(0xFFE0E0E0),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                  ),
+                  child: Text(
+                    "Decline",
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      color: isDarkMode
+                          ? Colors.white
+                          : const Color(0xFF1A1A1A),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 12.w),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4A80F0),
+                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: Text(
+                    "Accept",
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoItem(String label, String value, bool isDarkMode) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: GoogleFonts.plusJakartaSans(
+            fontSize: 12.sp,
+            color: isDarkMode ? Colors.white38 : const Color(0xFF9E9E9E),
+          ),
+        ),
+        Text(
+          value,
+          style: GoogleFonts.plusJakartaSans(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w600,
+            color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _showHowItWorks(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height * 0.75,
+        decoration: BoxDecoration(
+          color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+        ),
+        padding: EdgeInsets.all(24.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "How It Works",
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w700,
+                    color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => Get.back(),
+                  icon: Icon(
+                    Icons.close,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            Text(
+              "Watch this short video to understand how publishing a trip and delivering parcels works.",
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 14.sp,
+                color: isDarkMode ? Colors.white70 : const Color(0xFF666666),
+              ),
+            ),
+            SizedBox(height: 24.h),
+            Container(
+              height: 200.h,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: isDarkMode ? Colors.black26 : const Color(0xFFF5F7FA),
+                borderRadius: BorderRadius.circular(16.r),
+              ),
+              child: Center(
+                child: Icon(
+                  Icons.play_circle_fill,
+                  size: 64.w,
+                  color: const Color(0xFF4A80F0),
+                ),
+              ),
+            ),
+            SizedBox(height: 24.h),
+            Text(
+              "What you’ll learn:",
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w700,
+                color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+              ),
+            ),
+            SizedBox(height: 16.h),
+            _buildLearnItem("How to publish your trip", isDarkMode),
+            _buildLearnItem("How to set prices and capacity", isDarkMode),
+            _buildLearnItem("How to accept delivery requests", isDarkMode),
+            _buildLearnItem("How you get paid", isDarkMode),
+            const Spacer(),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => Get.back(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF4A80F0),
+                  padding: EdgeInsets.symmetric(vertical: 16.h),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                ),
+                child: Text(
+                  "Got It",
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLearnItem(String text, bool isDarkMode) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 12.h),
+      child: Row(
+        children: [
+          Container(
+            width: 4.w,
+            height: 4.w,
+            decoration: BoxDecoration(
+              color: isDarkMode ? Colors.white70 : const Color(0xFF666666),
+              shape: BoxShape.circle,
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Text(
+            text,
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 14.sp,
+              color: isDarkMode ? Colors.white70 : const Color(0xFF666666),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

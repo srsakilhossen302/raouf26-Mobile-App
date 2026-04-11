@@ -9,6 +9,7 @@ import '../Screen/Traveler-Roll/Dashboard/dashboard_view.dart';
 import '../Screen/Traveler-Roll/MyParcels/my_parcels_view.dart';
 import '../Screen/Traveler-Roll/Search/search_view.dart';
 import '../Screen/MessagesScreen/messages_view.dart';
+import '../Screen/Traveler-Roll/PublishTrips/publish_trips_screen.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int selectedIndex;
@@ -32,7 +33,7 @@ class CustomBottomNavBar extends StatelessWidget {
         Get.offAll(() => const MessagesScreen());
         break;
       case 4:
-        // Get.offAll(() => const PublishTripsScreen());
+        Get.offAll(() => const PublishTripsScreen());
         break;
     }
   }
