@@ -5,9 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import '../../Utils/AppIcons/app_icons.dart';
-import '../Screen/Traveler-Roll/DashboardScreen/dashboard_screen.dart';
-import '../Screen/Traveler-Roll/MyParcelsScreen/my_parcels_screen.dart';
-import '../Screen/Traveler-Roll/SearchScreen/search_screen.dart';
+import '../Screen/Traveler-Roll/Dashboard/dashboard_view.dart';
+import '../Screen/Traveler-Roll/MyParcels/my_parcels_view.dart';
+import '../Screen/Traveler-Roll/Search/search_view.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int selectedIndex;

@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 import '../../../../Utils/AppIcons/app_icons.dart';
 import '../../../../Utils/AppImg/app_img.dart';
 import '../../../Widget/custom_bottom_nav_bar.dart';
+import 'dashboard_controller.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.put(DashboardController());
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -181,7 +183,7 @@ class DashboardScreen extends StatelessWidget {
                         _statsRow(
                           icon: AppIcons.totalEarnings,
                           label: "Total Earnings",
-                          value: "€1,240",
+                          value: controller.totalEarnings.value,
                           isDarkMode: isDarkMode,
                         ),
                         Divider(
@@ -193,7 +195,7 @@ class DashboardScreen extends StatelessWidget {
                         _statsRow(
                           icon: AppIcons.clients,
                           label: "Clients",
-                          value: "42",
+                          value: controller.clientsCount.value,
                           isDarkMode: isDarkMode,
                         ),
                       ],

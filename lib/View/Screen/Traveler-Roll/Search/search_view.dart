@@ -5,12 +5,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import '../../../Widget/custom_bottom_nav_bar.dart';
 import '../../../../Utils/AppImg/app_img.dart';
+import 'search_controller.dart' hide SearchController;
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends GetView<SearchController> {
   const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Get.put(SearchController());
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(

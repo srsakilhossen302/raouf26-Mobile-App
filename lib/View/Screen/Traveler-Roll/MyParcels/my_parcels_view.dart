@@ -2,21 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 import '../../../Widget/custom_bottom_nav_bar.dart';
+import 'my_parcels_controller.dart';
 
-class MyParcelsScreen extends StatefulWidget {
+class MyParcelsScreen extends GetView<MyParcelsController> {
   const MyParcelsScreen({super.key});
 
   @override
-  State<MyParcelsScreen> createState() => _MyParcelsScreenState();
-}
-
-class _MyParcelsScreenState extends State<MyParcelsScreen> {
-  int _selectedFilter = 0;
-  final List<String> _filters = ["All", "Active", "Delivered", "Cancelled"];
-
-  @override
   Widget build(BuildContext context) {
+    Get.put(MyParcelsController());
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -66,54 +61,56 @@ class _MyParcelsScreenState extends State<MyParcelsScreen> {
           // Filters
           SizedBox(
             height: 45.h,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              itemCount: _filters.length,
-              itemBuilder: (context, index) {
-                bool isSelected = _selectedFilter == index;
-                return GestureDetector(
-                  onTap: () => setState(() => _selectedFilter = index),
-                  child: Container(
-                    margin: EdgeInsets.only(right: 12.w),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 24.w,
-                      vertical: 8.h,
-                    ),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? (isDarkMode
-                                ? Colors.white10
-                                : const Color(0xFF1A1A1A))
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(8.r),
-                      border: Border.all(
-                        color: isSelected
-                            ? Colors.transparent
-                            : (isDarkMode
-                                  ? Colors.white10
-                                  : Colors.grey.shade300),
+            child: Obx(
+              () => ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                itemCount: controller.filters.length,
+                itemBuilder: (context, index) {
+                  bool isSelected = controller.selectedFilter.value == index;
+                  return GestureDetector(
+                    onTap: () => controller.updateFilter(index),
+                    child: Container(
+                      margin: EdgeInsets.only(right: 12.w),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 24.w,
+                        vertical: 8.h,
                       ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        _filters[index],
-                        style: GoogleFonts.montserrat(
-                          fontSize: 14.sp,
-                          fontWeight: isSelected
-                              ? FontWeight.w600
-                              : FontWeight.w500,
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? (isDarkMode
+                                  ? Colors.white10
+                                  : const Color(0xFF1A1A1A))
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(8.r),
+                        border: Border.all(
                           color: isSelected
-                              ? Colors.white
+                              ? Colors.transparent
                               : (isDarkMode
-                                    ? Colors.white70
-                                    : Colors.grey.shade600),
+                                    ? Colors.white10
+                                    : Colors.grey.shade300),
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          controller.filters[index],
+                          style: GoogleFonts.montserrat(
+                            fontSize: 14.sp,
+                            fontWeight: isSelected
+                                ? FontWeight.w600
+                                : FontWeight.w500,
+                            color: isSelected
+                                ? Colors.white
+                                : (isDarkMode
+                                      ? Colors.white70
+                                      : Colors.grey.shade600),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
 
