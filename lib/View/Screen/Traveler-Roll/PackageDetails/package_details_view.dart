@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/PackageDetails/package_details_controller.dart';
 
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/SenderDetails/sender_details_view.dart';
+
 class PackageDetailsScreen extends GetView<PackageDetailsController> {
   const PackageDetailsScreen({super.key});
 
@@ -264,7 +266,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
               width: double.infinity,
               height: 52.h,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Get.to(() => const SenderDetailsView()),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   shape: RoundedRectangleBorder(

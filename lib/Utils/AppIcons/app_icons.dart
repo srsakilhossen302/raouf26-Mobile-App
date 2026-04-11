@@ -19,4 +19,13 @@ class AppIcons {
   static const String myParcelsNavbar = "$basePath/My Parcels-navbar.svg";
   static const String publishTripsNavbar = "$basePath/Publish Trips-navbar.svg";
   static const String searchNavbar = "$basePath/sarch-navbar.svg";
+  static const String partion = "$basePath/Partion-icons.svg";
+  static const String save = "$basePath/Save-icons.svg";
+  static const String camera = "$basePath/Camera=icons.svg";
+  static const String verifa = "$basePath/verifa-icon.svg";
+  static const String delivery = "$basePath/delveri-Icons.svg";
+  static const String clothes = "$basePath/Clothes-icons.svg";
+  static const String documents = "$basePath/Documents-icons.svg";
+  static const String food = "$basePath/Food-Icons.svg";
+  static const String medicines = "$basePath/Medicines-icons.svg";
 }
