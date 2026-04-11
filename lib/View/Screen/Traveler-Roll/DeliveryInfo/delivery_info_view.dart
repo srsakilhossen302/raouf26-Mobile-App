@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/DeliveryInfo/delivery_info_controller.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/ReviewDelivery/review_delivery_view.dart';
 import 'package:raouf26mobileapp/utils/appicons/app_icons.dart';
 
 class DeliveryInfoView extends GetView<DeliveryInfoController> {
@@ -80,10 +81,16 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
                 children: [
                   _inviteNewCircle(isDarkMode),
                   SizedBox(width: 20.w),
-                  ...controller.contacts.map((contact) => Padding(
-                        padding: EdgeInsets.only(right: 20.w),
-                        child: _contactCircle(contact['name']!, contact['image']!, isDarkMode),
-                      )),
+                  ...controller.contacts.map(
+                    (contact) => Padding(
+                      padding: EdgeInsets.only(right: 20.w),
+                      child: _contactCircle(
+                        contact['name']!,
+                        contact['image']!,
+                        isDarkMode,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -122,16 +129,24 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
                     height: 160.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(16.r),
+                      ),
                       image: const DecorationImage(
-                        image: NetworkImage("https://static-maps.yandex.ru/1.x/?lang=en_US&ll=10.6346,35.8256&z=13&l=map&size=450,450"),
+                        image: NetworkImage(
+                          "https://static-maps.yandex.ru/1.x/?lang=en_US&ll=10.6346,35.8256&z=13&l=map&size=450,450",
+                        ),
                         fit: BoxFit.cover,
                       ),
                     ),
                     child: Center(
                       child: ElevatedButton.icon(
                         onPressed: () => controller.adjustLocation(),
-                        icon: const Icon(Icons.location_on_outlined, size: 18, color: Colors.black),
+                        icon: const Icon(
+                          Icons.location_on_outlined,
+                          size: 18,
+                          color: Colors.black,
+                        ),
                         label: Text(
                           "Adjust Location",
                           style: GoogleFonts.montserrat(
@@ -168,20 +183,30 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
                               ),
                             ],
                           ),
-                          child: Icon(Icons.location_on_outlined, color: Colors.grey, size: 20.sp),
+                          child: Icon(
+                            Icons.location_on_outlined,
+                            color: Colors.grey,
+                            size: 20.sp,
+                          ),
                         ),
                         SizedBox(width: 12.w),
                         Expanded(
-                          child: Obx(() => Text(
-                            controller.selectedAddress.value,
-                            style: GoogleFonts.montserrat(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                              color: isDarkMode ? Colors.white : Colors.black,
+                          child: Obx(
+                            () => Text(
+                              controller.selectedAddress.value,
+                              style: GoogleFonts.montserrat(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                                color: isDarkMode ? Colors.white : Colors.black,
+                              ),
                             ),
-                          )),
+                          ),
                         ),
-                        SvgPicture.asset(AppIcons.save, width: 20.w, height: 20.h),
+                        SvgPicture.asset(
+                          AppIcons.save,
+                          width: 20.w,
+                          height: 20.h,
+                        ),
                       ],
                     ),
                   ),
@@ -202,38 +227,51 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
               ),
             ),
             SizedBox(height: 16.h),
-            Obx(() => Row(
-              children: controller.speedOptions.map((speed) => Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(right: 8.w),
-                  child: _selectionChip(
-                    label: speed,
-                    isSelected: controller.selectedSpeed.value == speed,
-                    onTap: () => controller.setSpeed(speed),
-                    isDarkMode: isDarkMode,
-                  ),
-                ),
-              )).toList(),
-            )),
+            Obx(
+              () => Row(
+                children: controller.speedOptions
+                    .map(
+                      (speed) => Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 8.w),
+                          child: _selectionChip(
+                            label: speed,
+                            isSelected: controller.selectedSpeed.value == speed,
+                            onTap: () => controller.setSpeed(speed),
+                            isDarkMode: isDarkMode,
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
 
             SizedBox(height: 24.h),
 
             // Delivery Handed Over Preference
             _sectionTitle("Delivery Handed Over Preference", isDarkMode),
             SizedBox(height: 16.h),
-            Obx(() => Row(
-              children: controller.preferenceOptions.map((pref) => Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(right: 8.w),
-                  child: _selectionChip(
-                    label: pref,
-                    isSelected: controller.selectedPreference.value == pref,
-                    onTap: () => controller.setPreference(pref),
-                    isDarkMode: isDarkMode,
-                  ),
-                ),
-              )).toList(),
-            )),
+            Obx(
+              () => Row(
+                children: controller.preferenceOptions
+                    .map(
+                      (pref) => Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 8.w),
+                          child: _selectionChip(
+                            label: pref,
+                            isSelected:
+                                controller.selectedPreference.value == pref,
+                            onTap: () => controller.setPreference(pref),
+                            isDarkMode: isDarkMode,
+                          ),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ),
 
             SizedBox(height: 32.h),
 
@@ -242,9 +280,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
               width: double.infinity,
               height: 56.h,
               child: ElevatedButton(
-                onPressed: () {
-                  // Finish flow
-                },
+                onPressed: () => Get.to(() => const ReviewDeliveryView()),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   shape: RoundedRectangleBorder(
@@ -291,16 +327,17 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             shape: BoxShape.circle,
           ),
           child: Center(
-            child: SvgPicture.asset(AppIcons.inviteNew, width: 24.w, height: 24.h),
+            child: SvgPicture.asset(
+              AppIcons.inviteNew,
+              width: 24.w,
+              height: 24.h,
+            ),
           ),
         ),
         SizedBox(height: 8.h),
         Text(
           "Invite New",
-          style: GoogleFonts.montserrat(
-            fontSize: 12.sp,
-            color: Colors.grey,
-          ),
+          style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
         ),
       ],
     );
@@ -314,16 +351,16 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
           height: 60.h,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            image: DecorationImage(image: NetworkImage(imageUrl), fit: BoxFit.cover),
+            image: DecorationImage(
+              image: NetworkImage(imageUrl),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         SizedBox(height: 8.h),
         Text(
           name,
-          style: GoogleFonts.montserrat(
-            fontSize: 12.sp,
-            color: Colors.grey,
-          ),
+          style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
         ),
       ],
     );
@@ -340,11 +377,13 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
       child: Container(
         height: 48.h,
         decoration: BoxDecoration(
-          color: isSelected 
+          color: isSelected
               ? (isDarkMode ? Colors.grey.shade800 : Colors.grey.shade100)
               : (isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50),
           borderRadius: BorderRadius.circular(12.r),
-          border: isSelected ? Border.all(color: const Color(0xFF4A80F0).withOpacity(0.5)) : null,
+          border: isSelected
+              ? Border.all(color: const Color(0xFF4A80F0).withOpacity(0.5))
+              : null,
         ),
         child: Center(
           child: Text(
@@ -374,16 +413,28 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
       ),
       child: TextField(
         controller: controller,
-        style: GoogleFonts.montserrat(color: isDarkMode ? Colors.white : Colors.black),
+        style: GoogleFonts.montserrat(
+          color: isDarkMode ? Colors.white : Colors.black,
+        ),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: GoogleFonts.montserrat(color: Colors.grey, fontSize: 14.sp),
+          hintStyle: GoogleFonts.montserrat(
+            color: Colors.grey,
+            fontSize: 14.sp,
+          ),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 16.w,
+            vertical: 16.h,
+          ),
           suffixIcon: suffixIcon != null
               ? Padding(
                   padding: EdgeInsets.all(12.r),
-                  child: SvgPicture.asset(suffixIcon, width: 20.w, height: 20.h),
+                  child: SvgPicture.asset(
+                    suffixIcon,
+                    width: 20.w,
+                    height: 20.h,
+                  ),
                 )
               : null,
         ),
@@ -407,7 +458,9 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
                   width: 24.w,
                   height: 16.h,
                   color: Colors.red,
-                  child: const Center(child: Icon(Icons.star, size: 10, color: Colors.white)),
+                  child: const Center(
+                    child: Icon(Icons.star, size: 10, color: Colors.white),
+                  ),
                 ),
                 SizedBox(width: 8.w),
                 Text(
@@ -425,10 +478,15 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             child: TextField(
               controller: controller.phoneNumberController,
               keyboardType: TextInputType.phone,
-              style: GoogleFonts.montserrat(color: isDarkMode ? Colors.white : Colors.black),
+              style: GoogleFonts.montserrat(
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
               decoration: InputDecoration(
                 hintText: "00000000",
-                hintStyle: GoogleFonts.montserrat(color: Colors.grey, fontSize: 14.sp),
+                hintStyle: GoogleFonts.montserrat(
+                  color: Colors.grey,
+                  fontSize: 14.sp,
+                ),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
               ),

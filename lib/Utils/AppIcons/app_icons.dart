@@ -29,4 +29,5 @@ class AppIcons {
   static const String food = "$basePath/Food-Icons.svg";
   static const String medicines = "$basePath/Medicines-icons.svg";
   static const String inviteNew = "$basePath/Invite New-Icons.svg";
+  static const String edit = "$basePath/Edit-icons.svg";
 }
