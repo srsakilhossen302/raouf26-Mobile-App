@@ -481,10 +481,10 @@ class DashboardScreen extends GetView<DashboardController> {
                 ),
               ),
               SizedBox(width: 4.w),
-              Icon(
-                Icons.check_circle,
-                color: const Color(0xFF4A80F0),
-                size: 14.sp,
+              SvgPicture.asset(
+                AppIcons.verifa,
+                width: 14.w,
+                height: 14.h,
               ),
               const Spacer(),
               Text(

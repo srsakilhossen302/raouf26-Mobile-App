@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/BookingRequest/booking_request_view.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporters_controller.dart';
 
 import '../../../../Utils/AppIcons/app_icons.dart';
@@ -21,7 +22,11 @@ class TransporterDetailsView extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.close, color: isDarkMode ? Colors.white : Colors.black, size: 28.sp),
+          icon: Icon(
+            Icons.close,
+            color: isDarkMode ? Colors.white : Colors.black,
+            size: 28.sp,
+          ),
           onPressed: () => Get.back(),
         ),
         title: Text(
@@ -52,12 +57,14 @@ class TransporterDetailsView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 24.h),
-                  
+
                   // Route Info Box
                   Container(
                     padding: EdgeInsets.all(16.r),
                     decoration: BoxDecoration(
-                      color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
+                      color: isDarkMode
+                          ? Colors.grey.shade900
+                          : Colors.grey.shade50,
                       borderRadius: BorderRadius.circular(16.r),
                     ),
                     child: Column(
@@ -84,9 +91,18 @@ class TransporterDetailsView extends StatelessWidget {
                             children: [
                               Column(
                                 children: [
-                                  Icon(Icons.near_me_outlined, color: const Color(0xFF4A80F0), size: 24.sp),
+                                  Icon(
+                                    Icons.near_me_outlined,
+                                    color: const Color(0xFF4A80F0),
+                                    size: 24.sp,
+                                  ),
                                   SizedBox(height: 4.h),
-                                  Text(transporter.from, style: GoogleFonts.montserrat(fontWeight: FontWeight.w600)),
+                                  Text(
+                                    transporter.from,
+                                    style: GoogleFonts.montserrat(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                 ],
                               ),
                               SvgPicture.string(
@@ -94,9 +110,18 @@ class TransporterDetailsView extends StatelessWidget {
                               ),
                               Column(
                                 children: [
-                                  Icon(Icons.location_on_outlined, color: const Color(0xFF4A80F0), size: 24.sp),
+                                  Icon(
+                                    Icons.location_on_outlined,
+                                    color: const Color(0xFF4A80F0),
+                                    size: 24.sp,
+                                  ),
                                   SizedBox(height: 4.h),
-                                  Text(transporter.to, style: GoogleFonts.montserrat(fontWeight: FontWeight.w600)),
+                                  Text(
+                                    transporter.to,
+                                    style: GoogleFonts.montserrat(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
@@ -104,10 +129,34 @@ class TransporterDetailsView extends StatelessWidget {
                         ),
                         SizedBox(height: 24.h),
                         // Timeline Route
-                        _timelineRouteItem("08:30 AM", "12 Avenue Habib Bourguiba, Tunis, Tunisia", "20 Jan", true, false),
-                        _timelineRouteItem("01:00 PM", "21 Via del Corso, Rome, Italy", "20 Jan", false, false),
-                        _timelineRouteItem("04:30 PM", "9 Bahnhofstrasse, Zürich, Switzerland", "20 Jan", false, false),
-                        _timelineRouteItem("09:30 PM", "18 Rue de Rivoli, Paris, France", "20 Jan", false, true),
+                        _timelineRouteItem(
+                          "08:30 AM",
+                          "12 Avenue Habib Bourguiba, Tunis, Tunisia",
+                          "20 Jan",
+                          true,
+                          false,
+                        ),
+                        _timelineRouteItem(
+                          "01:00 PM",
+                          "21 Via del Corso, Rome, Italy",
+                          "20 Jan",
+                          false,
+                          false,
+                        ),
+                        _timelineRouteItem(
+                          "04:30 PM",
+                          "9 Bahnhofstrasse, Zürich, Switzerland",
+                          "20 Jan",
+                          false,
+                          false,
+                        ),
+                        _timelineRouteItem(
+                          "09:30 PM",
+                          "18 Rue de Rivoli, Paris, France",
+                          "20 Jan",
+                          false,
+                          true,
+                        ),
                       ],
                     ),
                   ),
@@ -116,17 +165,34 @@ class TransporterDetailsView extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.all(16.r),
                     decoration: BoxDecoration(
-                      color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
+                      color: isDarkMode
+                          ? Colors.grey.shade900
+                          : Colors.grey.shade50,
                       borderRadius: BorderRadius.circular(16.r),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Pricing", style: GoogleFonts.montserrat(fontSize: 16.sp, fontWeight: FontWeight.w700)),
+                        Text(
+                          "Pricing",
+                          style: GoogleFonts.montserrat(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
                         SizedBox(height: 16.h),
-                        _pricingRow("Price Per kg", transporter.pricePerKg, isDarkMode),
+                        _pricingRow(
+                          "Price Per kg",
+                          transporter.pricePerKg,
+                          isDarkMode,
+                        ),
                         const Divider(),
-                        _pricingRow("Estimated Total (15kg)", transporter.estimatedTotal, isDarkMode, isBold: true),
+                        _pricingRow(
+                          "Estimated Total (15kg)",
+                          transporter.estimatedTotal,
+                          isDarkMode,
+                          isBold: true,
+                        ),
                       ],
                     ),
                   ),
@@ -135,7 +201,9 @@ class TransporterDetailsView extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.all(16.r),
                     decoration: BoxDecoration(
-                      color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
+                      color: isDarkMode
+                          ? Colors.grey.shade900
+                          : Colors.grey.shade50,
                       borderRadius: BorderRadius.circular(16.r),
                     ),
                     child: Row(
@@ -153,28 +221,45 @@ class TransporterDetailsView extends StatelessWidget {
                                 children: [
                                   Text(
                                     transporter.name,
-                                    style: GoogleFonts.montserrat(fontSize: 15.sp, fontWeight: FontWeight.w700),
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                                   ),
                                   SizedBox(width: 4.w),
-                                  Icon(Icons.check_circle, color: Colors.blue, size: 14.sp),
+                                  SvgPicture.asset(
+                                    AppIcons.verifa,
+                                    width: 14.w,
+                                    height: 14.h,
+                                  ),
                                 ],
                               ),
                               Text(
                                 "Verified Profile",
-                                style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 12.sp,
+                                  color: Colors.grey,
+                                ),
                               ),
                             ],
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 10.w,
+                            vertical: 4.h,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.blue.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(12.r),
                           ),
                           child: Text(
                             transporter.vehicleType,
-                            style: GoogleFonts.montserrat(fontSize: 10.sp, fontWeight: FontWeight.w600, color: Colors.blue),
+                            style: GoogleFonts.montserrat(
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.blue,
+                            ),
                           ),
                         ),
                       ],
@@ -193,12 +278,18 @@ class TransporterDetailsView extends StatelessWidget {
                 onPressed: () => _showPaymentConfirmation(context, isDarkMode),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
                   elevation: 0,
                 ),
                 child: Text(
                   "Book Transporter",
-                  style: GoogleFonts.montserrat(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Colors.white),
+                  style: GoogleFonts.montserrat(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -235,7 +326,10 @@ class TransporterDetailsView extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: IconButton(
                 onPressed: () => Get.back(),
-                icon: Icon(Icons.close, color: isDarkMode ? Colors.white : Colors.black),
+                icon: Icon(
+                  Icons.close,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
             ),
             Container(
@@ -305,16 +399,23 @@ class TransporterDetailsView extends StatelessWidget {
               height: 56.h,
               child: ElevatedButton(
                 onPressed: () {
-                  // Confirm logic
+                  Get.back(); // Close bottom sheet
+                  Get.to(() => const BookingRequestView());
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
                   elevation: 0,
                 ),
                 child: Text(
                   "Confirm & Book",
-                  style: GoogleFonts.montserrat(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Colors.white),
+                  style: GoogleFonts.montserrat(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -326,11 +427,17 @@ class TransporterDetailsView extends StatelessWidget {
                 onPressed: () => Get.back(),
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(color: Colors.grey.shade300),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
                 ),
                 child: Text(
                   "Save as Draft",
-                  style: GoogleFonts.montserrat(fontSize: 16.sp, fontWeight: FontWeight.w600, color: Colors.black),
+                  style: GoogleFonts.montserrat(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
@@ -341,7 +448,12 @@ class TransporterDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _paymentInfoRow(String icon, String title, String subtitle, bool isDarkMode) {
+  Widget _paymentInfoRow(
+    String icon,
+    String title,
+    String subtitle,
+    bool isDarkMode,
+  ) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -351,7 +463,11 @@ class TransporterDetailsView extends StatelessWidget {
             color: Colors.white,
             shape: BoxShape.circle,
             boxShadow: [
-              BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 4, spreadRadius: 1),
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 4,
+                spreadRadius: 1,
+              ),
             ],
           ),
           child: SvgPicture.asset(icon, width: 20.w, height: 20.h),
@@ -363,12 +479,19 @@ class TransporterDetailsView extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.montserrat(fontSize: 14.sp, fontWeight: FontWeight.w700),
+                style: GoogleFonts.montserrat(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               SizedBox(height: 4.h),
               Text(
                 subtitle,
-                style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey, height: 1.4),
+                style: GoogleFonts.montserrat(
+                  fontSize: 12.sp,
+                  color: Colors.grey,
+                  height: 1.4,
+                ),
               ),
             ],
           ),
@@ -377,8 +500,13 @@ class TransporterDetailsView extends StatelessWidget {
     );
   }
 
-
-  Widget _timelineRouteItem(String time, String address, String date, bool isFirst, bool isLast) {
+  Widget _timelineRouteItem(
+    String time,
+    String address,
+    String date,
+    bool isFirst,
+    bool isLast,
+  ) {
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -412,10 +540,7 @@ class TransporterDetailsView extends StatelessWidget {
               ),
               if (!isLast)
                 Expanded(
-                  child: Container(
-                    width: 2.w,
-                    color: const Color(0xFF4A80F0),
-                  ),
+                  child: Container(width: 2.w, color: const Color(0xFF4A80F0)),
                 ),
             ],
           ),
@@ -449,7 +574,12 @@ class TransporterDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _pricingRow(String label, String value, bool isDarkMode, {bool isBold = false}) {
+  Widget _pricingRow(
+    String label,
+    String value,
+    bool isDarkMode, {
+    bool isBold = false,
+  }) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Row(

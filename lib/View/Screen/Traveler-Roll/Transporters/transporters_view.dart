@@ -235,10 +235,10 @@ class TransportersView extends GetView<TransportersController> {
                           ),
                         ),
                         SizedBox(width: 4.w),
-                        Icon(
-                          Icons.check_circle,
-                          color: Colors.blue,
-                          size: 14.sp,
+                        SvgPicture.asset(
+                          AppIcons.verifa,
+                          width: 14.w,
+                          height: 14.h,
                         ),
                       ],
                     ),
