@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/BookingRequest/booking_request_controller.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/ConversationDetails/conversation_details_view.dart';
 import '../../../../Utils/AppIcons/app_icons.dart';
 
 class BookingRequestView extends GetView<BookingRequestController> {
@@ -20,7 +21,10 @@ class BookingRequestView extends GetView<BookingRequestController> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: isDarkMode ? Colors.white : Colors.black),
+          icon: Icon(
+            Icons.arrow_back,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
           onPressed: () => Get.back(),
         ),
         title: Row(
@@ -29,7 +33,9 @@ class BookingRequestView extends GetView<BookingRequestController> {
               children: [
                 CircleAvatar(
                   radius: 20.r,
-                  backgroundImage: NetworkImage(controller.transporterImage.value),
+                  backgroundImage: NetworkImage(
+                    controller.transporterImage.value,
+                  ),
                 ),
                 Positioned(
                   right: 0,
@@ -81,8 +87,11 @@ class BookingRequestView extends GetView<BookingRequestController> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.info_outline, color: isDarkMode ? Colors.white : Colors.black),
+            onPressed: () => Get.to(() => const ConversationDetailsView()),
+            icon: Icon(
+              Icons.info_outline,
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
           ),
         ],
       ),
@@ -103,14 +112,20 @@ class BookingRequestView extends GetView<BookingRequestController> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(Icons.info, color: const Color(0xFF4A80F0), size: 20.sp),
+                        Icon(
+                          Icons.info,
+                          color: const Color(0xFF4A80F0),
+                          size: 20.sp,
+                        ),
                         SizedBox(width: 12.w),
                         Expanded(
                           child: Text(
                             "Message is blocked until transporter accepts your reservation",
                             style: GoogleFonts.montserrat(
                               fontSize: 13.sp,
-                              color: isDarkMode ? Colors.white70 : Colors.black87,
+                              color: isDarkMode
+                                  ? Colors.white70
+                                  : Colors.black87,
                             ),
                           ),
                         ),
@@ -123,7 +138,9 @@ class BookingRequestView extends GetView<BookingRequestController> {
                   Container(
                     padding: EdgeInsets.all(16.r),
                     decoration: BoxDecoration(
-                      color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
+                      color: isDarkMode
+                          ? Colors.grey.shade900
+                          : Colors.grey.shade50,
                       borderRadius: BorderRadius.circular(16.r),
                     ),
                     child: Column(
@@ -143,7 +160,10 @@ class BookingRequestView extends GetView<BookingRequestController> {
                                 ),
                                 SizedBox(width: 8.w),
                                 Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 8.w,
+                                    vertical: 4.h,
+                                  ),
                                   decoration: BoxDecoration(
                                     color: Colors.orange.withOpacity(0.1),
                                     borderRadius: BorderRadius.circular(12.r),
@@ -159,11 +179,19 @@ class BookingRequestView extends GetView<BookingRequestController> {
                                 ),
                               ],
                             ),
-                            SvgPicture.asset(AppIcons.edit, width: 20.w, height: 20.h, colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn)),
+                            SvgPicture.asset(
+                              AppIcons.edit,
+                              width: 20.w,
+                              height: 20.h,
+                              colorFilter: const ColorFilter.mode(
+                                Colors.grey,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                           ],
                         ),
                         SizedBox(height: 20.h),
-                        
+
                         // Route Box
                         Container(
                           padding: EdgeInsets.all(12.r),
@@ -174,25 +202,54 @@ class BookingRequestView extends GetView<BookingRequestController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Route", style: GoogleFonts.montserrat(fontSize: 14.sp, fontWeight: FontWeight.w700)),
+                              Text(
+                                "Route",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
                               SizedBox(height: 12.h),
-                              _routeRow(Icons.near_me_outlined, controller.fromCity.value, controller.fromDate.value, controller.fromTime.value, isDarkMode),
+                              _routeRow(
+                                Icons.near_me_outlined,
+                                controller.fromCity.value,
+                                controller.fromDate.value,
+                                controller.fromTime.value,
+                                isDarkMode,
+                              ),
                               Padding(
                                 padding: EdgeInsets.only(left: 10.w),
                                 child: Container(
                                   width: 1,
                                   height: 20.h,
                                   decoration: BoxDecoration(
-                                    border: Border(left: BorderSide(color: Colors.grey.shade300, width: 1, style: BorderStyle.solid)),
+                                    border: Border(
+                                      left: BorderSide(
+                                        color: Colors.grey.shade300,
+                                        width: 1,
+                                        style: BorderStyle.solid,
+                                      ),
+                                    ),
                                   ),
-                                  child: const VerticalDivider(color: Colors.grey, thickness: 1, indent: 2, endIndent: 2),
+                                  child: const VerticalDivider(
+                                    color: Colors.grey,
+                                    thickness: 1,
+                                    indent: 2,
+                                    endIndent: 2,
+                                  ),
                                 ),
                               ),
-                              _routeRow(Icons.location_on_outlined, controller.toCity.value, controller.toDate.value, controller.toTime.value, isDarkMode),
+                              _routeRow(
+                                Icons.location_on_outlined,
+                                controller.toCity.value,
+                                controller.toDate.value,
+                                controller.toTime.value,
+                                isDarkMode,
+                              ),
                             ],
                           ),
                         ),
-                        
+
                         SizedBox(height: 16.h),
 
                         // Package Summary Box
@@ -205,44 +262,89 @@ class BookingRequestView extends GetView<BookingRequestController> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text("Package Summary", style: GoogleFonts.montserrat(fontSize: 14.sp, fontWeight: FontWeight.w700)),
+                              Text(
+                                "Package Summary",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
                               SizedBox(height: 16.h),
-                              _summaryRow("Package Size", controller.packageSize.value, isDarkMode),
+                              _summaryRow(
+                                "Package Size",
+                                controller.packageSize.value,
+                                isDarkMode,
+                              ),
                               const Divider(),
-                              _summaryRow("Delivery Time", controller.deliveryTime.value, isDarkMode),
-                              const Divider(),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("Package Photos", style: GoogleFonts.montserrat(fontSize: 13.sp, color: Colors.grey)),
-                                  Row(
-                                    children: [
-                                      _photoThumbnail("https://images.unsplash.com/photo-1580915411954-282cb1b0d780?q=80&w=100"),
-                                      SizedBox(width: 8.w),
-                                      _photoThumbnail("https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?q=80&w=100"),
-                                    ],
-                                  ),
-                                ],
+                              _summaryRow(
+                                "Delivery Time",
+                                controller.deliveryTime.value,
+                                isDarkMode,
                               ),
                               const Divider(),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Status", style: GoogleFonts.montserrat(fontSize: 13.sp, color: Colors.grey)),
+                                  Text(
+                                    "Package Photos",
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 13.sp,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
                                   Row(
                                     children: [
-                                      Icon(Icons.access_time, color: const Color(0xFF4A80F0), size: 16.sp),
-                                      SizedBox(width: 4.w),
-                                      Text(
-                                        controller.bookingStatus.value,
-                                        style: GoogleFonts.montserrat(fontSize: 13.sp, color: const Color(0xFF4A80F0), fontWeight: FontWeight.w600),
+                                      _photoThumbnail(
+                                        "https://images.unsplash.com/photo-1580915411954-282cb1b0d780?q=80&w=100",
+                                      ),
+                                      SizedBox(width: 8.w),
+                                      _photoThumbnail(
+                                        "https://images.unsplash.com/photo-1566576721346-d4a3b4eaad5b?q=80&w=100",
                                       ),
                                     ],
                                   ),
                                 ],
                               ),
                               const Divider(),
-                              _summaryRow("Total Estimate", controller.totalEstimate.value, isDarkMode, isBold: true),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Status",
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 13.sp,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.access_time,
+                                        color: const Color(0xFF4A80F0),
+                                        size: 16.sp,
+                                      ),
+                                      SizedBox(width: 4.w),
+                                      Text(
+                                        controller.bookingStatus.value,
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: 13.sp,
+                                          color: const Color(0xFF4A80F0),
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const Divider(),
+                              _summaryRow(
+                                "Total Estimate",
+                                controller.totalEstimate.value,
+                                isDarkMode,
+                                isBold: true,
+                              ),
                             ],
                           ),
                         ),
@@ -263,11 +365,17 @@ class BookingRequestView extends GetView<BookingRequestController> {
                 onPressed: () => controller.cancelReservation(),
                 style: OutlinedButton.styleFrom(
                   side: BorderSide(color: Colors.grey.shade300),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
                 ),
                 child: Text(
                   "Cancel Reservation",
-                  style: GoogleFonts.montserrat(fontSize: 16.sp, fontWeight: FontWeight.w600, color: Colors.black),
+                  style: GoogleFonts.montserrat(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
@@ -277,7 +385,13 @@ class BookingRequestView extends GetView<BookingRequestController> {
     );
   }
 
-  Widget _routeRow(IconData icon, String city, String date, String time, bool isDarkMode) {
+  Widget _routeRow(
+    IconData icon,
+    String city,
+    String date,
+    String time,
+    bool isDarkMode,
+  ) {
     return Row(
       children: [
         Icon(icon, color: Colors.grey, size: 18.sp),
@@ -286,23 +400,49 @@ class BookingRequestView extends GetView<BookingRequestController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(city, style: GoogleFonts.montserrat(fontSize: 13.sp, fontWeight: FontWeight.w600)),
-              Text(date, style: GoogleFonts.montserrat(fontSize: 11.sp, color: Colors.grey)),
+              Text(
+                city,
+                style: GoogleFonts.montserrat(
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Text(
+                date,
+                style: GoogleFonts.montserrat(
+                  fontSize: 11.sp,
+                  color: Colors.grey,
+                ),
+              ),
             ],
           ),
         ),
-        Text(time, style: GoogleFonts.montserrat(fontSize: 12.sp, fontWeight: FontWeight.w600)),
+        Text(
+          time,
+          style: GoogleFonts.montserrat(
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ],
     );
   }
 
-  Widget _summaryRow(String label, String value, bool isDarkMode, {bool isBold = false}) {
+  Widget _summaryRow(
+    String label,
+    String value,
+    bool isDarkMode, {
+    bool isBold = false,
+  }) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: GoogleFonts.montserrat(fontSize: 13.sp, color: Colors.grey)),
+          Text(
+            label,
+            style: GoogleFonts.montserrat(fontSize: 13.sp, color: Colors.grey),
+          ),
           Text(
             value,
             style: GoogleFonts.montserrat(

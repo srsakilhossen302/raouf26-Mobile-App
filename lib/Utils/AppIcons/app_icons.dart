@@ -35,4 +35,10 @@ class AppIcons {
   static const String escrow = "$basePath/Escrow Protection-Icons.svg";
   static const String refund = "$basePath/Refund-Icons.svg";
   static const String privacy = "$basePath/prevesi.svg";
+  static const String archive = "$basePath/Archive Conversation.svg";
+  static const String markUnread = "$basePath/Mark as Unread.svg";
+  static const String mute = "$basePath/Mute Conversation.svg";
+  static const String printLabel = "$basePath/Print Parcel Label.svg";
+  static const String star = "$basePath/Star Conversation.svg";
+  static const String helpCenter = "$basePath/Visit the Help Center.svg";
 }
