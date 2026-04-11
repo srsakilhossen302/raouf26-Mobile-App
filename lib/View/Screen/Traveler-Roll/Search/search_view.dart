@@ -5,14 +5,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import '../../../Widget/custom_bottom_nav_bar.dart';
 import '../../../../Utils/AppImg/app_img.dart';
-import 'search_controller.dart' hide SearchController;
+import 'search_controller.dart';
+import 'map_picker_screen.dart';
 
-class SearchScreen extends GetView<SearchController> {
+class SearchScreen extends GetView<TravelerSearchController> {
   const SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SearchController());
+    Get.put(TravelerSearchController());
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -185,11 +186,24 @@ class SearchScreen extends GetView<SearchController> {
                           ),
                           child: Column(
                             children: [
-                              _routeInputField(
-                                iconPath: "assets/icons/delveri-Icons.svg",
-                                label: "Pick Up",
-                                placeholder: "Where should it be delivered?",
-                                isDarkMode: isDarkMode,
+                              Obx(
+                                () => _routeInputField(
+                                  iconPath: "assets/icons/delveri-Icons.svg",
+                                  label: "Pick Up",
+                                  address: controller.pickUpAddress.value,
+                                  isDarkMode: isDarkMode,
+                                  onMapTap: () async {
+                                    var result = await Get.to(
+                                      () => const MapPickerScreen(
+                                        title: "Pickup Point",
+                                      ),
+                                    );
+                                    if (result != null) {
+                                      controller.updatePickUp(result);
+                                    }
+                                  },
+                                  onClearTap: () => controller.clearPickUp(),
+                                ),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: 12.w),
@@ -219,11 +233,24 @@ class SearchScreen extends GetView<SearchController> {
                                   ],
                                 ),
                               ),
-                              _routeInputField(
-                                iconPath: "assets/icons/Location-icons.svg",
-                                label: "Drop",
-                                placeholder: "Where should it be delivered?",
-                                isDarkMode: isDarkMode,
+                              Obx(
+                                () => _routeInputField(
+                                  iconPath: "assets/icons/Location-icons.svg",
+                                  label: "Drop",
+                                  address: controller.dropAddress.value,
+                                  isDarkMode: isDarkMode,
+                                  onMapTap: () async {
+                                    var result = await Get.to(
+                                      () => const MapPickerScreen(
+                                        title: "Drop Point",
+                                      ),
+                                    );
+                                    if (result != null) {
+                                      controller.updateDrop(result);
+                                    }
+                                  },
+                                  onClearTap: () => controller.clearDrop(),
+                                ),
                               ),
                             ],
                           ),
@@ -387,9 +414,13 @@ class SearchScreen extends GetView<SearchController> {
   Widget _routeInputField({
     required String iconPath,
     required String label,
-    required String placeholder,
+    required String address,
     required bool isDarkMode,
+    required VoidCallback onMapTap,
+    required VoidCallback onClearTap,
   }) {
+    bool hasAddress = address != "Where should it be delivered?";
+
     return Row(
       children: [
         Container(
@@ -413,27 +444,58 @@ class SearchScreen extends GetView<SearchController> {
         ),
         SizedBox(width: 16.w),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                label,
-                style: GoogleFonts.montserrat(
-                  fontSize: 10.sp,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.w500,
+          child: GestureDetector(
+            onTap: onMapTap,
+            behavior: HitTestBehavior.opaque,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 10.sp,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
+                Text(
+                  address,
+                  style: GoogleFonts.montserrat(
+                    fontSize: 13.sp,
+                    color: hasAddress
+                        ? (isDarkMode ? Colors.white : Colors.black87)
+                        : Colors.grey.shade400,
+                    fontWeight: hasAddress ? FontWeight.w600 : FontWeight.w500,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+        ),
+        Row(
+          children: [
+            GestureDetector(
+              onTap: onMapTap,
+              child: Icon(
+                Icons.map_outlined,
+                color: Colors.black54,
+                size: 20.sp,
               ),
-              Text(
-                placeholder,
-                style: GoogleFonts.montserrat(
-                  fontSize: 13.sp,
+            ),
+            if (hasAddress) ...[
+              SizedBox(width: 12.w),
+              GestureDetector(
+                onTap: onClearTap,
+                child: Icon(
+                  Icons.cancel,
                   color: Colors.grey.shade400,
-                  fontWeight: FontWeight.w500,
+                  size: 20.sp,
                 ),
               ),
             ],
-          ),
+          ],
         ),
       ],
     );
