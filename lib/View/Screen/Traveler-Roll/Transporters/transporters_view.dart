@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporters_controller.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporter_details_view.dart';
 import 'package:raouf26mobileapp/utils/appicons/app_icons.dart';
 
 class TransportersView extends GetView<TransportersController> {
@@ -181,7 +182,12 @@ class TransportersView extends GetView<TransportersController> {
               itemCount: controller.transporters.length,
               itemBuilder: (context, index) {
                 final transporter = controller.transporters[index];
-                return _transporterCard(transporter, isDarkMode);
+                return GestureDetector(
+                  onTap: () => Get.to(
+                    () => TransporterDetailsView(transporter: transporter),
+                  ),
+                  child: _transporterCard(transporter, isDarkMode),
+                );
               },
             ),
           ),
