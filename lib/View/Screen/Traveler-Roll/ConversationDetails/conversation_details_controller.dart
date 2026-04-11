@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/ConversationDetails/parcel_label_preview_view.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/travel_pricing_details_view.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporters_controller.dart';
 
@@ -28,6 +29,9 @@ class ConversationDetailsController extends GetxController {
 
   void onActionTap(String action) {
     Get.log("Action tapped: $action");
+    if (action == "Print Parcel Label") {
+      Get.to(() => const ParcelLabelPreviewView());
+    }
   }
 
   void navigateToTransporterProfile() {
