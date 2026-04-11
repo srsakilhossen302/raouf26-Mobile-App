@@ -501,16 +501,111 @@ class PublishTripsScreen extends StatelessWidget {
   }
 
   Widget _buildRequestsTab(BuildContext context, bool isDarkMode) {
-    return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-      itemCount: 3,
-      itemBuilder: (context, index) {
-        return _buildRequestCard(isDarkMode);
-      },
+    final controller = Get.find<PublishTripsController>();
+    return Column(
+      children: [
+        _buildRequestSubTabBar(controller, isDarkMode),
+        Expanded(
+          child: Obx(() {
+            // Trigger dependency tracking by accessing value here
+            final currentSubTab = controller.requestSubTab.value;
+            return ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+              itemCount: 2,
+              itemBuilder: (context, index) {
+                String status = "Pending";
+                if (currentSubTab == 1) status = "Accepted";
+                if (currentSubTab == 2) status = "Declined";
+                return _buildRequestCard(context, isDarkMode, status);
+              },
+            );
+          }),
+        ),
+      ],
     );
   }
 
-  Widget _buildRequestCard(bool isDarkMode) {
+  Widget _buildRequestSubTabBar(
+    PublishTripsController controller,
+    bool isDarkMode,
+  ) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+      child: Row(
+        children: [
+          _buildRequestSubTabItem("Pending", 0, controller, isDarkMode),
+          SizedBox(width: 10.w),
+          _buildRequestSubTabItem("Accepted", 1, controller, isDarkMode),
+          SizedBox(width: 10.w),
+          _buildRequestSubTabItem("Declined", 2, controller, isDarkMode),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRequestSubTabItem(
+    String label,
+    int index,
+    PublishTripsController controller,
+    bool isDarkMode,
+  ) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => controller.changeRequestSubTab(index),
+        child: Obx(() {
+          bool isSelected = controller.requestSubTab.value == index;
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 8.h),
+            decoration: BoxDecoration(
+              color: isSelected
+                  ? (isDarkMode ? Colors.white : Colors.black)
+                  : Colors.transparent,
+              borderRadius: BorderRadius.circular(8.r),
+              border: Border.all(
+                color: isSelected
+                    ? (isDarkMode ? Colors.white : Colors.black)
+                    : (isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0)),
+              ),
+            ),
+            child: Text(
+              label,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 14.sp,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                color: isSelected
+                    ? (isDarkMode ? Colors.black : Colors.white)
+                    : (isDarkMode ? Colors.white70 : const Color(0xFF9E9E9E)),
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+  }
+
+  Widget _buildRequestCard(
+    BuildContext context,
+    bool isDarkMode,
+    String status,
+  ) {
+    Color statusColor;
+    Color statusBgColor;
+
+    switch (status) {
+      case "Accepted":
+        statusColor = const Color(0xFF039855);
+        statusBgColor = const Color(0xFFE7F6EC);
+        break;
+      case "Declined":
+        statusColor = const Color(0xFFD92D20);
+        statusBgColor = const Color(0xFFFEE4E2);
+        break;
+      default:
+        statusColor = const Color(0xFFF79009);
+        statusBgColor = const Color(0xFFFFFAEB);
+    }
+
     return Container(
       margin: EdgeInsets.only(bottom: 16.h),
       padding: EdgeInsets.all(20.w),
@@ -532,14 +627,8 @@ class PublishTripsScreen extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 20.r,
-                backgroundColor: const Color(0xFF4A80F0),
-                child: Text(
-                  "ZM",
-                  style: GoogleFonts.plusJakartaSans(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
+                backgroundImage: const NetworkImage(
+                  "https://i.pravatar.cc/150?u=mukaram",
                 ),
               ),
               SizedBox(width: 12.w),
@@ -548,7 +637,7 @@ class PublishTripsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Zain Malik",
+                      "Mukaram Hussain",
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
@@ -558,7 +647,7 @@ class PublishTripsScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Sent a booking request",
+                      "2 hrs ago",
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: 12.sp,
                         color: isDarkMode
@@ -569,103 +658,192 @@ class PublishTripsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(
-                "2h ago",
-                style: GoogleFonts.plusJakartaSans(
-                  fontSize: 12.sp,
-                  color: isDarkMode ? Colors.white38 : const Color(0xFF9E9E9E),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                decoration: BoxDecoration(
+                  color: statusBgColor,
+                  borderRadius: BorderRadius.circular(20.r),
+                ),
+                child: Text(
+                  status,
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w600,
+                    color: statusColor,
+                  ),
                 ),
               ),
             ],
           ),
           SizedBox(height: 20.h),
-          Row(
-            children: [
-              _buildInfoItem("Package", "Electronics", isDarkMode),
-              SizedBox(width: 24.w),
-              _buildInfoItem("Weight", "2.5 kg", isDarkMode),
-              SizedBox(width: 24.w),
-              _buildInfoItem("Fee", "€45.00", isDarkMode),
-            ],
+          _buildRoutePoint(
+            icon: AppIcons.departure,
+            city: "Tunisia",
+            date: "20 Jan",
+            time: "08:30 AM",
+            isFirst: true,
+            isDarkMode: isDarkMode,
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 12.w),
+            child: SvgPicture.asset(
+              AppIcons.partion,
+              height: 30.h,
+              colorFilter: ColorFilter.mode(
+                isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+          _buildRoutePoint(
+            icon: AppIcons.location,
+            city: "France",
+            date: "20 Jan",
+            time: "10:45 PM",
+            isFirst: false,
+            isDarkMode: isDarkMode,
           ),
           SizedBox(height: 20.h),
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 12.h),
-                    side: BorderSide(
-                      color: isDarkMode
-                          ? Colors.white24
-                          : const Color(0xFFE0E0E0),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                  ),
-                  child: Text(
-                    "Decline",
-                    style: GoogleFonts.plusJakartaSans(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w600,
-                      color: isDarkMode
-                          ? Colors.white
-                          : const Color(0xFF1A1A1A),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: 12.w),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4A80F0),
-                    padding: EdgeInsets.symmetric(vertical: 12.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    elevation: 0,
-                  ),
-                  child: Text(
-                    "Accept",
-                    style: GoogleFonts.plusJakartaSans(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          const Divider(),
+          SizedBox(height: 10.h),
+          _buildRequestDetailRow("Package Size", "Medium (15kg)", isDarkMode),
+          _buildRequestDetailRow(
+            "Status",
+            "Urgent",
+            isDarkMode,
+            isUrgent: true,
           ),
+          _buildRequestDetailRow(
+            "Total Estimate",
+            "150 TND",
+            isDarkMode,
+            isBold: true,
+          ),
+          SizedBox(height: 20.h),
+          if (status == "Accepted")
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: () {},
+                style: OutlinedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 12.h),
+                  side: BorderSide(
+                    color: isDarkMode
+                        ? Colors.white24
+                        : const Color(0xFFE0E0E0),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                ),
+                child: Text(
+                  "View Details",
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                  ),
+                ),
+              ),
+            )
+          else
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      side: const BorderSide(color: Color(0xFFFFEAEA)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                    ),
+                    child: Text(
+                      "Reject",
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                        color: const Color(0xFFFF3B3B),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF4A80F0),
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      "Accept",
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
         ],
       ),
     );
   }
 
-  Widget _buildInfoItem(String label, String value, bool isDarkMode) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: GoogleFonts.plusJakartaSans(
-            fontSize: 12.sp,
-            color: isDarkMode ? Colors.white38 : const Color(0xFF9E9E9E),
+  Widget _buildRequestDetailRow(
+    String label,
+    String value,
+    bool isDarkMode, {
+    bool isUrgent = false,
+    bool isBold = false,
+  }) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 8.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 14.sp,
+              color: isDarkMode ? Colors.white38 : const Color(0xFF9E9E9E),
+            ),
           ),
-        ),
-        Text(
-          value,
-          style: GoogleFonts.plusJakartaSans(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-            color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-          ),
-        ),
-      ],
+          if (isUrgent)
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFFAEB),
+                borderRadius: BorderRadius.circular(20.r),
+              ),
+              child: Text(
+                value,
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 10.sp,
+                  fontWeight: FontWeight.w600,
+                  color: const Color(0xFFF79009),
+                ),
+              ),
+            )
+          else
+            Text(
+              value,
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 14.sp,
+                fontWeight: isBold ? FontWeight.w700 : FontWeight.w600,
+                color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+              ),
+            ),
+        ],
+      ),
     );
   }
 
