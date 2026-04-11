@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Transporter {
@@ -39,6 +40,31 @@ class Transporter {
 class TransportersController extends GetxController {
   final RxString selectedFilter = "All".obs;
   final List<String> filters = ["All", "Most Trips", "Top Rated"];
+
+  // Filter BottomSheet States
+  final RxBool isTravelerSelected = true.obs;
+  final RxBool isTransporterSelected = false.obs;
+  final RxString selectedCurrency = "TND".obs;
+  final Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
+  final Rx<RangeValues> priceRange = const RangeValues(2, 10).obs;
+  final RxBool isDirectOnly = true.obs;
+  final RxBool isAllowStops = false.obs;
+  final RxBool isPassingOtherCountries = false.obs;
+  final RxBool isStorageRequired = true.obs;
+  final RxBool isNoStorageNeeded = false.obs;
+
+  void resetFilters() {
+    isTravelerSelected.value = true;
+    isTransporterSelected.value = false;
+    selectedCurrency.value = "TND";
+    selectedDate.value = null;
+    priceRange.value = const RangeValues(2, 10);
+    isDirectOnly.value = true;
+    isAllowStops.value = false;
+    isPassingOtherCountries.value = false;
+    isStorageRequired.value = true;
+    isNoStorageNeeded.value = false;
+  }
 
   final List<Transporter> transporters = [
     Transporter(

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporters_controller.dart';
 import 'package:raouf26mobileapp/utils/appicons/app_icons.dart';
 
@@ -15,12 +16,17 @@ class TransportersView extends GetView<TransportersController> {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.grey.shade50,
+      backgroundColor: isDarkMode
+          ? const Color(0xFF121212)
+          : Colors.grey.shade50,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: isDarkMode ? Colors.white : Colors.black),
+          icon: Icon(
+            Icons.arrow_back,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
           onPressed: () => Get.back(),
         ),
         title: Text(
@@ -35,13 +41,16 @@ class TransportersView extends GetView<TransportersController> {
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 16.w),
-            child: SvgPicture.asset(
-              AppIcons.filters,
-              width: 24.w,
-              height: 24.h,
-              colorFilter: ColorFilter.mode(
-                isDarkMode ? Colors.white : Colors.black,
-                BlendMode.srcIn,
+            child: GestureDetector(
+              onTap: () => _showFilterBottomSheet(context, isDarkMode),
+              child: SvgPicture.asset(
+                AppIcons.filters,
+                width: 24.w,
+                height: 24.h,
+                colorFilter: ColorFilter.mode(
+                  isDarkMode ? Colors.white : Colors.black,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ),
@@ -68,7 +77,10 @@ class TransportersView extends GetView<TransportersController> {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: "Search Location...",
-                  hintStyle: GoogleFonts.montserrat(color: Colors.grey, fontSize: 14.sp),
+                  hintStyle: GoogleFonts.montserrat(
+                    color: Colors.grey,
+                    fontSize: 14.sp,
+                  ),
                   border: InputBorder.none,
                   icon: Icon(Icons.search, color: Colors.grey, size: 22.sp),
                 ),
@@ -80,40 +92,55 @@ class TransportersView extends GetView<TransportersController> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Row(
-              children: controller.filters.map((filter) => Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(right: filter == controller.filters.last ? 0 : 8.w),
-                  child: Obx(() => GestureDetector(
-                    onTap: () => controller.setFilter(filter),
-                    child: Container(
-                      height: 40.h,
-                      decoration: BoxDecoration(
-                        color: controller.selectedFilter.value == filter
-                            ? const Color(0xFF1A1A1A)
-                            : (isDarkMode ? Colors.grey.shade900 : Colors.white),
-                        borderRadius: BorderRadius.circular(8.r),
-                        border: Border.all(
-                          color: controller.selectedFilter.value == filter
-                              ? Colors.transparent
-                              : Colors.grey.shade300,
+              children: controller.filters
+                  .map(
+                    (filter) => Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          right: filter == controller.filters.last ? 0 : 8.w,
                         ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          filter,
-                          style: GoogleFonts.montserrat(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w600,
-                            color: controller.selectedFilter.value == filter
-                                ? Colors.white
-                                : (isDarkMode ? Colors.white70 : Colors.black87),
+                        child: Obx(
+                          () => GestureDetector(
+                            onTap: () => controller.setFilter(filter),
+                            child: Container(
+                              height: 40.h,
+                              decoration: BoxDecoration(
+                                color: controller.selectedFilter.value == filter
+                                    ? const Color(0xFF1A1A1A)
+                                    : (isDarkMode
+                                          ? Colors.grey.shade900
+                                          : Colors.white),
+                                borderRadius: BorderRadius.circular(8.r),
+                                border: Border.all(
+                                  color:
+                                      controller.selectedFilter.value == filter
+                                      ? Colors.transparent
+                                      : Colors.grey.shade300,
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  filter,
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color:
+                                        controller.selectedFilter.value ==
+                                            filter
+                                        ? Colors.white
+                                        : (isDarkMode
+                                              ? Colors.white70
+                                              : Colors.black87),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  )),
-                ),
-              )).toList(),
+                  )
+                  .toList(),
             ),
           ),
 
@@ -202,7 +229,11 @@ class TransportersView extends GetView<TransportersController> {
                           ),
                         ),
                         SizedBox(width: 4.w),
-                        Icon(Icons.check_circle, color: Colors.blue, size: 14.sp),
+                        Icon(
+                          Icons.check_circle,
+                          color: Colors.blue,
+                          size: 14.sp,
+                        ),
                       ],
                     ),
                     Row(
@@ -248,7 +279,13 @@ class TransportersView extends GetView<TransportersController> {
             ),
             child: Column(
               children: [
-                _routeRow(Icons.near_me_outlined, transporter.from, transporter.fromDate, transporter.fromTime, isDarkMode),
+                _routeRow(
+                  Icons.near_me_outlined,
+                  transporter.from,
+                  transporter.fromDate,
+                  transporter.fromTime,
+                  isDarkMode,
+                ),
                 Padding(
                   padding: EdgeInsets.only(left: 10.w),
                   child: Align(
@@ -260,7 +297,13 @@ class TransportersView extends GetView<TransportersController> {
                     ),
                   ),
                 ),
-                _routeRow(Icons.location_on_outlined, transporter.to, transporter.toDate, transporter.toTime, isDarkMode),
+                _routeRow(
+                  Icons.location_on_outlined,
+                  transporter.to,
+                  transporter.toDate,
+                  transporter.toTime,
+                  isDarkMode,
+                ),
               ],
             ),
           ),
@@ -271,15 +314,39 @@ class TransportersView extends GetView<TransportersController> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Price Per kg", style: GoogleFonts.montserrat(fontSize: 11.sp, color: Colors.grey)),
-                  Text(transporter.pricePerKg, style: GoogleFonts.montserrat(fontSize: 14.sp, fontWeight: FontWeight.w700)),
+                  Text(
+                    "Price Per kg",
+                    style: GoogleFonts.montserrat(
+                      fontSize: 11.sp,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  Text(
+                    transporter.pricePerKg,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text("Estimated Total", style: GoogleFonts.montserrat(fontSize: 11.sp, color: Colors.grey)),
-                  Text(transporter.estimatedTotal, style: GoogleFonts.montserrat(fontSize: 14.sp, fontWeight: FontWeight.w700)),
+                  Text(
+                    "Estimated Total",
+                    style: GoogleFonts.montserrat(
+                      fontSize: 11.sp,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  Text(
+                    transporter.estimatedTotal,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -289,7 +356,10 @@ class TransportersView extends GetView<TransportersController> {
             children: [
               Text(
                 "Also traveling to ${transporter.alsoTravelingTo.join(', ')}",
-                style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
+                style: GoogleFonts.montserrat(
+                  fontSize: 12.sp,
+                  color: Colors.grey,
+                ),
               ),
             ],
           ),
@@ -298,7 +368,13 @@ class TransportersView extends GetView<TransportersController> {
     );
   }
 
-  Widget _routeRow(IconData icon, String city, String date, String time, bool isDarkMode) {
+  Widget _routeRow(
+    IconData icon,
+    String city,
+    String date,
+    String time,
+    bool isDarkMode,
+  ) {
     return Row(
       children: [
         Icon(icon, color: Colors.grey, size: 18.sp),
@@ -317,7 +393,10 @@ class TransportersView extends GetView<TransportersController> {
               ),
               Text(
                 date,
-                style: GoogleFonts.montserrat(fontSize: 11.sp, color: Colors.grey),
+                style: GoogleFonts.montserrat(
+                  fontSize: 11.sp,
+                  color: Colors.grey,
+                ),
               ),
             ],
           ),
@@ -331,6 +410,354 @@ class TransportersView extends GetView<TransportersController> {
           ),
         ),
       ],
+    );
+  }
+
+  void _showFilterBottomSheet(BuildContext context, bool isDarkMode) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: 0.85.sh,
+        decoration: BoxDecoration(
+          color: isDarkMode ? const Color(0xFF121212) : Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+        ),
+        padding: EdgeInsets.all(20.r),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  onPressed: () => Get.back(),
+                  icon: Icon(
+                    Icons.close,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                Text(
+                  "Filters",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w700,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => controller.resetFilters(),
+                  child: Text(
+                    "Clear all",
+                    style: GoogleFonts.montserrat(
+                      color: const Color(0xFF4A80F0),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 20.h),
+                    _filterTitle("Who will carry your parcel?", isDarkMode),
+                    Obx(
+                      () => _checkboxRow(
+                        "Travelers",
+                        "(Best for documents)",
+                        controller.isTravelerSelected.value,
+                        (val) => controller.isTravelerSelected.value = val!,
+                        isDarkMode,
+                      ),
+                    ),
+                    Obx(
+                      () => _checkboxRow(
+                        "Transporters",
+                        "(Suitable for larger packages)",
+                        controller.isTransporterSelected.value,
+                        (val) => controller.isTransporterSelected.value = val!,
+                        isDarkMode,
+                      ),
+                    ),
+                    SizedBox(height: 24.h),
+                    _filterTitle("Currency", isDarkMode),
+                    SizedBox(height: 12.h),
+                    _currencyDropdown(isDarkMode),
+                    SizedBox(height: 24.h),
+                    _filterTitle("Travel Date", isDarkMode),
+                    SizedBox(height: 12.h),
+                    _datePickerField(isDarkMode),
+                    SizedBox(height: 24.h),
+                    _filterTitle("Price Range", isDarkMode),
+                    SizedBox(height: 12.h),
+                    _priceRangeSlider(isDarkMode),
+                    SizedBox(height: 24.h),
+                    _filterTitle("Route Preferences", isDarkMode),
+                    Obx(
+                      () => _checkboxRow(
+                        "Direct only",
+                        "(no stops)",
+                        controller.isDirectOnly.value,
+                        (val) => controller.isDirectOnly.value = val!,
+                        isDarkMode,
+                      ),
+                    ),
+                    Obx(
+                      () => _checkboxRow(
+                        "Allow stops",
+                        "",
+                        controller.isAllowStops.value,
+                        (val) => controller.isAllowStops.value = val!,
+                        isDarkMode,
+                      ),
+                    ),
+                    Obx(
+                      () => _checkboxRow(
+                        "Passing through other countries",
+                        "",
+                        controller.isPassingOtherCountries.value,
+                        (val) =>
+                            controller.isPassingOtherCountries.value = val!,
+                        isDarkMode,
+                      ),
+                    ),
+                    SizedBox(height: 24.h),
+                    _filterTitle("Storage Preferences", isDarkMode),
+                    Obx(
+                      () => _checkboxRow(
+                        "Requires storage before pickup",
+                        "",
+                        controller.isStorageRequired.value,
+                        (val) => controller.isStorageRequired.value = val!,
+                        isDarkMode,
+                      ),
+                    ),
+                    Obx(
+                      () => _checkboxRow(
+                        "No storage needed",
+                        "",
+                        controller.isNoStorageNeeded.value,
+                        (val) => controller.isNoStorageNeeded.value = val!,
+                        isDarkMode,
+                      ),
+                    ),
+                    SizedBox(height: 32.h),
+                  ],
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {
+                      controller.resetFilters();
+                      Get.back();
+                    },
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                    ),
+                    child: Text(
+                      "Reset",
+                      style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 16.w),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () => Get.back(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF4A80F0),
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      "Apply",
+                      style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _filterTitle(String title, bool isDarkMode) {
+    return Text(
+      title,
+      style: GoogleFonts.montserrat(
+        fontSize: 15.sp,
+        fontWeight: FontWeight.w700,
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+    );
+  }
+
+  Widget _checkboxRow(
+    String title,
+    String subtitle,
+    bool value,
+    Function(bool?) onChanged,
+    bool isDarkMode,
+  ) {
+    return Padding(
+      padding: EdgeInsets.only(top: 8.h),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 24.w,
+            height: 24.h,
+            child: Checkbox(
+              value: value,
+              onChanged: onChanged,
+              activeColor: const Color(0xFF4A80F0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4.r),
+              ),
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Text(
+            title,
+            style: GoogleFonts.montserrat(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+          if (subtitle.isNotEmpty) ...[
+            SizedBox(width: 4.w),
+            Text(
+              subtitle,
+              style: GoogleFonts.montserrat(
+                fontSize: 12.sp,
+                color: Colors.grey,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _currencyDropdown(bool isDarkMode) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
+      decoration: BoxDecoration(
+        color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 32.w,
+            height: 20.h,
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(2.r),
+            ),
+            child: const Center(
+              child: Icon(Icons.star, size: 10, color: Colors.white),
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Text(
+            "TND",
+            style: GoogleFonts.montserrat(fontWeight: FontWeight.w600),
+          ),
+          const Spacer(),
+          const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+        ],
+      ),
+    );
+  }
+
+  Widget _datePickerField(bool isDarkMode) {
+    return Obx(
+      () => Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+        decoration: BoxDecoration(
+          color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        child: Row(
+          children: [
+            Text(
+              controller.selectedDate.value == null
+                  ? "Select Date"
+                  : DateFormat(
+                      'dd MMM, yyyy',
+                    ).format(controller.selectedDate.value!),
+              style: GoogleFonts.montserrat(
+                color: Colors.grey,
+                fontSize: 14.sp,
+              ),
+            ),
+            const Spacer(),
+            Icon(
+              Icons.calendar_today_outlined,
+              color: Colors.grey,
+              size: 20.sp,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _priceRangeSlider(bool isDarkMode) {
+    return Obx(
+      () => Column(
+        children: [
+          RangeSlider(
+            values: controller.priceRange.value,
+            min: 0,
+            max: 20,
+            activeColor: const Color(0xFF4A80F0),
+            inactiveColor: Colors.grey.shade200,
+            onChanged: (values) => controller.priceRange.value = values,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "${controller.priceRange.value.start.toInt()} TND/ kg",
+                style: GoogleFonts.montserrat(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Text(
+                "${controller.priceRange.value.end.toInt()} TND/ kg",
+                style: GoogleFonts.montserrat(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
