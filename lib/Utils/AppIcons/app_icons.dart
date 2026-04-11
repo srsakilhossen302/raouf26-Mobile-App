@@ -31,4 +31,8 @@ class AppIcons {
   static const String inviteNew = "$basePath/Invite New-Icons.svg";
   static const String edit = "$basePath/Edit-icons.svg";
   static const String filters = "$basePath/Filters-icons.svg";
+  static const String wallet = "$basePath/Wallet-Icons.svg";
+  static const String escrow = "$basePath/Escrow Protection-Icons.svg";
+  static const String refund = "$basePath/Refund-Icons.svg";
+  static const String privacy = "$basePath/prevesi.svg";
 }

@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporters_controller.dart';
 
+import '../../../../Utils/AppIcons/app_icons.dart';
+
 class TransporterDetailsView extends StatelessWidget {
   final Transporter transporter;
   const TransporterDetailsView({super.key, required this.transporter});
@@ -188,9 +190,7 @@ class TransporterDetailsView extends StatelessWidget {
               width: double.infinity,
               height: 56.h,
               child: ElevatedButton(
-                onPressed: () {
-                  // Book logic
-                },
+                onPressed: () => _showPaymentConfirmation(context, isDarkMode),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
@@ -207,6 +207,176 @@ class TransporterDetailsView extends StatelessWidget {
       ),
     );
   }
+
+  void _showPaymentConfirmation(BuildContext context, bool isDarkMode) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        padding: EdgeInsets.all(24.r),
+        decoration: BoxDecoration(
+          color: isDarkMode ? const Color(0xFF121212) : Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 40.w,
+              height: 4.h,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                borderRadius: BorderRadius.circular(2.r),
+              ),
+            ),
+            SizedBox(height: 12.h),
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () => Get.back(),
+                icon: Icon(Icons.close, color: isDarkMode ? Colors.white : Colors.black),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(20.r),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade50,
+                shape: BoxShape.circle,
+              ),
+              child: SvgPicture.asset(
+                AppIcons.privacy,
+                width: 40.w,
+                height: 40.h,
+              ),
+            ),
+            SizedBox(height: 24.h),
+            Text(
+              "Payment Confirmation",
+              style: GoogleFonts.montserrat(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(height: 8.h),
+            Text(
+              "Your payment is protected and handled securely.",
+              style: GoogleFonts.montserrat(
+                fontSize: 14.sp,
+                color: Colors.grey,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 32.h),
+            Container(
+              padding: EdgeInsets.all(16.r),
+              decoration: BoxDecoration(
+                color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
+                borderRadius: BorderRadius.circular(16.r),
+              ),
+              child: Column(
+                children: [
+                  _paymentInfoRow(
+                    AppIcons.wallet,
+                    "Secure Wallet Deduction",
+                    "The payable amount will be safely deducted from your wallet.",
+                    isDarkMode,
+                  ),
+                  SizedBox(height: 20.h),
+                  _paymentInfoRow(
+                    AppIcons.escrow,
+                    "Escrow Protection",
+                    "Your funds are securely held and released to the transporter only after successful delivery.",
+                    isDarkMode,
+                  ),
+                  SizedBox(height: 20.h),
+                  _paymentInfoRow(
+                    AppIcons.refund,
+                    "Refund Assurance",
+                    "If any issue occurs, you can request a full refund as per our policy.",
+                    isDarkMode,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 32.h),
+            SizedBox(
+              width: double.infinity,
+              height: 56.h,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Confirm logic
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF4A80F0),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                  elevation: 0,
+                ),
+                child: Text(
+                  "Confirm & Book",
+                  style: GoogleFonts.montserrat(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Colors.white),
+                ),
+              ),
+            ),
+            SizedBox(height: 12.h),
+            SizedBox(
+              width: double.infinity,
+              height: 56.h,
+              child: OutlinedButton(
+                onPressed: () => Get.back(),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Colors.grey.shade300),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                ),
+                child: Text(
+                  "Save as Draft",
+                  style: GoogleFonts.montserrat(fontSize: 16.sp, fontWeight: FontWeight.w600, color: Colors.black),
+                ),
+              ),
+            ),
+            SizedBox(height: 20.h),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _paymentInfoRow(String icon, String title, String subtitle, bool isDarkMode) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: EdgeInsets.all(10.r),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 4, spreadRadius: 1),
+            ],
+          ),
+          child: SvgPicture.asset(icon, width: 20.w, height: 20.h),
+        ),
+        SizedBox(width: 16.w),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.montserrat(fontSize: 14.sp, fontWeight: FontWeight.w700),
+              ),
+              SizedBox(height: 4.h),
+              Text(
+                subtitle,
+                style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey, height: 1.4),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
 
   Widget _timelineRouteItem(String time, String address, String date, bool isFirst, bool isLast) {
     return IntrinsicHeight(
