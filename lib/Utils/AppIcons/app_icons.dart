@@ -11,6 +11,8 @@ class AppIcons {
   static const String clients = "$basePath/Clients.svg";
   static const String totalEarnings = "$basePath/Total Earnings.svg";
   static const String date = "$basePath/Date-icons.svg";
+  static const String route = "$basePath/Route-icons.svg";
+  static const String departure = "$basePath/Departure-icons.svg";
   static const String location = "$basePath/Location-icons.svg";
   static const String recent = "$basePath/Recent-icons.svg";
   static const String upcoming = "$basePath/Upcoming Trips.svg";
