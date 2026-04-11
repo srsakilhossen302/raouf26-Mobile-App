@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,7 +20,10 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: isDarkMode ? Colors.white : Colors.black),
+          icon: Icon(
+            Icons.arrow_back,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
           onPressed: () => Get.back(),
         ),
         title: Text(
@@ -37,10 +41,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
             color: Colors.grey.shade200,
             height: 1.h,
             alignment: Alignment.centerLeft,
-            child: Container(
-              width: 0.3.sw,
-              color: const Color(0xFF4A80F0),
-            ),
+            child: Container(width: 0.3.sw, color: const Color(0xFF4A80F0)),
           ),
         ),
       ),
@@ -70,15 +71,17 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
             // Package Size Section
             _sectionTitle("Package Size", isDarkMode),
             SizedBox(height: 16.h),
-            Obx(() => Column(
-              children: [
-                _sizeOption("Small", "( 1 to 10 kg )", isDarkMode),
-                SizedBox(height: 12.h),
-                _sizeOption("Medium", "( 20 to 50 kg )", isDarkMode),
-                SizedBox(height: 12.h),
-                _sizeOption("Large", "( 60 to 120 kg )", isDarkMode),
-              ],
-            )),
+            Obx(
+              () => Column(
+                children: [
+                  _sizeOption("Small", "( 1 to 10 kg )", isDarkMode),
+                  SizedBox(height: 12.h),
+                  _sizeOption("Medium", "( 20 to 50 kg )", isDarkMode),
+                  SizedBox(height: 12.h),
+                  _sizeOption("Large", "( 60 to 120 kg )", isDarkMode),
+                ],
+              ),
+            ),
 
             SizedBox(height: 24.h),
             _sectionTitle("Or Enter Exact Weight", isDarkMode),
@@ -101,36 +104,74 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
             _sectionTitle("What Kind of Package?", isDarkMode),
             Text(
               "You can select multiple categories",
-              style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
+              style: GoogleFonts.montserrat(
+                fontSize: 12.sp,
+                color: Colors.grey,
+              ),
             ),
             SizedBox(height: 16.h),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Obx(() => Row(
-                children: [
-                  _categoryChip("Food", "assets/icons/Food-Icons.svg", isDarkMode),
-                  SizedBox(width: 12.w),
-                  _categoryChip("Clothes", "assets/icons/Clothes-icons.svg", isDarkMode),
-                  SizedBox(width: 12.w),
-                  _categoryChip("Documents", "assets/icons/Documents-icons.svg", isDarkMode),
-                  SizedBox(width: 12.w),
-                  _categoryChip("Medicines", "assets/icons/Medicines-icons.svg", isDarkMode),
-                ],
-              )),
+              child: Obx(
+                () => Row(
+                  children: [
+                    _categoryChip(
+                      "Food",
+                      "assets/icons/Food-Icons.svg",
+                      isDarkMode,
+                    ),
+                    SizedBox(width: 12.w),
+                    _categoryChip(
+                      "Clothes",
+                      "assets/icons/Clothes-icons.svg",
+                      isDarkMode,
+                    ),
+                    SizedBox(width: 12.w),
+                    _categoryChip(
+                      "Documents",
+                      "assets/icons/Documents-icons.svg",
+                      isDarkMode,
+                    ),
+                    SizedBox(width: 12.w),
+                    _categoryChip(
+                      "Medicines",
+                      "assets/icons/Medicines-icons.svg",
+                      isDarkMode,
+                    ),
+                  ],
+                ),
+              ),
             ),
 
             SizedBox(height: 24.h),
             _sectionTitle("Package Photos", isDarkMode),
             Text(
               "Please provide the photos of the package's exterior and interior for verification.",
-              style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
+              style: GoogleFonts.montserrat(
+                fontSize: 12.sp,
+                color: Colors.grey,
+              ),
             ),
             SizedBox(height: 16.h),
             Row(
               children: [
-                _photoUploadBox("Exterior", isDarkMode),
+                Obx(
+                  () => _photoUploadBox(
+                    "Exterior",
+                    isDarkMode,
+                    controller.exteriorImage.value,
+                    () => controller.pickImage(true),
+                  ),
+                ),
                 SizedBox(width: 16.w),
-                _photoUploadBox("Interior", isDarkMode),
+                Obx(
+                  () => _photoUploadBox(
+                    "Interior",
+                    isDarkMode,
+                    controller.interiorImage.value,
+                    () => controller.pickImage(false),
+                  ),
+                ),
               ],
             ),
 
@@ -146,18 +187,22 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                     color: isDarkMode ? Colors.white : Colors.black,
                   ),
                 ),
-                Obx(() => Switch(
-                  value: controller.needStorage.value,
-                  onChanged: (val) => controller.toggleStorage(val),
-                  activeColor: const Color(0xFF4A80F0),
-                )),
+                Obx(
+                  () => Switch(
+                    value: controller.needStorage.value,
+                    onChanged: (val) => controller.toggleStorage(val),
+                    activeColor: const Color(0xFF4A80F0),
+                  ),
+                ),
               ],
             ),
             SizedBox(height: 12.h),
             Container(
               padding: EdgeInsets.all(16.r),
               decoration: BoxDecoration(
-                color: isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF9FAFB),
+                color: isDarkMode
+                    ? Colors.white.withOpacity(0.05)
+                    : const Color(0xFFF9FAFB),
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: Text(
@@ -169,12 +214,14 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                 ),
               ),
             ),
-            
+
             SizedBox(height: 16.h),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
               decoration: BoxDecoration(
-                color: isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF9FAFB),
+                color: isDarkMode
+                    ? Colors.white.withOpacity(0.05)
+                    : const Color(0xFFF9FAFB),
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: Row(
@@ -191,17 +238,23 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      Obx(() => Text(
-                        controller.storageDateRange.value,
-                        style: GoogleFonts.montserrat(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                          color: isDarkMode ? Colors.white : Colors.black87,
+                      Obx(
+                        () => Text(
+                          controller.storageDateRange.value,
+                          style: GoogleFonts.montserrat(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600,
+                            color: isDarkMode ? Colors.white : Colors.black87,
+                          ),
                         ),
-                      )),
+                      ),
                     ],
                   ),
-                  Icon(Icons.calendar_today_outlined, color: Colors.black54, size: 20.sp),
+                  Icon(
+                    Icons.calendar_today_outlined,
+                    color: Colors.black54,
+                    size: 20.sp,
+                  ),
                 ],
               ),
             ),
@@ -214,7 +267,9 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
                   elevation: 0,
                 ),
                 child: Text(
@@ -252,7 +307,9 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
       child: Container(
         padding: EdgeInsets.all(16.r),
         decoration: BoxDecoration(
-          color: isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF9FAFB),
+          color: isDarkMode
+              ? Colors.white.withOpacity(0.05)
+              : const Color(0xFFF9FAFB),
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: isSelected ? const Color(0xFF4A80F0) : Colors.transparent,
@@ -291,7 +348,9 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: isSelected ? const Color(0xFF4A80F0) : Colors.grey.shade300,
+                  color: isSelected
+                      ? const Color(0xFF4A80F0)
+                      : Colors.grey.shade300,
                   width: 2,
                 ),
               ),
@@ -314,20 +373,33 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
     );
   }
 
-  Widget _customTextField({required String hintText, String? suffix, required bool isDarkMode}) {
+  Widget _customTextField({
+    required String hintText,
+    String? suffix,
+    required bool isDarkMode,
+  }) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
       decoration: BoxDecoration(
-        color: isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF9FAFB),
+        color: isDarkMode
+            ? Colors.white.withOpacity(0.05)
+            : const Color(0xFFF9FAFB),
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: TextField(
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: GoogleFonts.montserrat(fontSize: 14.sp, color: Colors.grey.shade400),
+          hintStyle: GoogleFonts.montserrat(
+            fontSize: 14.sp,
+            color: Colors.grey.shade400,
+          ),
           border: InputBorder.none,
           suffixText: suffix,
-          suffixStyle: GoogleFonts.montserrat(fontSize: 14.sp, color: Colors.black87, fontWeight: FontWeight.w600),
+          suffixStyle: GoogleFonts.montserrat(
+            fontSize: 14.sp,
+            color: Colors.black87,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );
@@ -340,7 +412,11 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF4A80F0).withOpacity(0.1) : (isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF9FAFB)),
+          color: isSelected
+              ? const Color(0xFF4A80F0).withOpacity(0.1)
+              : (isDarkMode
+                    ? Colors.white.withOpacity(0.05)
+                    : const Color(0xFFF9FAFB)),
           borderRadius: BorderRadius.circular(8.r),
           border: Border.all(
             color: isSelected ? const Color(0xFF4A80F0) : Colors.transparent,
@@ -363,7 +439,9 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
               style: GoogleFonts.montserrat(
                 fontSize: 14.sp,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                color: isSelected ? const Color(0xFF4A80F0) : (isDarkMode ? Colors.white70 : Colors.black87),
+                color: isSelected
+                    ? const Color(0xFF4A80F0)
+                    : (isDarkMode ? Colors.white70 : Colors.black87),
               ),
             ),
           ],
@@ -372,28 +450,51 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
     );
   }
 
-  Widget _photoUploadBox(String label, bool isDarkMode) {
+  Widget _photoUploadBox(
+    String label,
+    bool isDarkMode,
+    File? image,
+    VoidCallback onTap,
+  ) {
     return Expanded(
-      child: Container(
-        height: 120.h,
-        decoration: BoxDecoration(
-          color: isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF9FAFB),
-          borderRadius: BorderRadius.circular(16.r),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.camera_alt_outlined, color: Colors.grey.shade400, size: 28.sp),
-            SizedBox(height: 8.h),
-            Text(
-              label,
-              style: GoogleFonts.montserrat(
-                fontSize: 12.sp,
-                color: Colors.grey.shade400,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          height: 120.h,
+          decoration: BoxDecoration(
+            color: isDarkMode
+                ? Colors.white.withOpacity(0.05)
+                : const Color(0xFFF9FAFB),
+            borderRadius: BorderRadius.circular(16.r),
+            image: image != null
+                ? DecorationImage(image: FileImage(image), fit: BoxFit.cover)
+                : null,
+          ),
+          child: image == null
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      "assets/icons/Camera=icons.svg",
+                      width: 28.sp,
+                      height: 28.sp,
+                      colorFilter: ColorFilter.mode(
+                        Colors.grey.shade400,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    SizedBox(height: 8.h),
+                    Text(
+                      label,
+                      style: GoogleFonts.montserrat(
+                        fontSize: 12.sp,
+                        color: Colors.grey.shade400,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                )
+              : null,
         ),
       ),
     );

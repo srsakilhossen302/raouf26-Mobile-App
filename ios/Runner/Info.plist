@@ -66,5 +66,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires camera access to take photos of packages for verification.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires photo library access to upload package photos from your gallery.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app requires microphone access if you choose to record video of the package.</string>
 </dict>
 </plist>
