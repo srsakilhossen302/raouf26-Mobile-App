@@ -23,6 +23,19 @@ class PublishTripsScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            if (Get.isDarkMode) {
+              Get.changeThemeMode(ThemeMode.light);
+            } else {
+              Get.changeThemeMode(ThemeMode.dark);
+            }
+          },
+          icon: Icon(
+            isDarkMode ? Icons.wb_sunny_outlined : Icons.nightlight_round,
+            color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+          ),
+        ),
         title: Obx(() {
           String title = "Publish Trips";
           if (controller.selectedTab.value == 1) title = "Trips";
@@ -37,7 +50,7 @@ class PublishTripsScreen extends StatelessWidget {
           );
         }),
         actions: [
-          Obx(
+           Obx(
             () => controller.selectedTab.value == 1
                 ? IconButton(
                     onPressed: () {
