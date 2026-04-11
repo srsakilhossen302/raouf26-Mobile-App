@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MessagesController extends GetxController {
@@ -83,6 +84,9 @@ class MessagesController extends GetxController {
     },
   ].obs;
 
+  final RxList<Map<String, dynamic>> archivedMessages =
+      <Map<String, dynamic>>[].obs;
+
   List<Map<String, dynamic>> get filteredMessages {
     if (selectedTab.value == 0) return messages;
     String role = selectedTab.value == 1 ? 'traveler' : 'client';
@@ -93,5 +97,32 @@ class MessagesController extends GetxController {
 
   void onTabSelected(int index) {
     selectedTab.value = index;
+  }
+
+  void archiveMessage(Map<String, dynamic> message) {
+    messages.remove(message);
+    archivedMessages.add(message);
+    Get.snackbar(
+      "Archived",
+      "Conversation archived",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Get.theme.brightness == Brightness.dark
+          ? Colors.grey.shade900
+          : Colors.white,
+      colorText: Get.theme.brightness == Brightness.dark
+          ? Colors.white
+          : Colors.black,
+    );
+  }
+
+  void deleteMessage(Map<String, dynamic> message) {
+    messages.remove(message);
+    Get.snackbar(
+      "Deleted",
+      "Conversation deleted",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.red.withOpacity(0.1),
+      colorText: Colors.red,
+    );
   }
 }

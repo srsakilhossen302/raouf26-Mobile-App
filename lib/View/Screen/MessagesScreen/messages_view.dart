@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:raouf26mobileapp/View/Screen/MessagesScreen/messages_controller.dart';
+import 'package:raouf26mobileapp/View/Screen/MessagesScreen/chat_view.dart';
+import 'package:raouf26mobileapp/View/Screen/MessagesScreen/archive_view.dart';
 import 'package:raouf26mobileapp/View/Widget/custom_bottom_nav_bar.dart';
 
 class MessagesScreen extends StatelessWidget {
@@ -28,12 +31,65 @@ class MessagesScreen extends StatelessWidget {
         ),
         centerTitle: true,
         actions: [
-          IconButton(
-            onPressed: () {},
+          PopupMenuButton<int>(
             icon: Icon(
               Icons.settings_outlined,
               color: isDarkMode ? Colors.white : Colors.black,
             ),
+            offset: const Offset(0, 50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+            onSelected: (value) {
+              if (value == 0) {
+                Get.to(() => const ArchiveView());
+              } else if (value == 1) {
+                // Give Feedback
+              }
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 0,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.archive_outlined,
+                      size: 20.sp,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    SizedBox(width: 12.w),
+                    Text(
+                      "Archive",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14.sp,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 1,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.chat_bubble_outline,
+                      size: 20.sp,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    SizedBox(width: 12.w),
+                    Text(
+                      "Give Feedback",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14.sp,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -91,7 +147,36 @@ class MessagesScreen extends StatelessWidget {
                 itemCount: messages.length,
                 itemBuilder: (context, index) {
                   final message = messages[index];
-                  return _buildMessageItem(message, isDarkMode);
+                  return Slidable(
+                    key: ValueKey(message['name']),
+                    endActionPane: ActionPane(
+                      motion: const ScrollMotion(),
+                      extentRatio: 0.4,
+                      children: [
+                        SlidableAction(
+                          onPressed: (context) =>
+                              controller.archiveMessage(message),
+                          backgroundColor: Colors.grey.shade100,
+                          foregroundColor: Colors.grey.shade700,
+                          icon: Icons.archive_outlined,
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        SizedBox(width: 8.w),
+                        SlidableAction(
+                          onPressed: (context) =>
+                              controller.deleteMessage(message),
+                          backgroundColor: Colors.red.shade50,
+                          foregroundColor: Colors.red,
+                          icon: Icons.delete_outline,
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                      ],
+                    ),
+                    child: GestureDetector(
+                      onTap: () => Get.to(() => ChatView(userData: message)),
+                      child: _buildMessageItem(message, isDarkMode),
+                    ),
+                  );
                 },
               );
             }),
