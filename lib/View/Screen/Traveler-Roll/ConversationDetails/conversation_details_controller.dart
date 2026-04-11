@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/ConversationDetails/parcel_label_preview_view.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/travel_pricing_details_view.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporters_controller.dart';
@@ -31,7 +34,111 @@ class ConversationDetailsController extends GetxController {
     Get.log("Action tapped: $action");
     if (action == "Print Parcel Label") {
       Get.to(() => const ParcelLabelPreviewView());
+    } else if (action == "Star Conversation") {
+      showStarredDialog();
+    } else if (action == "Mark as Unread") {
+      showRemovedFromStarredDialog();
     }
+  }
+
+  void showRemovedFromStarredDialog() {
+    Get.dialog(
+      Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24.r),
+        ),
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 24.w),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(24.r),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 80.r,
+                height: 80.r,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade50,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.star, color: Colors.black87, size: 40.sp),
+              ),
+              SizedBox(height: 24.h),
+              Text(
+                "Removed from Starred",
+                style: GoogleFonts.montserrat(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 12.h),
+              Text(
+                "This conversation has been removed from your important chats.",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.montserrat(
+                  fontSize: 13.sp,
+                  color: Colors.grey,
+                  height: 1.4,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void showStarredDialog() {
+    Get.dialog(
+      Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24.r),
+        ),
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 40.h, horizontal: 24.w),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(24.r),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 80.r,
+                height: 80.r,
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade50,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.star, color: Colors.black87, size: 40.sp),
+              ),
+              SizedBox(height: 24.h),
+              Text(
+                "Added to Starred",
+                style: GoogleFonts.montserrat(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+              ),
+              SizedBox(height: 12.h),
+              Text(
+                "This conversation is now marked as important.",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.montserrat(
+                  fontSize: 13.sp,
+                  color: Colors.grey,
+                  height: 1.4,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   void navigateToTransporterProfile() {
