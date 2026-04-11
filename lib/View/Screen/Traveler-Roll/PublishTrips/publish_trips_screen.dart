@@ -8,6 +8,8 @@ import '../../../../Utils/AppIcons/app_icons.dart';
 import '../../../../Utils/AppImg/app_img.dart';
 import '../../../Widget/custom_bottom_nav_bar.dart';
 import 'publish_trips_controller.dart';
+import 'trip_details_screen.dart';
+import 'trip_model.dart';
 
 class PublishTripsScreen extends StatelessWidget {
   const PublishTripsScreen({super.key});
@@ -50,11 +52,11 @@ class PublishTripsScreen extends StatelessWidget {
           );
         }),
         actions: [
-           Obx(
+          Obx(
             () => controller.selectedTab.value == 1
                 ? IconButton(
                     onPressed: () {
-                      // Filter action for My Trips
+                      _showFilters(context);
                     },
                     icon: SvgPicture.asset(
                       AppIcons.filters,
@@ -201,20 +203,77 @@ class PublishTripsScreen extends StatelessWidget {
   }
 
   Widget _buildMyTripsTab(BuildContext context, bool isDarkMode) {
-    // For now, showing a simple list as seen in the image
     return Column(
       children: [
         _buildSubTabBar(isDarkMode),
+        _buildFilterChips(isDarkMode),
         Expanded(
           child: ListView.builder(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
             itemCount: 2,
             itemBuilder: (context, index) {
-              return _buildTripCard(isDarkMode);
+              return _buildTripCard(context, isDarkMode);
             },
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildFilterChips(bool isDarkMode) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+      child: Row(
+        children: [
+          _buildChip("Tunis", isDarkMode),
+          SizedBox(width: 12.w),
+          _buildChip("Tue 3 March, 2026", isDarkMode),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildChip(String label, bool isDarkMode) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+      decoration: BoxDecoration(
+        color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+        borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(
+          color: isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (label == "Tunis") ...[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(2.r),
+              child: Image.network(
+                "https://flagcdn.com/w40/tn.png",
+                width: 20.w,
+                height: 14.h,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(width: 8.w),
+          ],
+          Text(
+            label,
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.w500,
+              color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+            ),
+          ),
+          SizedBox(width: 8.w),
+          Icon(
+            Icons.close,
+            size: 14.sp,
+            color: isDarkMode ? Colors.white60 : const Color(0xFF9E9E9E),
+          ),
+        ],
+      ),
     );
   }
 
@@ -260,7 +319,7 @@ class PublishTripsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTripCard(bool isDarkMode) {
+  Widget _buildTripCard(BuildContext context, bool isDarkMode) {
     return Container(
       margin: EdgeInsets.only(bottom: 16.h),
       padding: EdgeInsets.all(20.w),
@@ -310,7 +369,7 @@ class PublishTripsScreen extends StatelessWidget {
           _buildRoutePoint(
             icon: AppIcons.departure,
             city: "Tunisia",
-            date: "20 Jan",
+            date: "03 March",
             time: "08:30 AM",
             isFirst: true,
             isDarkMode: isDarkMode,
@@ -329,7 +388,7 @@ class PublishTripsScreen extends StatelessWidget {
           _buildRoutePoint(
             icon: AppIcons.location,
             city: "France",
-            date: "20 Jan",
+            date: "03 March",
             time: "10:45 PM",
             isFirst: false,
             isDarkMode: isDarkMode,
@@ -338,7 +397,22 @@ class PublishTripsScreen extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                final dummyTrip = TripModel(
+                  id: "1",
+                  departureCity: "Tunisia",
+                  arrivalCity: "France",
+                  departureDate: "03 March",
+                  arrivalDate: "03 March",
+                  departureTime: "08:30 AM",
+                  arrivalTime: "10:45 PM",
+                  stops: "40, Sidi Bu Jafar, Sousse, Tunisia",
+                  maxWeight: "Medium (15kg)",
+                  pricePerKg: "2.5 TND",
+                  travelMode: "Flight",
+                );
+                Get.to(() => TripDetailsScreen(trip: dummyTrip));
+              },
               style: OutlinedButton.styleFrom(
                 padding: EdgeInsets.symmetric(vertical: 12.h),
                 side: BorderSide(
@@ -592,6 +666,222 @@ class PublishTripsScreen extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  void _showFilters(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        height: MediaQuery.of(context).size.height * 0.9,
+        decoration: BoxDecoration(
+          color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(24.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () => Get.back(),
+                    icon: Icon(
+                      Icons.close,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  Text(
+                    "Filters",
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700,
+                      color: isDarkMode
+                          ? Colors.white
+                          : const Color(0xFF1A1A1A),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Clear all",
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14.sp,
+                        color: const Color(0xFF4A80F0),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Select Country",
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700,
+                        color: isDarkMode
+                            ? Colors.white
+                            : const Color(0xFF1A1A1A),
+                      ),
+                    ),
+                    SizedBox(height: 12.h),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.w,
+                        vertical: 12.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: isDarkMode
+                            ? const Color(0xFF2C2C2C)
+                            : const Color(0xFFF5F7FA),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(2.r),
+                            child: Image.network(
+                              "https://flagcdn.com/w40/tn.png",
+                              width: 24.w,
+                              height: 18.h,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(width: 12.w),
+                          Expanded(
+                            child: Text(
+                              "Tunis",
+                              style: GoogleFonts.plusJakartaSans(
+                                fontSize: 14.sp,
+                                color: isDarkMode
+                                    ? Colors.white
+                                    : const Color(0xFF1A1A1A),
+                              ),
+                            ),
+                          ),
+                          Icon(
+                            Icons.keyboard_arrow_down,
+                            color: isDarkMode ? Colors.white60 : Colors.black54,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 24.h),
+                    Text(
+                      "Select Date",
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700,
+                        color: isDarkMode
+                            ? Colors.white
+                            : const Color(0xFF1A1A1A),
+                      ),
+                    ),
+                    SizedBox(height: 12.h),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.w,
+                        vertical: 12.h,
+                      ),
+                      decoration: BoxDecoration(
+                        color: isDarkMode
+                            ? const Color(0xFF2C2C2C)
+                            : const Color(0xFFF5F7FA),
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "Select Date",
+                              style: GoogleFonts.plusJakartaSans(
+                                fontSize: 14.sp,
+                                color: isDarkMode
+                                    ? Colors.white38
+                                    : const Color(0xFF9E9E9E),
+                              ),
+                            ),
+                          ),
+                          Icon(
+                            Icons.calendar_today_outlined,
+                            size: 20.sp,
+                            color: isDarkMode ? Colors.white60 : Colors.black54,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(24.w),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => Get.back(),
+                      style: OutlinedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 16.h),
+                        side: BorderSide(
+                          color: isDarkMode
+                              ? Colors.white24
+                              : const Color(0xFFE0E0E0),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                      ),
+                      child: Text(
+                        "Reset",
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                          color: isDarkMode
+                              ? Colors.white
+                              : const Color(0xFF1A1A1A),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 16.w),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () => Get.back(),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4A80F0),
+                        padding: EdgeInsets.symmetric(vertical: 16.h),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: Text(
+                        "Apply",
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
