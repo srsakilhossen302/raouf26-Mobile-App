@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporter_details_view.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/travel_pricing_details_view.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporters_controller.dart';
 
 class ConversationDetailsController extends GetxController {
@@ -50,6 +50,6 @@ class ConversationDetailsController extends GetxController {
       isVerified: true,
     );
 
-    Get.to(() => TransporterDetailsView(transporter: transporter));
+    Get.to(() => TravelPricingDetailsView(transporter: transporter));
   }
 }
