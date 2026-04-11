@@ -9,6 +9,7 @@ import '../../../Widget/custom_bottom_nav_bar.dart';
 import '../../../../Utils/AppImg/app_img.dart';
 import 'search_controller.dart';
 import 'map_picker_screen.dart';
+import '../PackageDetails/package_details_view.dart';
 
 class SearchScreen extends GetView<TravelerSearchController> {
   const SearchScreen({super.key});
@@ -324,7 +325,8 @@ class SearchScreen extends GetView<TravelerSearchController> {
                           width: double.infinity,
                           height: 52.h,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () =>
+                                Get.to(() => const PackageDetailsScreen()),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF4A80F0),
                               shape: RoundedRectangleBorder(
