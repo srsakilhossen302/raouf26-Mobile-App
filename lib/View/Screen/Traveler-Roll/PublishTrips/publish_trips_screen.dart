@@ -11,6 +11,7 @@ import 'publish_trips_controller.dart';
 import 'trip_details_screen.dart';
 import 'trip_model.dart';
 import 'booking_details_modal.dart';
+import 'publish_trip_flow_screen.dart';
 
 class PublishTripsScreen extends StatelessWidget {
   const PublishTripsScreen({super.key});
@@ -1145,7 +1146,10 @@ class PublishTripsScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Get.back(),
+                onPressed: () {
+                  Get.back();
+                  Get.to(() => const PublishTripFlowScreen());
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   padding: EdgeInsets.symmetric(vertical: 16.h),
