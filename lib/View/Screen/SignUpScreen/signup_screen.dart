@@ -181,6 +181,13 @@ class SignUpScreen extends StatelessWidget {
             SizedBox(height: 16.h),
             _socialButton(
               isDarkMode: isDarkMode,
+              icon: AppIcons.whatsapp,
+              label: "continue_with_whatsapp".tr,
+              onTap: () {},
+            ),
+            SizedBox(height: 16.h),
+            _socialButton(
+              isDarkMode: isDarkMode,
               icon: AppIcons.facebook,
               label: "continue_with_facebook".tr,
               onTap: () {},
