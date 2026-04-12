@@ -7,6 +7,12 @@ class AppTranslations extends Translations {
       'welcome_title': 'Welcome to Sendit',
       'welcome_subtitle':
           'Connect with trusted travelers to send packages or earn money on your trips.',
+      'onboarding2_title': 'Ship With Confidence',
+      'onboarding2_desc':
+          'Track your packages in real-time and enjoy secure payments.',
+      'onboarding3_title': 'Turn Your Trips Into Earnings',
+      'onboarding3_desc':
+          'Make money by delivering items while you travel to your destination.',
       'get_started': 'Get Started',
       'select_language': 'Select Language',
       'english': 'English',
@@ -56,6 +62,12 @@ class AppTranslations extends Translations {
       'welcome_title': 'Bienvenue sur Sendit',
       'welcome_subtitle':
           'Connectez-vous avec des voyageurs de confiance pour envoyer des colis ou gagner de l\'argent lors de vos voyages.',
+      'onboarding2_title': 'Expédiez en toute confiance',
+      'onboarding2_desc':
+          'Suivez vos colis en temps réel et profitez de paiements sécurisés.',
+      'onboarding3_title': 'Transformez vos voyages en revenus',
+      'onboarding3_desc':
+          'Gagnez de l\'argent en livrant des articles pendant que vous voyagez vers votre destination.',
       'get_started': 'Commencer',
       'select_language': 'Choisir la langue',
       'english': 'Anglais',
@@ -105,6 +117,11 @@ class AppTranslations extends Translations {
       'welcome_title': 'مرحباً بك في Sendit',
       'welcome_subtitle':
           'تواصل مع مسافرين موثوقين لإرسال الطرود أو كسب المال في رحلاتك.',
+      'onboarding2_title': 'اشحن بثقة',
+      'onboarding2_desc': 'تتبع طرودك في الوقت الفعلي واستمتع بمدفوعات آمنة.',
+      'onboarding3_title': 'حول رحلاتك إلى أرباح',
+      'onboarding3_desc':
+          'اكسب المال عن طريق تسليم العناصر أثناء سفرك إلى وجهتك.',
       'get_started': 'ابدأ الآن',
       'select_language': 'اختر اللغة',
       'english': 'الإنجليزية',

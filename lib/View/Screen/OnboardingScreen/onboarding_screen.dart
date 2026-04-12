@@ -90,7 +90,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       "title": "welcome_title",
       "desc": "welcome_subtitle",
     },
-    // ... other data can also be localized if keys are added to translations
+    {
+      "image": AppImg.onboarding2,
+      "title": "onboarding2_title",
+      "desc": "onboarding2_desc",
+    },
+    {
+      "image": AppImg.onboarding3,
+      "title": "onboarding3_title",
+      "desc": "onboarding3_desc",
+    },
   ];
 
   @override
@@ -259,56 +268,66 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                             ),
                             SizedBox(height: 30.h),
-                            // Buttons
-                            SizedBox(
-                              width: double.infinity,
-                              height: 55.h,
-                              child: ElevatedButton(
-                                onPressed: () =>
-                                    Get.to(() => const ChooseRoleScreen()),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF4A80F0),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                  ),
-                                  elevation: 0,
+                            // Updated Get Started CTA with App Theme Blue Color
+                            GestureDetector(
+                              onTap: () =>
+                                  Get.to(() => const ChooseRoleScreen()),
+                              child: Container(
+                                width: double.infinity,
+                                height: 65.h,
+                                padding: EdgeInsets.all(8.r),
+                                decoration: BoxDecoration(
+                                  color: isDarkMode
+                                      ? const Color(0xFF1E1E1E)
+                                      : Colors.black,
+                                  borderRadius: BorderRadius.circular(40.r),
+                                  border: isDarkMode
+                                      ? Border.all(color: Colors.white10)
+                                      : null,
                                 ),
-                                child: Text(
-                                  "create_account".tr,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 12.h),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 55.h,
-                              child: OutlinedButton(
-                                onPressed: () =>
-                                    Get.to(() => const LogInScreen()),
-                                style: OutlinedButton.styleFrom(
-                                  side: BorderSide(
-                                    color: isDarkMode
-                                        ? Colors.white24
-                                        : Colors.grey.shade300,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                  ),
-                                ),
-                                child: Text(
-                                  "log_in".tr,
-                                  style: TextStyle(
-                                    color: isDarkMode
-                                        ? Colors.white
-                                        : Colors.black,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                                child: Row(
+                                  children: [
+                                    SizedBox(width: 24.w),
+                                    Text(
+                                      "continue_button".tr,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    SizedBox(width: 12.w),
+                                    const Icon(
+                                      Icons.arrow_forward,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                    const Spacer(),
+                                    Container(
+                                      height: double.infinity,
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 24.w,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: const Color(
+                                          0xFF4A80F0,
+                                        ), // App Primary Blue
+                                        borderRadius: BorderRadius.circular(
+                                          30.r,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          "get_started".tr,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
