@@ -33,7 +33,7 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          "Choose Your Role",
+          "choose_your_role".tr,
           style: TextStyle(
             color: isDarkMode ? Colors.white : Colors.black,
             fontSize: 18.sp,
@@ -62,7 +62,7 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
           children: [
             SizedBox(height: 20.h),
             Text(
-              "Choose Your Role",
+              "choose_your_role".tr,
               style: TextStyle(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
@@ -71,7 +71,7 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
             ),
             SizedBox(height: 8.h),
             Text(
-              "How would you like to use Sendit?",
+              "role_subtitle".tr,
               style: TextStyle(
                 fontSize: 16.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
@@ -79,14 +79,14 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
             ),
             SizedBox(height: 32.h),
             _roleOption(
-              title: "I am a Transporter.",
+              title: "i_am_transporter".tr,
               icon: AppIcons.transporte,
               role: "Transporter",
               isDarkMode: isDarkMode,
             ),
             SizedBox(height: 16.h),
             _roleOption(
-              title: "I am a Traveler.",
+              title: "i_am_traveler".tr,
               icon: AppIcons.traveler,
               role: "Traveler",
               isDarkMode: isDarkMode,
@@ -105,10 +105,9 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.r),
                   ),
-                  elevation: 0,
                 ),
                 child: Text(
-                  "Continue",
+                  "continue_button".tr,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16.sp,

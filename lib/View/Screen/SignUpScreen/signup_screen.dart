@@ -27,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          "Sign Up",
+          "sign_up".tr,
           style: TextStyle(
             color: isDarkMode ? Colors.white : Colors.black,
             fontSize: 18.sp,
@@ -56,7 +56,7 @@ class SignUpScreen extends StatelessWidget {
           children: [
             SizedBox(height: 20.h),
             Text(
-              "Create Your Account",
+              "create_your_account".tr,
               style: TextStyle(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
@@ -65,22 +65,22 @@ class SignUpScreen extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             Text(
-              "Send packages or earn on your trips.",
+              "signup_subtitle".tr,
               style: TextStyle(
                 fontSize: 16.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
               ),
             ),
             SizedBox(height: 32.h),
-            _inputLabel(label: "Full Name", isDarkMode: isDarkMode),
+            _inputLabel(label: "full_name".tr, isDarkMode: isDarkMode),
             SizedBox(height: 12.h),
-            _textField(hint: "Full Name", isDarkMode: isDarkMode),
+            _textField(hint: "full_name".tr, isDarkMode: isDarkMode),
             SizedBox(height: 20.h),
-            _inputLabel(label: "Email", isDarkMode: isDarkMode),
+            _inputLabel(label: "email".tr, isDarkMode: isDarkMode),
             SizedBox(height: 12.h),
-            _textField(hint: "Email", isDarkMode: isDarkMode),
+            _textField(hint: "email".tr, isDarkMode: isDarkMode),
             SizedBox(height: 20.h),
-            _inputLabel(label: "Phone Number", isDarkMode: isDarkMode),
+            _inputLabel(label: "phone_number".tr, isDarkMode: isDarkMode),
             SizedBox(height: 12.h),
             IntlPhoneField(
               decoration: InputDecoration(
@@ -150,7 +150,7 @@ class SignUpScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Text(
-                    "Sign Up With",
+                    "log_in_with".tr, // Reusing key
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
@@ -168,21 +168,21 @@ class SignUpScreen extends StatelessWidget {
             _socialButton(
               isDarkMode: isDarkMode,
               icon: AppIcons.google,
-              label: "Continue with Google",
+              label: "continue_with_google".tr,
               onTap: () {},
             ),
             SizedBox(height: 16.h),
             _socialButton(
               isDarkMode: isDarkMode,
               icon: AppIcons.apple,
-              label: "Continue with Apple",
+              label: "continue_with_apple".tr,
               onTap: () {},
             ),
             SizedBox(height: 16.h),
             _socialButton(
               isDarkMode: isDarkMode,
               icon: AppIcons.facebook,
-              label: "Continue with Facebook",
+              label: "continue_with_facebook".tr,
               onTap: () {},
             ),
             SizedBox(height: 20.h),
@@ -191,14 +191,14 @@ class SignUpScreen extends StatelessWidget {
                 onTap: () => Get.back(),
                 child: RichText(
                   text: TextSpan(
-                    text: "Already have an account? ",
+                    text: "${"already_have_account".tr} ",
                     style: TextStyle(
                       color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
                       fontSize: 14.sp,
                     ),
                     children: [
                       TextSpan(
-                        text: "Log In",
+                        text: "log_in".tr,
                         style: TextStyle(
                           color: const Color(0xFF4A80F0),
                           fontSize: 14.sp,

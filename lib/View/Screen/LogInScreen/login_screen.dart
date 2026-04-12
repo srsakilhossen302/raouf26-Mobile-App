@@ -28,7 +28,7 @@ class LogInScreen extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          "Log In",
+          "log_in".tr,
           style: TextStyle(
             color: isDarkMode ? Colors.white : Colors.black,
             fontSize: 18.sp,
@@ -57,7 +57,7 @@ class LogInScreen extends StatelessWidget {
           children: [
             SizedBox(height: 20.h),
             Text(
-              "Welcome Back",
+              "welcome_back".tr,
               style: TextStyle(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
@@ -66,7 +66,7 @@ class LogInScreen extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             Text(
-              "Sign in to manage your trips and shipments.",
+              "sign_in_subtitle".tr,
               style: TextStyle(
                 fontSize: 16.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
@@ -74,7 +74,7 @@ class LogInScreen extends StatelessWidget {
             ),
             SizedBox(height: 32.h),
             Text(
-              "Phone Number",
+              "phone_number".tr,
               style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
@@ -165,7 +165,7 @@ class LogInScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Text(
-                    "Log In With",
+                    "log_in_with".tr,
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
@@ -183,21 +183,21 @@ class LogInScreen extends StatelessWidget {
             _socialButton(
               isDarkMode: isDarkMode,
               icon: AppIcons.google,
-              label: "Continue with Google",
+              label: "continue_with_google".tr,
               onTap: () {},
             ),
             SizedBox(height: 16.h),
             _socialButton(
               isDarkMode: isDarkMode,
               icon: AppIcons.apple,
-              label: "Continue with Apple",
+              label: "continue_with_apple".tr,
               onTap: () {},
             ),
             SizedBox(height: 16.h),
             _socialButton(
               isDarkMode: isDarkMode,
               icon: AppIcons.facebook,
-              label: "Continue with Facebook",
+              label: "continue_with_facebook".tr,
               onTap: () {},
             ),
             SizedBox(height: 20.h),
@@ -206,14 +206,14 @@ class LogInScreen extends StatelessWidget {
                 onTap: () => Get.to(() => const SignUpScreen()),
                 child: RichText(
                   text: TextSpan(
-                    text: "Don't have an account? ",
+                    text: "${"create_account_prompt".tr} ",
                     style: TextStyle(
                       color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
                       fontSize: 14.sp,
                     ),
                     children: [
                       TextSpan(
-                        text: "Sign Up",
+                        text: "sign_up".tr,
                         style: TextStyle(
                           color: const Color(0xFF4A80F0),
                           fontSize: 14.sp,

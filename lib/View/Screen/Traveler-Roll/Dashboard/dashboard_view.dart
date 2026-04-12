@@ -71,7 +71,7 @@ class DashboardScreen extends GetView<DashboardController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Dashboard",
+                                "dashboard_title".tr,
                                 style: TextStyle(
                                   fontSize: 24.sp,
                                   fontWeight: FontWeight.bold,
@@ -82,7 +82,7 @@ class DashboardScreen extends GetView<DashboardController> {
                               ),
                               SizedBox(height: 4.h),
                               Text(
-                                "Overview of your shipments and trips",
+                                "dashboard_subtitle".tr,
                                 style: TextStyle(
                                   fontSize: 14.sp,
                                   color: isDarkMode
@@ -92,7 +92,7 @@ class DashboardScreen extends GetView<DashboardController> {
                               ),
                               SizedBox(height: 24.h),
                               Text(
-                                "Quick Actions",
+                                "quick_actions".tr,
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.bold,
@@ -105,15 +105,15 @@ class DashboardScreen extends GetView<DashboardController> {
                               Row(
                                 children: [
                                   _quickActionCard(
-                                    title: "Send Package",
-                                    subtitle: "Ship with a traveler",
+                                    title: "send_package".tr,
+                                    subtitle: "ship_with_traveler".tr,
                                     icon: AppIcons.sendPackage,
                                     isDarkMode: isDarkMode,
                                   ),
                                   SizedBox(width: 16.w),
                                   _quickActionCard(
-                                    title: "Carry Package",
-                                    subtitle: "Earn on your trip",
+                                    title: "carry_package".tr,
+                                    subtitle: "earn_on_trip".tr,
                                     icon: AppIcons.carryPackage,
                                     isDarkMode: isDarkMode,
                                   ),
@@ -134,7 +134,7 @@ class DashboardScreen extends GetView<DashboardController> {
               padding: EdgeInsets.all(20.r),
               child: Column(
                 children: [
-                  _sectionHeader("Statistics", isDarkMode),
+                  _sectionHeader("statistics".tr, isDarkMode),
                   SizedBox(height: 16.h),
                   Container(
                     padding: EdgeInsets.all(20.r),
@@ -148,7 +148,7 @@ class DashboardScreen extends GetView<DashboardController> {
                       children: [
                         _statsRow(
                           icon: AppIcons.totalEarnings,
-                          label: "Total Earnings",
+                          label: "total_earnings".tr,
                           value: controller.totalEarnings.value,
                           isDarkMode: isDarkMode,
                         ),
@@ -160,7 +160,7 @@ class DashboardScreen extends GetView<DashboardController> {
                         ),
                         _statsRow(
                           icon: AppIcons.clients,
-                          label: "Clients",
+                          label: "clients".tr,
                           value: controller.clientsCount.value,
                           isDarkMode: isDarkMode,
                         ),
@@ -168,7 +168,7 @@ class DashboardScreen extends GetView<DashboardController> {
                     ),
                   ),
                   SizedBox(height: 24.h),
-                  _sectionHeader("Total Earnings", isDarkMode),
+                  _sectionHeader("total_earnings".tr, isDarkMode),
                   SizedBox(height: 16.h),
                   Container(
                     padding: EdgeInsets.all(20.r),
@@ -447,11 +447,7 @@ class DashboardScreen extends GetView<DashboardController> {
                 ),
               ),
               SizedBox(width: 4.w),
-              SvgPicture.asset(
-                AppIcons.verifa,
-                width: 14.w,
-                height: 14.h,
-              ),
+              SvgPicture.asset(AppIcons.verifa, width: 14.w, height: 14.h),
               const Spacer(),
               Text(
                 "5h ago",
