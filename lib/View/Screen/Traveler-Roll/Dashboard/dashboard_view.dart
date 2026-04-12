@@ -49,40 +49,6 @@ class DashboardScreen extends GetView<DashboardController> {
                     ),
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "9:42",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.signal_cellular_alt,
-                                  color: Colors.white,
-                                  size: 16.sp,
-                                ),
-                                SizedBox(width: 4.w),
-                                Icon(
-                                  Icons.wifi,
-                                  color: Colors.white,
-                                  size: 16.sp,
-                                ),
-                                SizedBox(width: 4.w),
-                                Icon(
-                                  Icons.battery_full,
-                                  color: Colors.white,
-                                  size: 16.sp,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
                         SizedBox(height: 20.h),
                         // Dashboard Card
                         Container(

@@ -10,6 +10,7 @@ import '../../../Widget/custom_bottom_nav_bar.dart';
 import 'publish_trips_controller.dart';
 import 'trip_details_screen.dart';
 import 'trip_model.dart';
+import 'booking_details_modal.dart';
 
 class PublishTripsScreen extends StatelessWidget {
   const PublishTripsScreen({super.key});
@@ -772,7 +773,7 @@ class PublishTripsScreen extends StatelessWidget {
                 SizedBox(width: 12.w),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => _showBookingDetails(context),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF4A80F0),
                       padding: EdgeInsets.symmetric(vertical: 12.h),
@@ -845,6 +846,10 @@ class PublishTripsScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _showBookingDetails(BuildContext context) {
+    Get.to(() => const BookingDetailsScreen());
   }
 
   void _showFilters(BuildContext context) {
