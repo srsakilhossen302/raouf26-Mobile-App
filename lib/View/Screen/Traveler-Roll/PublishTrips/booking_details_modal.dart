@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../Utils/AppIcons/app_icons.dart';
+import '../../MessagesScreen/chat_view.dart';
 
 class BookingDetailsScreen extends StatelessWidget {
   const BookingDetailsScreen({super.key});
@@ -287,7 +288,16 @@ class BookingDetailsScreen extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: OutlinedButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(
+                  () => ChatView(
+                    userData: {
+                      'image': "https://i.pravatar.cc/150?u=mukaram",
+                      'name': "Mukaram Hussain",
+                    },
+                  ),
+                );
+              },
               style: OutlinedButton.styleFrom(
                 padding: EdgeInsets.symmetric(vertical: 14.h),
                 side: const BorderSide(color: Color(0xFFE0E0E0)),
