@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../Utils/AppIcons/app_icons.dart';
 import '../../../Utils/AppImg/app_img.dart';
 import '../LogInScreen/login_screen.dart';
@@ -19,24 +20,77 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
+  void _changeLanguage(String langCode, String countryCode) async {
+    Locale locale = Locale(langCode, countryCode);
+    Get.updateLocale(locale);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('locale', '${langCode}_$countryCode');
+  }
+
+  void _showLanguageSelector(BuildContext context) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+      ),
+      builder: (context) => Container(
+        padding: EdgeInsets.all(20.r),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'select_language'.tr,
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.bold,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
+            SizedBox(height: 20.h),
+            _buildLanguageOption('English', 'en', 'US', isDarkMode),
+            _buildLanguageOption('French', 'fr', 'FR', isDarkMode),
+            _buildLanguageOption('Arabic', 'ar', 'AR', isDarkMode),
+            SizedBox(height: 20.h),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLanguageOption(
+    String title,
+    String langCode,
+    String countryCode,
+    bool isDarkMode,
+  ) {
+    bool isSelected = Get.locale?.languageCode == langCode;
+    return ListTile(
+      title: Text(
+        title,
+        style: TextStyle(
+          color: isDarkMode ? Colors.white : Colors.black,
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
+      trailing: isSelected
+          ? const Icon(Icons.check, color: Color(0xFF4A80F0))
+          : null,
+      onTap: () {
+        _changeLanguage(langCode, countryCode);
+        Get.back();
+      },
+    );
+  }
+
   final List<Map<String, String>> onboardingData = [
     {
       "image": AppImg.onboarding1,
-      "title": "Welcome to Sendit",
-      "desc":
-          "Connect with trusted travelers to send packages or earn money on your trips.",
+      "title": "welcome_title",
+      "desc": "welcome_subtitle",
     },
-    {
-      "image": AppImg.onboarding2,
-      "title": "Ship With Confidence",
-      "desc": "Track your packages in real-time and enjoy secure payments.",
-    },
-    {
-      "image": AppImg.onboarding3,
-      "title": "Turn Your Trips Into Earnings",
-      "desc":
-          "Make money by delivering items while you travel to your destination.",
-    },
+    // ... other data can also be localized if keys are added to translations
   ];
 
   @override
@@ -62,35 +116,38 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       BlendMode.srcIn,
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 10.w,
-                      vertical: 5.h,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: isDarkMode
-                            ? Colors.white24
-                            : Colors.grey.shade300,
+                  GestureDetector(
+                    onTap: () => _showLanguageSelector(context),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.w,
+                        vertical: 5.h,
                       ),
-                      borderRadius: BorderRadius.circular(20.r),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.translate,
-                          size: 16.sp,
-                          color: isDarkMode ? Colors.white : Colors.black,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: isDarkMode
+                              ? Colors.white24
+                              : Colors.grey.shade300,
                         ),
-                        SizedBox(width: 5.w),
-                        Text(
-                          "EN / FR",
-                          style: TextStyle(
-                            fontSize: 12.sp,
+                        borderRadius: BorderRadius.circular(20.r),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.translate,
+                            size: 16.sp,
                             color: isDarkMode ? Colors.white : Colors.black,
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 5.w),
+                          Text(
+                            "EN / FR / AR",
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: isDarkMode ? Colors.white : Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -183,7 +240,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             SizedBox(height: 20.h),
                             Text(
-                              onboardingData[index]["title"]!,
+                              onboardingData[index]["title"]!.tr,
                               style: TextStyle(
                                 fontSize: 24.sp,
                                 fontWeight: FontWeight.bold,
@@ -192,7 +249,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             SizedBox(height: 10.h),
                             Text(
-                              onboardingData[index]["desc"]!,
+                              onboardingData[index]["desc"]!.tr,
                               style: TextStyle(
                                 fontSize: 16.sp,
                                 color: isDarkMode
@@ -217,7 +274,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   elevation: 0,
                                 ),
                                 child: Text(
-                                  "Create Account",
+                                  "create_account".tr,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 16.sp,
@@ -244,7 +301,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   ),
                                 ),
                                 child: Text(
-                                  "Log In",
+                                  "log_in".tr,
                                   style: TextStyle(
                                     color: isDarkMode
                                         ? Colors.white

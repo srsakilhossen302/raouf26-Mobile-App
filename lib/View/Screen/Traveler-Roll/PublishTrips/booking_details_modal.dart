@@ -29,7 +29,7 @@ class BookingDetailsScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          "Booking Details",
+          "booking_details".tr,
           style: GoogleFonts.plusJakartaSans(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
@@ -93,7 +93,7 @@ class BookingDetailsScreen extends StatelessWidget {
               elevation: 0,
             ),
             child: Text(
-              "Marked as Pickup",
+              "pickup".tr,
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
@@ -131,7 +131,7 @@ class BookingDetailsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Accepted!",
+                  "accepted".tr,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
@@ -140,7 +140,7 @@ class BookingDetailsScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  "You have agreed to carry this parcel.",
+                  "welcome_subtitle".tr,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 14.sp,
                     color: const Color(0xFF666666),
@@ -306,7 +306,7 @@ class BookingDetailsScreen extends StatelessWidget {
                 ),
               ),
               child: Text(
-                "Message",
+                "message".tr,
                 style: GoogleFonts.plusJakartaSans(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
