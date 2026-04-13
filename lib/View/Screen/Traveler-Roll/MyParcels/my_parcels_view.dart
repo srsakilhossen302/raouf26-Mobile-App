@@ -214,8 +214,25 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
                             BlendMode.srcIn,
                           ),
                         ),
+                        SizedBox(width: 12.w),
+                        Icon(
+                          Icons.qr_code_2,
+                          size: 16.sp,
+                          color: const Color(0xFF4A80F0),
+                        ),
+                        SizedBox(width: 8.w),
+                        SvgPicture.asset(
+                          "assets/icons/Location-icons.svg",
+                          width: 16.sp,
+                          height: 16.sp,
+                          colorFilter: const ColorFilter.mode(
+                            Color(0xFF4A80F0),
+                            BlendMode.srcIn,
+                          ),
+                        ),
                       ],
                     ),
+                    SizedBox(height: 4.h),
                     Text(
                       date,
                       style: GoogleFonts.montserrat(
