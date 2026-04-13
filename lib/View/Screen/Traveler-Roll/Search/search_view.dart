@@ -90,17 +90,34 @@ class SearchScreen extends GetView<TravelerSearchController> {
                                 ),
                               ],
                             ),
-                            Container(
-                              padding: EdgeInsets.all(10.r),
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.2),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                Icons.notifications_none,
-                                color: Colors.white,
-                                size: 24.sp,
-                              ),
+                            Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(10.r),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.2),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Icons.qr_code_scanner,
+                                    color: Colors.white,
+                                    size: 24.sp,
+                                  ),
+                                ),
+                                SizedBox(width: 12.w),
+                                Container(
+                                  padding: EdgeInsets.all(10.r),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.2),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Icons.notifications_none,
+                                    color: Colors.white,
+                                    size: 24.sp,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
