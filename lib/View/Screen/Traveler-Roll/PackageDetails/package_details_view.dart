@@ -70,28 +70,28 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
             ),
             SizedBox(height: 24.h),
 
+            // Exact Weight Section (Moved to first)
+            _sectionTitle("Exact Weight", isDarkMode),
+            SizedBox(height: 12.h),
+            _customTextField(
+              hintText: "Enter Custom Weight",
+              isDarkMode: isDarkMode,
+            ),
+
+            SizedBox(height: 24.h),
             // Package Size Section
             _sectionTitle("Package Size", isDarkMode),
             SizedBox(height: 16.h),
             Obx(
               () => Column(
                 children: [
-                  _sizeOption("Small", "( 1 to 10 kg )", isDarkMode),
+                  _sizeOption("Small", "( 1 to 10 )", isDarkMode),
                   SizedBox(height: 12.h),
-                  _sizeOption("Medium", "( 20 to 50 kg )", isDarkMode),
+                  _sizeOption("Medium", "( 20 to 50 )", isDarkMode),
                   SizedBox(height: 12.h),
-                  _sizeOption("Large", "( 60 to 120 kg )", isDarkMode),
+                  _sizeOption("Large", "( 60 to 120 )", isDarkMode),
                 ],
               ),
-            ),
-
-            SizedBox(height: 24.h),
-            _sectionTitle("Or Enter Exact Weight", isDarkMode),
-            SizedBox(height: 12.h),
-            _customTextField(
-              hintText: "Enter Custom Weight",
-              suffix: "kg",
-              isDarkMode: isDarkMode,
             ),
 
             SizedBox(height: 24.h),
