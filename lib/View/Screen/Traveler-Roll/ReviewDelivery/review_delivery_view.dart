@@ -99,6 +99,20 @@ class ReviewDeliveryView extends GetView<ReviewDeliveryController> {
 
             SizedBox(height: 16.h),
 
+            // Pickup Details Section
+            _reviewSection(
+              title: "Pickup Details",
+              isDarkMode: isDarkMode,
+              onEdit: () => controller.editSection("Pickup"),
+              children: [
+                _reviewRow("Pickup Date", "Jan 14, 2026"),
+                _reviewRow("Pickup Time", "2:30 PM"),
+                _reviewRow("Pickup Preference", "Sender's Address"),
+              ],
+            ),
+
+            SizedBox(height: 16.h),
+
             // Delivery Details Section
             _reviewSection(
               title: "Delivery Details",
