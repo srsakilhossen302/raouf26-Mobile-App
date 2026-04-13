@@ -8,6 +8,7 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transpor
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporters_controller.dart';
 
 import '../../../../Utils/AppIcons/app_icons.dart';
+import '../../MessagesScreen/chat_view.dart';
 
 class TransporterDetailsView extends StatelessWidget {
   final Transporter transporter;
@@ -395,28 +396,72 @@ class TransporterDetailsView extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.all(24.r),
-            child: SizedBox(
-              width: double.infinity,
-              height: 56.h,
-              child: ElevatedButton(
-                onPressed: () =>
-                    _showPaymentConfirmation(context, isDarkMode, controller),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4A80F0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
+            child: Row(
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    height: 56.h,
+                    child: OutlinedButton(
+                      onPressed: () {
+                        Get.to(
+                          () => ChatView(
+                            userData: {
+                              'name': transporter.name,
+                              'image': transporter.imageUrl,
+                              'from': transporter.from,
+                              'to': transporter.to,
+                              'weight': "15kg", // Default or from search
+                              'price': transporter.estimatedTotal,
+                            },
+                          ),
+                        );
+                      },
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Color(0xFF4A80F0)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                      ),
+                      child: Text(
+                        "Contact",
+                        style: GoogleFonts.montserrat(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w700,
+                          color: const Color(0xFF4A80F0),
+                        ),
+                      ),
+                    ),
                   ),
-                  elevation: 0,
                 ),
-                child: Text(
-                  "Book Transporter",
-                  style: GoogleFonts.montserrat(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: SizedBox(
+                    height: 56.h,
+                    child: ElevatedButton(
+                      onPressed: () => _showPaymentConfirmation(
+                        context,
+                        isDarkMode,
+                        controller,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4A80F0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: Text(
+                        "Book Now",
+                        style: GoogleFonts.montserrat(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
         ],
