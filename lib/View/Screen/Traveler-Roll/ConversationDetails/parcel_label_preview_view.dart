@@ -11,7 +11,9 @@ class ParcelLabelPreviewView extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.grey.shade50,
+      backgroundColor: isDarkMode
+          ? const Color(0xFF121212)
+          : Colors.grey.shade50,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -29,7 +31,10 @@ class ParcelLabelPreviewView extends StatelessWidget {
             const Spacer(),
             IconButton(
               onPressed: () => Get.back(),
-              icon: Icon(Icons.close, color: isDarkMode ? Colors.white : Colors.black),
+              icon: Icon(
+                Icons.close,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
             ),
           ],
         ),
@@ -75,13 +80,23 @@ class ParcelLabelPreviewView extends StatelessWidget {
                   SizedBox(height: 16.h),
 
                   // FROM
-                  _addressSection("FROM:", "Zain Malik", "12 Avenue Habib Bourguiba, Tunis,\nTunisia\n+216 00 000 000", isDarkMode),
+                  _addressSection(
+                    "FROM:",
+                    "Zain Malik",
+                    "12 Avenue Habib Bourguiba, Tunis,\nTunisia\n+216 00 000 000",
+                    isDarkMode,
+                  ),
                   SizedBox(height: 24.h),
                   const Divider(),
                   SizedBox(height: 16.h),
 
                   // To
-                  _addressSection("To:", "Ahmed Bin Salah", "18 Rue de Rivoli, Paris\nFrance\n+216 00 000 000", isDarkMode),
+                  _addressSection(
+                    "To:",
+                    "Ahmed Bin Salah",
+                    "18 Rue de Rivoli, Paris\nFrance\n+216 00 000 000",
+                    isDarkMode,
+                  ),
                   SizedBox(height: 24.h),
                   const Divider(),
                   SizedBox(height: 16.h),
@@ -131,31 +146,30 @@ class ParcelLabelPreviewView extends StatelessWidget {
                   ),
                   SizedBox(height: 32.h),
 
-                  // Barcode Placeholder
+                  // QR Code
                   Center(
                     child: Column(
                       children: [
                         Container(
-                          height: 60.h,
-                          width: double.infinity,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(40, (index) {
-                              return Container(
-                                width: (index % 3 == 0) ? 4.w : 2.w,
-                                height: 60.h,
-                                margin: EdgeInsets.only(right: 2.w),
-                                color: isDarkMode ? Colors.white : Colors.black,
-                              );
-                            }),
+                          padding: EdgeInsets.all(12.r),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12.r),
+                            border: Border.all(color: Colors.grey.shade200),
+                          ),
+                          child: Icon(
+                            Icons.qr_code_2,
+                            size: 120.sp,
+                            color: Colors.black,
                           ),
                         ),
-                        SizedBox(height: 8.h),
+                        SizedBox(height: 12.h),
                         Text(
                           "SNDT48291328JAN",
                           style: GoogleFonts.montserrat(
                             fontSize: 11.sp,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 2,
                             color: isDarkMode ? Colors.white70 : Colors.black54,
                           ),
                         ),
@@ -204,16 +218,18 @@ class ParcelLabelPreviewView extends StatelessWidget {
     );
   }
 
-  Widget _addressSection(String label, String name, String address, bool isDarkMode) {
+  Widget _addressSection(
+    String label,
+    String name,
+    String address,
+    bool isDarkMode,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: GoogleFonts.montserrat(
-            fontSize: 11.sp,
-            color: Colors.grey,
-          ),
+          style: GoogleFonts.montserrat(fontSize: 11.sp, color: Colors.grey),
         ),
         SizedBox(height: 4.h),
         Text(
@@ -243,10 +259,7 @@ class ParcelLabelPreviewView extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.montserrat(
-            fontSize: 11.sp,
-            color: Colors.grey,
-          ),
+          style: GoogleFonts.montserrat(fontSize: 11.sp, color: Colors.grey),
         ),
         SizedBox(height: 4.h),
         Text(
