@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
 import '../publish_trip_flow_controller.dart';
 
@@ -63,34 +64,67 @@ class PricesCapacityStep extends StatelessWidget {
           ),
           SizedBox(height: 8.h),
           Obx(
-            () => Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              decoration: BoxDecoration(
-                color: isDarkMode ? Colors.white10 : const Color(0xFFF5F7FA),
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  value: controller.selectedCurrency.value,
-                  isExpanded: true,
-                  dropdownColor: isDarkMode
-                      ? const Color(0xFF1E1E1E)
-                      : Colors.white,
-                  style: GoogleFonts.plusJakartaSans(
-                    color: isDarkMode ? Colors.white : Colors.black,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  items: ["TND", "USD", "EUR"].map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (newValue) {
-                    if (newValue != null) {
-                      controller.selectedCurrency.value = newValue;
-                    }
+            () => GestureDetector(
+              onTap: () {
+                showCountryPicker(
+                  context: context,
+                  showPhoneCode: false,
+                  onSelect: (Country country) {
+                    controller.selectedCountryName.value = country.name;
+                    controller.selectedCountryFlag.value = country.flagEmoji;
+                    // Note: country_picker doesn't provide currency code directly.
+                    // You might need a mapping or another package for full currency support.
+                    controller.selectedCurrency.value = country.countryCode;
                   },
+                  countryListTheme: CountryListThemeData(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(24.r),
+                    ),
+                    inputDecoration: InputDecoration(
+                      hintText: 'Search country',
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: isDarkMode
+                          ? Colors.white10
+                          : const Color(0xFFF5F7FA),
+                    ),
+                    backgroundColor: isDarkMode
+                        ? const Color(0xFF1E1E1E)
+                        : Colors.white,
+                  ),
+                );
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                decoration: BoxDecoration(
+                  color: isDarkMode ? Colors.white10 : const Color(0xFFF5F7FA),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      controller.selectedCountryFlag.value,
+                      style: TextStyle(fontSize: 20.sp),
+                    ),
+                    SizedBox(width: 12.w),
+                    Expanded(
+                      child: Text(
+                        "${controller.selectedCountryName.value} (${controller.selectedCurrency.value})",
+                        style: GoogleFonts.plusJakartaSans(
+                          color: isDarkMode ? Colors.white : Colors.black,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      Icons.keyboard_arrow_down,
+                      color: isDarkMode ? Colors.white70 : Colors.black54,
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -178,7 +212,7 @@ class PricesCapacityStep extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () => controller.nextStep(),
+              onPressed: () => controller.currentStep.value = 0,
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4A80F0),
                 padding: EdgeInsets.symmetric(vertical: 16.h),

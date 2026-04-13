@@ -16,6 +16,8 @@ class PublishTripFlowController extends GetxController {
 
   // Prices & Capacity
   final RxString selectedCurrency = "TND".obs;
+  final RxString selectedCountryName = "Tunisia".obs;
+  final RxString selectedCountryFlag = "🇹🇳".obs;
   final pricePerDocumentController = TextEditingController();
   final pricePerPackageController = TextEditingController();
   final RxBool canCarryDocuments = false.obs;

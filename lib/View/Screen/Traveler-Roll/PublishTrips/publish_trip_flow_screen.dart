@@ -79,7 +79,10 @@ class PublishTripFlowScreen extends StatelessWidget {
             ),
           );
         }
-        if (controller.currentStep.value == 1) return const SizedBox();
+        if (controller.currentStep.value == 1 ||
+            controller.currentStep.value == 2) {
+          return const SizedBox();
+        }
         return Padding(
           padding: EdgeInsets.all(24.w),
           child: ElevatedButton(
