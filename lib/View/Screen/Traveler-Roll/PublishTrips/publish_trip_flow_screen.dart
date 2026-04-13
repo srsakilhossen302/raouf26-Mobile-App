@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'publish_trip_flow_controller.dart';
 import 'Widgets/calendar_step.dart';
 import 'Widgets/trip_details_step.dart';
+import 'Widgets/prices_capacity_step.dart';
 import 'Widgets/trip_summary_step.dart';
 
 class PublishTripFlowScreen extends StatelessWidget {
@@ -47,6 +48,11 @@ class PublishTripFlowScreen extends StatelessWidget {
               isDarkMode: isDarkMode,
             );
           case 2:
+            return PricesCapacityStep(
+              controller: controller,
+              isDarkMode: isDarkMode,
+            );
+          case 3:
             return TripSummaryStep(
               controller: controller,
               isDarkMode: isDarkMode,
@@ -87,7 +93,7 @@ class PublishTripFlowScreen extends StatelessWidget {
               elevation: 0,
             ),
             child: Text(
-              controller.currentStep.value == 2 ? "Publish" : "Next",
+              controller.currentStep.value == 3 ? "Publish" : "Next",
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,

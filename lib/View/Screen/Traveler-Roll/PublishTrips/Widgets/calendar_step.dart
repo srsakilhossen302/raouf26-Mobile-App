@@ -152,49 +152,52 @@ class CalendarStep extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 24.w,
-                        vertical: 12.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF1A1A1A),
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            DateFormat('EEE, d MMM')
-                                .format(controller.selectedDate.value!)
-                                .toUpperCase(),
-                            style: GoogleFonts.plusJakartaSans(
-                              color: Colors.white,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          if (controller.departureTime.value.isNotEmpty) ...[
+                    GestureDetector(
+                      onTap: () => controller.currentStep.value = 1,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 24.w,
+                          vertical: 12.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF1A1A1A),
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
                             Text(
-                              " - Dep. ${controller.departureTime.value}",
+                              DateFormat('EEE, d MMM')
+                                  .format(controller.selectedDate.value!)
+                                  .toUpperCase(),
                               style: GoogleFonts.plusJakartaSans(
                                 color: Colors.white,
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                          ],
-                          if (controller.arrivalTime.value.isNotEmpty) ...[
-                            Text(
-                              " - Arr. ${controller.arrivalTime.value}",
-                              style: GoogleFonts.plusJakartaSans(
-                                color: Colors.white,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w600,
+                            if (controller.departureTime.value.isNotEmpty) ...[
+                              Text(
+                                " - Dep. ${controller.departureTime.value}",
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: Colors.white,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
-                            ),
+                            ],
+                            if (controller.arrivalTime.value.isNotEmpty) ...[
+                              Text(
+                                " - Arr. ${controller.arrivalTime.value}",
+                                style: GoogleFonts.plusJakartaSans(
+                                  color: Colors.white,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
                           ],
-                        ],
+                        ),
                       ),
                     ),
                     SizedBox(width: 12.w),
