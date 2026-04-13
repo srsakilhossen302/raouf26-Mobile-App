@@ -48,6 +48,12 @@ class TravelerSearchController extends GetxController {
     dropAddress.value = "Where should it be delivered?";
   }
 
+  void useMyPosition() {
+    // Mock current position
+    pickUpAddress.value = "Current Location: 123 Main St, Tunis";
+    pickUpLocation.value = "Current Location: 123 Main St, Tunis";
+  }
+
   @override
   void onInit() {
     super.onInit();

@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:table_calendar/table_calendar.dart';
 import '../../../../Utils/AppIcons/app_icons.dart';
 import '../../../../Utils/AppImg/app_img.dart';
 import '../../../Widget/custom_bottom_nav_bar.dart';
 import 'dashboard_controller.dart';
+import '../Search/map_picker_screen.dart';
+import '../PackageDetails/package_details_view.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({super.key});
@@ -714,6 +718,7 @@ class DashboardScreen extends GetView<DashboardController> {
         color: const Color(0xFF4A80F0),
         borderRadius: BorderRadius.circular(4.r),
       ),
+
     );
   }
 }

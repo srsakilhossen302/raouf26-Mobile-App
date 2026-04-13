@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
+import '../../../../Utils/AppIcons/app_icons.dart';
 import '../../../Widget/custom_bottom_nav_bar.dart';
 import '../../../../Utils/AppImg/app_img.dart';
 import 'search_controller.dart';
@@ -53,41 +54,6 @@ class SearchScreen extends GetView<TravelerSearchController> {
                     ),
                     child: Column(
                       children: [
-                        // Status Bar Area
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "9:42",
-                              style: GoogleFonts.montserrat(
-                                color: Colors.white,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.signal_cellular_alt,
-                                  color: Colors.white,
-                                  size: 16.sp,
-                                ),
-                                SizedBox(width: 4.w),
-                                Icon(
-                                  Icons.wifi,
-                                  color: Colors.white,
-                                  size: 16.sp,
-                                ),
-                                SizedBox(width: 4.w),
-                                Icon(
-                                  Icons.battery_full,
-                                  color: Colors.white,
-                                  size: 16.sp,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
                         SizedBox(height: 20.h),
                         // User Profile Header
                         Row(
@@ -191,10 +157,12 @@ class SearchScreen extends GetView<TravelerSearchController> {
                             children: [
                               Obx(
                                 () => _routeInputField(
-                                  iconPath: "assets/icons/delveri-Icons.svg",
+                                  iconPath: AppIcons.delivery,
                                   label: "Pick Up",
                                   address: controller.pickUpAddress.value,
                                   isDarkMode: isDarkMode,
+                                  onPositionTap: () =>
+                                      controller.useMyPosition(),
                                   onMapTap: () async {
                                     var result = await Get.to(
                                       () => const MapPickerScreen(
@@ -238,7 +206,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                               ),
                               Obx(
                                 () => _routeInputField(
-                                  iconPath: "assets/icons/Location-icons.svg",
+                                  iconPath: AppIcons.location,
                                   label: "Drop",
                                   address: controller.dropAddress.value,
                                   isDarkMode: isDarkMode,
@@ -578,6 +546,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
     required bool isDarkMode,
     required VoidCallback onMapTap,
     required VoidCallback onClearTap,
+    VoidCallback? onPositionTap,
   }) {
     bool hasAddress = address != "Where should it be delivered?";
 
@@ -636,6 +605,17 @@ class SearchScreen extends GetView<TravelerSearchController> {
         ),
         Row(
           children: [
+            if (onPositionTap != null) ...[
+              GestureDetector(
+                onTap: onPositionTap,
+                child: Icon(
+                  Icons.my_location,
+                  color: const Color(0xFF4A80F0),
+                  size: 20.sp,
+                ),
+              ),
+              SizedBox(width: 12.w),
+            ],
             GestureDetector(
               onTap: onMapTap,
               child: Icon(
