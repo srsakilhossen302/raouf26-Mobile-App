@@ -58,6 +58,9 @@ class AppTranslations extends Translations {
       'i_am_transporter': 'I am a Transporter.',
       'i_am_traveler': 'I am a Traveler.',
       'continue_button': 'Continue',
+      'report_an_issue': 'Report an issue',
+      'cancel_booking': 'Cancel booking',
+      'contact_support': 'Contact support',
     },
     'fr_FR': {
       'welcome_title': 'Bienvenue sur Sendit',
@@ -114,6 +117,9 @@ class AppTranslations extends Translations {
       'i_am_transporter': 'Je suis un transporteur.',
       'i_am_traveler': 'Je suis un voyageur.',
       'continue_button': 'Continuer',
+      'report_an_issue': 'Signaler un problème',
+      'cancel_booking': 'Annuler la réservation',
+      'contact_support': 'Contacter le support',
     },
     'ar_AR': {
       'welcome_title': 'مرحباً بك في Sendit',
@@ -169,6 +175,9 @@ class AppTranslations extends Translations {
       'i_am_transporter': 'أنا ناقل.',
       'i_am_traveler': 'أنا مسافر.',
       'continue_button': 'استمرار',
+      'report_an_issue': 'الإبلاغ عن مشكلة',
+      'cancel_booking': 'إلغاء الحجز',
+      'contact_support': 'اتصل بالدعم',
     },
   };
 }

@@ -28,6 +28,90 @@ class BookingDetailsScreen extends StatelessWidget {
             color: isDarkMode ? Colors.white : Colors.black,
           ),
         ),
+        actions: [
+          PopupMenuButton<int>(
+            icon: Icon(
+              Icons.more_vert,
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
+            offset: const Offset(0, 50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+            onSelected: (value) {
+              if (value == 0) {
+                // Handle Report an issue
+              } else if (value == 1) {
+                // Handle Cancel booking
+              } else if (value == 2) {
+                // Handle Contact support
+              }
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 0,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.report_problem_outlined,
+                      size: 20.sp,
+                      color: isDarkMode ? Colors.white70 : Colors.black87,
+                    ),
+                    SizedBox(width: 12.w),
+                    Text(
+                      "report_an_issue".tr,
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14.sp,
+                        color: isDarkMode ? Colors.white70 : Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 1,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.cancel_outlined,
+                      size: 20.sp,
+                      color: Colors.redAccent,
+                    ),
+                    SizedBox(width: 12.w),
+                    Text(
+                      "cancel_booking".tr,
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14.sp,
+                        color: Colors.redAccent,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 2,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.support_agent_outlined,
+                      size: 20.sp,
+                      color: isDarkMode ? Colors.white70 : Colors.black87,
+                    ),
+                    SizedBox(width: 12.w),
+                    Text(
+                      "contact_support".tr,
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14.sp,
+                        color: isDarkMode ? Colors.white70 : Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
         title: Text(
           "booking_details".tr,
           style: GoogleFonts.plusJakartaSans(

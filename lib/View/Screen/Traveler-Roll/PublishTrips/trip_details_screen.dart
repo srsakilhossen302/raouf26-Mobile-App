@@ -16,15 +16,82 @@ class TripDetailsScreen extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode ? const Color(0xFF121212) : const Color(0xFFF9FAFB),
+      backgroundColor: isDarkMode
+          ? const Color(0xFF121212)
+          : const Color(0xFFF9FAFB),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
           onPressed: () => Get.back(),
-          icon: Icon(Icons.arrow_back, color: isDarkMode ? Colors.white : Colors.black),
+          icon: Icon(
+            Icons.arrow_back,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
         ),
+        actions: [
+          PopupMenuButton<int>(
+            icon: Icon(
+              Icons.more_vert,
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
+            offset: const Offset(0, 50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+            onSelected: (value) {
+              if (value == 0) {
+                // Handle Report an issue
+              } else if (value == 1) {
+                // Handle Contact support
+              }
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: 0,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.report_problem_outlined,
+                      size: 20.sp,
+                      color: isDarkMode ? Colors.white70 : Colors.black87,
+                    ),
+                    SizedBox(width: 12.w),
+                    Text(
+                      "report_an_issue".tr,
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14.sp,
+                        color: isDarkMode ? Colors.white70 : Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              PopupMenuItem(
+                value: 1,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.support_agent_outlined,
+                      size: 20.sp,
+                      color: isDarkMode ? Colors.white70 : Colors.black87,
+                    ),
+                    SizedBox(width: 12.w),
+                    Text(
+                      "contact_support".tr,
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14.sp,
+                        color: isDarkMode ? Colors.white70 : Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
         title: Text(
           "Trip Details",
           style: GoogleFonts.plusJakartaSans(
@@ -62,7 +129,9 @@ class TripDetailsScreen extends StatelessWidget {
                               AppIcons.partion,
                               height: 30.h,
                               colorFilter: ColorFilter.mode(
-                                isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
+                                isDarkMode
+                                    ? Colors.white24
+                                    : const Color(0xFFE0E0E0),
                                 BlendMode.srcIn,
                               ),
                             ),
@@ -86,7 +155,9 @@ class TripDetailsScreen extends StatelessWidget {
                               "Stops",
                               style: GoogleFonts.plusJakartaSans(
                                 fontSize: 14.sp,
-                                color: isDarkMode ? Colors.white38 : const Color(0xFF9E9E9E),
+                                color: isDarkMode
+                                    ? Colors.white38
+                                    : const Color(0xFF9E9E9E),
                               ),
                             ),
                             Expanded(
@@ -96,7 +167,9 @@ class TripDetailsScreen extends StatelessWidget {
                                 style: GoogleFonts.plusJakartaSans(
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w500,
-                                  color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                                  color: isDarkMode
+                                      ? Colors.white
+                                      : const Color(0xFF1A1A1A),
                                 ),
                               ),
                             ),
@@ -111,11 +184,31 @@ class TripDetailsScreen extends StatelessWidget {
                     isDarkMode: isDarkMode,
                     child: Column(
                       children: [
-                        _buildDetailRow("Departure Date & Time", "${trip.departureDate}, ${trip.departureTime}", isDarkMode),
-                        _buildDetailRow("Arrival Date & Time", "${trip.arrivalDate}, ${trip.arrivalTime}", isDarkMode),
-                        _buildDetailRow("Maximum Weight Available:", trip.maxWeight, isDarkMode),
-                        _buildDetailRow("Price Per kg", trip.pricePerKg, isDarkMode),
-                        _buildDetailRow("Travel Mode", trip.travelMode, isDarkMode),
+                        _buildDetailRow(
+                          "Departure Date & Time",
+                          "${trip.departureDate}, ${trip.departureTime}",
+                          isDarkMode,
+                        ),
+                        _buildDetailRow(
+                          "Arrival Date & Time",
+                          "${trip.arrivalDate}, ${trip.arrivalTime}",
+                          isDarkMode,
+                        ),
+                        _buildDetailRow(
+                          "Maximum Weight Available:",
+                          trip.maxWeight,
+                          isDarkMode,
+                        ),
+                        _buildDetailRow(
+                          "Price Per kg",
+                          trip.pricePerKg,
+                          isDarkMode,
+                        ),
+                        _buildDetailRow(
+                          "Travel Mode",
+                          trip.travelMode,
+                          isDarkMode,
+                        ),
                       ],
                     ),
                   ),
@@ -134,7 +227,9 @@ class TripDetailsScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF4A80F0),
                       padding: EdgeInsets.symmetric(vertical: 16.h),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
                       elevation: 0,
                     ),
                     child: Text(
@@ -155,7 +250,9 @@ class TripDetailsScreen extends StatelessWidget {
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 16.h),
                       side: const BorderSide(color: Color(0xFFFFEAEA)),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
                     ),
                     child: Text(
                       "Delete Trip",
@@ -175,7 +272,11 @@ class TripDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailsCard({required String title, required Widget child, required bool isDarkMode}) {
+  Widget _buildDetailsCard({
+    required String title,
+    required Widget child,
+    required bool isDarkMode,
+  }) {
     return Container(
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
@@ -258,7 +359,9 @@ class TripDetailsScreen extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(8.w),
           decoration: BoxDecoration(
-            color: isDarkMode ? const Color(0xFF2C2C2C) : const Color(0xFFF5F7FA),
+            color: isDarkMode
+                ? const Color(0xFF2C2C2C)
+                : const Color(0xFFF5F7FA),
             shape: BoxShape.circle,
           ),
           child: SvgPicture.asset(
