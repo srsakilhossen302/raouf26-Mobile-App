@@ -8,12 +8,20 @@ class PublishTripFlowController extends GetxController {
 
   final departureController = TextEditingController();
   final destinationController = TextEditingController();
+  final RxString departureText = "".obs;
+  final RxString destinationText = "".obs;
   final RxString departureTime = "".obs;
   final RxString arrivalTime = "".obs;
   final RxList<String> stops = <String>[].obs;
 
   void nextStep() {
-    if (currentStep.value < 2) {
+    if (currentStep.value == 0) {
+      if (departureTime.value.isNotEmpty && arrivalTime.value.isNotEmpty) {
+        currentStep.value = 2;
+      } else {
+        currentStep.value = 1;
+      }
+    } else if (currentStep.value < 2) {
       currentStep.value++;
     }
   }

@@ -35,7 +35,10 @@ class TripDetailsStep extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () => controller.previousStep(),
-                icon: Icon(Icons.close, color: isDarkMode ? Colors.white : Colors.black),
+                icon: Icon(
+                  Icons.close,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
             ],
           ),
@@ -70,19 +73,21 @@ class TripDetailsStep extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16.h),
-          Obx(() => _buildDateField(
-                label: "Departure Time",
-                hint: "Select Time",
-                value: controller.departureTime.value,
-                isDarkMode: isDarkMode,
-                onTap: () => Get.dialog(
-                  TimePickerDialog(
-                    controller: controller,
-                    isDeparture: true,
-                    isDarkMode: isDarkMode,
-                  ),
+          Obx(
+            () => _buildDateField(
+              label: "Departure Time",
+              hint: "Select Time",
+              value: controller.departureTime.value,
+              isDarkMode: isDarkMode,
+              onTap: () => Get.dialog(
+                TimePickerDialog(
+                  controller: controller,
+                  isDeparture: true,
+                  isDarkMode: isDarkMode,
                 ),
-              )),
+              ),
+            ),
+          ),
           SizedBox(height: 24.h),
           Text(
             "Add a Stop (Optional)",
@@ -119,24 +124,26 @@ class TripDetailsStep extends StatelessWidget {
             suffixIcon: Icons.map_outlined,
           ),
           SizedBox(height: 16.h),
-          Obx(() => _buildDateField(
-                label: "Arrival Time",
-                hint: "Select Time",
-                value: controller.arrivalTime.value,
-                isDarkMode: isDarkMode,
-                onTap: () => Get.dialog(
-                  TimePickerDialog(
-                    controller: controller,
-                    isDeparture: false,
-                    isDarkMode: isDarkMode,
-                  ),
+          Obx(
+            () => _buildDateField(
+              label: "Arrival Time",
+              hint: "Select Time",
+              value: controller.arrivalTime.value,
+              isDarkMode: isDarkMode,
+              onTap: () => Get.dialog(
+                TimePickerDialog(
+                  controller: controller,
+                  isDeparture: false,
+                  isDarkMode: isDarkMode,
                 ),
-              )),
+              ),
+            ),
+          ),
           SizedBox(height: 32.h),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () => controller.nextStep(),
+              onPressed: () => controller.currentStep.value = 0,
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4A80F0),
                 padding: EdgeInsets.symmetric(vertical: 16.h),
@@ -178,10 +185,19 @@ class TripDetailsStep extends StatelessWidget {
         TextField(
           controller: controller,
           style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+          onChanged: (value) {
+            if (label == "From") {
+              this.controller.departureText.value = value;
+            } else if (label == "To") {
+              this.controller.destinationText.value = value;
+            }
+          },
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: GoogleFonts.plusJakartaSans(color: Colors.grey),
-            suffixIcon: suffixIcon != null ? Icon(suffixIcon, color: Colors.grey) : null,
+            suffixIcon: suffixIcon != null
+                ? Icon(suffixIcon, color: Colors.grey)
+                : null,
             filled: true,
             fillColor: isDarkMode ? Colors.white10 : const Color(0xFFF5F7FA),
             border: OutlineInputBorder(
@@ -247,7 +263,9 @@ class TripDetailsStep extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
-          border: Border.all(color: isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0)),
+          border: Border.all(
+            color: isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
+          ),
           borderRadius: BorderRadius.circular(8.r),
         ),
         child: Row(

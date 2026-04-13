@@ -250,9 +250,25 @@ class CalendarStep extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 12.h),
-                            _buildMiniInput(Icons.location_on, isDarkMode),
+                            Obx(
+                              () => _buildMiniInput(
+                                Icons.location_on,
+                                controller.departureText.value.isEmpty
+                                    ? "Departure"
+                                    : controller.departureText.value,
+                                isDarkMode,
+                              ),
+                            ),
                             SizedBox(height: 8.h),
-                            _buildMiniInput(Icons.near_me, isDarkMode),
+                            Obx(
+                              () => _buildMiniInput(
+                                Icons.near_me,
+                                controller.destinationText.value.isEmpty
+                                    ? "Destination"
+                                    : controller.destinationText.value,
+                                isDarkMode,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -346,14 +362,32 @@ class CalendarStep extends StatelessWidget {
     );
   }
 
-  Widget _buildMiniInput(IconData icon, bool isDarkMode) {
+  Widget _buildMiniInput(IconData icon, String text, bool isDarkMode) {
     return Container(
       padding: EdgeInsets.all(8.w),
       decoration: BoxDecoration(
         color: isDarkMode ? Colors.white10 : const Color(0xFFF5F7FA),
         borderRadius: BorderRadius.circular(8.r),
       ),
-      child: Row(children: [Icon(icon, size: 16, color: Colors.grey)]),
+      child: Row(
+        children: [
+          Icon(icon, size: 16, color: Colors.grey),
+          SizedBox(width: 8.w),
+          Expanded(
+            child: Text(
+              text,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 10.sp,
+                color: text == "Departure" || text == "Destination"
+                    ? Colors.grey
+                    : (isDarkMode ? Colors.white : Colors.black),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
