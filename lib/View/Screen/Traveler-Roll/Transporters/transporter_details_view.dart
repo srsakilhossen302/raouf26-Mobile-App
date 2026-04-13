@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/BookingRequest/booking_request_view.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporter_details_controller.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporters_controller.dart';
 
 import '../../../../Utils/AppIcons/app_icons.dart';
@@ -14,6 +15,10 @@ class TransporterDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(
+      TransporterDetailsController(transporter),
+      tag: transporter.name,
+    );
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -162,6 +167,59 @@ class TransporterDetailsView extends StatelessWidget {
                   ),
                   SizedBox(height: 16.h),
                   // Pricing Box
+                  Obx(
+                    () => Container(
+                      padding: EdgeInsets.all(16.r),
+                      decoration: BoxDecoration(
+                        color: isDarkMode
+                            ? Colors.grey.shade900
+                            : Colors.grey.shade50,
+                        borderRadius: BorderRadius.circular(16.r),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Pricing",
+                            style: GoogleFonts.montserrat(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          SizedBox(height: 16.h),
+                          _pricingRow(
+                            "Price Per kg",
+                            transporter.pricePerKg,
+                            isDarkMode,
+                          ),
+                          const Divider(),
+                          _pricingRow(
+                            "Original Total (15kg)",
+                            "${controller.originalTotal.value.toStringAsFixed(2)} TND",
+                            isDarkMode,
+                          ),
+                          if (controller.isCodeApplied.value) ...[
+                            _pricingRow(
+                              "Discount",
+                              "- ${controller.discountAmount.value.toStringAsFixed(2)} TND",
+                              isDarkMode,
+                              color: Colors.green,
+                            ),
+                          ],
+                          const Divider(),
+                          _pricingRow(
+                            "Estimated Total",
+                            "${controller.finalTotal.value.toStringAsFixed(2)} TND",
+                            isDarkMode,
+                            isBold: true,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16.h),
+
+                  // Discount Code Box
                   Container(
                     padding: EdgeInsets.all(16.r),
                     decoration: BoxDecoration(
@@ -174,25 +232,91 @@ class TransporterDetailsView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Pricing",
+                          "Discount Code",
                           style: GoogleFonts.montserrat(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        SizedBox(height: 16.h),
-                        _pricingRow(
-                          "Price Per kg",
-                          transporter.pricePerKg,
-                          isDarkMode,
+                        SizedBox(height: 12.h),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                                decoration: BoxDecoration(
+                                  color: isDarkMode
+                                      ? Colors.black26
+                                      : Colors.white,
+                                  borderRadius: BorderRadius.circular(12.r),
+                                  border: Border.all(
+                                    color: Colors.grey.shade300,
+                                  ),
+                                ),
+                                child: TextField(
+                                  controller: controller.codeController,
+                                  decoration: InputDecoration(
+                                    hintText: "Enter Code",
+                                    border: InputBorder.none,
+                                    hintStyle: GoogleFonts.montserrat(
+                                      fontSize: 14.sp,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 12.w),
+                            ElevatedButton(
+                              onPressed: () => controller.applyDiscount(),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF4A80F0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 24.w,
+                                  vertical: 14.h,
+                                ),
+                                elevation: 0,
+                              ),
+                              child: Text(
+                                "Apply",
+                                style: GoogleFonts.montserrat(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        const Divider(),
-                        _pricingRow(
-                          "Estimated Total (15kg)",
-                          transporter.estimatedTotal,
-                          isDarkMode,
-                          isBold: true,
-                        ),
+                        Obx(() {
+                          if (controller.codeError.value.isNotEmpty) {
+                            return Padding(
+                              padding: EdgeInsets.only(top: 8.h),
+                              child: Text(
+                                controller.codeError.value,
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 12.sp,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            );
+                          }
+                          if (controller.successMessage.value.isNotEmpty) {
+                            return Padding(
+                              padding: EdgeInsets.only(top: 8.h),
+                              child: Text(
+                                controller.successMessage.value,
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 12.sp,
+                                  color: Colors.green,
+                                ),
+                              ),
+                            );
+                          }
+                          return const SizedBox.shrink();
+                        }),
                       ],
                     ),
                   ),
@@ -275,7 +399,8 @@ class TransporterDetailsView extends StatelessWidget {
               width: double.infinity,
               height: 56.h,
               child: ElevatedButton(
-                onPressed: () => _showPaymentConfirmation(context, isDarkMode),
+                onPressed: () =>
+                    _showPaymentConfirmation(context, isDarkMode, controller),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   shape: RoundedRectangleBorder(
@@ -299,7 +424,11 @@ class TransporterDetailsView extends StatelessWidget {
     );
   }
 
-  void _showPaymentConfirmation(BuildContext context, bool isDarkMode) {
+  void _showPaymentConfirmation(
+    BuildContext context,
+    bool isDarkMode,
+    TransporterDetailsController controller,
+  ) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -362,35 +491,39 @@ class TransporterDetailsView extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 32.h),
-            Container(
-              padding: EdgeInsets.all(16.r),
-              decoration: BoxDecoration(
-                color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
-                borderRadius: BorderRadius.circular(16.r),
-              ),
-              child: Column(
-                children: [
-                  _paymentInfoRow(
-                    AppIcons.wallet,
-                    "Secure Wallet Deduction",
-                    "The payable amount will be safely deducted from your wallet.",
-                    isDarkMode,
-                  ),
-                  SizedBox(height: 20.h),
-                  _paymentInfoRow(
-                    AppIcons.escrow,
-                    "Escrow Protection",
-                    "Your funds are securely held and released to the transporter only after successful delivery.",
-                    isDarkMode,
-                  ),
-                  SizedBox(height: 20.h),
-                  _paymentInfoRow(
-                    AppIcons.refund,
-                    "Refund Assurance",
-                    "If any issue occurs, you can request a full refund as per our policy.",
-                    isDarkMode,
-                  ),
-                ],
+            Obx(
+              () => Container(
+                padding: EdgeInsets.all(16.r),
+                decoration: BoxDecoration(
+                  color: isDarkMode
+                      ? Colors.grey.shade900
+                      : Colors.grey.shade50,
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                child: Column(
+                  children: [
+                    _paymentInfoRow(
+                      AppIcons.wallet,
+                      "Payable Amount",
+                      "Total amount to be deducted from your wallet: ${controller.finalTotal.value.toStringAsFixed(2)} TND",
+                      isDarkMode,
+                    ),
+                    SizedBox(height: 20.h),
+                    _paymentInfoRow(
+                      AppIcons.escrow,
+                      "Escrow Protection",
+                      "Your funds are securely held and released to the transporter only after successful delivery.",
+                      isDarkMode,
+                    ),
+                    SizedBox(height: 20.h),
+                    _paymentInfoRow(
+                      AppIcons.refund,
+                      "Refund Assurance",
+                      "If any issue occurs, you can request a full refund as per our policy.",
+                      isDarkMode,
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(height: 32.h),
@@ -579,6 +712,7 @@ class TransporterDetailsView extends StatelessWidget {
     String value,
     bool isDarkMode, {
     bool isBold = false,
+    Color? color,
   }) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -589,7 +723,7 @@ class TransporterDetailsView extends StatelessWidget {
             label,
             style: GoogleFonts.montserrat(
               fontSize: 14.sp,
-              color: isDarkMode ? Colors.white70 : Colors.black54,
+              color: color ?? (isDarkMode ? Colors.white70 : Colors.black54),
             ),
           ),
           Text(
@@ -597,7 +731,7 @@ class TransporterDetailsView extends StatelessWidget {
             style: GoogleFonts.montserrat(
               fontSize: 14.sp,
               fontWeight: isBold ? FontWeight.w700 : FontWeight.w600,
-              color: isDarkMode ? Colors.white : Colors.black,
+              color: color ?? (isDarkMode ? Colors.white : Colors.black),
             ),
           ),
         ],
