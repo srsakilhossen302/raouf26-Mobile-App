@@ -148,33 +148,25 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
             SizedBox(height: 24.h),
             _sectionTitle("Package Photos", isDarkMode),
             Text(
-              "Please provide the photos of the package's exterior and interior for verification.",
+              "Please provide the photos of the package's exterior and interior for verification (Max 5 photos each).",
               style: GoogleFonts.montserrat(
                 fontSize: 12.sp,
                 color: Colors.grey,
               ),
             ),
             SizedBox(height: 16.h),
-            Row(
-              children: [
-                Obx(
-                  () => _photoUploadBox(
-                    "Exterior",
-                    isDarkMode,
-                    controller.exteriorImage.value,
-                    () => controller.pickImage(true),
-                  ),
-                ),
-                SizedBox(width: 16.w),
-                Obx(
-                  () => _photoUploadBox(
-                    "Interior",
-                    isDarkMode,
-                    controller.interiorImage.value,
-                    () => controller.pickImage(false),
-                  ),
-                ),
-              ],
+            _buildPhotoList(
+              "Exterior",
+              isDarkMode,
+              controller.exteriorImages,
+              true,
+            ),
+            SizedBox(height: 16.h),
+            _buildPhotoList(
+              "Interior",
+              isDarkMode,
+              controller.interiorImages,
+              false,
             ),
 
             SizedBox(height: 32.h),
@@ -452,53 +444,112 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
     );
   }
 
-  Widget _photoUploadBox(
+  Widget _buildPhotoList(
     String label,
     bool isDarkMode,
-    File? image,
-    VoidCallback onTap,
+    RxList<File> images,
+    bool isExterior,
   ) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          height: 120.h,
-          decoration: BoxDecoration(
-            color: isDarkMode
-                ? Colors.white.withOpacity(0.05)
-                : const Color(0xFFF9FAFB),
-            borderRadius: BorderRadius.circular(16.r),
-            image: image != null
-                ? DecorationImage(image: FileImage(image), fit: BoxFit.cover)
-                : null,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: GoogleFonts.montserrat(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w600,
+            color: isDarkMode ? Colors.white70 : Colors.black54,
           ),
-          child: image == null
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      "assets/icons/Camera=icons.svg",
-                      width: 28.sp,
-                      height: 28.sp,
-                      colorFilter: ColorFilter.mode(
-                        Colors.grey.shade400,
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                    SizedBox(height: 8.h),
-                    Text(
-                      label,
-                      style: GoogleFonts.montserrat(
-                        fontSize: 12.sp,
-                        color: Colors.grey.shade400,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                )
-              : null,
         ),
-      ),
+        SizedBox(height: 8.h),
+        Obx(
+          () => SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ...images.asMap().entries.map((entry) {
+                  int index = entry.key;
+                  File image = entry.value;
+                  return Padding(
+                    padding: EdgeInsets.only(right: 12.w),
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 100.w,
+                          height: 100.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.r),
+                            image: DecorationImage(
+                              image: FileImage(image),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 4,
+                          right: 4,
+                          child: GestureDetector(
+                            onTap: () =>
+                                controller.removeImage(index, isExterior),
+                            child: Container(
+                              padding: EdgeInsets.all(4.r),
+                              decoration: const BoxDecoration(
+                                color: Colors.black54,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.close,
+                                color: Colors.white,
+                                size: 14.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+                if (images.length < 5)
+                  GestureDetector(
+                    onTap: () => controller.pickImage(isExterior),
+                    child: Container(
+                      width: 100.w,
+                      height: 100.w,
+                      decoration: BoxDecoration(
+                        color: isDarkMode
+                            ? Colors.white.withOpacity(0.05)
+                            : const Color(0xFFF9FAFB),
+                        borderRadius: BorderRadius.circular(12.r),
+                        border: Border.all(
+                          color: Colors.grey.shade300,
+                          style: BorderStyle.solid,
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_a_photo_outlined,
+                            color: Colors.grey.shade400,
+                            size: 24.sp,
+                          ),
+                          SizedBox(height: 4.h),
+                          Text(
+                            "Add Photo",
+                            style: GoogleFonts.montserrat(
+                              fontSize: 10.sp,
+                              color: Colors.grey.shade400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

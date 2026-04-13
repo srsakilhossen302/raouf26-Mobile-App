@@ -5,9 +5,9 @@ import 'package:image_picker/image_picker.dart';
 class PackageDetailsController extends GetxController {
   final ImagePicker _picker = ImagePicker();
 
-  // Image paths
-  final Rx<File?> exteriorImage = Rx<File?>(null);
-  final Rx<File?> interiorImage = Rx<File?>(null);
+  // Image lists (max 5 each)
+  final RxList<File> exteriorImages = <File>[].obs;
+  final RxList<File> interiorImages = <File>[].obs;
 
   // Package Size selection
   final RxString selectedSize = "Small".obs;
@@ -28,13 +28,39 @@ class PackageDetailsController extends GetxController {
   final RxString storageDateRange = "1-29-2026 - 1-31-2026".obs;
 
   Future<void> pickImage(bool isExterior) async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+    if (isExterior) {
+      if (exteriorImages.length >= 5) {
+        Get.snackbar(
+          "Limit Reached",
+          "You can only upload up to 5 exterior photos.",
+        );
+        return;
+      }
+    } else {
+      if (interiorImages.length >= 5) {
+        Get.snackbar(
+          "Limit Reached",
+          "You can only upload up to 5 interior photos.",
+        );
+        return;
+      }
+    }
+
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       if (isExterior) {
-        exteriorImage.value = File(image.path);
+        exteriorImages.add(File(image.path));
       } else {
-        interiorImage.value = File(image.path);
+        interiorImages.add(File(image.path));
       }
+    }
+  }
+
+  void removeImage(int index, bool isExterior) {
+    if (isExterior) {
+      exteriorImages.removeAt(index);
+    } else {
+      interiorImages.removeAt(index);
     }
   }
 
