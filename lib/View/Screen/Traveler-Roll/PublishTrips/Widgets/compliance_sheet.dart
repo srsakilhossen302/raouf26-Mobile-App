@@ -6,41 +6,83 @@ import 'package:get/get.dart';
 class ComplianceFlowController extends GetxController {
   final RxInt currentStep = 0.obs;
   final bool isDarkMode;
+  final String userRole; // "Transporter" or "Traveler"
+  final bool isAccountVerified;
+  final bool isAgreementAccepted;
+  final bool isAgreementExpired;
 
-  ComplianceFlowController({required this.isDarkMode});
+  ComplianceFlowController({
+    required this.isDarkMode,
+    this.userRole = "Traveler",
+    this.isAccountVerified = false,
+    this.isAgreementAccepted = false,
+    this.isAgreementExpired =
+        true, // Default to true for testing/demo as requested
+  });
 
-  final List<Map<String, String>> steps = [
-    {
-      "title": "Trip Saved as Draft",
-      "description":
-          "Your trip has been saved. Complete verification or sign the agreement to publish it.\n\nYou can come back and finish this anytime from your drafts.",
-      "buttonText": "Complete Required Steps",
-    },
-    {
-      "title": "Verify Your Account",
-      "description":
-          "To publish trips and receive delivery requests please verify your account first.\n\nVerification helps keep Sendit safe and trusted for everyone.",
-      "buttonText": "Verify My Account",
-    },
-    {
-      "title": "Accept the Transport Agreement",
-      "description":
-          "Before publishing trips, you need to review and accept the agreement. This sets clear rules and responsibilities for both you and the sender.",
-      "buttonText": "Review & Sign",
-    },
-    {
-      "title": "Agreement Expired",
-      "description":
-          "Your transport agreement has expired. To continue publishing trips and receiving bookings please renew it.\n\nRenewing your agreement keeps your account active and helps ensure smooth trip management.",
-      "buttonText": "Renew My Agreement",
-    },
-  ];
+  List<Map<String, String>> get filteredSteps {
+    List<Map<String, String>> activeSteps = [];
+
+    // Step 1: Draft (Always show if something is missing)
+    if (!isAccountVerified || !isAgreementAccepted || isAgreementExpired) {
+      String draftDesc = "Your trip has been saved. ";
+      if (!isAccountVerified && !isAgreementAccepted) {
+        draftDesc +=
+            "Complete verification and sign the agreement to publish it.";
+      } else if (!isAccountVerified) {
+        draftDesc += "Complete verification to publish it.";
+      } else if (isAgreementExpired) {
+        draftDesc += "Renew your agreement to publish it.";
+      } else {
+        draftDesc += "Sign the agreement to publish it.";
+      }
+
+      activeSteps.add({
+        "title": "Trip Saved as Draft",
+        "description":
+            "$draftDesc\n\nYou can come back and finish this anytime from your drafts.",
+        "buttonText": "Complete Required Steps",
+      });
+    }
+
+    // Step 2: Verification (If missing)
+    if (!isAccountVerified) {
+      activeSteps.add({
+        "title": "Verify Your Account",
+        "description":
+            "To publish trips and receive delivery requests please verify your account first.\n\nVerification helps keep Sendit safe and trusted for everyone.",
+        "buttonText": "Verify My Account",
+      });
+    }
+
+    // Step 3: Agreement (If missing) - Role based
+    if (!isAgreementAccepted) {
+      activeSteps.add({
+        "title": "Accept the $userRole Agreement",
+        "description":
+            "Before publishing trips, you need to review and accept the $userRole agreement. This sets clear rules and responsibilities for both you and the sender.",
+        "buttonText": "Review & Sign",
+      });
+    }
+
+    // Step 4: Expired (If expired)
+    if (isAgreementExpired) {
+      activeSteps.add({
+        "title": "Agreement Expired",
+        "description":
+            "Your transport agreement has expired. To continue publishing trips and receiving bookings please renew it.\n\nRenewing your agreement keeps your account active and helps ensure smooth trip management.",
+        "buttonText": "Renew My Agreement",
+      });
+    }
+
+    return activeSteps;
+  }
 
   void nextStep() {
-    if (currentStep.value < steps.length - 1) {
+    if (currentStep.value < filteredSteps.length - 1) {
       currentStep.value++;
     } else {
-      Get.back(); // Close the flow
+      Get.back();
       Get.snackbar(
         "Success",
         "Trip Published Successfully!",
@@ -52,12 +94,17 @@ class ComplianceFlowController extends GetxController {
 
 class ComplianceSheet extends StatelessWidget {
   final bool isDarkMode;
+  final String userRole;
 
-  const ComplianceSheet({super.key, required this.isDarkMode});
+  const ComplianceSheet({
+    super.key,
+    required this.isDarkMode,
+    this.userRole = "Traveler",
+  });
 
-  static void show(bool isDarkMode) {
+  static void show(bool isDarkMode, {String role = "Traveler"}) {
     Get.bottomSheet(
-      ComplianceSheet(isDarkMode: isDarkMode),
+      ComplianceSheet(isDarkMode: isDarkMode, userRole: role),
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       enableDrag: true,
@@ -66,12 +113,20 @@ class ComplianceSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // In a real app, these would come from an AuthController or UserProfile
     final controller = Get.put(
-      ComplianceFlowController(isDarkMode: isDarkMode),
+      ComplianceFlowController(
+        isDarkMode: isDarkMode,
+        userRole: userRole,
+        isAccountVerified: false, // Mock value
+        isAgreementAccepted: false, // Mock value
+        isAgreementExpired: true, // New Mock value for "Agreement Expired"
+      ),
     );
 
     return Obx(() {
-      final step = controller.steps[controller.currentStep.value];
+      final steps = controller.filteredSteps;
+      final step = steps[controller.currentStep.value];
       return Container(
         width: double.infinity,
         height: 0.9.sh, // "bro popap" - Covers 90% of the screen
