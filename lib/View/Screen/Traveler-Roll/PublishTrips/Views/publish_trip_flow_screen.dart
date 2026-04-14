@@ -10,6 +10,8 @@ import '../Widgets/travel_details_step.dart';
 import '../Widgets/trip_summary_step.dart';
 import '../Widgets/trip_rules_step.dart';
 import '../Widgets/review_publish_step.dart';
+import '../Widgets/compliance_sheet.dart';
+import 'compliance_page.dart';
 
 class PublishTripFlowScreen extends StatelessWidget {
   const PublishTripFlowScreen({super.key});
@@ -109,8 +111,8 @@ class PublishTripFlowScreen extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () {
               if (controller.currentStep.value == 6) {
-                // Final publish logic here
-                Get.snackbar("Success", "Trip Published Successfully!");
+                // Show Compliance Flow in a big popup (Bottom Sheet)
+                ComplianceSheet.show(isDarkMode);
               } else {
                 controller.nextStep();
               }
