@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import '../Views/transport_agreement_page.dart';
 
 class ComplianceFlowController extends GetxController {
   final RxInt currentStep = 0.obs;
@@ -79,6 +80,14 @@ class ComplianceFlowController extends GetxController {
   }
 
   void nextStep() {
+    final currentStepData = filteredSteps[currentStep.value];
+    if (currentStepData["title"] == "Agreement Expired" ||
+        currentStepData["buttonText"] == "Renew My Agreement") {
+      Get.back(); // Close popup
+      Get.to(() => TransportAgreementPage(isDarkMode: isDarkMode));
+      return;
+    }
+
     if (currentStep.value < filteredSteps.length - 1) {
       currentStep.value++;
     } else {
