@@ -11,19 +11,25 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
 
-  // Load saved locale or use system default
-  String? savedLocaleCode = prefs.getString('locale');
-  Locale? initialLocale;
-  if (savedLocaleCode != null) {
-    List<String> codes = savedLocaleCode.split('_');
-    initialLocale = Locale(codes[0], codes[1]);
-  } else {
-    initialLocale = Get.deviceLocale;
+  // Auto detect initial locale
+  Locale initialLocale = const Locale('en', 'US');
+  Locale? deviceLocale = Get.deviceLocale;
+  if (deviceLocale != null) {
+    String langCode = deviceLocale.languageCode.toLowerCase();
+    if (langCode == 'ar') {
+      initialLocale = const Locale('ar', 'AR');
+    } else if (langCode == 'fr') {
+      initialLocale = const Locale('fr', 'FR');
+    }
   }
 
   // Initialize Controllers
   Get.put(LocaleController());
-  Get.put(ThemeController());
+  final themeController = Get.put(ThemeController());
+  
+  // Load saved theme or use default (Light)
+  bool isDark = prefs.getBool('isDarkMode') ?? false;
+  themeController.isDarkMode.value = isDark;
 
   runApp(MyApp(initialLocale: initialLocale));
 }

@@ -77,15 +77,17 @@ class _AccessibilityPageState extends State<AccessibilityPage> {
                     ? Colors.white10
                     : Colors.grey.withOpacity(0.1),
               ),
-              _buildAccessibilityItem(
-                title: 'dark_mode'.tr,
-                subtitle: 'dark_mode_desc'.tr,
-                icon: Icons.dark_mode_outlined,
-                value: themeController.isDarkMode.value,
-                onChanged: (val) => themeController.toggleTheme(),
-                isDarkMode: isDarkMode,
-                showBetaTag: true,
-                isLast: true,
+              Obx(
+                () => _buildAccessibilityItem(
+                  title: 'dark_mode'.tr,
+                  subtitle: 'dark_mode_desc'.tr,
+                  icon: Icons.dark_mode_outlined,
+                  value: themeController.isDarkMode.value,
+                  onChanged: (val) => themeController.toggleTheme(),
+                  isDarkMode: isDarkMode,
+                  showBetaTag: true,
+                  isLast: true,
+                ),
               ),
             ],
           ),

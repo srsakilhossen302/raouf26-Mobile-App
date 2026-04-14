@@ -11,7 +11,6 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_safet
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/payment_method_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/saved_address_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/accessibility_page.dart';
-import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/language_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_verification_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/document_verification_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/trips_shipments_page.dart';
@@ -86,12 +85,6 @@ class ProfilePage extends StatelessWidget {
                   "assets/icons/Accessibility.svg",
                   isDarkMode,
                   onTap: () => Get.to(() => const AccessibilityPage()),
-                ),
-                _buildMenuItem(
-                  'languages'.tr,
-                  "assets/icons/Languages.svg",
-                  isDarkMode,
-                  onTap: () => Get.to(() => const LanguagePage()),
                 ),
                 _buildThemeToggle(isDarkMode),
               ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../Utils/AppIcons/app_icons.dart';
 import '../../../Utils/AppImg/app_img.dart';
 import '../LogInScreen/login_screen.dart';
@@ -20,69 +19,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  void _changeLanguage(String langCode, String countryCode) async {
-    Locale locale = Locale(langCode, countryCode);
-    Get.updateLocale(locale);
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('locale', '${langCode}_$countryCode');
-  }
-
-  void _showLanguageSelector(BuildContext context) {
-    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-      ),
-      builder: (context) => Container(
-        padding: EdgeInsets.all(20.r),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'select_language'.tr,
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
-            ),
-            SizedBox(height: 20.h),
-            _buildLanguageOption('English', 'en', 'US', isDarkMode),
-            _buildLanguageOption('French', 'fr', 'FR', isDarkMode),
-            _buildLanguageOption('Arabic', 'ar', 'AR', isDarkMode),
-            SizedBox(height: 20.h),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLanguageOption(
-    String title,
-    String langCode,
-    String countryCode,
-    bool isDarkMode,
-  ) {
-    bool isSelected = Get.locale?.languageCode == langCode;
-    return ListTile(
-      title: Text(
-        title,
-        style: TextStyle(
-          color: isDarkMode ? Colors.white : Colors.black,
-          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-        ),
-      ),
-      trailing: isSelected
-          ? const Icon(Icons.check, color: Color(0xFF4A80F0))
-          : null,
-      onTap: () {
-        _changeLanguage(langCode, countryCode);
-        Get.back();
-      },
-    );
-  }
 
   final List<Map<String, String>> onboardingData = [
     {
@@ -123,40 +59,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     colorFilter: ColorFilter.mode(
                       isDarkMode ? Colors.white : Colors.black,
                       BlendMode.srcIn,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => _showLanguageSelector(context),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 10.w,
-                        vertical: 5.h,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: isDarkMode
-                              ? Colors.white24
-                              : Colors.grey.shade300,
-                        ),
-                        borderRadius: BorderRadius.circular(20.r),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.translate,
-                            size: 16.sp,
-                            color: isDarkMode ? Colors.white : Colors.black,
-                          ),
-                          SizedBox(width: 5.w),
-                          Text(
-                            "EN / FR / AR",
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              color: isDarkMode ? Colors.white : Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                 ],

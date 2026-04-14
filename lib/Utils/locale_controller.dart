@@ -5,29 +5,43 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LocaleController extends GetxController {
   static LocaleController get instance => Get.find();
 
-  final Rx<Locale> currentLocale = const Locale('en', 'US').obs;
+  // Supported languages
+  static const List<String> _supportedLanguages = ['en', 'ar', 'fr'];
+
+  // Default locale
+  static const Locale _defaultLocale = Locale('en', 'US');
+
+  final Rx<Locale> currentLocale = _defaultLocale.obs;
 
   @override
   void onInit() {
     super.onInit();
-    _loadSavedLocale();
+    autoDetectLocale();
   }
 
-  Future<void> _loadSavedLocale() async {
-    final prefs = await SharedPreferences.getInstance();
-    String? savedLocaleCode = prefs.getString('locale');
-    if (savedLocaleCode != null) {
-      List<String> codes = savedLocaleCode.split('_');
-      currentLocale.value = Locale(codes[0], codes[1]);
+  void autoDetectLocale() {
+    Locale? deviceLocale = Get.deviceLocale;
+    
+    if (deviceLocale != null) {
+      String languageCode = deviceLocale.languageCode.toLowerCase();
+      
+      if (_supportedLanguages.contains(languageCode)) {
+        if (languageCode == 'ar') {
+          currentLocale.value = const Locale('ar', 'AR');
+        } else if (languageCode == 'fr') {
+          currentLocale.value = const Locale('fr', 'FR');
+        } else {
+          currentLocale.value = const Locale('en', 'US');
+        }
+      } else {
+        // Fallback to English
+        currentLocale.value = _defaultLocale;
+      }
     } else {
-      currentLocale.value = Get.deviceLocale ?? const Locale('en', 'US');
+      currentLocale.value = _defaultLocale;
     }
-  }
-
-  Future<void> changeLocale(String code, String country) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('locale', '${code}_$country');
-    currentLocale.value = Locale(code, country);
+    
+    // Apply locale
     Get.updateLocale(currentLocale.value);
   }
 }

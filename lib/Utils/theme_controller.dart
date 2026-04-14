@@ -6,6 +6,7 @@ class ThemeController extends GetxController {
   static ThemeController get instance => Get.find();
 
   final RxBool isDarkMode = false.obs;
+  static const String _key = 'isDarkMode';
 
   @override
   void onInit() {
@@ -15,14 +16,18 @@ class ThemeController extends GetxController {
 
   Future<void> _loadSavedTheme() async {
     final prefs = await SharedPreferences.getInstance();
-    isDarkMode.value = prefs.getBool('isDarkMode') ?? false;
+    isDarkMode.value = prefs.getBool(_key) ?? false;
   }
 
   Future<void> toggleTheme() async {
-    isDarkMode.value = !isDarkMode.value;
+    await setTheme(!isDarkMode.value);
+  }
+
+  Future<void> setTheme(bool dark) async {
+    isDarkMode.value = dark;
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isDarkMode', isDarkMode.value);
-    Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
+    await prefs.setBool(_key, dark);
+    Get.changeThemeMode(dark ? ThemeMode.dark : ThemeMode.light);
   }
 
   ThemeMode get themeMode => isDarkMode.value ? ThemeMode.dark : ThemeMode.light;
