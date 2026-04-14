@@ -111,7 +111,7 @@ class PublishTripFlowScreen extends StatelessWidget {
               elevation: 0,
             ),
             child: Text(
-              controller.currentStep.value == 5 ? "Publish" : "Next",
+              controller.currentStep.value == 5 ? "Next" : "Next",
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,

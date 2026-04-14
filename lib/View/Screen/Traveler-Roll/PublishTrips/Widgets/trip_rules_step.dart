@@ -25,6 +25,39 @@ class TripRulesStep extends StatelessWidget {
       {"label": "Electronics", "icon": AppIcons.electronicsIcon},
     ];
 
+    final List<Map<String, String>> guidelines = [
+      {
+        "title": "Proper Packaging",
+        "subtitle":
+            "Ensure items are securely packed to prevent damage during transit.",
+      },
+      {
+        "title": "Clear Item Description",
+        "subtitle":
+            "Ask senders to accurately describe contents before confirmation.",
+      },
+      {
+        "title": "Size & Weight Limits",
+        "subtitle": "Mention maximum size and weight you can carry.",
+      },
+      {
+        "title": "Fragile Handling Policy",
+        "subtitle":
+            "Clarify whether you accept fragile items and under what conditions.",
+      },
+      {
+        "title": "No Restricted Items",
+        "subtitle": "Do not accept prohibited or illegal goods.",
+      },
+    ];
+
+    final List<String> suggestedRules = [
+      "Max 5kg per package",
+      "Proper packaging required",
+      "Fragile items at sender's risk",
+      "Delivery within 24 hours",
+    ];
+
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
       child: Column(
@@ -39,7 +72,7 @@ class TripRulesStep extends StatelessWidget {
             ),
           ),
           Text(
-            "Set clear rules for senders and define your delivery conditions.",
+            "Define what you accept and the rules senders should follow.",
             style: GoogleFonts.plusJakartaSans(
               fontSize: 14.sp,
               color: Colors.grey,
@@ -47,12 +80,208 @@ class TripRulesStep extends StatelessWidget {
           ),
           SizedBox(height: 24.h),
 
+          // Recommended Guidelines
+          Container(
+            padding: EdgeInsets.all(16.w),
+            decoration: BoxDecoration(
+              color: isDarkMode
+                  ? Colors.white.withOpacity(0.05)
+                  : const Color(0xFFF9F9F9),
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Recommended Guidelines",
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  "These best practices help you avoid disputes and ensure smooth deliveries.",
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 12.sp,
+                    color: Colors.grey,
+                  ),
+                ),
+                SizedBox(height: 16.h),
+                ...guidelines.map(
+                  (g) => Padding(
+                    padding: EdgeInsets.only(bottom: 12.h),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(top: 6.h),
+                          child: Container(
+                            width: 4.w,
+                            height: 4.w,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: isDarkMode ? Colors.white : Colors.black,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 8.w),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                g["title"]!,
+                                style: GoogleFonts.plusJakartaSans(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
+                              Text(
+                                g["subtitle"]!,
+                                style: GoogleFonts.plusJakartaSans(
+                                  fontSize: 12.sp,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 24.h),
+
+          // Suggested Rules
+          Container(
+            padding: EdgeInsets.all(16.w),
+            decoration: BoxDecoration(
+              color: isDarkMode
+                  ? Colors.white.withOpacity(0.05)
+                  : const Color(0xFFF9F9F9),
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Suggested Rules",
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  "Tap to quickly add common trip rules.",
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 12.sp,
+                    color: Colors.grey,
+                  ),
+                ),
+                SizedBox(height: 16.h),
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: suggestedRules.length,
+                  separatorBuilder: (context, index) => Divider(
+                    color: Colors.grey.withOpacity(0.2),
+                    height: 24.h,
+                  ),
+                  itemBuilder: (context, index) {
+                    final rule = suggestedRules[index];
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            rule,
+                            style: GoogleFonts.plusJakartaSans(
+                              fontSize: 13.sp,
+                              color: isDarkMode ? Colors.white : Colors.black,
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            if (!controller.rules.contains(rule)) {
+                              controller.rules.add(rule);
+                            }
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(4.w),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey.withOpacity(0.3),
+                              ),
+                              borderRadius: BorderRadius.circular(4.r),
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              size: 14.sp,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 24.h),
+
+          // Add Your Rule
+          Text(
+            "Add Your Rule",
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+          SizedBox(height: 12.h),
+          TextField(
+            controller: controller.addRuleController,
+            maxLines: 3,
+            style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+            decoration: InputDecoration(
+              hintText: "Type here ...",
+              hintStyle: GoogleFonts.plusJakartaSans(
+                color: Colors.grey,
+                fontSize: 14.sp,
+              ),
+              filled: true,
+              fillColor: isDarkMode ? Colors.white10 : const Color(0xFFF5F7FA),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12.r),
+                borderSide: BorderSide.none,
+              ),
+            ),
+          ),
+          SizedBox(height: 12.h),
+
           // Add a Rule Button
           SizedBox(
             width: double.infinity,
             child: OutlinedButton.icon(
               onPressed: () {
-                // Logic to add a rule
+                if (controller.addRuleController.text.trim().isNotEmpty) {
+                  controller.rules.add(
+                    controller.addRuleController.text.trim(),
+                  );
+                  controller.addRuleController.clear();
+                }
               },
               icon: const Icon(Icons.add, color: Colors.grey),
               label: Text(
@@ -72,7 +301,56 @@ class TripRulesStep extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 12.h),
+
+          // Display Added Rules
+          Obx(
+            () => controller.rules.isEmpty
+                ? const SizedBox()
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Added Rules",
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w600,
+                          color: isDarkMode ? Colors.white : Colors.black,
+                        ),
+                      ),
+                      SizedBox(height: 12.h),
+                      Wrap(
+                        spacing: 8.w,
+                        runSpacing: 8.h,
+                        children: controller.rules
+                            .map(
+                              (rule) => Chip(
+                                label: Text(
+                                  rule,
+                                  style: GoogleFonts.plusJakartaSans(
+                                    fontSize: 12.sp,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
+                                ),
+                                backgroundColor: isDarkMode
+                                    ? Colors.white10
+                                    : const Color(0xFFF5F7FA),
+                                deleteIcon: const Icon(Icons.close, size: 14),
+                                onDeleted: () => controller.rules.remove(rule),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.r),
+                                  side: BorderSide.none,
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                      SizedBox(height: 24.h),
+                    ],
+                  ),
+          ),
 
           // What You Accept?
           Text(
@@ -100,7 +378,17 @@ class TripRulesStep extends StatelessWidget {
                     if (isSelected) {
                       controller.selectedWhatYouAccept.remove(option["label"]);
                     } else {
-                      controller.selectedWhatYouAccept.add(option["label"]);
+                      if (controller.selectedWhatYouAccept.length < 3) {
+                        controller.selectedWhatYouAccept.add(option["label"]);
+                      } else {
+                        Get.snackbar(
+                          "Selection Limit",
+                          "You can only select up to 3 items.",
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.redAccent.withOpacity(0.8),
+                          colorText: Colors.white,
+                        );
+                      }
                     }
                   },
                   child: Container(

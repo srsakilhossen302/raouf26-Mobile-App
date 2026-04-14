@@ -49,6 +49,7 @@ class PublishTripFlowController extends GetxController {
   final RxList<String> rules = <String>[].obs;
   final RxList<String> selectedWhatYouAccept = <String>[].obs;
   final tripDescriptionController = TextEditingController();
+  final addRuleController = TextEditingController();
 
   void nextStep() {
     if (currentStep.value == 0) {
