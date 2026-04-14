@@ -175,6 +175,12 @@ class AppTranslations extends Translations {
       'no_business_address_desc':
           'Save your office or workspace addresses to make deliveries faster.',
       'saved_address_title': 'Saved Address',
+      'app_accessibility': 'App Accessibility',
+      'contrast': 'Contrast',
+      'contrast_desc':
+          'Display setting with increased color contrast to help you see clearer.',
+      'dark_mode_desc': 'Display setting with dark background theme.',
+      'beta': 'Beta',
     },
     'fr_FR': {
       'profile': 'Profile',
@@ -377,6 +383,12 @@ class AppTranslations extends Translations {
       'no_business_address_desc':
           'Enregistrez vos adresses de bureau pour des livraisons plus rapides.',
       'saved_address_title': 'Adresses Enregistrées',
+      'app_accessibility': 'Accessibilité de l\'Application',
+      'contrast': 'Contraste',
+      'contrast_desc':
+          'Paramètre d\'affichage avec un contraste de couleurs accru pour vous aider à voir plus clair.',
+      'dark_mode_desc': 'Paramètre d\'affichage avec un thème de fond sombre.',
+      'beta': 'Bêta',
     },
     'ar_AR': {
       'welcome_title': 'مرحباً بك في Sendit',
@@ -549,6 +561,12 @@ class AppTranslations extends Translations {
       'no_business_address_desc':
           'احفظ عناوين مكتبك أو مكان عملك لتجعل عمليات التسليم أسرع.',
       'saved_address_title': 'العناوين المحفوظة',
+      'app_accessibility': 'سهولة الوصول التطبيق',
+      'contrast': 'التباين',
+      'contrast_desc':
+          'إعداد العرض مع زيادة تباين الألوان لمساعدتك على الرؤية بشكل أوضح.',
+      'dark_mode_desc': 'إعداد العرض مع مظهر خلفية داكن.',
+      'beta': 'بيتا',
     },
   };
 }

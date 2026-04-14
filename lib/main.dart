@@ -4,11 +4,12 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'View/Screen/SplashScreen/splash_screen.dart';
 import 'Utils/Localizations/app_translations.dart';
+import 'Utils/locale_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  
+
   // Load saved locale or use system default
   String? savedLocaleCode = prefs.getString('locale');
   Locale? initialLocale;
@@ -18,6 +19,9 @@ void main() async {
   } else {
     initialLocale = Get.deviceLocale;
   }
+
+  // Initialize LocaleController
+  Get.put(LocaleController());
 
   runApp(MyApp(initialLocale: initialLocale));
 }
@@ -39,6 +43,12 @@ class MyApp extends StatelessWidget {
           translations: AppTranslations(),
           locale: initialLocale ?? const Locale('en', 'US'),
           fallbackLocale: const Locale('en', 'US'),
+          builder: (context, child) {
+            return Directionality(
+              textDirection: TextDirection.ltr,
+              child: child!,
+            );
+          },
           // Light Theme
           theme: ThemeData(
             brightness: Brightness.light,
