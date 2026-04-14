@@ -39,12 +39,11 @@ class PublishTripFlowController extends GetxController {
   // Bus Details
   final busNumberController = TextEditingController();
 
-  // Truck Details
-  final companyNameController = TextEditingController();
-  final trackingNumberController = TextEditingController();
-
   // Boat Details
   final vesselNameController = TextEditingController();
+
+  // Other Details
+  final otherDescriptionController = TextEditingController();
 
   void nextStep() {
     if (currentStep.value == 0) {

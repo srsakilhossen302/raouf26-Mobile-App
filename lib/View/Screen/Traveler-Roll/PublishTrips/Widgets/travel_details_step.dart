@@ -23,8 +23,11 @@ class TravelDetailsStep extends StatelessWidget {
       {"label": "Car", "icon": AppIcons.car},
       {"label": "Train", "icon": AppIcons.train},
       {"label": "Bus", "icon": AppIcons.bus},
-      {"label": "Truck", "icon": AppIcons.truck},
       {"label": "Boat", "icon": AppIcons.boat},
+      {
+        "label": "Other",
+        "icon": AppIcons.inviteNew,
+      }, // Using truck icon as placeholder for Other
     ];
 
     return SingleChildScrollView(
@@ -159,10 +162,10 @@ class TravelDetailsStep extends StatelessWidget {
                 return _buildTrainFields();
               case "Bus":
                 return _buildBusFields();
-              case "Truck":
-                return _buildTruckFields();
               case "Boat":
                 return _buildBoatFields();
+              case "Other":
+                return _buildOtherFields();
               default:
                 return const SizedBox.shrink();
             }
@@ -295,21 +298,17 @@ class TravelDetailsStep extends StatelessWidget {
     );
   }
 
-  Widget _buildTruckFields() {
+  Widget _buildOtherFields() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildTextField(
-          label: "Company Name",
-          hint: "Enter Company Name",
-          controller: controller.companyNameController,
+          label: "Description",
+          hint: "Enter Description",
+          controller: controller.otherDescriptionController,
         ),
         SizedBox(height: 24.h),
-        _buildTextField(
-          label: "Tracking Number",
-          hint: "Enter Tracking Number",
-          controller: controller.trackingNumberController,
-        ),
+        _buildUploadSection("Upload Proof (Required)", isRequired: true),
       ],
     );
   }
@@ -374,7 +373,7 @@ class TravelDetailsStep extends StatelessWidget {
     );
   }
 
-  Widget _buildUploadSection(String label) {
+  Widget _buildUploadSection(String label, {bool isRequired = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
