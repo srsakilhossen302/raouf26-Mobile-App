@@ -9,7 +9,7 @@ import '../Screen/Traveler-Roll/Dashboard/dashboard_view.dart';
 import '../Screen/Traveler-Roll/MyParcels/my_parcels_view.dart';
 import '../Screen/Traveler-Roll/Search/search_view.dart';
 import '../Screen/MessagesScreen/messages_view.dart';
-import '../Screen/Traveler-Roll/PublishTrips/publish_trips_screen.dart';
+import '../Screen/Traveler-Roll/PublishTrips/Views/publish_trips_screen.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int selectedIndex;

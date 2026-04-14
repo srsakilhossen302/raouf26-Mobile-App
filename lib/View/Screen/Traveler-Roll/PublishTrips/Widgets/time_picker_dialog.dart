@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../publish_trip_flow_controller.dart';
+import '../Controllers/publish_trip_flow_controller.dart';
 
 class TimePickerDialog extends StatelessWidget {
   final PublishTripFlowController controller;
@@ -24,9 +24,7 @@ class TimePickerDialog extends StatelessWidget {
 
     return Dialog(
       backgroundColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24.r),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24.r)),
       child: StatefulBuilder(
         builder: (context, setState) => Container(
           padding: EdgeInsets.all(24.r),
@@ -40,7 +38,9 @@ class TimePickerDialog extends StatelessWidget {
                   Expanded(
                     child: Center(
                       child: Text(
-                        isDeparture ? "Select Departure Time" : "Select Arrival Time",
+                        isDeparture
+                            ? "Select Departure Time"
+                            : "Select Arrival Time",
                         style: GoogleFonts.plusJakartaSans(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
@@ -89,7 +89,8 @@ class TimePickerDialog extends StatelessWidget {
                             diameterRatio: 1.2,
                             physics: const FixedExtentScrollPhysics(),
                             controller: FixedExtentScrollController(
-                                initialItem: selectedHour - 1),
+                              initialItem: selectedHour - 1,
+                            ),
                             onSelectedItemChanged: (index) {
                               setState(() {
                                 selectedHour = index + 1;
@@ -108,7 +109,9 @@ class TimePickerDialog extends StatelessWidget {
                                           ? FontWeight.w700
                                           : FontWeight.w500,
                                       color: isSelected
-                                          ? (isDarkMode ? Colors.white : Colors.black)
+                                          ? (isDarkMode
+                                                ? Colors.white
+                                                : Colors.black)
                                           : Colors.grey.withOpacity(0.4),
                                     ),
                                   ),
@@ -134,7 +137,8 @@ class TimePickerDialog extends StatelessWidget {
                             diameterRatio: 1.2,
                             physics: const FixedExtentScrollPhysics(),
                             controller: FixedExtentScrollController(
-                                initialItem: selectedMinute),
+                              initialItem: selectedMinute,
+                            ),
                             onSelectedItemChanged: (index) {
                               setState(() {
                                 selectedMinute = index;
@@ -153,7 +157,9 @@ class TimePickerDialog extends StatelessWidget {
                                           ? FontWeight.w700
                                           : FontWeight.w500,
                                       color: isSelected
-                                          ? (isDarkMode ? Colors.white : Colors.black)
+                                          ? (isDarkMode
+                                                ? Colors.white
+                                                : Colors.black)
                                           : Colors.grey.withOpacity(0.4),
                                     ),
                                   ),
@@ -172,7 +178,8 @@ class TimePickerDialog extends StatelessWidget {
                             diameterRatio: 1.2,
                             physics: const FixedExtentScrollPhysics(),
                             controller: FixedExtentScrollController(
-                                initialItem: selectedPeriod == "AM" ? 0 : 1),
+                              initialItem: selectedPeriod == "AM" ? 0 : 1,
+                            ),
                             onSelectedItemChanged: (index) {
                               setState(() {
                                 selectedPeriod = index == 0 ? "AM" : "PM";
@@ -192,7 +199,9 @@ class TimePickerDialog extends StatelessWidget {
                                           ? FontWeight.w700
                                           : FontWeight.w500,
                                       color: isSelected
-                                          ? (isDarkMode ? Colors.white : Colors.black)
+                                          ? (isDarkMode
+                                                ? Colors.white
+                                                : Colors.black)
                                           : Colors.grey.withOpacity(0.4),
                                     ),
                                   ),

@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../Utils/AppIcons/app_icons.dart';
-import '../../MessagesScreen/chat_view.dart';
+import '../../../../../Utils/AppIcons/app_icons.dart';
+import '../../../MessagesScreen/chat_view.dart';
 
 class BookingDetailsScreen extends StatelessWidget {
   const BookingDetailsScreen({super.key});

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../publish_trip_flow_controller.dart';
+import '../Controllers/publish_trip_flow_controller.dart';
 
 class CalendarStep extends StatelessWidget {
   final PublishTripFlowController controller;

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
-import '../publish_trip_flow_controller.dart';
+import '../Controllers/publish_trip_flow_controller.dart';
 
 class TravelDetailsStep extends StatelessWidget {
   final PublishTripFlowController controller;
@@ -177,7 +177,7 @@ class TravelDetailsStep extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () => controller.currentStep.value = 0,
+              onPressed: () => controller.nextStep(),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4A80F0),
                 padding: EdgeInsets.symmetric(vertical: 16.h),

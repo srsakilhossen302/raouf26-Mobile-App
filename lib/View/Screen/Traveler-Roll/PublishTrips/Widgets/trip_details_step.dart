@@ -2,7 +2,7 @@ import 'package:flutter/material.dart' hide TimePickerDialog;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../publish_trip_flow_controller.dart';
+import '../Controllers/publish_trip_flow_controller.dart';
 import 'time_picker_dialog.dart';
 
 class TripDetailsStep extends StatelessWidget {

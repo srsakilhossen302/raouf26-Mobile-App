@@ -4,14 +4,14 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../Utils/AppIcons/app_icons.dart';
-import '../../../../Utils/AppImg/app_img.dart';
-import '../../../Widget/custom_bottom_nav_bar.dart';
-import 'publish_trips_controller.dart';
-import 'trip_details_screen.dart';
-import 'trip_model.dart';
-import 'booking_details_modal.dart';
+import '../../../../../Utils/AppIcons/app_icons.dart';
+import '../../../../../Utils/AppImg/app_img.dart';
+import '../../../../Widget/custom_bottom_nav_bar.dart';
+import '../Controllers/publish_trips_controller.dart';
+import '../Models/trip_model.dart';
+import '../Widgets/booking_details_modal.dart';
 import 'publish_trip_flow_screen.dart';
+import 'trip_details_screen.dart';
 
 class PublishTripsScreen extends StatelessWidget {
   const PublishTripsScreen({super.key});

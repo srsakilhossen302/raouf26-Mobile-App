@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../publish_trip_flow_controller.dart';
+import '../Controllers/publish_trip_flow_controller.dart';
 
 class TripSummaryStep extends StatelessWidget {
   final PublishTripFlowController controller;
@@ -74,7 +74,10 @@ class TripSummaryStep extends StatelessWidget {
     );
   }
 
-  Widget _buildSummaryCard(PublishTripFlowController controller, bool isDarkMode) {
+  Widget _buildSummaryCard(
+    PublishTripFlowController controller,
+    bool isDarkMode,
+  ) {
     return Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -106,7 +109,12 @@ class TripSummaryStep extends StatelessWidget {
     );
   }
 
-  Widget _buildSummaryBox(String title, String value, IconData icon, bool isDarkMode) {
+  Widget _buildSummaryBox(
+    String title,
+    String value,
+    IconData icon,
+    bool isDarkMode,
+  ) {
     return Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -123,7 +131,10 @@ class TripSummaryStep extends StatelessWidget {
           SizedBox(height: 12.h),
           Text(
             title,
-            style: GoogleFonts.plusJakartaSans(fontSize: 12.sp, color: Colors.grey),
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 12.sp,
+              color: Colors.grey,
+            ),
           ),
           SizedBox(height: 4.h),
           Text(
@@ -154,12 +165,18 @@ class TripSummaryStep extends StatelessWidget {
         children: [
           Text(
             title,
-            style: GoogleFonts.plusJakartaSans(fontSize: 10.sp, color: Colors.grey),
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 10.sp,
+              color: Colors.grey,
+            ),
           ),
           SizedBox(height: 4.h),
           Text(
             hint,
-            style: GoogleFonts.plusJakartaSans(fontSize: 12.sp, color: Colors.grey),
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 12.sp,
+              color: Colors.grey,
+            ),
           ),
         ],
       ),

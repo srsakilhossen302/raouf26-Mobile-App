@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
-import '../publish_trip_flow_controller.dart';
+import '../Controllers/publish_trip_flow_controller.dart';
 
 class PricesCapacityStep extends StatelessWidget {
   final PublishTripFlowController controller;

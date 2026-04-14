@@ -45,6 +45,11 @@ class PublishTripFlowController extends GetxController {
   // Other Details
   final otherDescriptionController = TextEditingController();
 
+  // Trip Rules & Details
+  final RxList<String> rules = <String>[].obs;
+  final RxList<String> selectedWhatYouAccept = <String>[].obs;
+  final tripDescriptionController = TextEditingController();
+
   void nextStep() {
     if (currentStep.value == 0) {
       if (departureTime.value.isNotEmpty && arrivalTime.value.isNotEmpty) {
@@ -52,7 +57,7 @@ class PublishTripFlowController extends GetxController {
       } else {
         currentStep.value = 1;
       }
-    } else if (currentStep.value < 3) {
+    } else if (currentStep.value < 5) {
       currentStep.value++;
     }
   }

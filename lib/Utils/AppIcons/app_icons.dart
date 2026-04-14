@@ -50,4 +50,8 @@ class AppIcons {
   static const String bus = "$basePath/bus.svg";
   static const String boat = "$basePath/boat.svg";
   static const String truck = "$basePath/truck.svg";
+  static const String documentsIcon = "$basePath/Documents-icons.svg";
+  static const String electronicsIcon = "$basePath/Electronics-icons.svg";
+  static const String foodSealedIcon = "$basePath/Food (sealed)-icons.svg";
+  static const String fragileItemsIcon = "$basePath/Fragile Items-Icons.svg";
 }

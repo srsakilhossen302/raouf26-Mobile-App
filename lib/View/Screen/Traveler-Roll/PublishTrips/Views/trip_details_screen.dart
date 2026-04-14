@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../Utils/AppIcons/app_icons.dart';
-import 'trip_model.dart';
+import '../../../../../Utils/AppIcons/app_icons.dart';
+import '../Models/trip_model.dart';
 
 class TripDetailsScreen extends StatelessWidget {
   final TripModel trip;

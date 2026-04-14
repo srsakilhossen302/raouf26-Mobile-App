@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'publish_trip_flow_controller.dart';
-import 'Widgets/calendar_step.dart';
-import 'Widgets/trip_details_step.dart';
-import 'Widgets/prices_capacity_step.dart';
-import 'Widgets/travel_details_step.dart';
-import 'Widgets/trip_summary_step.dart';
+import '../Controllers/publish_trip_flow_controller.dart';
+import '../Widgets/calendar_step.dart';
+import '../Widgets/trip_details_step.dart';
+import '../Widgets/prices_capacity_step.dart';
+import '../Widgets/travel_details_step.dart';
+import '../Widgets/trip_summary_step.dart';
+import '../Widgets/trip_rules_step.dart';
 
 class PublishTripFlowScreen extends StatelessWidget {
   const PublishTripFlowScreen({super.key});
@@ -63,6 +64,11 @@ class PublishTripFlowScreen extends StatelessWidget {
               controller: controller,
               isDarkMode: isDarkMode,
             );
+          case 5:
+            return TripRulesStep(
+              controller: controller,
+              isDarkMode: isDarkMode,
+            );
           default:
             return const SizedBox();
         }
@@ -105,7 +111,7 @@ class PublishTripFlowScreen extends StatelessWidget {
               elevation: 0,
             ),
             child: Text(
-              controller.currentStep.value == 4 ? "Publish" : "Next",
+              controller.currentStep.value == 5 ? "Publish" : "Next",
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
