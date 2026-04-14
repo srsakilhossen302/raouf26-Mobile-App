@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/manage_account_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -152,6 +153,7 @@ class ProfilePage extends StatelessWidget {
                   'manage_account'.tr,
                   "assets/icons/Manage Account.svg",
                   isDarkMode,
+                  onTap: () => Get.to(() => const ManageAccountPage()),
                 ),
                 _buildMenuItem(
                   'log_out'.tr,
@@ -398,6 +400,7 @@ class ProfilePage extends StatelessWidget {
     String iconPath,
     bool isDarkMode, {
     bool isLast = false,
+    VoidCallback? onTap,
   }) {
     return Column(
       children: [
@@ -433,7 +436,7 @@ class ProfilePage extends StatelessWidget {
             color: isDarkMode ? Colors.white38 : Colors.grey,
             size: 20.sp,
           ),
-          onTap: () {},
+          onTap: onTap ?? () {},
         ),
         if (!isLast)
           Divider(

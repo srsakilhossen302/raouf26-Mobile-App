@@ -86,6 +86,12 @@ class AppTranslations extends Translations {
       'rating': 'Rating',
       'on_time': 'On-Time',
       'version': 'Version',
+      'delete_account': 'Delete Account',
+      'switch_account': 'Switch Account',
+      'delete_your_account_q': 'Delete Your Account?',
+      'delete_account_desc':
+          'This action is permanent and will remove your trips, messages, and account data from Sendit.',
+      'cancel': 'Cancel',
     },
     'fr_FR': {
       'profile': 'Profile',
@@ -198,6 +204,12 @@ class AppTranslations extends Translations {
       'on_time': 'À l\'heure',
       'version': 'Version',
       'dark_mode': 'Mode Sombre',
+      'delete_account': 'Supprimer le compte',
+      'switch_account': 'Changer de compte',
+      'delete_your_account_q': 'Supprimer votre compte?',
+      'delete_account_desc':
+          'Cette action est permanente et supprimera vos trajets, messages et données de compte de Sendit.',
+      'cancel': 'Annuler',
     },
     'ar_AR': {
       'welcome_title': 'مرحباً بك في Sendit',
@@ -282,6 +294,12 @@ class AppTranslations extends Translations {
       'on_time': 'في الوقت المحدد',
       'version': 'الإصدار',
       'dark_mode': 'الوضع الداكن',
+      'delete_account': 'حذف الحساب',
+      'switch_account': 'تبديل الحساب',
+      'delete_your_account_q': 'حذف حسابك؟',
+      'delete_account_desc':
+          'هذا الإجراء دائم وسيزيل رحلاتك ورسائلك وبيانات حسابك من Sendit.',
+      'cancel': 'إلغاء',
     },
   };
 }
