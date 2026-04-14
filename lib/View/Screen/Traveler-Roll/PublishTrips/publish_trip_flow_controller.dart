@@ -29,6 +29,23 @@ class PublishTripFlowController extends GetxController {
   final RxString selectedAirline = "Select Airline".obs;
   final flightNumberController = TextEditingController();
 
+  // Car Details
+  final RxString selectedVehicleType = "Select Vehicle Type".obs;
+  final licensePlateController = TextEditingController();
+
+  // Train Details
+  final trainNumberController = TextEditingController();
+
+  // Bus Details
+  final busNumberController = TextEditingController();
+
+  // Truck Details
+  final companyNameController = TextEditingController();
+  final trackingNumberController = TextEditingController();
+
+  // Boat Details
+  final vesselNameController = TextEditingController();
+
   void nextStep() {
     if (currentStep.value == 0) {
       if (departureTime.value.isNotEmpty && arrivalTime.value.isNotEmpty) {

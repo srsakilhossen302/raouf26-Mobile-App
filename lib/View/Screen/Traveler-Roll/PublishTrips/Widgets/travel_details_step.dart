@@ -69,8 +69,7 @@ class TravelDetailsStep extends StatelessWidget {
               crossAxisCount: 2,
               crossAxisSpacing: 16.w,
               mainAxisSpacing: 16.h,
-              childAspectRatio:
-                  1.1, // Adjusted to match the taller cards in the image
+              childAspectRatio: 1.1,
             ),
             itemCount: travelModes.length,
             itemBuilder: (context, index) {
@@ -107,7 +106,7 @@ class TravelDetailsStep extends StatelessWidget {
                           ),
                           child: SvgPicture.asset(
                             mode["icon"]!,
-                            width: 28.w, // Slightly larger icons
+                            width: 28.w,
                             height: 28.w,
                             fit: BoxFit.contain,
                             placeholderBuilder: (context) => Icon(
@@ -149,109 +148,26 @@ class TravelDetailsStep extends StatelessWidget {
           ),
           SizedBox(height: 24.h),
 
-          // Airline Selection
-          Text(
-            "Airline",
-            style: GoogleFonts.plusJakartaSans(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
-          ),
-          SizedBox(height: 8.h),
-          Obx(
-            () => Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              decoration: BoxDecoration(
-                color: isDarkMode ? Colors.white10 : const Color(0xFFF5F7FA),
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  value: controller.selectedAirline.value == "Select Airline"
-                      ? null
-                      : controller.selectedAirline.value,
-                  hint: Text(
-                    "Select Airline",
-                    style: GoogleFonts.plusJakartaSans(color: Colors.grey),
-                  ),
-                  isExpanded: true,
-                  dropdownColor: isDarkMode
-                      ? const Color(0xFF1E1E1E)
-                      : Colors.white,
-                  style: GoogleFonts.plusJakartaSans(
-                    color: isDarkMode ? Colors.white : Colors.black,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  items:
-                      [
-                        "Emirates",
-                        "Qatar Airways",
-                        "Turkish Airlines",
-                        "Tunisair",
-                      ].map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                  onChanged: (newValue) {
-                    if (newValue != null) {
-                      controller.selectedAirline.value = newValue;
-                    }
-                  },
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 24.h),
+          // Dynamic Fields based on Travel Mode
+          Obx(() {
+            switch (controller.selectedTravelMode.value) {
+              case "Flight":
+                return _buildFlightFields();
+              case "Car":
+                return _buildCarFields();
+              case "Train":
+                return _buildTrainFields();
+              case "Bus":
+                return _buildBusFields();
+              case "Truck":
+                return _buildTruckFields();
+              case "Boat":
+                return _buildBoatFields();
+              default:
+                return const SizedBox.shrink();
+            }
+          }),
 
-          // Flight Number
-          _buildTextField(
-            label: "Flight Number",
-            hint: "Enter Flight Number",
-            controller: controller.flightNumberController,
-            isDarkMode: isDarkMode,
-          ),
-          SizedBox(height: 24.h),
-
-          // Upload Ticket
-          Text(
-            "Upload Ticket (Optional)",
-            style: GoogleFonts.plusJakartaSans(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
-          ),
-          SizedBox(height: 8.h),
-          GestureDetector(
-            onTap: () {}, // Handle file picker
-            child: Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 32.h),
-              decoration: BoxDecoration(
-                color: isDarkMode
-                    ? Colors.white.withOpacity(0.05)
-                    : const Color(0xFFF9F9F9),
-                borderRadius: BorderRadius.circular(16.r),
-                border: Border.all(color: const Color(0xFFF0F0F0)),
-              ),
-              child: Column(
-                children: [
-                  const Icon(Icons.file_present_outlined, color: Colors.grey),
-                  SizedBox(height: 12.h),
-                  Text(
-                    "Click to Upload",
-                    style: GoogleFonts.plusJakartaSans(
-                      fontSize: 12.sp,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
           SizedBox(height: 32.h),
 
           // Confirm Button
@@ -282,23 +198,228 @@ class TravelDetailsStep extends StatelessWidget {
     );
   }
 
+  Widget _buildFlightFields() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildLabel("Airline"),
+        SizedBox(height: 8.h),
+        Obx(
+          () => _buildDropdown(
+            value: controller.selectedAirline.value == "Select Airline"
+                ? null
+                : controller.selectedAirline.value,
+            hint: "Select Airline",
+            items: [
+              "Emirates",
+              "Qatar Airways",
+              "Turkish Airlines",
+              "Tunisair",
+            ],
+            onChanged: (newValue) {
+              if (newValue != null) {
+                controller.selectedAirline.value = newValue;
+              }
+            },
+          ),
+        ),
+        SizedBox(height: 24.h),
+        _buildTextField(
+          label: "Flight Number",
+          hint: "Enter Flight Number",
+          controller: controller.flightNumberController,
+        ),
+        SizedBox(height: 24.h),
+        _buildUploadSection("Upload Ticket (Optional)"),
+      ],
+    );
+  }
+
+  Widget _buildCarFields() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildLabel("Vehicle Type"),
+        SizedBox(height: 8.h),
+        Obx(
+          () => _buildDropdown(
+            value: controller.selectedVehicleType.value == "Select Vehicle Type"
+                ? null
+                : controller.selectedVehicleType.value,
+            hint: "Select Vehicle Type",
+            items: ["Sedan", "SUV", "Van", "Coupe"],
+            onChanged: (newValue) {
+              if (newValue != null) {
+                controller.selectedVehicleType.value = newValue;
+              }
+            },
+          ),
+        ),
+        SizedBox(height: 24.h),
+        _buildTextField(
+          label: "License Plate (Optional)",
+          hint: "Enter License Plate Number",
+          controller: controller.licensePlateController,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTrainFields() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildTextField(
+          label: "Train Number",
+          hint: "Enter Train Number",
+          controller: controller.trainNumberController,
+        ),
+        SizedBox(height: 24.h),
+        _buildUploadSection("Upload Ticket (Optional)"),
+      ],
+    );
+  }
+
+  Widget _buildBusFields() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildTextField(
+          label: "Bus Number",
+          hint: "Enter Bus Number",
+          controller: controller.busNumberController,
+        ),
+        SizedBox(height: 24.h),
+        _buildUploadSection("Upload Ticket (Optional)"),
+      ],
+    );
+  }
+
+  Widget _buildTruckFields() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildTextField(
+          label: "Company Name",
+          hint: "Enter Company Name",
+          controller: controller.companyNameController,
+        ),
+        SizedBox(height: 24.h),
+        _buildTextField(
+          label: "Tracking Number",
+          hint: "Enter Tracking Number",
+          controller: controller.trackingNumberController,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBoatFields() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildTextField(
+          label: "Vessel Name",
+          hint: "Enter Vessel Name",
+          controller: controller.vesselNameController,
+        ),
+        SizedBox(height: 24.h),
+        _buildUploadSection("Upload Booking (Optional)"),
+      ],
+    );
+  }
+
+  Widget _buildLabel(String label) {
+    return Text(
+      label,
+      style: GoogleFonts.plusJakartaSans(
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w600,
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+    );
+  }
+
+  Widget _buildDropdown({
+    required String? value,
+    required String hint,
+    required List<String> items,
+    required Function(String?) onChanged,
+  }) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      decoration: BoxDecoration(
+        color: isDarkMode ? Colors.white10 : const Color(0xFFF5F7FA),
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: value,
+          hint: Text(
+            hint,
+            style: GoogleFonts.plusJakartaSans(color: Colors.grey),
+          ),
+          isExpanded: true,
+          dropdownColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+          style: GoogleFonts.plusJakartaSans(
+            color: isDarkMode ? Colors.white : Colors.black,
+            fontWeight: FontWeight.w600,
+          ),
+          items: items.map((String val) {
+            return DropdownMenuItem<String>(value: val, child: Text(val));
+          }).toList(),
+          onChanged: onChanged,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildUploadSection(String label) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildLabel(label),
+        SizedBox(height: 8.h),
+        GestureDetector(
+          onTap: () {}, // Handle file picker
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 32.h),
+            decoration: BoxDecoration(
+              color: isDarkMode
+                  ? Colors.white.withOpacity(0.05)
+                  : const Color(0xFFF9F9F9),
+              borderRadius: BorderRadius.circular(16.r),
+              border: Border.all(color: const Color(0xFFF0F0F0)),
+            ),
+            child: Column(
+              children: [
+                const Icon(Icons.file_present_outlined, color: Colors.grey),
+                SizedBox(height: 12.h),
+                Text(
+                  "Click to Upload",
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 12.sp,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildTextField({
     required String label,
     required String hint,
     required TextEditingController controller,
-    required bool isDarkMode,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: GoogleFonts.plusJakartaSans(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
-        ),
+        _buildLabel(label),
         SizedBox(height: 8.h),
         TextField(
           controller: controller,
