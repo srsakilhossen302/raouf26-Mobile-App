@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import '../Profile/profile_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -56,70 +58,74 @@ class SearchScreen extends GetView<TravelerSearchController> {
                       children: [
                         SizedBox(height: 20.h),
                         // User Profile Header
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: 24.r,
-                                  backgroundImage: const NetworkImage(
-                                    "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-                                  ),
-                                ),
-                                SizedBox(width: 12.w),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Hi, Zain Malik",
-                                      style: GoogleFonts.montserrat(
-                                        color: Colors.white,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w700,
-                                      ),
+                        GestureDetector(
+                          onTap: () => Get.to(() => const ProfilePage()),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 24.r,
+                                    backgroundImage: const NetworkImage(
+                                      "https://i.pravatar.cc/150?u=a042581f4e29026704d",
                                     ),
-                                    Text(
-                                      "Ready to Send a Parcel?",
-                                      style: GoogleFonts.montserrat(
-                                        color: Colors.white.withOpacity(0.8),
-                                        fontSize: 12.sp,
+                                  ),
+                                  SizedBox(width: 12.w),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Hi, Zain Malik",
+                                        style: GoogleFonts.montserrat(
+                                          color: Colors.white,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w700,
+                                        ),
                                       ),
+                                      Text(
+                                        "Ready to Send a Parcel?",
+                                        style: GoogleFonts.montserrat(
+                                          color: Colors.white.withOpacity(0.8),
+                                          fontSize: 12.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(10.r),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.2),
+                                      shape: BoxShape.circle,
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(10.r),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.2),
-                                    shape: BoxShape.circle,
+                                    child: Icon(
+                                      Icons.qr_code_scanner,
+                                      color: Colors.white,
+                                      size: 24.sp,
+                                    ),
                                   ),
-                                  child: Icon(
-                                    Icons.qr_code_scanner,
-                                    color: Colors.white,
-                                    size: 24.sp,
+                                  SizedBox(width: 12.w),
+                                  Container(
+                                    padding: EdgeInsets.all(10.r),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.2),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(
+                                      Icons.notifications_none,
+                                      color: Colors.white,
+                                      size: 24.sp,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(width: 12.w),
-                                Container(
-                                  padding: EdgeInsets.all(10.r),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.2),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Icon(
-                                    Icons.notifications_none,
-                                    color: Colors.white,
-                                    size: 24.sp,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

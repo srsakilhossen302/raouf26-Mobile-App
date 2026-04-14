@@ -15,6 +15,7 @@ class TransportAgreementPage extends StatefulWidget {
 class _TransportAgreementPageState extends State<TransportAgreementPage> {
   String selectedValidity = "Valid for 6 Months";
   bool isTypeMode = true;
+  bool isAgreed = false;
   final TextEditingController signatureController = TextEditingController();
 
   @override
@@ -67,7 +68,11 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
                     "The Transporter is responsible for:\n• Safe handling and transport of all accepted parcels.\n• Timely pickup and delivery as per agreed schedules.\n• Maintaining proper documentation and proof of delivery.\n• Communicating any delays or issues promptly.\n• Ensuring parcels are not damaged, lost, or tampered with.",
                   ),
                   _buildTermItem(
-                    "4. Commission Structure",
+                    "4. Digital agreements and legal acceptance",
+                    "By signing this document, the Transporter acknowledges that digital signatures are legally binding and equivalent to handwritten signatures. You agree to be bound by the terms of this digital agreement and the platform's overall policies.",
+                  ),
+                  _buildTermItem(
+                    "5. Commission Structure",
                     "A commission will be deducted from both the traveler (sender) and transporter per completed delivery. The commission rates are as follows:\n• Sender commission: 5% of the agreed delivery price\n• Transporter commission: 5% of the agreed delivery price",
                   ),
                   _buildTermItem(
@@ -175,17 +180,57 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
                 ],
               ),
             ),
-            SizedBox(height: 32.h),
+            SizedBox(height: 24.h),
+
+            // Legal Acceptance Checkbox
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 24.w,
+                  width: 24.w,
+                  child: Checkbox(
+                    value: isAgreed,
+                    onChanged: (value) =>
+                        setState(() => isAgreed = value ?? false),
+                    activeColor: const Color(0xFF4A80F0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4.r),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => setState(() => isAgreed = !isAgreed),
+                    child: Text(
+                      "I have read and agree to the Digital agreements and legal acceptance terms.",
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 13.sp,
+                        color: widget.isDarkMode
+                            ? Colors.white70
+                            : Colors.black87,
+                        height: 1.4,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 24.h),
 
             // Sign & Activate Button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  Get.to(
-                    () => TripPublishedPage(isDarkMode: widget.isDarkMode),
-                  );
-                },
+                onPressed: isAgreed
+                    ? () {
+                        Get.to(
+                          () =>
+                              TripPublishedPage(isDarkMode: widget.isDarkMode),
+                        );
+                      }
+                    : null, // Disabled if not agreed
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   padding: EdgeInsets.symmetric(vertical: 18.h),
@@ -193,13 +238,14 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   elevation: 0,
+                  disabledBackgroundColor: Colors.grey.withOpacity(0.3),
                 ),
                 child: Text(
                   "Sign & Activate",
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    color: isAgreed ? Colors.white : Colors.white70,
                   ),
                 ),
               ),
