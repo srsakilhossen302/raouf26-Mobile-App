@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../VerifyEmailScreen/verify_email_screen.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/otp_verification_page.dart';
+import '../ResetPasswordScreen/reset_password_screen.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   const ForgotPasswordScreen({super.key});
@@ -94,7 +95,11 @@ class ForgotPasswordScreen extends StatelessWidget {
               width: double.infinity,
               height: 55.h,
               child: ElevatedButton(
-                onPressed: () => Get.to(() => const VerifyEmailScreen()),
+                onPressed: () => Get.to(
+                  () => OtpVerificationPage(
+                    onVerify: () => Get.off(() => const ResetPasswordScreen()),
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   shape: RoundedRectangleBorder(

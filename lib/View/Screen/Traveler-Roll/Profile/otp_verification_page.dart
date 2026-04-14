@@ -2,13 +2,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import 'package:pinput/pinput.dart';
 
 class OtpVerificationPage extends StatelessWidget {
-  const OtpVerificationPage({super.key});
+  final VoidCallback onVerify;
+  final String? title;
+  final String? description;
+
+  const OtpVerificationPage({
+    super.key,
+    required this.onVerify,
+    this.title,
+    this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    final defaultPinTheme = PinTheme(
+      width: 70.w,
+      height: 70.h,
+      textStyle: GoogleFonts.plusJakartaSans(
+        fontSize: 24.sp,
+        fontWeight: FontWeight.w700,
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      decoration: BoxDecoration(
+        color: isDarkMode ? const Color(0xFF1E1E1E) : const Color(0xFFF5F7FA),
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(
+          color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
+        ),
+      ),
+    );
+
+    final focusedPinTheme = defaultPinTheme.copyWith(
+      decoration: defaultPinTheme.decoration!.copyWith(
+        border: Border.all(color: const Color(0xFF4A80F0), width: 1.5),
+      ),
+    );
 
     return Scaffold(
       backgroundColor: isDarkMode ? const Color(0xFF121212) : const Color(0xFFF8F9FB),
@@ -24,7 +57,7 @@ class OtpVerificationPage extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          'verify_email'.tr,
+          title ?? 'verify_email'.tr,
           style: GoogleFonts.plusJakartaSans(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
@@ -33,7 +66,7 @@ class OtpVerificationPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(24.w),
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -42,13 +75,13 @@ class OtpVerificationPage extends StatelessWidget {
               'enter_otp_code'.tr,
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 24.sp,
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w800,
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
             ),
             SizedBox(height: 12.h),
             Text(
-              'otp_sent_desc'.tr,
+              description ?? 'otp_sent_desc'.tr,
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 14.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey[600],
@@ -56,59 +89,47 @@ class OtpVerificationPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(
-                4,
-                (index) => SizedBox(
-                  width: 70.w,
-                  height: 70.h,
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    keyboardType: TextInputType.number,
-                    maxLength: 1,
-                    style: GoogleFonts.plusJakartaSans(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w700,
-                      color: isDarkMode ? Colors.white : Colors.black,
-                    ),
-                    decoration: InputDecoration(
-                      counterText: "",
-                      filled: true,
-                      fillColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                        borderSide: BorderSide(
-                          color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                        borderSide: BorderSide(
-                          color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 24.h),
+            
             Center(
-              child: Text(
-                '${'resend_code_in'.tr} 00:29',
-                style: GoogleFonts.plusJakartaSans(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                  color: isDarkMode ? Colors.white70 : Colors.grey[600],
+              child: Pinput(
+                length: 4,
+                defaultPinTheme: defaultPinTheme,
+                focusedPinTheme: focusedPinTheme,
+                onCompleted: (pin) {
+                  // Handle PIN completion
+                },
+              ),
+            ),
+            
+            SizedBox(height: 32.h),
+            Center(
+              child: RichText(
+                text: TextSpan(
+                  text: '${'resend_code_in'.tr} ',
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: isDarkMode ? Colors.white54 : Colors.grey[600],
+                  ),
+                  children: [
+                    TextSpan(
+                      text: "00:28",
+                      style: GoogleFonts.plusJakartaSans(
+                        color: isDarkMode ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
+            
             const Spacer(),
+            
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Get.back(),
+                onPressed: onVerify,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   padding: EdgeInsets.symmetric(vertical: 16.h),
@@ -121,7 +142,7 @@ class OtpVerificationPage extends StatelessWidget {
                   'verify'.tr,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w700,
                     color: Colors.white,
                   ),
                 ),

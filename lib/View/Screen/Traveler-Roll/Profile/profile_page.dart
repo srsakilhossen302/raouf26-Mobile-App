@@ -11,6 +11,7 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/payment_metho
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/saved_address_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/accessibility_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/language_page.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_verification_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -101,6 +102,7 @@ class ProfilePage extends StatelessWidget {
                   'account_verification'.tr,
                   "assets/icons/Account Verification.svg",
                   isDarkMode,
+                  onTap: () => Get.to(() => const AccountVerificationPage()),
                 ),
                 _buildMenuItem(
                   'documents_verification'.tr,

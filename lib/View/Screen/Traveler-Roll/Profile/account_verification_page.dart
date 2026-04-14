@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/otp_verification_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/success_verification_page.dart';
 
-class EmailVerificationPage extends StatelessWidget {
-  const EmailVerificationPage({super.key});
+class AccountVerificationPage extends StatelessWidget {
+  const AccountVerificationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final TextEditingController nameController = TextEditingController();
     final TextEditingController emailController = TextEditingController();
 
     return Scaffold(
-      backgroundColor: isDarkMode
-          ? const Color(0xFF121212)
-          : const Color(0xFFF8F9FB),
+      backgroundColor: isDarkMode ? const Color(0xFF121212) : const Color(0xFFF8F9FB),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -29,7 +29,7 @@ class EmailVerificationPage extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          'email_verification'.tr,
+          'account_verification'.tr,
           style: GoogleFonts.plusJakartaSans(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
@@ -38,29 +38,31 @@ class EmailVerificationPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(24.w),
+        padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20.h),
+            
+            // Full Name
             Text(
-              'email_verification'.tr,
+              'full_name'.tr,
               style: GoogleFonts.plusJakartaSans(
-                fontSize: 24.sp,
-                fontWeight: FontWeight.w700,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
             ),
-            SizedBox(height: 12.h),
-            Text(
-              'enter_email_desc'.tr,
-              style: GoogleFonts.plusJakartaSans(
-                fontSize: 14.sp,
-                color: isDarkMode ? Colors.white70 : Colors.grey[600],
-                height: 1.5,
-              ),
+            SizedBox(height: 8.h),
+            _buildTextField(
+              controller: nameController,
+              hint: 'Full Name',
+              isDarkMode: isDarkMode,
             ),
-            SizedBox(height: 40.h),
+            
+            SizedBox(height: 20.h),
+            
+            // Email
             Text(
               'email'.tr,
               style: GoogleFonts.plusJakartaSans(
@@ -70,15 +72,28 @@ class EmailVerificationPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8.h),
-            TextField(
+            _buildTextField(
               controller: emailController,
+              hint: 'Email',
+              isDarkMode: isDarkMode,
               keyboardType: TextInputType.emailAddress,
+            ),
+            
+            SizedBox(height: 20.h),
+            
+            // Phone Number
+            Text(
+              'phone_number'.tr,
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
+            ),
+            SizedBox(height: 8.h),
+            IntlPhoneField(
               decoration: InputDecoration(
-                hintText: 'Enter Your Email',
+                hintText: '00000000',
                 hintStyle: GoogleFonts.plusJakartaSans(
                   fontSize: 14.sp,
                   color: isDarkMode ? Colors.white30 : Colors.grey[400],
@@ -88,35 +103,39 @@ class EmailVerificationPage extends StatelessWidget {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide(
-                    color: isDarkMode
-                        ? Colors.white10
-                        : Colors.grey.withOpacity(0.1),
+                    color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide(
-                    color: isDarkMode
-                        ? Colors.white10
-                        : Colors.grey.withOpacity(0.1),
+                    color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
                   ),
                 ),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 16.h,
-                ),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+              ),
+              initialCountryCode: 'TN',
+              onChanged: (phone) {
+                // Handle phone number change
+              },
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 14.sp,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
+              dropdownTextStyle: GoogleFonts.plusJakartaSans(
+                fontSize: 14.sp,
+                color: isDarkMode ? Colors.white : Colors.black,
               ),
             ),
+            
             const Spacer(),
+            
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Get.to(
-                  () => OtpVerificationPage(
-                    onVerify: () =>
-                        Get.off(() => const SuccessVerificationPage()),
-                  ),
-                ),
+                onPressed: () => Get.to(() => OtpVerificationPage(
+                  onVerify: () => Get.off(() => const SuccessVerificationPage()),
+                )),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   padding: EdgeInsets.symmetric(vertical: 16.h),
@@ -126,7 +145,7 @@ class EmailVerificationPage extends StatelessWidget {
                   elevation: 0,
                 ),
                 child: Text(
-                  'verify'.tr,
+                  'verify_account'.tr,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
@@ -138,6 +157,44 @@ class EmailVerificationPage extends StatelessWidget {
             SizedBox(height: 40.h),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hint,
+    required bool isDarkMode,
+    TextInputType keyboardType = TextInputType.text,
+  }) {
+    return TextField(
+      controller: controller,
+      keyboardType: keyboardType,
+      style: GoogleFonts.plusJakartaSans(
+        fontSize: 14.sp,
+        color: isDarkMode ? Colors.white : Colors.black,
+      ),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: GoogleFonts.plusJakartaSans(
+          fontSize: 14.sp,
+          color: isDarkMode ? Colors.white30 : Colors.grey[400],
+        ),
+        filled: true,
+        fillColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(
+            color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(
+            color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
+          ),
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       ),
     );
   }
