@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
+import 'package:raouf26mobileapp/Utils/theme_controller.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/manage_account_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/edit_profile_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_safety_page.dart';
@@ -733,6 +734,7 @@ Widget _buildCategoryChip(
 }
 
 Widget _buildThemeToggle(bool isDarkMode) {
+  final themeController = ThemeController.instance;
   return Column(
     children: [
       Divider(
@@ -765,12 +767,14 @@ Widget _buildThemeToggle(bool isDarkMode) {
             color: isDarkMode ? Colors.white : Colors.black,
           ),
         ),
-        trailing: Switch.adaptive(
-          value: isDarkMode,
-          activeColor: const Color(0xFF4A80F0),
-          onChanged: (value) {
-            Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
-          },
+        trailing: Obx(
+          () => Switch.adaptive(
+            value: themeController.isDarkMode.value,
+            activeColor: const Color(0xFF4A80F0),
+            onChanged: (value) {
+              themeController.toggleTheme();
+            },
+          ),
         ),
       ),
     ],

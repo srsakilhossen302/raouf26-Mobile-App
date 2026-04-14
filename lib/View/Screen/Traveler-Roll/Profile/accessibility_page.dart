@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import 'package:raouf26mobileapp/Utils/theme_controller.dart';
 
 class AccessibilityPage extends StatefulWidget {
   const AccessibilityPage({super.key});
@@ -12,14 +13,16 @@ class AccessibilityPage extends StatefulWidget {
 
 class _AccessibilityPageState extends State<AccessibilityPage> {
   bool isContrastEnabled = true;
-  bool isDarkModeEnabled = false;
+  final themeController = ThemeController.instance;
 
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode ? const Color(0xFF121212) : const Color(0xFFF8F9FB),
+      backgroundColor: isDarkMode
+          ? const Color(0xFF121212)
+          : const Color(0xFFF8F9FB),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -70,14 +73,16 @@ class _AccessibilityPageState extends State<AccessibilityPage> {
                 height: 1,
                 indent: 64.w,
                 endIndent: 16.w,
-                color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
+                color: isDarkMode
+                    ? Colors.white10
+                    : Colors.grey.withOpacity(0.1),
               ),
               _buildAccessibilityItem(
                 title: 'dark_mode'.tr,
                 subtitle: 'dark_mode_desc'.tr,
                 icon: Icons.dark_mode_outlined,
-                value: isDarkModeEnabled,
-                onChanged: (val) => setState(() => isDarkModeEnabled = val),
+                value: themeController.isDarkMode.value,
+                onChanged: (val) => themeController.toggleTheme(),
                 isDarkMode: isDarkMode,
                 showBetaTag: true,
                 isLast: true,
@@ -107,7 +112,9 @@ class _AccessibilityPageState extends State<AccessibilityPage> {
           Container(
             padding: EdgeInsets.all(10.w),
             decoration: BoxDecoration(
-              color: isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF5F7FA),
+              color: isDarkMode
+                  ? Colors.white.withOpacity(0.05)
+                  : const Color(0xFFF5F7FA),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -134,7 +141,10 @@ class _AccessibilityPageState extends State<AccessibilityPage> {
                     if (showBetaTag) ...[
                       SizedBox(width: 8.w),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8.w,
+                          vertical: 2.h,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(10.r),

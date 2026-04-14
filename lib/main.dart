@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'View/Screen/SplashScreen/splash_screen.dart';
 import 'Utils/Localizations/app_translations.dart';
 import 'Utils/locale_controller.dart';
+import 'Utils/theme_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,8 +21,9 @@ void main() async {
     initialLocale = Get.deviceLocale;
   }
 
-  // Initialize LocaleController
+  // Initialize Controllers
   Get.put(LocaleController());
+  Get.put(ThemeController());
 
   runApp(MyApp(initialLocale: initialLocale));
 }
@@ -32,45 +34,49 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeController = ThemeController.instance;
+
     return ScreenUtilInit(
       designSize: const Size(430, 932),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Raouf 26 App',
-          translations: AppTranslations(),
-          locale: initialLocale ?? const Locale('en', 'US'),
-          fallbackLocale: const Locale('en', 'US'),
-          builder: (context, child) {
-            return Directionality(
-              textDirection: TextDirection.ltr,
-              child: child!,
-            );
-          },
-          // Light Theme
-          theme: ThemeData(
-            brightness: Brightness.light,
-            scaffoldBackgroundColor: Colors.white,
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color(0xFF4A80F0),
+        return Obx(
+          () => GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Raouf 26 App',
+            translations: AppTranslations(),
+            locale: initialLocale ?? const Locale('en', 'US'),
+            fallbackLocale: const Locale('en', 'US'),
+            builder: (context, child) {
+              return Directionality(
+                textDirection: TextDirection.ltr,
+                child: child!,
+              );
+            },
+            theme: ThemeData(
               brightness: Brightness.light,
+              scaffoldBackgroundColor: Colors.white,
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: const Color(0xFF4A80F0),
+                brightness: Brightness.light,
+              ),
+              useMaterial3: true,
             ),
-            useMaterial3: true,
-          ),
-          // Dark Theme
-          themeMode: ThemeMode.system,
-          darkTheme: ThemeData(
-            brightness: Brightness.dark,
-            scaffoldBackgroundColor: const Color(0xFF121212),
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color(0xFF4A80F0),
+            themeMode: themeController.isDarkMode.value
+                ? ThemeMode.dark
+                : ThemeMode.light,
+            darkTheme: ThemeData(
               brightness: Brightness.dark,
+              scaffoldBackgroundColor: const Color(0xFF121212),
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: const Color(0xFF4A80F0),
+                brightness: Brightness.dark,
+              ),
+              useMaterial3: true,
             ),
-            useMaterial3: true,
+            home: const SplashScreen(),
           ),
-          home: const SplashScreen(),
         );
       },
     );
