@@ -8,6 +8,7 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/manage_accoun
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/edit_profile_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_safety_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/payment_method_page.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/saved_address_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -70,6 +71,7 @@ class ProfilePage extends StatelessWidget {
                   'saved_address'.tr,
                   "assets/icons/Saved Address.svg",
                   isDarkMode,
+                  onTap: () => Get.to(() => const SavedAddressPage()),
                 ),
                 _buildMenuItem(
                   'accessibility'.tr,
