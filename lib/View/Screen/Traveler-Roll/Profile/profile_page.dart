@@ -14,6 +14,8 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/language_page
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_verification_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/document_verification_page.dart';
 
+import '../PublishTrips/Views/transport_agreement_page.dart';
+
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
@@ -115,6 +117,9 @@ class ProfilePage extends StatelessWidget {
                   'transport_agreement'.tr,
                   "assets/icons/Transport Agreement.svg",
                   isDarkMode,
+                  onTap: () => Get.to(
+                    () => TransportAgreementPage(isDarkMode: isDarkMode),
+                  ),
                 ),
               ],
             ),
