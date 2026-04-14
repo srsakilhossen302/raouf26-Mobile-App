@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/manage_account_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/edit_profile_page.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_safety_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -56,6 +57,7 @@ class ProfilePage extends StatelessWidget {
                   'account_safety'.tr,
                   "assets/icons/Account Safety.svg",
                   isDarkMode,
+                  onTap: () => Get.to(() => const AccountSafetyPage()),
                 ),
                 _buildMenuItem(
                   'payments_payouts'.tr,
