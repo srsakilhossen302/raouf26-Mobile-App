@@ -45,6 +45,7 @@ class ManageAccountPage extends StatelessWidget {
               isDarkMode: isDarkMode,
               onTap: () => _showDeleteConfirmationDialog(context, isDarkMode),
               fallbackIcon: Icons.delete_outline_rounded,
+              imagePath: "assets/images/brokenHard.png",
             ),
             SizedBox(height: 16.h),
             _buildManageItem(
@@ -68,6 +69,7 @@ class ManageAccountPage extends StatelessWidget {
     required bool isDarkMode,
     required VoidCallback onTap,
     required IconData fallbackIcon,
+    String? imagePath,
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -95,7 +97,12 @@ class ManageAccountPage extends StatelessWidget {
                     : const Color(0xFFF8F9FB),
                 borderRadius: BorderRadius.circular(8.r),
               ),
-              child: _buildIcon(icon, fallbackIcon, isDarkMode),
+              child: _buildIcon(
+                icon,
+                fallbackIcon,
+                isDarkMode,
+                imagePath: imagePath,
+              ),
             ),
             SizedBox(width: 16.w),
             Expanded(
@@ -124,7 +131,17 @@ class ManageAccountPage extends StatelessWidget {
     IconData fallbackIcon,
     bool isDarkMode, {
     double? size,
+    String? imagePath,
   }) {
+    if (imagePath != null) {
+      return Image.asset(
+        imagePath,
+        width: size ?? 20.sp,
+        height: size ?? 20.sp,
+        fit: BoxFit.contain,
+      );
+    }
+
     // Check if SVG exists - for now we'll use a simple logic: if path contains ".svg" and we don't have it, use fallback.
     // In a real app, you might use a more sophisticated check or assume assets are bundled.
     // Since I know they are not in the list from the LS tool, I'll use the fallback for now.
@@ -163,7 +180,8 @@ class ManageAccountPage extends StatelessWidget {
                     "assets/icons/Delete Account.svg",
                     Icons.delete_outline_rounded,
                     isDarkMode,
-                    size: 32.sp,
+                    size: 40.sp,
+                    imagePath: "assets/images/brokenHard.png",
                   ),
                 ),
               ),
