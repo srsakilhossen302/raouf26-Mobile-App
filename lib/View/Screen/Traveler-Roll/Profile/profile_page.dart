@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/manage_account_page.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/edit_profile_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -269,12 +270,15 @@ class ProfilePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SvgPicture.asset(
-                "assets/icons/Edit-icons.svg",
-                width: 20.w,
-                colorFilter: ColorFilter.mode(
-                  isDarkMode ? Colors.white : Colors.black,
-                  BlendMode.srcIn,
+              GestureDetector(
+                onTap: () => Get.to(() => const EditProfilePage()),
+                child: SvgPicture.asset(
+                  "assets/icons/Edit-icons.svg",
+                  width: 20.w,
+                  colorFilter: ColorFilter.mode(
+                    isDarkMode ? Colors.white : Colors.black,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
             ],

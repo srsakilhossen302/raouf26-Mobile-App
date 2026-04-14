@@ -92,6 +92,10 @@ class AppTranslations extends Translations {
       'delete_account_desc':
           'This action is permanent and will remove your trips, messages, and account data from Sendit.',
       'cancel': 'Cancel',
+      'edit_profile': 'Edit Profile',
+      'user_name': 'User Name',
+      'linked_accounts': 'Linked Accounts',
+      'save': 'Save',
     },
     'fr_FR': {
       'profile': 'Profile',
@@ -210,6 +214,10 @@ class AppTranslations extends Translations {
       'delete_account_desc':
           'Cette action est permanente et supprimera vos trajets, messages et données de compte de Sendit.',
       'cancel': 'Annuler',
+      'edit_profile': 'Modifier le profil',
+      'user_name': 'Nom d\'utilisateur',
+      'linked_accounts': 'Comptes liés',
+      'save': 'Enregistrer',
     },
     'ar_AR': {
       'welcome_title': 'مرحباً بك في Sendit',
@@ -300,6 +308,10 @@ class AppTranslations extends Translations {
       'delete_account_desc':
           'هذا الإجراء دائم وسيزيل رحلاتك ورسائلك وبيانات حسابك من Sendit.',
       'cancel': 'إلغاء',
+      'edit_profile': 'تعديل الملف الشخصي',
+      'user_name': 'اسم المستخدم',
+      'linked_accounts': 'الحسابات المرتبطة',
+      'save': 'حفظ',
     },
   };
 }
