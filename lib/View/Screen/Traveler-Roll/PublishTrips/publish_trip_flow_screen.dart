@@ -6,6 +6,7 @@ import 'publish_trip_flow_controller.dart';
 import 'Widgets/calendar_step.dart';
 import 'Widgets/trip_details_step.dart';
 import 'Widgets/prices_capacity_step.dart';
+import 'Widgets/travel_details_step.dart';
 import 'Widgets/trip_summary_step.dart';
 
 class PublishTripFlowScreen extends StatelessWidget {
@@ -53,6 +54,11 @@ class PublishTripFlowScreen extends StatelessWidget {
               isDarkMode: isDarkMode,
             );
           case 3:
+            return TravelDetailsStep(
+              controller: controller,
+              isDarkMode: isDarkMode,
+            );
+          case 4:
             return TripSummaryStep(
               controller: controller,
               isDarkMode: isDarkMode,
@@ -62,6 +68,12 @@ class PublishTripFlowScreen extends StatelessWidget {
         }
       }),
       bottomNavigationBar: Obx(() {
+        if (controller.currentStep.value == 1 ||
+            controller.currentStep.value == 2 ||
+            controller.currentStep.value == 3) {
+          return const SizedBox();
+        }
+
         if (controller.currentStep.value == 0 &&
             controller.selectedDate.value == null) {
           return Padding(
@@ -79,10 +91,7 @@ class PublishTripFlowScreen extends StatelessWidget {
             ),
           );
         }
-        if (controller.currentStep.value == 1 ||
-            controller.currentStep.value == 2) {
-          return const SizedBox();
-        }
+
         return Padding(
           padding: EdgeInsets.all(24.w),
           child: ElevatedButton(
@@ -96,7 +105,7 @@ class PublishTripFlowScreen extends StatelessWidget {
               elevation: 0,
             ),
             child: Text(
-              controller.currentStep.value == 3 ? "Publish" : "Next",
+              controller.currentStep.value == 4 ? "Publish" : "Next",
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,

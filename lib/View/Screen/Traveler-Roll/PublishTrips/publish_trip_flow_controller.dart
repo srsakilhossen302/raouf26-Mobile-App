@@ -24,6 +24,11 @@ class PublishTripFlowController extends GetxController {
   final RxBool canCarryPackages = true.obs;
   final capacityController = TextEditingController();
 
+  // Travel Details
+  final RxString selectedTravelMode = "Flight".obs;
+  final RxString selectedAirline = "Select Airline".obs;
+  final flightNumberController = TextEditingController();
+
   void nextStep() {
     if (currentStep.value == 0) {
       if (departureTime.value.isNotEmpty && arrivalTime.value.isNotEmpty) {

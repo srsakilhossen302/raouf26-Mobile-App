@@ -44,4 +44,10 @@ class AppIcons {
   static const String printLabel = "$basePath/Print Parcel Label.svg";
   static const String star = "$basePath/Star Conversation.svg";
   static const String helpCenter = "$basePath/Visit the Help Center.svg";
+  static const String flight = "$basePath/flight.svg";
+  static const String car = "$basePath/car.svg";
+  static const String train = "$basePath/train.svg";
+  static const String bus = "$basePath/bus.svg";
+  static const String boat = "$basePath/boat.svg";
+  static const String truck = "$basePath/truck.svg";
 }
