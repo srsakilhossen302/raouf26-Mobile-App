@@ -102,7 +102,7 @@ class SuccessVerificationPage extends StatelessWidget {
                     backgroundColor: const Color(0xFF4A80F0),
                     padding: EdgeInsets.symmetric(vertical: 16.h),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
+                      borderRadius: BorderRadius.circular(16.r),
                     ),
                     elevation: 0,
                   ),

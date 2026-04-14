@@ -16,7 +16,9 @@ class AccountVerificationPage extends StatelessWidget {
     final TextEditingController emailController = TextEditingController();
 
     return Scaffold(
-      backgroundColor: isDarkMode ? const Color(0xFF121212) : const Color(0xFFF8F9FB),
+      backgroundColor: isDarkMode
+          ? const Color(0xFF121212)
+          : const Color(0xFFF8F9FB),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -43,54 +45,54 @@ class AccountVerificationPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20.h),
-            
+
             // Full Name
             Text(
               'full_name'.tr,
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: 12.h),
             _buildTextField(
               controller: nameController,
               hint: 'Full Name',
               isDarkMode: isDarkMode,
             ),
-            
-            SizedBox(height: 20.h),
-            
+
+            SizedBox(height: 24.h),
+
             // Email
             Text(
               'email'.tr,
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: 12.h),
             _buildTextField(
               controller: emailController,
               hint: 'Email',
               isDarkMode: isDarkMode,
               keyboardType: TextInputType.emailAddress,
             ),
-            
-            SizedBox(height: 20.h),
-            
+
+            SizedBox(height: 24.h),
+
             // Phone Number
             Text(
               'phone_number'.tr,
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
             ),
-            SizedBox(height: 8.h),
+            SizedBox(height: 12.h),
             IntlPhoneField(
               decoration: InputDecoration(
                 hintText: '00000000',
@@ -101,18 +103,25 @@ class AccountVerificationPage extends StatelessWidget {
                 filled: true,
                 fillColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: BorderRadius.circular(16.r),
                   borderSide: BorderSide(
-                    color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
+                    color: isDarkMode
+                        ? Colors.white10
+                        : Colors.grey.withOpacity(0.1),
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
+                  borderRadius: BorderRadius.circular(16.r),
                   borderSide: BorderSide(
-                    color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
+                    color: isDarkMode
+                        ? Colors.white10
+                        : Colors.grey.withOpacity(0.1),
                   ),
                 ),
-                contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16.w,
+                  vertical: 16.h,
+                ),
               ),
               initialCountryCode: 'TN',
               onChanged: (phone) {
@@ -127,20 +136,23 @@ class AccountVerificationPage extends StatelessWidget {
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
             ),
-            
+
             const Spacer(),
-            
+
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Get.to(() => OtpVerificationPage(
-                  onVerify: () => Get.off(() => const SuccessVerificationPage()),
-                )),
+                onPressed: () => Get.to(
+                  () => OtpVerificationPage(
+                    onVerify: () =>
+                        Get.off(() => const SuccessVerificationPage()),
+                  ),
+                ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
                   padding: EdgeInsets.symmetric(vertical: 16.h),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
+                    borderRadius: BorderRadius.circular(16.r),
                   ),
                   elevation: 0,
                 ),
@@ -148,7 +160,7 @@ class AccountVerificationPage extends StatelessWidget {
                   'verify_account'.tr,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w700,
                     color: Colors.white,
                   ),
                 ),
@@ -183,13 +195,13 @@ class AccountVerificationPage extends StatelessWidget {
         filled: true,
         fillColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(16.r),
           borderSide: BorderSide(
             color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(16.r),
           borderSide: BorderSide(
             color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
           ),

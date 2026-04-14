@@ -60,4 +60,10 @@ class AppIcons {
   static const String googlePay = "$basePath/GooglePay.svg";
   static const String creditDebitCard = "$basePath/Credit-Debit Card.svg";
   static const String applePay = "$basePath/ApplePay.svg";
+  static const String cinIdCard = "$basePath/CIN (ID Card).svg";
+  static const String drivingLicense = "$basePath/Driving License.svg";
+  static const String passport = "$basePath/Passport.svg";
+  static const String vehicleRegistration =
+      "$basePath/Vehicle Registration.svg";
+  static const String passportImg = "$basePath/passport-img.svg";
 }

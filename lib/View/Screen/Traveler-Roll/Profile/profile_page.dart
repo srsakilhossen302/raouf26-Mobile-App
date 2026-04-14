@@ -12,6 +12,7 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/saved_address
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/accessibility_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/language_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_verification_page.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/document_verification_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -108,6 +109,7 @@ class ProfilePage extends StatelessWidget {
                   'documents_verification'.tr,
                   "assets/icons/Documents-icons.svg",
                   isDarkMode,
+                  onTap: () => Get.to(() => const DocumentVerificationPage()),
                 ),
                 _buildMenuItem(
                   'transport_agreement'.tr,
