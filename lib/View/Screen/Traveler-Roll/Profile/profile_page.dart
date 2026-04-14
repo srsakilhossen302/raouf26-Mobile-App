@@ -13,6 +13,7 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/accessibility
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/language_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_verification_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/document_verification_page.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/trips_shipments_page.dart';
 
 import '../PublishTrips/Views/transport_agreement_page.dart';
 
@@ -134,6 +135,7 @@ class ProfilePage extends StatelessWidget {
                   'trips_shipments'.tr,
                   "assets/icons/Trips & Shipments.svg",
                   isDarkMode,
+                  onTap: () => Get.to(() => const TripsShipmentsPage()),
                 ),
               ],
             ),

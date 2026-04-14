@@ -213,6 +213,12 @@ class AppTranslations extends Translations {
       'scan_cin_back': 'Scan CIN (Back of Document)',
       'scan_license_front': 'Scan License (Front of Document)',
       'scan_license_back': 'Scan License (Back of Document)',
+      'sent_packages': 'Sent Packages',
+      'delivered_packages': 'Delivered Packages',
+      'transaction_history': 'Transaction History',
+      'delivered': 'Delivered',
+      'cancelled': 'Cancelled',
+      'pending': 'Pending',
     },
     'fr_FR': {
       'profile': 'Profile',
@@ -453,6 +459,12 @@ class AppTranslations extends Translations {
       'scan_cin_back': 'Numériser CIN (Verso)',
       'scan_license_front': 'Numériser Permis (Recto)',
       'scan_license_back': 'Numériser Permis (Verso)',
+      'sent_packages': 'Colis Envoyés',
+      'delivered_packages': 'Colis Livrés',
+      'transaction_history': 'Historique des Transactions',
+      'delivered': 'Livré',
+      'cancelled': 'Annulé',
+      'pending': 'En attente',
     },
     'ar_AR': {
       'welcome_title': 'مرحباً بك في Sendit',
@@ -663,6 +675,12 @@ class AppTranslations extends Translations {
       'scan_cin_back': 'مسح بطاقة التعريف (الظهر)',
       'scan_license_front': 'مسح الرخصة (الوجه)',
       'scan_license_back': 'مسح الرخصة (الظهر)',
+      'sent_packages': 'الطرود المرسلة',
+      'delivered_packages': 'الطرود المسلمة',
+      'transaction_history': 'سجل المعاملات',
+      'delivered': 'تم التسليم',
+      'cancelled': 'ملغى',
+      'pending': 'قيد الانتظار',
     },
   };
 }
