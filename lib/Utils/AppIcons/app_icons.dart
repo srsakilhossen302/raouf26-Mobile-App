@@ -54,4 +54,10 @@ class AppIcons {
   static const String electronicsIcon = "$basePath/Electronics-icons.svg";
   static const String foodSealedIcon = "$basePath/Food (sealed)-icons.svg";
   static const String fragileItemsIcon = "$basePath/Fragile Items-Icons.svg";
+  static const String sentitCredits = "$basePath/Sentit Credits.svg";
+  static const String visaCard = "$basePath/VisaCard.svg";
+  static const String payPal = "$basePath/PayPal.svg";
+  static const String googlePay = "$basePath/GooglePay.svg";
+  static const String creditDebitCard = "$basePath/Credit-Debit Card.svg";
+  static const String applePay = "$basePath/ApplePay.svg";
 }

@@ -7,6 +7,7 @@ import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/manage_account_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/edit_profile_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_safety_page.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/payment_method_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -63,6 +64,7 @@ class ProfilePage extends StatelessWidget {
                   'payments_payouts'.tr,
                   "assets/icons/Payments & Payouts.svg",
                   isDarkMode,
+                  onTap: () => Get.to(() => const PaymentMethodPage()),
                 ),
                 _buildMenuItem(
                   'saved_address'.tr,
