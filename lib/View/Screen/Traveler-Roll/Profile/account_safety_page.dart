@@ -9,6 +9,7 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/email_verific
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/change_pin_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/trusted_devices_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/login_history_page.dart';
+import 'package:raouf26mobileapp/View/Screen/VerifyIdentityScreen/verify_identity_screen.dart';
 
 class AccountSafetyPage extends StatelessWidget {
   const AccountSafetyPage({super.key});
@@ -57,6 +58,12 @@ class AccountSafetyPage extends StatelessWidget {
             _buildSectionCard(
               isDarkMode: isDarkMode,
               items: [
+                _buildMenuItem(
+                  'kyc_verification'.tr,
+                  Icons.verified_user_rounded,
+                  isDarkMode,
+                  onTap: () => Get.to(() => const VerifyIdentityScreen()),
+                ),
                 _buildMenuItem(
                   'update_email'.tr,
                   Icons.mail_outline_rounded,

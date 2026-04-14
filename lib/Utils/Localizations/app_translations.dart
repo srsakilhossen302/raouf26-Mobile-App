@@ -99,6 +99,7 @@ class AppTranslations extends Translations {
       'account_protection_status': 'Protection Status',
       'protection_status_desc': 'Complete steps to fully secure your account.',
       'security_preferences': 'Security Preferences',
+      'kyc_verification': 'KYC Verification',
       'update_email': 'Update Email',
       'change_pin': 'Change Pin',
       'face_recognition': 'Face Recognition',
@@ -255,6 +256,7 @@ class AppTranslations extends Translations {
       'protection_status_desc':
           'Complétez les étapes pour sécuriser pleinement votre compte.',
       'security_preferences': 'Préférences de Sécurité',
+      'kyc_verification': 'Vérification KYC',
       'update_email': 'Mettre à jour l\'Email',
       'change_pin': 'Changer le PIN',
       'face_recognition': 'Reconnaissance Faciale',
@@ -382,6 +384,7 @@ class AppTranslations extends Translations {
       'account_protection_status': 'حالة الحماية',
       'protection_status_desc': 'أكمل الخطوات لتأمين حسابك بالكامل.',
       'security_preferences': 'تفضيلات الأمان',
+      'kyc_verification': 'التحقق من الهوية (KYC)',
       'update_email': 'تحديث البريد الإلكتروني',
       'change_pin': 'تغيير رمز PIN',
       'face_recognition': 'التعرف على الوجه',
