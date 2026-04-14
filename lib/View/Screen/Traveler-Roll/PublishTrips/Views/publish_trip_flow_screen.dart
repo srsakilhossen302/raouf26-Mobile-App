@@ -9,6 +9,7 @@ import '../Widgets/prices_capacity_step.dart';
 import '../Widgets/travel_details_step.dart';
 import '../Widgets/trip_summary_step.dart';
 import '../Widgets/trip_rules_step.dart';
+import '../Widgets/review_publish_step.dart';
 
 class PublishTripFlowScreen extends StatelessWidget {
   const PublishTripFlowScreen({super.key});
@@ -69,6 +70,11 @@ class PublishTripFlowScreen extends StatelessWidget {
               controller: controller,
               isDarkMode: isDarkMode,
             );
+          case 6:
+            return ReviewPublishStep(
+              controller: controller,
+              isDarkMode: isDarkMode,
+            );
           default:
             return const SizedBox();
         }
@@ -101,7 +107,14 @@ class PublishTripFlowScreen extends StatelessWidget {
         return Padding(
           padding: EdgeInsets.all(24.w),
           child: ElevatedButton(
-            onPressed: () => controller.nextStep(),
+            onPressed: () {
+              if (controller.currentStep.value == 6) {
+                // Final publish logic here
+                Get.snackbar("Success", "Trip Published Successfully!");
+              } else {
+                controller.nextStep();
+              }
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF4A80F0),
               padding: EdgeInsets.symmetric(vertical: 16.h),
@@ -111,7 +124,11 @@ class PublishTripFlowScreen extends StatelessWidget {
               elevation: 0,
             ),
             child: Text(
-              controller.currentStep.value == 5 ? "Next" : "Next",
+              controller.currentStep.value == 6
+                  ? "Publish My Trip"
+                  : controller.currentStep.value == 5
+                  ? "Review"
+                  : "Next",
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,

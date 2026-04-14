@@ -58,7 +58,7 @@ class PublishTripFlowController extends GetxController {
       } else {
         currentStep.value = 1;
       }
-    } else if (currentStep.value < 5) {
+    } else if (currentStep.value < 6) {
       currentStep.value++;
     }
   }
