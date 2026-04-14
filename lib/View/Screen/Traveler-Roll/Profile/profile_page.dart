@@ -150,6 +150,7 @@ class ProfilePage extends StatelessWidget {
                   'report_an_issue'.tr,
                   "assets/icons/Report an Issue.svg",
                   isDarkMode,
+                  onTap: () => _showReportIssueBottomSheet(context, isDarkMode),
                 ),
                 _buildMenuItem(
                   'help_center'.tr,
@@ -473,49 +474,305 @@ class ProfilePage extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget _buildThemeToggle(bool isDarkMode) {
-    return Column(
+void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
+  Get.bottomSheet(
+    StatefulBuilder(
+      builder: (context, setState) {
+        String selectedCategory = "App Issue";
+        return Container(
+          padding: EdgeInsets.all(24.w),
+          decoration: BoxDecoration(
+            color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(width: 48), // Spacer for centering
+                    Text(
+                      'Report Issue',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w800,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.close_rounded,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                      onPressed: () => Get.back(),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 24.h),
+                Icon(Icons.error_rounded, color: Colors.red, size: 48.sp),
+                SizedBox(height: 24.h),
+                Text(
+                  'Please include the following details in your report',
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w700,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                SizedBox(height: 12.h),
+                _buildTipItem("Select the issue category", isDarkMode),
+                _buildTipItem(
+                  "Provide detailed problem description",
+                  isDarkMode,
+                ),
+                SizedBox(height: 24.h),
+                Text(
+                  'What is this Report About?',
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                SizedBox(height: 12.h),
+                Wrap(
+                  spacing: 12.w,
+                  runSpacing: 12.h,
+                  children: [
+                    _buildCategoryChip(
+                      "App Issue",
+                      selectedCategory == "App Issue",
+                      isDarkMode,
+                      (val) => setState(() => selectedCategory = val),
+                    ),
+                    _buildCategoryChip(
+                      "Account",
+                      selectedCategory == "Account",
+                      isDarkMode,
+                      (val) => setState(() => selectedCategory = val),
+                    ),
+                    _buildCategoryChip(
+                      "Payment",
+                      selectedCategory == "Payment",
+                      isDarkMode,
+                      (val) => setState(() => selectedCategory = val),
+                    ),
+                    _buildCategoryChip(
+                      "Transporter Issue",
+                      selectedCategory == "Transporter Issue",
+                      isDarkMode,
+                      (val) => setState(() => selectedCategory = val),
+                    ),
+                    _buildCategoryChip(
+                      "Others",
+                      selectedCategory == "Others",
+                      isDarkMode,
+                      (val) => setState(() => selectedCategory = val),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 24.h),
+                Text(
+                  'Describe Issue',
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                SizedBox(height: 12.h),
+                TextField(
+                  maxLines: 4,
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 14.sp,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                  decoration: InputDecoration(
+                    hintText: "Type here ...",
+                    hintStyle: GoogleFonts.plusJakartaSans(
+                      fontSize: 14.sp,
+                      color: Colors.grey,
+                    ),
+                    filled: true,
+                    fillColor: isDarkMode
+                        ? Colors.white.withOpacity(0.05)
+                        : const Color(0xFFF8F9FB),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 24.h),
+                Text(
+                  'Add Attachment (Optional)',
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                SizedBox(height: 12.h),
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(vertical: 24.h),
+                  decoration: BoxDecoration(
+                    color: isDarkMode
+                        ? Colors.white.withOpacity(0.05)
+                        : const Color(0xFFF8F9FB),
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.description_outlined,
+                        color: Colors.grey,
+                        size: 32.sp,
+                      ),
+                      SizedBox(height: 8.h),
+                      Text(
+                        "Add Image or Document",
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: 13.sp,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 32.h),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Get.back(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF4A80F0),
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      "Submit",
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.h),
+              ],
+            ),
+          ),
+        );
+      },
+    ),
+    isScrollControlled: true,
+  );
+}
+
+Widget _buildTipItem(String tip, bool isDarkMode) {
+  return Padding(
+    padding: EdgeInsets.only(bottom: 8.h),
+    child: Row(
       children: [
-        Divider(
-          indent: 60.w,
-          endIndent: 16.w,
-          height: 1,
-          color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
-        ),
-        ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
-          leading: Container(
-            padding: EdgeInsets.all(8.w),
-            decoration: BoxDecoration(
-              color: isDarkMode
-                  ? Colors.white.withOpacity(0.05)
-                  : const Color(0xFFF5F7FA),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              isDarkMode ? Icons.nightlight_round : Icons.wb_sunny_rounded,
-              size: 18.sp,
-              color: isDarkMode ? Colors.white : Colors.orange,
-            ),
-          ),
-          title: Text(
-            'dark_mode'.tr,
-            style: GoogleFonts.plusJakartaSans(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
-          ),
-          trailing: Switch.adaptive(
-            value: isDarkMode,
-            activeColor: const Color(0xFF4A80F0),
-            onChanged: (value) {
-              Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
-            },
+        Icon(Icons.circle, size: 4.sp, color: Colors.grey),
+        SizedBox(width: 8.w),
+        Text(
+          tip,
+          style: GoogleFonts.plusJakartaSans(
+            fontSize: 13.sp,
+            color: isDarkMode ? Colors.white70 : Colors.black54,
           ),
         ),
       ],
-    );
-  }
+    ),
+  );
+}
+
+Widget _buildCategoryChip(
+  String label,
+  bool isSelected,
+  bool isDarkMode,
+  Function(String) onTap,
+) {
+  return InkWell(
+    onTap: () => onTap(label),
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+      decoration: BoxDecoration(
+        color: isSelected
+            ? const Color(0xFF4A80F0)
+            : (isDarkMode ? Colors.white.withOpacity(0.05) : Colors.white),
+        borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(
+          color: isSelected ? Colors.transparent : Colors.grey.withOpacity(0.2),
+        ),
+      ),
+      child: Text(
+        label,
+        style: GoogleFonts.plusJakartaSans(
+          fontSize: 13.sp,
+          fontWeight: FontWeight.w600,
+          color: isSelected
+              ? Colors.white
+              : (isDarkMode ? Colors.white70 : Colors.black87),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget _buildThemeToggle(bool isDarkMode) {
+  return Column(
+    children: [
+      Divider(
+        indent: 60.w,
+        endIndent: 16.w,
+        height: 1,
+        color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
+      ),
+      ListTile(
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
+        leading: Container(
+          padding: EdgeInsets.all(8.w),
+          decoration: BoxDecoration(
+            color: isDarkMode
+                ? Colors.white.withOpacity(0.05)
+                : const Color(0xFFF5F7FA),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            isDarkMode ? Icons.nightlight_round : Icons.wb_sunny_rounded,
+            size: 18.sp,
+            color: isDarkMode ? Colors.white : Colors.orange,
+          ),
+        ),
+        title: Text(
+          'dark_mode'.tr,
+          style: GoogleFonts.plusJakartaSans(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w600,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
+        trailing: Switch.adaptive(
+          value: isDarkMode,
+          activeColor: const Color(0xFF4A80F0),
+          onChanged: (value) {
+            Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
+          },
+        ),
+      ),
+    ],
+  );
 }
