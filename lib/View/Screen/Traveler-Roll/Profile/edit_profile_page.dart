@@ -103,6 +103,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               controller: _phoneController,
               isDarkMode: isDarkMode,
               keyboardType: TextInputType.phone,
+              enabled: false,
             ),
             SizedBox(height: 20.h),
             _buildTextField(
@@ -110,6 +111,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               controller: _emailController,
               isDarkMode: isDarkMode,
               keyboardType: TextInputType.emailAddress,
+              enabled: false,
             ),
             SizedBox(height: 32.h),
 
@@ -199,6 +201,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     required TextEditingController controller,
     required bool isDarkMode,
     TextInputType keyboardType = TextInputType.text,
+    bool enabled = true,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -217,18 +220,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
         TextField(
           controller: controller,
           keyboardType: keyboardType,
+          enabled: enabled,
           style: GoogleFonts.plusJakartaSans(
             fontSize: 14.sp,
-            color: isDarkMode ? Colors.white : Colors.black,
+            color: isDarkMode
+                ? (enabled ? Colors.white : Colors.white38)
+                : (enabled ? Colors.black : Colors.black38),
           ),
           decoration: InputDecoration(
             filled: true,
-            fillColor: isDarkMode ? const Color(0xFF1E1E1E) : const Color(0xFFF5F7FA),
+            fillColor: isDarkMode
+                ? (enabled ? const Color(0xFF1E1E1E) : Colors.black38)
+                : (enabled ? const Color(0xFFF5F7FA) : const Color(0xFFE0E0E0)),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
               borderSide: BorderSide.none,
             ),
-            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+            suffixIcon: !enabled
+                ? Icon(
+                    Icons.lock_outline,
+                    size: 18.sp,
+                    color: isDarkMode ? Colors.white24 : Colors.black26,
+                  )
+                : null,
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
           ),
         ),
       ],
