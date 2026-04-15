@@ -216,11 +216,11 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
 
             SizedBox(height: 24.h),
 
-            // Delivery Speed
-            _sectionTitle("Delivery Speed", isDarkMode),
+            // Pickup Method
+            _sectionTitle("Pickup Method", isDarkMode),
             SizedBox(height: 8.h),
             Text(
-              "Select delivery speed and preferred carrier type.",
+              "How should the package be collected?",
               style: GoogleFonts.montserrat(
                 fontSize: 12.sp,
                 color: Colors.grey,
@@ -228,48 +228,99 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             ),
             SizedBox(height: 16.h),
             Obx(
-              () => Row(
-                children: controller.speedOptions
-                    .map(
-                      (speed) => Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 8.w),
-                          child: _selectionChip(
-                            label: speed,
-                            isSelected: controller.selectedSpeed.value == speed,
-                            onTap: () => controller.setSpeed(speed),
-                            isDarkMode: isDarkMode,
-                          ),
+              () => Column(
+                children: [
+                   Row(
+                    children: [
+                      Expanded(
+                        child: _selectionChip(
+                          label: controller.pickupMethodOptions[0],
+                          isSelected: controller.selectedPickupMethod.value == controller.pickupMethodOptions[0],
+                          onTap: () => controller.setPickupMethod(controller.pickupMethodOptions[0]),
+                          isDarkMode: isDarkMode,
                         ),
                       ),
-                    )
-                    .toList(),
+                      SizedBox(width: 10.w),
+                      Expanded(
+                        child: _selectionChip(
+                          label: controller.pickupMethodOptions[1],
+                          isSelected: controller.selectedPickupMethod.value == controller.pickupMethodOptions[1],
+                          onTap: () => controller.setPickupMethod(controller.pickupMethodOptions[1]),
+                          isDarkMode: isDarkMode,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10.h),
+                   Row(
+                    children: [
+                      Expanded(
+                        child: _selectionChip(
+                          label: controller.pickupMethodOptions[2],
+                          isSelected: controller.selectedPickupMethod.value == controller.pickupMethodOptions[2],
+                          onTap: () => controller.setPickupMethod(controller.pickupMethodOptions[2]),
+                          isDarkMode: isDarkMode,
+                        ),
+                      ),
+                      const Expanded(child: SizedBox()),
+                    ],
+                  ),
+                ],
               ),
             ),
 
             SizedBox(height: 24.h),
 
-            // Delivery Handed Over Preference
-            _sectionTitle("Delivery Handed Over Preference", isDarkMode),
+            // Delivery Method
+            _sectionTitle("Delivery Method", isDarkMode),
+            SizedBox(height: 8.h),
+            Text(
+              "How should the package reach the receiver?",
+              style: GoogleFonts.montserrat(
+                fontSize: 12.sp,
+                color: Colors.grey,
+              ),
+            ),
             SizedBox(height: 16.h),
             Obx(
-              () => Row(
-                children: controller.preferenceOptions
-                    .map(
-                      (pref) => Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 8.w),
-                          child: _selectionChip(
-                            label: pref,
-                            isSelected:
-                                controller.selectedPreference.value == pref,
-                            onTap: () => controller.setPreference(pref),
-                            isDarkMode: isDarkMode,
-                          ),
+              () => Column(
+                children: [
+                   Row(
+                    children: [
+                      Expanded(
+                        child: _selectionChip(
+                          label: controller.deliveryMethodOptions[0],
+                          isSelected: controller.selectedDeliveryMethod.value == controller.deliveryMethodOptions[0],
+                          onTap: () => controller.setDeliveryMethod(controller.deliveryMethodOptions[0]),
+                          isDarkMode: isDarkMode,
                         ),
                       ),
-                    )
-                    .toList(),
+                      SizedBox(width: 10.w),
+                      Expanded(
+                        child: _selectionChip(
+                          label: controller.deliveryMethodOptions[1],
+                          isSelected: controller.selectedDeliveryMethod.value == controller.deliveryMethodOptions[1],
+                          onTap: () => controller.setDeliveryMethod(controller.deliveryMethodOptions[1]),
+                          isDarkMode: isDarkMode,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10.h),
+                   Row(
+                    children: [
+                      Expanded(
+                        child: _selectionChip(
+                          label: controller.deliveryMethodOptions[2],
+                          isSelected: controller.selectedDeliveryMethod.value == controller.deliveryMethodOptions[2],
+                          onTap: () => controller.setDeliveryMethod(controller.deliveryMethodOptions[2]),
+                          isDarkMode: isDarkMode,
+                        ),
+                      ),
+                      const Expanded(child: SizedBox()),
+                    ],
+                  ),
+                ],
               ),
             ),
 
