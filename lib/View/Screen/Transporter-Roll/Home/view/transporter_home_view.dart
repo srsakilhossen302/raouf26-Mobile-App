@@ -9,6 +9,7 @@ import '../controller/transporter_home_controller.dart';
 import '../../Notifications/view/transporter_notifications_view.dart';
 import '../../NewRequests/view/transporter_new_requests_view.dart';
 import '../../RateDelivery/view/rate_delivery_sheet.dart';
+import '../../../Traveler-Roll/Profile/profile_page.dart';
 
 class TransporterHomeScreen extends StatelessWidget {
   const TransporterHomeScreen({super.key});
@@ -125,38 +126,45 @@ class TransporterHomeScreen extends StatelessWidget {
                     // Profile Row
                     Row(
                       children: [
-                        CircleAvatar(
-                          radius: 25.r,
-                          backgroundColor: Colors.grey.shade300,
-                          backgroundImage: const NetworkImage(
-                            "https://i.pravatar.cc/150?u=zain",
-                          ),
-                        ),
-                        SizedBox(width: 12.w),
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Hi, Zain Malik",
-                                style: TextStyle(
-                                  color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.bold,
+                          child: GestureDetector(
+                            onTap: () => Get.to(() => const ProfilePage()),
+                            child: Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 25.r,
+                                  backgroundColor: Colors.grey.shade300,
+                                  backgroundImage: const NetworkImage(
+                                    "https://i.pravatar.cc/150?u=zain",
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                'new_delivery_requests'.tr,
-                                style: TextStyle(
-                                  color: isDarkMode
-                                      ? Colors.white70
-                                      : Colors.grey.shade600,
-                                  fontSize: 11.sp,
+                                SizedBox(width: 12.w),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Hi, Zain Malik",
+                                      style: TextStyle(
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : Colors.black,
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      'new_delivery_requests'.tr,
+                                      style: TextStyle(
+                                        color: isDarkMode
+                                            ? Colors.white70
+                                            : Colors.grey.shade600,
+                                        fontSize: 11.sp,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         // QR Code Icon
