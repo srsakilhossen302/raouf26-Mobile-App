@@ -34,6 +34,19 @@ void showDeliveryConfirmationSheet(
               child: Stack(
                 alignment: Alignment.center,
                 children: [
+                   Align(
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      onTap: () {
+                        // QR Scanner logic: This QR should contain BOTH pickup and delivery confirmation info.
+                      },
+                      child: Icon(
+                        Icons.qr_code_scanner,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                        size: 24.sp,
+                      ),
+                    ),
+                  ),
                   Text(
                     '${'delivery_confirmation'.tr} (${package.id})',
                     style: GoogleFonts.montserrat(

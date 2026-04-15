@@ -99,11 +99,7 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
               child: ElevatedButton(
                 onPressed: () async {
                   await SharedPreferenceHelper.saveUserRole(selectedRole);
-                  if (selectedRole == "Transporter") {
-                    Get.to(() => const TransporterHomeScreen());
-                  } else {
-                    Get.to(() => const SignUpScreen());
-                  }
+                  Get.to(() => const SignUpScreen());
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),

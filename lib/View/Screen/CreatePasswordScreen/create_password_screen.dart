@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../helper/shared_preference_helper.dart';
 import '../Traveler-Roll/Dashboard/dashboard_view.dart';
+import '../Transporter-Roll/Home/view/transporter_home_view.dart';
 
 class CreatePasswordScreen extends StatefulWidget {
   const CreatePasswordScreen({super.key});
@@ -109,10 +110,10 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               child: ElevatedButton(
                 onPressed: () async {
                   String? role = await SharedPreferenceHelper.getUserRole();
-                  if (role == "Traveler") {
-                    Get.offAll(() => const DashboardScreen());
+                  if (role == "Transporter") {
+                    Get.offAll(() => const TransporterHomeScreen());
                   } else {
-                    // Logic for other roles will be added later
+                    Get.offAll(() => const DashboardScreen());
                   }
                 },
                 style: ElevatedButton.styleFrom(

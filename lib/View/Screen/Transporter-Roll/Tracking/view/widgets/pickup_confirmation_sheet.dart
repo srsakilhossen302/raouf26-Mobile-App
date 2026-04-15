@@ -38,6 +38,19 @@ void showPickupConfirmationSheet(
               child: Stack(
                 alignment: Alignment.center,
                 children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      onTap: () {
+                        // QR Scanner logic
+                      },
+                      child: Icon(
+                        Icons.qr_code_scanner,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                        size: 24.sp,
+                      ),
+                    ),
+                  ),
                   Text(
                     '${'pickup_confirmation'.tr} (${package.id})',
                     style: GoogleFonts.montserrat(
