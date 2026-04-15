@@ -173,7 +173,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             // Updated Get Started CTA with App Theme Blue Color
                             GestureDetector(
                               onTap: () =>
-                                  Get.to(() => const ChooseRoleScreen()),
+                                  Get.to(() => const SignUpScreen()),
                               child: Container(
                                 width: double.infinity,
                                 height: 65.h,

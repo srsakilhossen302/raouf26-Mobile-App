@@ -85,11 +85,11 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
             Obx(
               () => Column(
                 children: [
-                  _sizeOption("Small", "( 1 to 10 )", isDarkMode),
+                  _sizeOption("Small", "", isDarkMode),
                   SizedBox(height: 12.h),
-                  _sizeOption("Medium", "( 20 to 50 )", isDarkMode),
+                  _sizeOption("Medium", "", isDarkMode),
                   SizedBox(height: 12.h),
-                  _sizeOption("Large", "( 60 to 120 )", isDarkMode),
+                  _sizeOption("Large", "", isDarkMode),
                 ],
               ),
             ),
@@ -122,19 +122,19 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                       "assets/icons/Food-Icons.svg",
                       isDarkMode,
                     ),
-                    SizedBox(width: 12.w),
+                    SizedBox(width: 10.w),
                     _categoryChip(
                       "Clothes",
                       "assets/icons/Clothes-icons.svg",
                       isDarkMode,
                     ),
-                    SizedBox(width: 12.w),
+                    SizedBox(width: 10.w),
                     _categoryChip(
                       "Documents",
                       "assets/icons/Documents-icons.svg",
                       isDarkMode,
                     ),
-                    SizedBox(width: 12.w),
+                    SizedBox(width: 10.w),
                     _categoryChip(
                       "Medicines",
                       "assets/icons/Medicines-icons.svg",
@@ -317,21 +317,22 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: "$title ",
+                      text: title,
                       style: GoogleFonts.montserrat(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black87,
                       ),
                     ),
-                    TextSpan(
-                      text: subtitle,
-                      style: GoogleFonts.montserrat(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey,
+                    if (subtitle.isNotEmpty)
+                      TextSpan(
+                        text: " $subtitle",
+                        style: GoogleFonts.montserrat(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey,
+                        ),
                       ),
-                    ),
                   ],
                 ),
               ),
@@ -404,7 +405,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
     return GestureDetector(
       onTap: () => controller.toggleCategory(title),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 10.h),
         decoration: BoxDecoration(
           color: isSelected
               ? const Color(0xFF4A80F0).withOpacity(0.1)
@@ -420,18 +421,18 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
           children: [
             SvgPicture.asset(
               iconPath,
-              width: 16.sp,
-              height: 16.sp,
+              width: 15.sp,
+              height: 15.sp,
               colorFilter: ColorFilter.mode(
                 isSelected ? const Color(0xFF4A80F0) : Colors.black54,
                 BlendMode.srcIn,
               ),
             ),
-            SizedBox(width: 8.w),
+            SizedBox(width: 6.w),
             Text(
               title,
               style: GoogleFonts.montserrat(
-                fontSize: 14.sp,
+                fontSize: 12.sp,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                 color: isSelected
                     ? const Color(0xFF4A80F0)

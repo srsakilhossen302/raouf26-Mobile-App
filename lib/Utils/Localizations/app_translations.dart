@@ -4,15 +4,15 @@ class AppTranslations extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
     'en_US': {
-      'welcome_title': 'Welcome to Sendit',
+      'welcome_title': 'Send or Carry, Easily',
       'welcome_subtitle':
-          'Connect with trusted travelers to send packages or earn money on your trips.',
-      'onboarding2_title': 'Ship With Confidence',
+          'Send packages with verified travelers and transporters Or earn money from trips you already take.',
+      'onboarding2_title': 'Earn From Trips You Already Take',
       'onboarding2_desc':
-          'Track your packages in real-time and enjoy secure payments.',
-      'onboarding3_title': 'Turn Your Trips Into Earnings',
+          'Post your route, accept a delivery request, and get paid for extra space in your trip.',
+      'onboarding3_title': 'Safe Delivery, Every Step',
       'onboarding3_desc':
-          'Make money by delivering items while you travel to your destination.',
+          'Verified profiles, tracking, and delivery proof help you send with confidence.',
       'get_started': 'Get Started',
       'select_language': 'Select Language',
       'english': 'English',
