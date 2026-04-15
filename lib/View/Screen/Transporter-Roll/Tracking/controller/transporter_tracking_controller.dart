@@ -66,7 +66,7 @@ class TransporterTrackingController extends GetxController {
       currentStatusStep: 2, // In Transit
       date: "Jan 29, 2026",
       packageSize: "Medium (15kg)",
-      priority: "Urgent",
+      priority: "urgent",
     ),
     TrackingPackageModel(
       id: "#PKG-002",
@@ -80,7 +80,7 @@ class TransporterTrackingController extends GetxController {
       currentStatusStep: 0, // Booked
       date: "Jan 29, 2026",
       packageSize: "Small (5kg)",
-      priority: "Standard",
+      priority: "standard",
     ),
   ].obs;
 

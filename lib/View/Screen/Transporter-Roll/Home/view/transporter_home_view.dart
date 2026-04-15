@@ -26,13 +26,15 @@ class TransporterHomeScreen extends StatelessWidget {
         onPressed: () {},
         backgroundColor: const Color(0xFF4A80F0),
         shape: RoundedRectangleBorder(
-           borderRadius: BorderRadius.circular(30.r),
+          borderRadius: BorderRadius.circular(30.r),
         ),
         elevation: 4,
         child: Icon(Icons.add, color: Colors.white, size: 28.sp),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: const CustomTransporterBottomNavBar(selectedIndex: 0),
+      bottomNavigationBar: const CustomTransporterBottomNavBar(
+        selectedIndex: 0,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -45,7 +47,13 @@ class TransporterHomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 24.h),
-                  _buildSectionHeader('new_requests'.tr, 'see_all'.tr, isDarkMode, onTap: () => Get.to(() => const TransporterNewRequestsView())),
+                  _buildSectionHeader(
+                    'new_requests'.tr,
+                    'see_all'.tr,
+                    isDarkMode,
+                    onTap: () =>
+                        Get.to(() => const TransporterNewRequestsView()),
+                  ),
                   SizedBox(height: 16.h),
                   _buildNewRequestsList(controller, isDarkMode),
 
@@ -132,7 +140,9 @@ class TransporterHomeScreen extends StatelessWidget {
                               Text(
                                 "Hi, Zain Malik",
                                 style: TextStyle(
-                                  color: isDarkMode ? Colors.white : Colors.black,
+                                  color: isDarkMode
+                                      ? Colors.white
+                                      : Colors.black,
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -172,7 +182,9 @@ class TransporterHomeScreen extends StatelessWidget {
                         SizedBox(width: 8.w),
                         // Notifications Icon
                         GestureDetector(
-                          onTap: () => Get.to(() => const TransporterNotificationsView()),
+                          onTap: () => Get.to(
+                            () => const TransporterNotificationsView(),
+                          ),
                           child: Container(
                             padding: EdgeInsets.all(10.r),
                             decoration: BoxDecoration(
@@ -250,19 +262,19 @@ class TransporterHomeScreen extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 16.h),
         decoration: BoxDecoration(
-          color: isDarkMode
-              ? Colors.white.withOpacity(0.05)
-              : Colors.white,
+          color: isDarkMode ? Colors.white.withOpacity(0.05) : Colors.white,
           borderRadius: BorderRadius.circular(16.r),
-          border: isDarkMode ? null : Border.all(color: Colors.grey.shade100, width: 1.5),
+          border: isDarkMode
+              ? null
+              : Border.all(color: Colors.grey.shade100, width: 1.5),
           boxShadow: [
-             if(!isDarkMode)
-               BoxShadow(
-                 color: Colors.black.withOpacity(0.01),
-                 blurRadius: 4,
-                 offset: const Offset(0, 2),
-               )
-          ]
+            if (!isDarkMode)
+              BoxShadow(
+                color: Colors.black.withOpacity(0.01),
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+          ],
         ),
         child: Column(
           children: [
@@ -299,7 +311,12 @@ class TransporterHomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionHeader(String title, String action, bool isDarkMode, {VoidCallback? onTap}) {
+  Widget _buildSectionHeader(
+    String title,
+    String action,
+    bool isDarkMode, {
+    VoidCallback? onTap,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

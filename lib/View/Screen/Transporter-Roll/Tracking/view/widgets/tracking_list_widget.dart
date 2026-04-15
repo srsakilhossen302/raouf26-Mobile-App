@@ -317,19 +317,17 @@ class TrackingListWidget extends StatelessWidget {
               SizedBox(width: 16.w),
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {
-                    showPickupConfirmationSheet(context, package);
-                  },
+                  onPressed: () => _onCTAPressed(context, package),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 14.h),
-                    backgroundColor: const Color(0xFF4A80F0),
+                    backgroundColor: package.currentStatusStep == 3 ? Colors.green : const Color(0xFF4A80F0),
                     elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                   ),
                   child: Text(
-                    'mark_as_delivered'.tr,
+                    _getCTAText(package.currentStatusStep),
                     style: GoogleFonts.montserrat(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
@@ -400,5 +398,32 @@ class TrackingListWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String _getCTAText(int statusStep) {
+    switch (statusStep) {
+      case 0: return 'confirm_pickup'.tr;
+      case 1: return 'mark_in_transit'.tr;
+      case 2: return 'confirm_delivery'.tr;
+      case 3: default: return 'view_proof'.tr;
+    }
+  }
+
+  void _onCTAPressed(BuildContext context, TrackingPackageModel package) {
+    switch (package.currentStatusStep) {
+      case 0:
+        showPickupConfirmationSheet(context, package);
+        break;
+      case 1:
+        // Future logic to mark as in transit
+        break;
+      case 2:
+        showDeliveryConfirmationSheet(context, package);
+        break;
+      case 3:
+      default:
+        // Future logic to view proof of delivery
+        break;
+    }
   }
 }

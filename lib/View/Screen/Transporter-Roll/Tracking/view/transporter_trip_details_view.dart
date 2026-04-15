@@ -102,15 +102,15 @@ class TransporterTripDetailsView extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                           decoration: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.1),
+                            color: _getStatusColor(package.currentStatusStep).withOpacity(0.1),
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                           child: Text(
-                            'in_transit'.tr,
+                            _getStatusText(package.currentStatusStep),
                             style: GoogleFonts.montserrat(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
-                              color: Colors.blue,
+                              color: _getStatusColor(package.currentStatusStep),
                             ),
                           ),
                         ),
@@ -292,16 +292,14 @@ class TransporterTripDetailsView extends StatelessWidget {
                 width: double.infinity,
                 height: 55.h,
                 child: ElevatedButton(
-                  onPressed: () {
-                    showPickupConfirmationSheet(context, package);
-                  },
+                  onPressed: () => _onCTAPressed(context, package),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4A80F0),
+                    backgroundColor: package.currentStatusStep == 3 ? Colors.green : const Color(0xFF4A80F0),
                     elevation: 0,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
                   ),
                   child: Text(
-                    'mark_as_delivered'.tr,
+                    _getCTAText(package.currentStatusStep),
                     style: GoogleFonts.montserrat(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
@@ -385,5 +383,50 @@ class TransporterTripDetailsView extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  String _getCTAText(int statusStep) {
+    switch (statusStep) {
+      case 0: return 'confirm_pickup'.tr;
+      case 1: return 'mark_in_transit'.tr;
+      case 2: return 'confirm_delivery'.tr;
+      case 3: default: return 'view_proof'.tr;
+    }
+  }
+
+  void _onCTAPressed(BuildContext context, TrackingPackageModel package) {
+    switch (package.currentStatusStep) {
+      case 0:
+        showPickupConfirmationSheet(context, package);
+        break;
+      case 1:
+        // Future logic to mark as in transit
+        break;
+      case 2:
+        showDeliveryConfirmationSheet(context, package);
+        break;
+      case 3:
+      default:
+        // Future logic to view proof of delivery
+        break;
+    }
+  }
+
+  String _getStatusText(int statusStep) {
+    switch (statusStep) {
+      case 0: return 'booked_status'.tr;
+      case 1: return 'picked_up'.tr;
+      case 2: return 'in_transit'.tr;
+      case 3: default: return 'delivered_status'.tr;
+    }
+  }
+
+  Color _getStatusColor(int statusStep) {
+    switch (statusStep) {
+      case 0: return Colors.orange;
+      case 1: return Colors.purple;
+      case 2: return Colors.blue;
+      case 3: default: return Colors.green;
+    }
   }
 }

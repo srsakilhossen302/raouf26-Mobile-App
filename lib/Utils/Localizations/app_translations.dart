@@ -261,6 +261,11 @@ class AppTranslations extends Translations {
       'active_deliveries': 'Active Deliveries',
       'republish_trips': 'Republish Trips',
       'trip_completed': 'Trip Completed',
+      'mark_in_transit': 'Mark In Transit',
+      'view_proof': 'View Proof',
+      'booked_status': 'Booked',
+      'urgent': 'Urgent',
+      'standard': 'Standard',
     },
     'fr_FR': {
       'profile': 'Profile',
@@ -549,6 +554,11 @@ class AppTranslations extends Translations {
       'active_deliveries': 'Livraisons actives',
       'republish_trips': 'Republier des voyages',
       'trip_completed': 'Voyage terminé',
+      'mark_in_transit': 'Marquer en transit',
+      'view_proof': 'Voir la preuve',
+      'booked_status': 'Réservé',
+      'urgent': 'Urgent',
+      'standard': 'Standard',
     },
     'ar_AR': {
       'welcome_title': 'مرحباً بك في Sendit',
@@ -807,6 +817,11 @@ class AppTranslations extends Translations {
       'active_deliveries': 'التسليمات النشطة',
       'republish_trips': 'إعادة نشر الرحلات',
       'trip_completed': 'تم اكتمال الرحلة',
+      'mark_in_transit': 'تحديد كمنقول',
+      'view_proof': 'عرض الإثبات',
+      'booked_status': 'تم الحجز',
+      'urgent': 'عاجل',
+      'standard': 'عادي',
     },
   };
 }
