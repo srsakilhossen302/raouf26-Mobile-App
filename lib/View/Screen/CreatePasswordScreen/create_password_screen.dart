@@ -110,6 +110,7 @@ class _CreatePasswordScreenState extends State<CreatePasswordScreen> {
               height: 55.h,
               child: ElevatedButton(
                 onPressed: () async {
+                  await SharedPreferenceHelper.saveUserRole("Traveler");
                   Get.offAll(() => const SearchScreen());
                 },
                 style: ElevatedButton.styleFrom(

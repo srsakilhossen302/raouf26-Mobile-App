@@ -15,8 +15,10 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_verif
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/document_verification_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/trips_shipments_page.dart';
 
+import '../../../../helper/shared_preference_helper.dart';
 import '../../Transporter-Roll/Home/view/transporter_home_view.dart';
 import '../PublishTrips/Views/transport_agreement_page.dart';
+import '../Search/search_view.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -183,35 +185,56 @@ class ProfilePage extends StatelessWidget {
             ),
             SizedBox(height: 32.h),
 
-            // Switch to Transporter Button
-            ElevatedButton.icon(
-              onPressed: () {
-                Get.to(() => const TransporterHomeScreen());
+            // Role Switch Button
+            FutureBuilder<String?>(
+              future: SharedPreferenceHelper.getUserRole(),
+              builder: (context, snapshot) {
+                final currentRole = snapshot.data ?? "Traveler";
+                final bool isTraveler = currentRole == "Traveler";
+
+                return ElevatedButton.icon(
+                  onPressed: () async {
+                    if (isTraveler) {
+                      await SharedPreferenceHelper.saveUserRole("Transporter");
+                      Get.offAll(() => const TransporterHomeScreen());
+                    } else {
+                      await SharedPreferenceHelper.saveUserRole("Traveler");
+                      Get.offAll(() => const SearchScreen());
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4A80F0),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 24.w,
+                      vertical: 14.h,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.r),
+                    ),
+                    elevation: 0,
+                  ),
+                  icon: SvgPicture.asset(
+                    isTraveler
+                        ? "assets/icons/Switch to Transporter.svg"
+                        : "assets/icons/Switch to Transporter.svg", // Using same or different icon
+                    width: 20.w,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  label: Text(
+                    isTraveler
+                        ? 'switch_to_transporter'.tr
+                        : 'Switch to Traveler',
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                );
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF4A80F0),
-                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.r),
-                ),
-                elevation: 0,
-              ),
-              icon: SvgPicture.asset(
-                "assets/icons/Switch to Transporter.svg",
-                width: 20.w,
-                colorFilter: const ColorFilter.mode(
-                  Colors.white,
-                  BlendMode.srcIn,
-                ),
-              ),
-              label: Text(
-                'switch_to_transporter'.tr,
-                style: GoogleFonts.plusJakartaSans(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              ),
             ),
             SizedBox(height: 16.h),
             Text(
