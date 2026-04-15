@@ -45,14 +45,14 @@ class TransporterHomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 24.h),
-                  _buildSectionHeader("New Requests", "See all", isDarkMode, onTap: () => Get.to(() => const TransporterNewRequestsView())),
+                  _buildSectionHeader('new_requests'.tr, 'see_all'.tr, isDarkMode, onTap: () => Get.to(() => const TransporterNewRequestsView())),
                   SizedBox(height: 16.h),
                   _buildNewRequestsList(controller, isDarkMode),
 
                   SizedBox(height: 24.h),
                   _buildSectionHeader(
-                    "Active Deliveries",
-                    "See all",
+                    'active_deliveries'.tr,
+                    'see_all'.tr,
                     isDarkMode,
                     onTap: () => showRateDeliverySheet(context),
                   ),
@@ -60,7 +60,7 @@ class TransporterHomeScreen extends StatelessWidget {
                   _buildActiveDeliveriesList(controller, isDarkMode),
 
                   SizedBox(height: 24.h),
-                  _buildSectionHeader("Republish Trips", "", isDarkMode),
+                  _buildSectionHeader('republish_trips'.tr, "", isDarkMode),
                   SizedBox(height: 16.h),
                   _buildRepublishTrips(isDarkMode),
                   SizedBox(height: 40.h),
@@ -138,7 +138,7 @@ class TransporterHomeScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "You have 2 new delivery requests",
+                                'new_delivery_requests'.tr,
                                 style: TextStyle(
                                   color: isDarkMode
                                       ? Colors.white70
@@ -193,7 +193,7 @@ class TransporterHomeScreen extends StatelessWidget {
                     SizedBox(height: 24.h),
                     // Activity Overview Title
                     Text(
-                      "Activity Overview",
+                      'activity_overview'.tr,
                       style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
@@ -205,7 +205,7 @@ class TransporterHomeScreen extends StatelessWidget {
                     Row(
                       children: [
                         _buildStatCard(
-                          "Total Earnings",
+                          'total_earnings'.tr,
                           "€1,240",
                           AppIcons.totalEarnings,
                           Colors.blue,
@@ -213,7 +213,7 @@ class TransporterHomeScreen extends StatelessWidget {
                         ),
                         SizedBox(width: 8.w),
                         _buildStatCard(
-                          "Active Clients",
+                          'active_clients'.tr,
                           "1,240",
                           AppIcons.clients,
                           Colors.green,
@@ -221,7 +221,7 @@ class TransporterHomeScreen extends StatelessWidget {
                         ),
                         SizedBox(width: 8.w),
                         _buildStatCard(
-                          "Rating",
+                          'rating'.tr,
                           "4.8",
                           "assets/icons/Rating.svg",
                           Colors.orange,
@@ -517,7 +517,7 @@ class TransporterHomeScreen extends StatelessWidget {
       child: Column(
         children: [
           _buildRepublishItem(
-            "Trip Completed",
+            'trip_completed'.tr,
             "Tunis \u2192 Paris",
             "23h ago",
             isDarkMode,
@@ -527,7 +527,7 @@ class TransporterHomeScreen extends StatelessWidget {
             color: isDarkMode ? Colors.white10 : Colors.grey.shade100,
           ),
           _buildRepublishItem(
-            "Trip Completed",
+            'trip_completed'.tr,
             "Paris \u2192 Tunis",
             "1h ago",
             isDarkMode,

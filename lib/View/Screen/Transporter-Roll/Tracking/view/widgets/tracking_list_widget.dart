@@ -34,7 +34,7 @@ class TrackingListWidget extends StatelessWidget {
             child: TextField(
               style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
               decoration: InputDecoration(
-                hintText: "Search...",
+                hintText: 'search_package'.tr,
                 hintStyle: TextStyle(color: Colors.grey, fontSize: 14.sp),
                 prefixIcon: Icon(Icons.search, color: Colors.grey, size: 20.sp),
                 border: InputBorder.none,
@@ -302,7 +302,7 @@ class TrackingListWidget extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    "View Details",
+                    'view_details'.tr,
                     style: GoogleFonts.montserrat(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
@@ -326,7 +326,7 @@ class TrackingListWidget extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    "Mark as Delivered",
+                    'mark_as_delivered'.tr,
                     style: GoogleFonts.montserrat(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.bold,
@@ -350,7 +350,7 @@ class TrackingListWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(steps.length, (index) {
             return Text(
-              steps[index],
+              steps[index].tr,
               style: GoogleFonts.montserrat(
                 fontSize: 10.sp,
                 fontWeight: index <= currentStep

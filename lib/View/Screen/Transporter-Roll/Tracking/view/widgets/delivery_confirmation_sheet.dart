@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../controller/transporter_tracking_controller.dart';
+import '../../controller/transporter_tracking_controller.dart';
 
-void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel package) {
+void showDeliveryConfirmationSheet(
+  BuildContext context,
+  TrackingPackageModel package,
+) {
   bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
   showModalBottomSheet(
@@ -22,12 +25,17 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
           children: [
             // Header
             Padding(
-              padding: EdgeInsets.only(top: 20.h, left: 20.w, right: 20.w, bottom: 10.h),
+              padding: EdgeInsets.only(
+                top: 20.h,
+                left: 20.w,
+                right: 20.w,
+                bottom: 10.h,
+              ),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   Text(
-                    "Delivery Confirmation (${package.id})",
+                    '${'delivery_confirmation'.tr} (${package.id})',
                     style: GoogleFonts.montserrat(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
@@ -38,14 +46,18 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: () => Get.back(),
-                      child: Icon(Icons.close, color: isDarkMode ? Colors.white : Colors.black, size: 24.sp),
+                      child: Icon(
+                        Icons.close,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                        size: 24.sp,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
             Divider(color: isDarkMode ? Colors.white24 : Colors.grey.shade200),
-            
+
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
@@ -53,7 +65,7 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Confirm Delivery",
+                      'confirm_delivery'.tr,
                       style: GoogleFonts.montserrat(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.bold,
@@ -62,7 +74,7 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
                     ),
                     SizedBox(height: 4.h),
                     Text(
-                      "Are you sure you want to mark this package as delivered?",
+                      'confirm_delivery_q'.tr,
                       style: GoogleFonts.montserrat(
                         fontSize: 13.sp,
                         color: Colors.grey,
@@ -72,7 +84,7 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
 
                     // Upload Delivery Proof
                     Text(
-                      "Upload Delivery Proof",
+                      'upload_delivery_proof'.tr,
                       style: GoogleFonts.montserrat(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,
@@ -84,16 +96,27 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
                       width: double.infinity,
                       padding: EdgeInsets.symmetric(vertical: 30.h),
                       decoration: BoxDecoration(
-                        color: isDarkMode ? Colors.white10 : const Color(0xFFF8F9FB),
+                        color: isDarkMode
+                            ? Colors.white10
+                            : const Color(0xFFF8F9FB),
                         borderRadius: BorderRadius.circular(12.r),
-                        border: Border.all(color: isDarkMode ? Colors.white24 : Colors.grey.shade300, style: BorderStyle.none),
+                        border: Border.all(
+                          color: isDarkMode
+                              ? Colors.white24
+                              : Colors.grey.shade300,
+                          style: BorderStyle.none,
+                        ),
                       ),
                       child: Column(
                         children: [
-                          Icon(Icons.camera_alt_outlined, color: Colors.grey, size: 30.sp),
+                          Icon(
+                            Icons.camera_alt_outlined,
+                            color: Colors.grey,
+                            size: 30.sp,
+                          ),
                           SizedBox(height: 8.h),
                           Text(
-                            "Take a photo or upload",
+                            'take_photo_or_upload'.tr,
                             style: GoogleFonts.montserrat(
                               fontSize: 12.sp,
                               color: Colors.grey,
@@ -106,7 +129,7 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
 
                     // Recipient Name
                     Text(
-                      "Recipient Name",
+                      'recipient_name'.tr,
                       style: GoogleFonts.montserrat(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,
@@ -116,16 +139,28 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
                     SizedBox(height: 10.h),
                     Container(
                       decoration: BoxDecoration(
-                        color: isDarkMode ? Colors.white10 : const Color(0xFFF8F9FB),
+                        color: isDarkMode
+                            ? Colors.white10
+                            : const Color(0xFFF8F9FB),
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: TextField(
-                        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+                        style: TextStyle(
+                          color: isDarkMode ? Colors.white : Colors.black,
+                        ),
                         decoration: InputDecoration(
-                          hintText: package.userName.isNotEmpty ? package.userName : "Enter recipient's full name",
-                          hintStyle: TextStyle(color: Colors.grey, fontSize: 13.sp),
+                          hintText: package.userName.isNotEmpty
+                              ? package.userName
+                              : 'enter_recipient_name'.tr,
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 13.sp,
+                          ),
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16.w,
+                            vertical: 14.h,
+                          ),
                         ),
                       ),
                     ),
@@ -135,7 +170,7 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
                     Row(
                       children: [
                         Text(
-                          "Signature ",
+                          'signature'.tr,
                           style: GoogleFonts.montserrat(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.bold,
@@ -143,7 +178,7 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
                           ),
                         ),
                         Text(
-                          "(Optional)",
+                          'optional_label'.tr,
                           style: GoogleFonts.montserrat(
                             fontSize: 14.sp,
                             color: Colors.grey,
@@ -155,7 +190,9 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
                     Container(
                       height: 120.h,
                       decoration: BoxDecoration(
-                        color: isDarkMode ? Colors.white10 : const Color(0xFFF8F9FB),
+                        color: isDarkMode
+                            ? Colors.white10
+                            : const Color(0xFFF8F9FB),
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       // Mock signature area
@@ -166,7 +203,7 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
                     Row(
                       children: [
                         Text(
-                          "Add Note ",
+                          'add_note'.tr,
                           style: GoogleFonts.montserrat(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.bold,
@@ -186,22 +223,32 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
                     Container(
                       height: 100.h,
                       decoration: BoxDecoration(
-                        color: isDarkMode ? Colors.white10 : const Color(0xFFF8F9FB),
+                        color: isDarkMode
+                            ? Colors.white10
+                            : const Color(0xFFF8F9FB),
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: TextField(
                         maxLines: null,
-                        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+                        style: TextStyle(
+                          color: isDarkMode ? Colors.white : Colors.black,
+                        ),
                         decoration: InputDecoration(
-                          hintText: "Type here ...",
-                          hintStyle: TextStyle(color: Colors.grey, fontSize: 13.sp),
+                          hintText: 'type_here'.tr,
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 13.sp,
+                          ),
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16.w,
+                            vertical: 14.h,
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(height: 40.h),
-                    
+
                     // Confirm Delivery Button
                     SizedBox(
                       width: double.infinity,
@@ -214,10 +261,12 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF4A80F0),
                           elevation: 0,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
                         ),
                         child: Text(
-                          "Confirm Delivery",
+                          'confirm_delivery'.tr,
                           style: GoogleFonts.montserrat(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
@@ -226,7 +275,9 @@ void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel pa
                         ),
                       ),
                     ),
-                    SizedBox(height: MediaQuery.of(context).viewInsets.bottom + 20.h),
+                    SizedBox(
+                      height: MediaQuery.of(context).viewInsets.bottom + 20.h,
+                    ),
                   ],
                 ),
               ),

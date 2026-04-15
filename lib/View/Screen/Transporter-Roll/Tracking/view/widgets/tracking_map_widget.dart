@@ -193,7 +193,7 @@ class TrackingMapWidget extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            "View Details",
+                            'view_details'.tr,
                             style: GoogleFonts.montserrat(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
@@ -217,7 +217,7 @@ class TrackingMapWidget extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            "Mark as Delivered",
+                            'mark_as_delivered'.tr,
                             style: GoogleFonts.montserrat(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold,

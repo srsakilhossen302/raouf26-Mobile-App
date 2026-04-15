@@ -23,7 +23,7 @@ class TransporterTrackingView extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          "Tracking",
+          'tracking'.tr,
           style: GoogleFonts.montserrat(
             color: isDarkMode ? Colors.white : Colors.black,
             fontSize: 18.sp,

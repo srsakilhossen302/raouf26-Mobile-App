@@ -106,7 +106,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                           child: Text(
-                            "In Transit",
+                            'in_transit'.tr,
                             style: GoogleFonts.montserrat(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
@@ -147,7 +147,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Pickup",
+                                        'pickup_status'.tr,
                                         style: GoogleFonts.montserrat(
                                           fontSize: 14.sp,
                                           fontWeight: FontWeight.bold,
@@ -168,7 +168,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Drop-off",
+                                        'drop_off'.tr,
                                         style: GoogleFonts.montserrat(
                                           fontSize: 14.sp,
                                           fontWeight: FontWeight.bold,
@@ -191,16 +191,16 @@ class TransporterTripDetailsView extends StatelessWidget {
                     SizedBox(height: 24.h),
 
                     // Package details List
-                    _buildDetailRow("Date", package.date, isDarkMode),
+                    _buildDetailRow('date'.tr, package.date, isDarkMode),
                     SizedBox(height: 16.h),
-                    _buildDetailRow("Price", "€${package.price.toStringAsFixed(0)}", isDarkMode, isBold: true),
+                    _buildDetailRow('price'.tr, "€${package.price.toStringAsFixed(0)}", isDarkMode, isBold: true),
                     SizedBox(height: 16.h),
-                    _buildDetailRow("Package Size", package.packageSize, isDarkMode),
+                    _buildDetailRow('package_size'.tr, package.packageSize, isDarkMode),
                     SizedBox(height: 16.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Status", style: GoogleFonts.montserrat(fontSize: 14.sp, color: Colors.grey)),
+                        Text('status'.tr, style: GoogleFonts.montserrat(fontSize: 14.sp, color: Colors.grey)),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                           decoration: BoxDecoration(
@@ -268,7 +268,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                                   Icon(Icons.location_on, size: 14.sp, color: Colors.black),
                                   SizedBox(width: 4.w),
                                   Text(
-                                    "Open Full Map",
+                                    'open_full_map'.tr,
                                     style: GoogleFonts.montserrat(
                                       fontSize: 10.sp,
                                       fontWeight: FontWeight.bold,
@@ -301,7 +301,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
                   ),
                   child: Text(
-                    "Mark as Delivered",
+                    'mark_as_delivered'.tr,
                     style: GoogleFonts.montserrat(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
@@ -343,7 +343,7 @@ class TransporterTripDetailsView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(steps.length, (index) {
             return Text(
-              steps[index],
+              steps[index].tr,
               style: GoogleFonts.montserrat(
                 fontSize: 10.sp,
                 fontWeight: index <= currentStep ? FontWeight.bold : FontWeight.normal,
