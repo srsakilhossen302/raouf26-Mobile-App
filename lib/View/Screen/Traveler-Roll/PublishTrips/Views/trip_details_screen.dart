@@ -74,7 +74,7 @@ class TripDetailsScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Icon(
-                      Icons.support_agent_outlined,
+                      Icons.headset_mic_outlined,
                       size: 20.sp,
                       color: isDarkMode ? Colors.white70 : Colors.black87,
                     ),
