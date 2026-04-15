@@ -54,18 +54,25 @@ class VerifyIdentityScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 32.h),
-            _inputLabel(label: "Full Name", isDarkMode: isDarkMode),
+            SizedBox(height: 32.h),
+
+            _inputLabel(label: "Face Verification", isDarkMode: isDarkMode),
             SizedBox(height: 12.h),
-            _textField(hint: "Full Name", isDarkMode: isDarkMode),
-            SizedBox(height: 20.h),
-            _inputLabel(label: "Email", isDarkMode: isDarkMode),
-            SizedBox(height: 12.h),
-            _textField(hint: "Email", isDarkMode: isDarkMode),
-            SizedBox(height: 20.h),
-            _inputLabel(label: "Last Trip Reference (optional)", isDarkMode: isDarkMode),
-            SizedBox(height: 12.h),
-            _textField(hint: "Enter Your Last Trip", isDarkMode: isDarkMode),
-            SizedBox(height: 100.h), // Adjust spacing as per image
+            _buildVerificationAction(
+              "Take a Selfie",
+              Icons.camera_alt_outlined,
+              isDarkMode,
+              onTap: () {},
+            ),
+            SizedBox(height: 18.h),
+            _buildVerificationAction(
+              "Selfie with Document",
+              Icons.portrait_rounded,
+              isDarkMode,
+              onTap: () {},
+            ),
+
+            SizedBox(height: 60.h),
             SizedBox(
               width: double.infinity,
               height: 55.h,
@@ -92,6 +99,65 @@ class VerifyIdentityScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.h),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVerificationAction(
+    String label,
+    IconData icon,
+    bool isDarkMode, {
+    required VoidCallback onTap,
+  }) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: isDarkMode ? Colors.white.withOpacity(0.05) : Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(
+          color: isDarkMode ? Colors.white10 : Colors.grey.shade200,
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(12.r),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(8.w),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF4A80F0).withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    icon,
+                    size: 20.sp,
+                    color: const Color(0xFF4A80F0),
+                  ),
+                ),
+                SizedBox(width: 12.w),
+                Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                const Spacer(),
+                Icon(
+                  Icons.add_a_photo_outlined,
+                  size: 18.sp,
+                  color: Colors.grey,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
