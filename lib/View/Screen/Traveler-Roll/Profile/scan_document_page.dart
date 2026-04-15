@@ -60,7 +60,7 @@ class ScanDocumentPage extends StatelessWidget {
                 ),
                 SizedBox(width: 8.w),
                 Text(
-                  isSelfie ? 'Selfie Tips'.tr : 'scanning_tips'.tr,
+                  isSelfie ? 'selfie_tips'.tr : 'scanning_tips'.tr,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.w700,
@@ -71,15 +71,15 @@ class ScanDocumentPage extends StatelessWidget {
             ),
             SizedBox(height: 12.h),
             if (isSelfie) ...[
-              _buildTipItem('Maintain a neutral expression', isDarkMode),
-              _buildTipItem('Ensure your face is clearly visible', isDarkMode),
-              _buildTipItem('Avoid wearing glasses or hats', isDarkMode),
-              _buildTipItem('Face the camera directly', isDarkMode),
+              _buildTipItem('neutral_expression', isDarkMode),
+              _buildTipItem('face_visible', isDarkMode),
+              _buildTipItem('no_glasses_hats', isDarkMode),
+              _buildTipItem('face_camera_directly', isDarkMode),
             ] else ...[
-              _buildTipItem('Ensure good lighting', isDarkMode),
-              _buildTipItem('Place document on flat surface', isDarkMode),
-              _buildTipItem('All corners must be visible', isDarkMode),
-              _buildTipItem('Text must be readable', isDarkMode),
+              _buildTipItem('good_lighting', isDarkMode),
+              _buildTipItem('flat_surface', isDarkMode),
+              _buildTipItem('corners_visible', isDarkMode),
+              _buildTipItem('text_readable', isDarkMode),
             ],
 
             SizedBox(height: 32.h),
@@ -117,9 +117,9 @@ class ScanDocumentPage extends StatelessWidget {
             if (docType == 'passport'.tr) ...[
               _buildScanSlot('scan_passport'.tr, isDarkMode),
             ] else if (docType == 'take_a_selfie'.tr) ...[
-              _buildScanSlot('Take Selfie'.tr, isDarkMode),
+              _buildScanSlot('take_selfie'.tr, isDarkMode),
             ] else if (docType == 'selfie_with_document'.tr) ...[
-              _buildScanSlot('Take Selfie with Document'.tr, isDarkMode),
+              _buildScanSlot('take_selfie_with_doc'.tr, isDarkMode),
             ] else ...[
               _buildScanSlot('scan_cin_front'.tr, isDarkMode),
               SizedBox(height: 16.h),
@@ -149,6 +149,7 @@ class ScanDocumentPage extends StatelessWidget {
                 ),
               ),
             ),
+
             SizedBox(height: 40.h),
           ],
         ),
@@ -250,12 +251,13 @@ class ScanDocumentPage extends StatelessWidget {
                   ),
                   SizedBox(height: 4.h),
                   Text(
-                    'No document scanned yet',
+                    'no_doc_scanned'.tr,
                     style: GoogleFonts.plusJakartaSans(
                       fontSize: 11.sp,
                       color: Colors.grey,
                     ),
                   ),
+
                 ],
               ),
             ),

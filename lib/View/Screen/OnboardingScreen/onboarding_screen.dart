@@ -7,6 +7,8 @@ import '../../../Utils/AppImg/app_img.dart';
 import '../LogInScreen/login_screen.dart';
 import '../SignUpScreen/signup_screen.dart';
 import '../ChooseRoleScreen/choose_role_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -18,7 +20,6 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
-
 
   final List<Map<String, String>> onboardingData = [
     {
@@ -171,63 +172,53 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             ),
                             SizedBox(height: 30.h),
                             // Updated Get Started CTA with App Theme Blue Color
+                            // Premium Action Button
                             GestureDetector(
-                              onTap: () =>
-                                  Get.to(() => const SignUpScreen()),
-                              child: Container(
+                              onTap: () {
+                                if (_currentPage < onboardingData.length - 1) {
+                                  _pageController.nextPage(
+                                    duration: const Duration(milliseconds: 500),
+                                    curve: Curves.easeInOut,
+                                  );
+                                } else {
+                                  Get.to(() => const SignUpScreen());
+                                }
+                              },
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
                                 width: double.infinity,
-                                height: 65.h,
-                                padding: EdgeInsets.all(8.r),
+                                height: 60.h,
                                 decoration: BoxDecoration(
-                                  color: isDarkMode
-                                      ? const Color(0xFF1E1E1E)
-                                      : Colors.black,
-                                  borderRadius: BorderRadius.circular(40.r),
-                                  border: isDarkMode
-                                      ? Border.all(color: Colors.white10)
-                                      : null,
+                                  color: const Color(0xFF4A80F0),
+                                  borderRadius: BorderRadius.circular(16.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: const Color(0xFF4A80F0)
+                                          .withOpacity(0.3),
+                                      blurRadius: 12,
+                                      offset: const Offset(0, 6),
+                                    ),
+                                  ],
                                 ),
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    SizedBox(width: 24.w),
                                     Text(
-                                      "continue_button".tr,
-                                      style: TextStyle(
+                                      _currentPage == onboardingData.length - 1
+                                          ? "get_started".tr
+                                          : "continue_button".tr,
+                                      style: GoogleFonts.plusJakartaSans(
                                         color: Colors.white,
                                         fontSize: 16.sp,
-                                        fontWeight: FontWeight.w600,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 0.5,
                                       ),
                                     ),
-                                    SizedBox(width: 12.w),
+                                    SizedBox(width: 8.w),
                                     const Icon(
-                                      Icons.arrow_forward,
+                                      Icons.arrow_forward_rounded,
                                       color: Colors.white,
                                       size: 20,
-                                    ),
-                                    const Spacer(),
-                                    Container(
-                                      height: double.infinity,
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 24.w,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: const Color(
-                                          0xFF4A80F0,
-                                        ), // App Primary Blue
-                                        borderRadius: BorderRadius.circular(
-                                          30.r,
-                                        ),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "get_started".tr,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16.sp,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
                                     ),
                                   ],
                                 ),

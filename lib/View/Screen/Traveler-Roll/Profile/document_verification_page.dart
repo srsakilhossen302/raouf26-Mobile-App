@@ -58,7 +58,7 @@ class DocumentVerificationPage extends StatelessWidget {
             // Identity Documents
             _buildSectionTitle(
               'identity_documents'.tr,
-              'Upload at least one identity document.',
+              'identity_documents_desc'.tr,
               isDarkMode,
             ),
             SizedBox(height: 16.h),
@@ -96,7 +96,7 @@ class DocumentVerificationPage extends StatelessWidget {
             // Facial Verification
             _buildSectionTitle(
               'facial_verification'.tr,
-              'Required to confirm your identity matches your documents.',
+              'facial_verification_desc'.tr,
               isDarkMode,
             ),
             SizedBox(height: 16.h),
@@ -127,7 +127,7 @@ class DocumentVerificationPage extends StatelessWidget {
             // Transporter Documents
             _buildSectionTitle(
               'transporter_documents'.tr,
-              'Required for professional transporter activity.',
+              'transporter_documents_desc'.tr,
               isDarkMode,
             ),
             SizedBox(height: 16.h),
@@ -153,6 +153,7 @@ class DocumentVerificationPage extends StatelessWidget {
                 ),
               ],
             ),
+
             SizedBox(height: 40.h),
           ],
         ),
@@ -195,13 +196,14 @@ class DocumentVerificationPage extends StatelessWidget {
                     ),
                     SizedBox(height: 8.h),
                     Text(
-                      'Upload your document to verify your identity and build trust with other users.',
+                      'not_verified_desc'.tr,
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: 13.sp,
                         color: isDarkMode ? Colors.white70 : Colors.black54,
                         height: 1.5,
                       ),
                     ),
+
                   ],
                 ),
               ),
@@ -264,15 +266,16 @@ class DocumentVerificationPage extends StatelessWidget {
           SizedBox(height: 20.h),
           _buildWhyItem(
             'build_trust'.tr,
-            'Verified users are more trusted by the community.',
+            'build_trust_desc'.tr,
             isDarkMode,
           ),
           SizedBox(height: 16.h),
           _buildWhyItem(
             'more_opportunities'.tr,
-            'Get priority in matching with transporters and travelers.',
+            'more_opportunities_desc'.tr,
             isDarkMode,
           ),
+
         ],
       ),
     );

@@ -79,7 +79,7 @@ class _AccessibilityPageState extends State<AccessibilityPage> {
               ),
               Obx(
                 () => _buildAccessibilityItem(
-                  title: 'dark_mode'.tr,
+                  title: 'dark_mode_title'.tr,
                   subtitle: 'dark_mode_desc'.tr,
                   icon: Icons.dark_mode_outlined,
                   value: themeController.isDarkMode.value,
@@ -107,7 +107,7 @@ class _AccessibilityPageState extends State<AccessibilityPage> {
     bool isLast = false,
   }) {
     return Padding(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -137,39 +137,40 @@ class _AccessibilityPageState extends State<AccessibilityPage> {
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.w700,
-                        color: isDarkMode ? Colors.white : Colors.black,
+                        color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
                       ),
                     ),
                     if (showBetaTag) ...[
-                      SizedBox(width: 8.w),
+                      SizedBox(width: 10.w),
                       Container(
                         padding: EdgeInsets.symmetric(
-                          horizontal: 8.w,
-                          vertical: 2.h,
+                          horizontal: 10.w,
+                          vertical: 4.h,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(10.r),
+                          color: isDarkMode ? const Color(0xFF4A80F0).withOpacity(0.2) : Colors.black,
+                          borderRadius: BorderRadius.circular(20.r),
                         ),
                         child: Text(
                           'beta'.tr,
                           style: GoogleFonts.plusJakartaSans(
                             fontSize: 10.sp,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                            color: isDarkMode ? const Color(0xFF4A80F0) : Colors.white,
+                            letterSpacing: 0.5,
                           ),
                         ),
                       ),
                     ],
                   ],
                 ),
-                SizedBox(height: 4.h),
+                SizedBox(height: 6.h),
                 Text(
                   subtitle,
                   style: GoogleFonts.plusJakartaSans(
-                    fontSize: 12.sp,
-                    color: Colors.grey,
-                    height: 1.4,
+                    fontSize: 13.sp,
+                    color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
+                    height: 1.5,
                   ),
                 ),
               ],
@@ -185,4 +186,5 @@ class _AccessibilityPageState extends State<AccessibilityPage> {
       ),
     );
   }
+
 }
