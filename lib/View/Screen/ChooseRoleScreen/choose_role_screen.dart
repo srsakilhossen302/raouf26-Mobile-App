@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../Utils/AppIcons/app_icons.dart';
 import '../../../helper/shared_preference_helper.dart';
 import '../SignUpScreen/signup_screen.dart';
+import '../Transporter-Roll/Home/view/transporter_home_view.dart';
 
 class ChooseRoleScreen extends StatefulWidget {
   const ChooseRoleScreen({super.key});
@@ -98,7 +99,11 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
               child: ElevatedButton(
                 onPressed: () async {
                   await SharedPreferenceHelper.saveUserRole(selectedRole);
-                  Get.to(() => const SignUpScreen());
+                  if (selectedRole == "Transporter") {
+                    Get.to(() => const TransporterHomeScreen());
+                  } else {
+                    Get.to(() => const SignUpScreen());
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
