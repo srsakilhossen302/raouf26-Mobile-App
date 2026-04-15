@@ -86,7 +86,7 @@ class ProfilePage extends StatelessWidget {
                   isDarkMode,
                   onTap: () => Get.to(() => const AccessibilityPage()),
                 ),
-                _buildThemeToggle(isDarkMode),
+                // _buildThemeToggle(isDarkMode),
               ],
             ),
             SizedBox(height: 24.h),

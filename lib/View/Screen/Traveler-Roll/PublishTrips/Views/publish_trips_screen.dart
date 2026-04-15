@@ -103,13 +103,17 @@ class PublishTripsScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: Obx(() => controller.userRole.value == "Transporter"
-          ? CustomTransporterBottomNavBar.buildFloatingActionButton()
-          : CustomBottomNavBar.buildFloatingActionButton()),
+      floatingActionButton: Obx(
+        () => controller.userRole.value == "Transporter"
+            ? CustomTransporterBottomNavBar.buildFloatingActionButton()
+            : CustomBottomNavBar.buildFloatingActionButton(),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Obx(() => controller.userRole.value == "Transporter"
-          ? const CustomTransporterBottomNavBar(selectedIndex: 4)
-          : const CustomBottomNavBar(selectedIndex: 4)),
+      bottomNavigationBar: Obx(
+        () => controller.userRole.value == "Transporter"
+            ? const CustomTransporterBottomNavBar(selectedIndex: 4)
+            : const CustomBottomNavBar(selectedIndex: 4),
+      ),
     );
   }
 
@@ -171,7 +175,7 @@ class PublishTripsScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(AppImg.publishTrip, width: 250.w, height: 250.w),
+          //Image.asset(AppImg.publishTrip, width: 250.w, height: 250.w),
           SizedBox(height: 24.h),
           Text(
             "Publish a New Trip",
