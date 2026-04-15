@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../../../../../Utils/AppImg/app_img.dart';
 import '../../../../Widget/custom_bottom_nav_bar.dart';
+import '../../../../Widget/custom_transporter_bottom_nav_bar.dart';
 import '../Controllers/publish_trips_controller.dart';
 import '../Models/trip_model.dart';
 import '../Widgets/booking_details_modal.dart';
@@ -94,9 +95,13 @@ class PublishTripsScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: CustomBottomNavBar.buildFloatingActionButton(),
+      floatingActionButton: Obx(() => controller.userRole.value == "Transporter"
+          ? CustomTransporterBottomNavBar.buildFloatingActionButton()
+          : CustomBottomNavBar.buildFloatingActionButton()),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: const CustomBottomNavBar(selectedIndex: 4),
+      bottomNavigationBar: Obx(() => controller.userRole.value == "Transporter"
+          ? const CustomTransporterBottomNavBar(selectedIndex: 4)
+          : const CustomBottomNavBar(selectedIndex: 4)),
     );
   }
 

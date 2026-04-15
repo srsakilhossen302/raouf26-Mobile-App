@@ -7,6 +7,7 @@ import 'package:raouf26mobileapp/View/Screen/MessagesScreen/messages_controller.
 import 'package:raouf26mobileapp/View/Screen/MessagesScreen/chat_view.dart';
 import 'package:raouf26mobileapp/View/Screen/MessagesScreen/archive_view.dart';
 import 'package:raouf26mobileapp/View/Widget/custom_bottom_nav_bar.dart';
+import 'package:raouf26mobileapp/View/Widget/custom_transporter_bottom_nav_bar.dart';
 
 class MessagesScreen extends StatelessWidget {
   const MessagesScreen({super.key});
@@ -183,9 +184,13 @@ class MessagesScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: CustomBottomNavBar.buildFloatingActionButton(),
+      floatingActionButton: Obx(() => controller.userRole.value == "Transporter"
+          ? CustomTransporterBottomNavBar.buildFloatingActionButton()
+          : CustomBottomNavBar.buildFloatingActionButton()),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: const CustomBottomNavBar(selectedIndex: 3),
+      bottomNavigationBar: Obx(() => controller.userRole.value == "Transporter"
+          ? const CustomTransporterBottomNavBar(selectedIndex: 3)
+          : const CustomBottomNavBar(selectedIndex: 3)),
     );
   }
 

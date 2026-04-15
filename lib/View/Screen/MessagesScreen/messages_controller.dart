@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../helper/shared_preference_helper.dart';
 
 class MessagesController extends GetxController {
   var selectedTab = 0.obs; // 0 for All, 1 for Traveler, 2 for Client
+  var userRole = "".obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _fetchUserRole();
+  }
+
+  Future<void> _fetchUserRole() async {
+    userRole.value = await SharedPreferenceHelper.getUserRole() ?? "Traveler";
+  }
 
   final RxList<Map<String, dynamic>> messages = <Map<String, dynamic>>[
     {
