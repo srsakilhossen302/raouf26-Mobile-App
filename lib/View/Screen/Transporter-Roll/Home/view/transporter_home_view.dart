@@ -149,6 +149,28 @@ class TransporterHomeScreen extends StatelessWidget {
                             ],
                           ),
                         ),
+                        // QR Code Icon
+                        GestureDetector(
+                          onTap: () {
+                            // QR Scanner logic
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(10.r),
+                            decoration: BoxDecoration(
+                              color: isDarkMode
+                                  ? Colors.white10
+                                  : const Color(0xFFF5F5F5),
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            child: Icon(
+                              Icons.qr_code_scanner,
+                              color: isDarkMode ? Colors.white : Colors.black87,
+                              size: 22.sp,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 8.w),
+                        // Notifications Icon
                         GestureDetector(
                           onTap: () => Get.to(() => const TransporterNotificationsView()),
                           child: Container(
