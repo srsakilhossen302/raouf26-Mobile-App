@@ -6,6 +6,9 @@ import '../../../../../Utils/AppImg/app_img.dart';
 import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../../../../Widget/custom_transporter_bottom_nav_bar.dart';
 import '../controller/transporter_home_controller.dart';
+import '../../Notifications/view/transporter_notifications_view.dart';
+import '../../NewRequests/view/transporter_new_requests_view.dart';
+import '../../RateDelivery/view/rate_delivery_sheet.dart';
 
 class TransporterHomeScreen extends StatelessWidget {
   const TransporterHomeScreen({super.key});
@@ -42,7 +45,7 @@ class TransporterHomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 24.h),
-                  _buildSectionHeader("New Requests", "See all", isDarkMode),
+                  _buildSectionHeader("New Requests", "See all", isDarkMode, onTap: () => Get.to(() => const TransporterNewRequestsView())),
                   SizedBox(height: 16.h),
                   _buildNewRequestsList(controller, isDarkMode),
 
@@ -51,6 +54,7 @@ class TransporterHomeScreen extends StatelessWidget {
                     "Active Deliveries",
                     "See all",
                     isDarkMode,
+                    onTap: () => showRateDeliverySheet(context),
                   ),
                   SizedBox(height: 16.h),
                   _buildActiveDeliveriesList(controller, isDarkMode),
@@ -145,18 +149,21 @@ class TransporterHomeScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Container(
-                          padding: EdgeInsets.all(10.r),
-                          decoration: BoxDecoration(
-                            color: isDarkMode
-                                ? Colors.white10
-                                : const Color(0xFFF5F5F5),
-                            borderRadius: BorderRadius.circular(12.r),
-                          ),
-                          child: Icon(
-                            Icons.notifications_none,
-                            color: isDarkMode ? Colors.white : Colors.black87,
-                            size: 22.sp,
+                        GestureDetector(
+                          onTap: () => Get.to(() => const TransporterNotificationsView()),
+                          child: Container(
+                            padding: EdgeInsets.all(10.r),
+                            decoration: BoxDecoration(
+                              color: isDarkMode
+                                  ? Colors.white10
+                                  : const Color(0xFFF5F5F5),
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            child: Icon(
+                              Icons.notifications_none,
+                              color: isDarkMode ? Colors.white : Colors.black87,
+                              size: 22.sp,
+                            ),
                           ),
                         ),
                       ],
@@ -270,7 +277,7 @@ class TransporterHomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionHeader(String title, String action, bool isDarkMode) {
+  Widget _buildSectionHeader(String title, String action, bool isDarkMode, {VoidCallback? onTap}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -283,9 +290,12 @@ class TransporterHomeScreen extends StatelessWidget {
           ),
         ),
         if (action.isNotEmpty)
-          Text(
-            action,
-            style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+          GestureDetector(
+            onTap: onTap,
+            child: Text(
+              action,
+              style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+            ),
           ),
       ],
     );
