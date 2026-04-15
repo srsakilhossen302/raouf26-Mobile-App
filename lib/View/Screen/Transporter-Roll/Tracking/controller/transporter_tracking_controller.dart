@@ -51,7 +51,7 @@ class TransporterTrackingController extends GetxController {
   var isMapView = false.obs;
   var selectedFilterTab = 0.obs;
 
-  final List<String> filterTabs = ["Active", "Picked Up", "In Transit"];
+  final List<String> filterTabs = ["active", "picked_up", "in_transit", "delivered_status"];
 
   final packages = <TrackingPackageModel>[
     TrackingPackageModel(

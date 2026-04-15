@@ -45,13 +45,16 @@ class TrackingListWidget extends StatelessWidget {
         ),
 
         // Filter Tabs
-        Padding(
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(
               controller.filterTabs.length,
-              (index) => Obx(() => _buildFilterTab(index)),
+              (index) => Padding(
+                padding: EdgeInsets.only(right: 10.w),
+                child: Obx(() => _buildFilterTab(index)),
+              ),
             ),
           ),
         ),
@@ -91,7 +94,7 @@ class TrackingListWidget extends StatelessWidget {
           ),
         ),
         child: Text(
-          controller.filterTabs[index],
+          controller.filterTabs[index].tr,
           style: GoogleFonts.montserrat(
             fontSize: 12.sp,
             fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
