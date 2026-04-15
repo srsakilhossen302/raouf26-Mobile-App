@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/DeliveryInfo/delivery_info_view.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/PackageDetails/package_details_view.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/SenderDetails/sender_details_view.dart';
 
 class ReviewDeliveryController extends GetxController {
   // Mock Data for Review
@@ -27,5 +30,19 @@ class ReviewDeliveryController extends GetxController {
   
   void editSection(String section) {
     Get.log("Editing section: $section");
+    switch (section) {
+      case "Package":
+        Get.to(() => const PackageDetailsScreen());
+        break;
+      case "Sender":
+      case "Pickup":
+        Get.to(() => const SenderDetailsView());
+        break;
+      case "Delivery":
+        Get.to(() => const DeliveryInfoView());
+        break;
+      default:
+        Get.log("Unknown section: $section");
+    }
   }
 }
