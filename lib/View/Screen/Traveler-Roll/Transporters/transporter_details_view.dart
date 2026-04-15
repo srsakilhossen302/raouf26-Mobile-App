@@ -771,13 +771,30 @@ class TransporterDetailsView extends StatelessWidget {
               color: color ?? (isDarkMode ? Colors.white70 : Colors.black54),
             ),
           ),
-          Text(
-            value,
-            style: GoogleFonts.montserrat(
-              fontSize: 14.sp,
-              fontWeight: isBold ? FontWeight.w700 : FontWeight.w600,
-              color: color ?? (isDarkMode ? Colors.white : Colors.black),
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (value.contains("TND")) ...[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(2.r),
+                  child: Image.asset(
+                    "assets/images/image.png",
+                    width: 16.w,
+                    height: 10.h,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(width: 4.w),
+              ],
+              Text(
+                value,
+                style: GoogleFonts.montserrat(
+                  fontSize: 14.sp,
+                  fontWeight: isBold ? FontWeight.w700 : FontWeight.w600,
+                  color: color ?? (isDarkMode ? Colors.white : Colors.black),
+                ),
+              ),
+            ],
           ),
         ],
       ),

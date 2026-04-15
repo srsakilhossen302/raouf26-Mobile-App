@@ -311,12 +311,13 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
             child: Row(
               children: [
                 // Mock Flag (Tunisia from image)
-                Container(
-                  width: 24.w,
-                  height: 16.h,
-                  color: Colors.red,
-                  child: const Center(
-                    child: Icon(Icons.star, size: 10, color: Colors.white),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(2.r),
+                  child: Image.asset(
+                    "assets/images/image.png",
+                    width: 24.w,
+                    height: 16.h,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 SizedBox(width: 8.w),

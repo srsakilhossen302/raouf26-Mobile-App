@@ -50,13 +50,28 @@ class WithdrawConfirmationPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8.h),
-            Text(
-              '1,000.00 TND',
-              style: GoogleFonts.plusJakartaSans(
-                fontSize: 32.sp,
-                fontWeight: FontWeight.w800,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(2.r),
+                  child: Image.asset(
+                    "assets/images/image.png",
+                    width: 32.w,
+                    height: 20.h,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(width: 8.w),
+                Text(
+                  '1,000.00 TND',
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 32.sp,
+                    fontWeight: FontWeight.w800,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+              ],
             ),
             
             SizedBox(height: 40.h),
@@ -128,13 +143,30 @@ class WithdrawConfirmationPage extends StatelessWidget {
               color: isDarkMode ? Colors.white70 : Colors.grey[600],
             ),
           ),
-          Text(
-            value,
-            style: GoogleFonts.plusJakartaSans(
-              fontSize: 14.sp,
-              fontWeight: isBold ? FontWeight.w800 : FontWeight.w700,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (value.contains("TND")) ...[
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(2.r),
+                  child: Image.asset(
+                    "assets/images/image.png",
+                    width: 16.w,
+                    height: 10.h,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                SizedBox(width: 4.w),
+              ],
+              Text(
+                value,
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 14.sp,
+                  fontWeight: isBold ? FontWeight.w800 : FontWeight.w700,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
+            ],
           ),
         ],
       ),

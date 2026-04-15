@@ -505,12 +505,13 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 16.h),
             child: Row(
               children: [
-                Container(
-                  width: 24.w,
-                  height: 16.h,
-                  color: Colors.red,
-                  child: const Center(
-                    child: Icon(Icons.star, size: 10, color: Colors.white),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(2.r),
+                  child: Image.asset(
+                    "assets/images/image.png",
+                    width: 24.w,
+                    height: 16.h,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 SizedBox(width: 8.w),

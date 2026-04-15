@@ -60,13 +60,28 @@ class WithdrawFundsPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 8.h),
-                  Text(
-                    '2,450.00 TND',
-                    style: GoogleFonts.plusJakartaSans(
-                      fontSize: 32.sp,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.white,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(2.r),
+                        child: Image.asset(
+                          "assets/images/image.png",
+                          width: 32.w,
+                          height: 20.h,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Text(
+                        '2,450.00 TND',
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: 32.sp,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -93,7 +108,28 @@ class WithdrawFundsPage extends StatelessWidget {
               ),
               decoration: InputDecoration(
                 hintText: '0.00',
-                suffixText: 'TND',
+                suffix: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(2.r),
+                      child: Image.asset(
+                        "assets/images/image.png",
+                        width: 24.w,
+                        height: 16.h,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    SizedBox(width: 4.w),
+                    Text(
+                      'TND',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontWeight: FontWeight.w600,
+                        color: isDarkMode ? Colors.white70 : Colors.black54,
+                      ),
+                    ),
+                  ],
+                ),
                 filled: true,
                 fillColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
                 border: OutlineInputBorder(

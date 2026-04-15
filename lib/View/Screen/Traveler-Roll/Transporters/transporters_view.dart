@@ -682,15 +682,13 @@ class TransportersView extends GetView<TransportersController> {
       ),
       child: Row(
         children: [
-          Container(
-            width: 32.w,
-            height: 20.h,
-            decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(2.r),
-            ),
-            child: const Center(
-              child: Icon(Icons.star, size: 10, color: Colors.white),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(2.r),
+            child: Image.asset(
+              "assets/images/image.png",
+              width: 32.w,
+              height: 20.h,
+              fit: BoxFit.cover,
             ),
           ),
           SizedBox(width: 12.w),
