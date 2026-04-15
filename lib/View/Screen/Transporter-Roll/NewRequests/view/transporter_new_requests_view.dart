@@ -33,17 +33,32 @@ class TransporterNewRequestsView extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView.builder(
-        padding: EdgeInsets.all(20.r),
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return _buildNewRequestCard(isDarkMode);
-        },
-      ),
+      body: Obx(() {
+        return ListView.builder(
+          padding: EdgeInsets.all(20.r),
+          itemCount: controller.requests.length,
+          itemBuilder: (context, index) {
+            final request = controller.requests[index];
+            return NewRequestCard(request: request, isDarkMode: isDarkMode);
+          },
+        );
+      }),
     );
   }
+}
 
-  Widget _buildNewRequestCard(bool isDarkMode) {
+class NewRequestCard extends StatelessWidget {
+  final NewRequestModel request;
+  final bool isDarkMode;
+
+  const NewRequestCard({
+    super.key,
+    required this.request,
+    required this.isDarkMode,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 20.h),
       padding: EdgeInsets.all(20.r),
@@ -66,7 +81,9 @@ class TransporterNewRequestsView extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 20.r,
-                backgroundImage: const NetworkImage("https://i.pravatar.cc/150?u=a042581f4e29026704d"),
+                backgroundImage: NetworkImage(request.userImage),
+                onBackgroundImageError: (_, __) {},
+                child: Icon(Icons.person, color: Colors.white, size: 20.sp),
               ),
               SizedBox(width: 12.w),
               Expanded(
@@ -76,7 +93,7 @@ class TransporterNewRequestsView extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "Ahmad B.",
+                          request.userName,
                           style: GoogleFonts.montserrat(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
@@ -89,7 +106,7 @@ class TransporterNewRequestsView extends StatelessWidget {
                     ),
                     SizedBox(height: 2.h),
                     Text(
-                      "5 hrs ago",
+                      request.timeAgo,
                       style: GoogleFonts.montserrat(
                         fontSize: 12.sp,
                         color: Colors.grey,
@@ -105,7 +122,7 @@ class TransporterNewRequestsView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text(
-                  "Pending",
+                  request.status,
                   style: GoogleFonts.montserrat(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
@@ -116,7 +133,9 @@ class TransporterNewRequestsView extends StatelessWidget {
             ],
           ),
           SizedBox(height: 20.h),
-          Divider(color: isDarkMode ? Colors.white12 : Colors.grey.shade100, height: 1),
+          Divider(
+              color: isDarkMode ? Colors.white12 : Colors.grey.shade100,
+              height: 1),
           SizedBox(height: 20.h),
           // Route block
           Row(
@@ -131,7 +150,8 @@ class TransporterNewRequestsView extends StatelessWidget {
                     color: Colors.grey.shade300,
                     margin: EdgeInsets.symmetric(vertical: 4.h),
                   ),
-                  Icon(Icons.location_on_outlined, size: 20.sp, color: Colors.grey),
+                  Icon(Icons.location_on_outlined,
+                      size: 20.sp, color: Colors.grey),
                 ],
               ),
               SizedBox(width: 16.w),
@@ -146,17 +166,24 @@ class TransporterNewRequestsView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Tunis",
+                              request.fromCity,
                               style: GoogleFonts.montserrat(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
                                 color: isDarkMode ? Colors.white : Colors.black,
                               ),
                             ),
-                            Text("14 Jan", style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey)),
+                            Text(request.fromDate,
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 12.sp, color: Colors.grey)),
                           ],
                         ),
-                        Text("08:30 AM", style: GoogleFonts.montserrat(fontSize: 12.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
+                        Text(request.fromTime,
+                            style: GoogleFonts.montserrat(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    isDarkMode ? Colors.white : Colors.black)),
                       ],
                     ),
                     SizedBox(height: 24.h),
@@ -167,17 +194,24 @@ class TransporterNewRequestsView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Paris",
+                              request.toCity,
                               style: GoogleFonts.montserrat(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
                                 color: isDarkMode ? Colors.white : Colors.black,
                               ),
                             ),
-                            Text("14 Jan", style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey)),
+                            Text(request.toDate,
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 12.sp, color: Colors.grey)),
                           ],
                         ),
-                        Text("10:45 PM", style: GoogleFonts.montserrat(fontSize: 12.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
+                        Text(request.toTime,
+                            style: GoogleFonts.montserrat(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    isDarkMode ? Colors.white : Colors.black)),
                       ],
                     ),
                   ],
@@ -186,15 +220,20 @@ class TransporterNewRequestsView extends StatelessWidget {
             ],
           ),
           SizedBox(height: 20.h),
-          Divider(color: isDarkMode ? Colors.white12 : Colors.grey.shade100, height: 1),
+          Divider(
+              color: isDarkMode ? Colors.white12 : Colors.grey.shade100,
+              height: 1),
           SizedBox(height: 20.h),
+
           // Details block
-          _buildDetailRow("Package Size", "Medium (15kg)", isDarkMode),
+          _buildDetailRow("Package Size", request.packageSize, isDarkMode),
           SizedBox(height: 12.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Status", style: GoogleFonts.montserrat(fontSize: 14.sp, color: Colors.grey)),
+              Text("Status",
+                  style: GoogleFonts.montserrat(
+                      fontSize: 14.sp, color: Colors.grey)),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                 decoration: BoxDecoration(
@@ -202,7 +241,7 @@ class TransporterNewRequestsView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text(
-                  "Urgent",
+                  request.packageStatus,
                   style: GoogleFonts.montserrat(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
@@ -212,12 +251,67 @@ class TransporterNewRequestsView extends StatelessWidget {
               ),
             ],
           ),
+
+          // Render package photos if any exists (Solving the comment!)
+          if (request.packagePhotos.isNotEmpty) ...[
+            SizedBox(height: 16.h),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Package Details & Photos",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: isDarkMode ? Colors.white : Colors.black87,
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                SizedBox(
+                  height: 60.h,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: request.packagePhotos.length,
+                    separatorBuilder: (context, index) => SizedBox(width: 8.w),
+                    itemBuilder: (context, index) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(8.r),
+                        child: Image.network(
+                          request.packagePhotos[index],
+                          width: 60.h,
+                          height: 60.h,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              Container(
+                            width: 60.h,
+                            height: 60.h,
+                            color: Colors.grey.shade300,
+                            child: Icon(Icons.image_not_supported,
+                                color: Colors.grey.shade500),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+
           SizedBox(height: 16.h),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Total Estimate", style: GoogleFonts.montserrat(fontSize: 16.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
-              Text("€25", style: GoogleFonts.montserrat(fontSize: 18.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
+              Text("Total Estimate",
+                  style: GoogleFonts.montserrat(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode ? Colors.white : Colors.black)),
+              Text("€${request.totalEstimate.toStringAsFixed(0)}",
+                  style: GoogleFonts.montserrat(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode ? Colors.white : Colors.black)),
             ],
           ),
           SizedBox(height: 20.h),
@@ -230,7 +324,8 @@ class TransporterNewRequestsView extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 14.h),
                     side: BorderSide(color: Colors.redAccent.withOpacity(0.5)),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r)),
                   ),
                   child: Text(
                     "Reject",
@@ -250,7 +345,8 @@ class TransporterNewRequestsView extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 14.h),
                     backgroundColor: const Color(0xFF4A80F0),
                     elevation: 0,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r)),
                   ),
                   child: Text(
                     "Accept",
@@ -273,8 +369,14 @@ class TransporterNewRequestsView extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: GoogleFonts.montserrat(fontSize: 14.sp, color: Colors.grey)),
-        Text(value, style: GoogleFonts.montserrat(fontSize: 14.sp, fontWeight: FontWeight.w600, color: isDarkMode ? Colors.white : Colors.black)),
+        Text(label,
+            style:
+                GoogleFonts.montserrat(fontSize: 14.sp, color: Colors.grey)),
+        Text(value,
+            style: GoogleFonts.montserrat(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                color: isDarkMode ? Colors.white : Colors.black)),
       ],
     );
   }
