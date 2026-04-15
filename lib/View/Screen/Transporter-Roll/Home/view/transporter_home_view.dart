@@ -61,7 +61,7 @@ class TransporterHomeScreen extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: 180.h,
+          height: 220.h,
           width: double.infinity,
           decoration: const BoxDecoration(
             color: Color(0xFF4A80F0),
@@ -70,63 +70,16 @@ class TransporterHomeScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24),
             ),
           ),
         ),
         SafeArea(
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 25.r,
-                      backgroundColor: Colors.grey.shade300,
-                      backgroundImage: const NetworkImage(
-                        "https://i.pravatar.cc/150?u=zain",
-                      ),
-                    ),
-                    SizedBox(width: 12.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Hi, Zain Malik",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          "You have 2 new delivery requests",
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.8),
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    Container(
-                      padding: EdgeInsets.all(8.r),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.notifications_none,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               SizedBox(height: 10.h),
-              // Activity Overview Cards
+              // Master Activity Card
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 20.w),
                 padding: EdgeInsets.all(20.r),
@@ -134,16 +87,70 @@ class TransporterHomeScreen extends StatelessWidget {
                   color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
                   borderRadius: BorderRadius.circular(20.r),
                   boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 10,
-                      offset: const Offset(0, 5),
-                    ),
+                    if (!isDarkMode)
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 10,
+                        offset: const Offset(0, 5),
+                      ),
                   ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Profile Row
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 25.r,
+                          backgroundColor: Colors.grey.shade300,
+                          backgroundImage: const NetworkImage(
+                            "https://i.pravatar.cc/150?u=zain",
+                          ),
+                        ),
+                        SizedBox(width: 12.w),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Hi, Zain Malik",
+                                style: TextStyle(
+                                  color: isDarkMode ? Colors.white : Colors.black,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "You have 2 new delivery requests",
+                                style: TextStyle(
+                                  color: isDarkMode
+                                      ? Colors.white70
+                                      : Colors.grey.shade600,
+                                  fontSize: 11.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(10.r),
+                          decoration: BoxDecoration(
+                            color: isDarkMode
+                                ? Colors.white10
+                                : const Color(0xFFF5F5F5),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Icon(
+                            Icons.notifications_none,
+                            color: isDarkMode ? Colors.white : Colors.black87,
+                            size: 22.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 24.h),
+                    // Activity Overview Title
                     Text(
                       "Activity Overview",
                       style: TextStyle(
@@ -152,9 +159,9 @@ class TransporterHomeScreen extends StatelessWidget {
                         color: isDarkMode ? Colors.white : Colors.black,
                       ),
                     ),
-                    SizedBox(height: 20.h),
+                    SizedBox(height: 16.h),
+                    // Stats Row
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         _buildStatCard(
                           "Total Earnings",
@@ -163,6 +170,7 @@ class TransporterHomeScreen extends StatelessWidget {
                           Colors.blue,
                           isDarkMode,
                         ),
+                        SizedBox(width: 8.w),
                         _buildStatCard(
                           "Active Clients",
                           "1,240",
@@ -170,6 +178,7 @@ class TransporterHomeScreen extends StatelessWidget {
                           Colors.green,
                           isDarkMode,
                         ),
+                        SizedBox(width: 8.w),
                         _buildStatCard(
                           "Rating",
                           "4.8",
@@ -196,35 +205,56 @@ class TransporterHomeScreen extends StatelessWidget {
     Color color,
     bool isDarkMode,
   ) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.all(10.r),
-          decoration: BoxDecoration(
-            color: color.withOpacity(0.1),
-            shape: BoxShape.circle,
-          ),
-          child: SvgPicture.asset(
-            iconPath,
-            colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-            height: 20.sp,
-            width: 20.sp,
-          ),
+    return Expanded(
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 16.h),
+        decoration: BoxDecoration(
+          color: isDarkMode
+              ? Colors.white.withOpacity(0.05)
+              : Colors.white,
+          borderRadius: BorderRadius.circular(16.r),
+          border: isDarkMode ? null : Border.all(color: Colors.grey.shade100, width: 1.5),
+          boxShadow: [
+             if(!isDarkMode)
+               BoxShadow(
+                 color: Colors.black.withOpacity(0.01),
+                 blurRadius: 4,
+                 offset: const Offset(0, 2),
+               )
+          ]
         ),
-        SizedBox(height: 8.h),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.bold,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(10.r),
+              decoration: BoxDecoration(
+                color: color.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: SvgPicture.asset(
+                iconPath,
+                colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+                height: 20.sp,
+                width: 20.sp,
+              ),
+            ),
+            SizedBox(height: 12.h),
+            Text(
+              value,
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.bold,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
+            SizedBox(height: 2.h),
+            Text(
+              label,
+              style: TextStyle(fontSize: 10.sp, color: Colors.grey),
+            ),
+          ],
         ),
-        Text(
-          label,
-          style: TextStyle(fontSize: 10.sp, color: Colors.grey),
-        ),
-      ],
+      ),
     );
   }
 
