@@ -58,21 +58,21 @@ class TravelDetailsStep extends StatelessWidget {
           Text(
             "Tell us how you're traveling.",
             style: GoogleFonts.plusJakartaSans(
-              fontSize: 14.sp,
+              fontSize: 13.sp,
               color: Colors.grey,
             ),
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 16.h),
 
           // Grid of Travel Modes
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 16.w,
-              mainAxisSpacing: 16.h,
-              childAspectRatio: 1.1,
+              crossAxisCount: 3,
+              crossAxisSpacing: 12.w,
+              mainAxisSpacing: 12.h,
+              childAspectRatio: 0.95,
             ),
             itemCount: travelModes.length,
             itemBuilder: (context, index) {
@@ -100,7 +100,7 @@ class TravelDetailsStep extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          padding: EdgeInsets.all(12.w),
+                          padding: EdgeInsets.all(8.w),
                           decoration: BoxDecoration(
                             color: isSelected
                                 ? const Color(0xFFE8EFFF)
@@ -109,12 +109,12 @@ class TravelDetailsStep extends StatelessWidget {
                           ),
                           child: SvgPicture.asset(
                             mode["icon"]!,
-                            width: 28.w,
-                            height: 28.w,
+                            width: 22.w,
+                            height: 22.w,
                             fit: BoxFit.contain,
                             placeholderBuilder: (context) => Icon(
                               Icons.directions_run,
-                              size: 28.w,
+                              size: 22.w,
                               color: Colors.grey,
                             ),
                             colorFilter: ColorFilter.mode(
@@ -127,11 +127,11 @@ class TravelDetailsStep extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 12.h),
+                        SizedBox(height: 8.h),
                         Text(
                           mode["label"]!,
                           style: GoogleFonts.plusJakartaSans(
-                            fontSize: 15.sp,
+                            fontSize: 13.sp,
                             fontWeight: isSelected
                                 ? FontWeight.w700
                                 : FontWeight.w600,
@@ -149,7 +149,7 @@ class TravelDetailsStep extends StatelessWidget {
               });
             },
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 16.h),
 
           // Dynamic Fields based on Travel Mode
           Obx(() {
@@ -171,7 +171,7 @@ class TravelDetailsStep extends StatelessWidget {
             }
           }),
 
-          SizedBox(height: 32.h),
+          SizedBox(height: 24.h),
 
           // Confirm Button
           SizedBox(
@@ -378,12 +378,12 @@ class TravelDetailsStep extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildLabel(label),
-        SizedBox(height: 8.h),
+        SizedBox(height: 6.h),
         GestureDetector(
           onTap: () {}, // Handle file picker
           child: Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: 32.h),
+            padding: EdgeInsets.symmetric(vertical: 20.h),
             decoration: BoxDecoration(
               color: isDarkMode
                   ? Colors.white.withOpacity(0.05)
