@@ -55,24 +55,32 @@ class PublishTripsScreen extends StatelessWidget {
           );
         }),
         actions: [
-          Obx(
-            () => controller.selectedTab.value == 1
-                ? IconButton(
-                    onPressed: () {
-                      _showFilters(context);
-                    },
-                    icon: SvgPicture.asset(
-                      AppIcons.filters,
-                      width: 24.w,
-                      height: 24.w,
-                      colorFilter: ColorFilter.mode(
-                        isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                  )
-                : const SizedBox.shrink(),
-          ),
+          Obx(() {
+            if (controller.selectedTab.value == 0) {
+              return IconButton(
+                onPressed: () => _showHowItWorks(context),
+                icon: Icon(
+                  Icons.info_outline,
+                  color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                  size: 24.sp,
+                ),
+              );
+            } else if (controller.selectedTab.value == 1) {
+              return IconButton(
+                onPressed: () => _showFilters(context),
+                icon: SvgPicture.asset(
+                  AppIcons.filters,
+                  width: 24.w,
+                  height: 24.w,
+                  colorFilter: ColorFilter.mode(
+                    isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                    BlendMode.srcIn,
+                  ),
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          }),
           SizedBox(width: 8.w),
         ],
       ),

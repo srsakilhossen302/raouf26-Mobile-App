@@ -17,7 +17,10 @@ class TripPublishedPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: isDarkMode ? Colors.white : Colors.black),
+          icon: Icon(
+            Icons.arrow_back,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
           onPressed: () => Get.back(),
         ),
         centerTitle: true,
@@ -29,6 +32,7 @@ class TripPublishedPage extends StatelessWidget {
             color: isDarkMode ? Colors.white : Colors.black,
           ),
         ),
+        actions: [],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -143,7 +147,9 @@ class TripPublishedPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 16.h),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.r),
-            side: isOutline ? BorderSide(color: Colors.grey.withOpacity(0.2)) : BorderSide.none,
+            side: isOutline
+                ? BorderSide(color: Colors.grey.withOpacity(0.2))
+                : BorderSide.none,
           ),
         ),
         child: Row(
