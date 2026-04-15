@@ -1,57 +1,32 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../Utils/AppIcons/app_icons.dart';
-import '../Screen/Traveler-Roll/Dashboard/dashboard_view.dart';
-import '../Screen/Traveler-Roll/MyParcels/my_parcels_view.dart';
-import '../Screen/Traveler-Roll/Search/search_view.dart';
-import '../Screen/MessagesScreen/messages_view.dart';
-import '../Screen/Traveler-Roll/PublishTrips/Views/publish_trips_screen.dart';
+import '../Screen/Transporter-Roll/Home/view/transporter_home_view.dart';
 
-class CustomBottomNavBar extends StatelessWidget {
+class CustomTransporterBottomNavBar extends StatelessWidget {
   final int selectedIndex;
 
-  const CustomBottomNavBar({super.key, required this.selectedIndex});
-
-  static Widget buildFloatingActionButton() {
-    return FloatingActionButton(
-      onPressed: () => Get.offAll(() => const SearchScreen()),
-      backgroundColor: const Color(0xFF4A80F0),
-      shape: RoundedRectangleBorder(
-         borderRadius: BorderRadius.circular(30.r),
-      ),
-      elevation: 4,
-      child: Center(
-        child: SvgPicture.asset(
-          AppIcons.searchNavbar,
-          width: 28.w,
-          height: 28.w,
-          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-        ),
-      ),
-    );
-  }
+  const CustomTransporterBottomNavBar({super.key, required this.selectedIndex});
 
   void _onItemTapped(int index) {
     if (index == selectedIndex) return;
 
     switch (index) {
       case 0:
-        Get.offAll(() => const DashboardScreen());
+        Get.offAll(() => const TransporterHomeScreen());
         break;
       case 1:
-        Get.offAll(() => const MyParcelsScreen());
-        break;
-      case 2:
-        Get.offAll(() => const SearchScreen());
+        // Get.offAll(() => const TrackingScreen());
         break;
       case 3:
-        Get.offAll(() => const MessagesScreen());
+        // Get.offAll(() => const MessagesScreen());
         break;
       case 4:
-        Get.offAll(() => const PublishTripsScreen());
+        // Get.offAll(() => const TripsScreen());
         break;
     }
   }
@@ -77,14 +52,14 @@ class CustomBottomNavBar extends StatelessWidget {
               child: _buildNavItem(AppIcons.dashboardNavbar, "Dashboard", 0, selectedIndex == 0, activeColor, inactiveColor),
             ),
             Expanded(
-              child: _buildNavItem(AppIcons.myParcelsNavbar, "My Parcels", 1, selectedIndex == 1, activeColor, inactiveColor),
+              child: _buildNavItem(AppIcons.trackingNavbar, "Tracking", 1, selectedIndex == 1, activeColor, inactiveColor),
             ),
-            SizedBox(width: 48.w), // Space for the center floating action button (handled in Scaffold)
+            SizedBox(width: 48.w), // Space for the floating action button
             Expanded(
               child: _buildNavItem(AppIcons.messagesNavbar, "Messages", 3, selectedIndex == 3, activeColor, inactiveColor),
             ),
             Expanded(
-              child: _buildNavItem(AppIcons.publishTripsNavbar, "Publish Trips", 4, selectedIndex == 4, activeColor, inactiveColor),
+              child: _buildNavItem(AppIcons.publishTripsNavbar, "Trips", 4, selectedIndex == 4, activeColor, inactiveColor),
             ),
           ],
         ),
@@ -123,4 +98,3 @@ class CustomBottomNavBar extends StatelessWidget {
     );
   }
 }
-

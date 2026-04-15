@@ -26,6 +26,8 @@ class SearchScreen extends GetView<TravelerSearchController> {
       backgroundColor: isDarkMode
           ? const Color(0xFF121212)
           : const Color(0xFFF8F9FE),
+      floatingActionButton: CustomBottomNavBar.buildFloatingActionButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomBottomNavBar(selectedIndex: 2),
       body: SingleChildScrollView(
         child: Column(

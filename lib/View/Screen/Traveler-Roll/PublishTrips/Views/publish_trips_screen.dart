@@ -94,6 +94,8 @@ class PublishTripsScreen extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: CustomBottomNavBar.buildFloatingActionButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomBottomNavBar(selectedIndex: 4),
     );
   }

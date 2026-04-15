@@ -22,6 +22,7 @@ class AppIcons {
   static const String myParcelsNavbar = "$basePath/My Parcels-navbar.svg";
   static const String publishTripsNavbar = "$basePath/Publish Trips-navbar.svg";
   static const String searchNavbar = "$basePath/sarch-navbar.svg";
+  static const String trackingNavbar = "$basePath/Tracking-navbar.svg";
   static const String partion = "$basePath/Partion-icons.svg";
   static const String save = "$basePath/Save-icons.svg";
   static const String camera = "$basePath/Camera=icons.svg";

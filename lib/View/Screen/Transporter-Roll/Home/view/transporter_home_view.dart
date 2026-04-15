@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../../../../../Utils/AppImg/app_img.dart';
+import '../../../../../Utils/AppIcons/app_icons.dart';
+import '../../../../Widget/custom_transporter_bottom_nav_bar.dart';
 import '../controller/transporter_home_controller.dart';
 
 class TransporterHomeScreen extends StatelessWidget {
@@ -18,6 +19,17 @@ class TransporterHomeScreen extends StatelessWidget {
       backgroundColor: isDarkMode
           ? const Color(0xFF121212)
           : const Color(0xFFF8F9FB),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: const Color(0xFF4A80F0),
+        shape: RoundedRectangleBorder(
+           borderRadius: BorderRadius.circular(30.r),
+        ),
+        elevation: 4,
+        child: Icon(Icons.add, color: Colors.white, size: 28.sp),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: const CustomTransporterBottomNavBar(selectedIndex: 0),
       body: SingleChildScrollView(
         child: Column(
           children: [

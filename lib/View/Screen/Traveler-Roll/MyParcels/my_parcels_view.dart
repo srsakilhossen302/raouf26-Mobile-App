@@ -18,6 +18,8 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
       backgroundColor: isDarkMode
           ? const Color(0xFF121212)
           : const Color(0xFFF8F9FE),
+      floatingActionButton: CustomBottomNavBar.buildFloatingActionButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomBottomNavBar(selectedIndex: 1),
       appBar: AppBar(
         backgroundColor: Colors.transparent,

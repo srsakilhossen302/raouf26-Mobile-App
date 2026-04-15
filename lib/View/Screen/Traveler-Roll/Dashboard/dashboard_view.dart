@@ -23,6 +23,8 @@ class DashboardScreen extends GetView<DashboardController> {
       backgroundColor: isDarkMode
           ? const Color(0xFF121212)
           : const Color(0xFFF8F9FE),
+      floatingActionButton: CustomBottomNavBar.buildFloatingActionButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomBottomNavBar(selectedIndex: 0),
       body: SingleChildScrollView(
         child: Column(
