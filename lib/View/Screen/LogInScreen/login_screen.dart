@@ -257,7 +257,9 @@ class LogInScreen extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(icon, height: 24.h),
+            icon.endsWith('.svg')
+                ? SvgPicture.asset(icon, height: 24.h)
+                : Image.asset(icon, height: 24.h),
             SizedBox(width: 12.w),
             Text(
               label,

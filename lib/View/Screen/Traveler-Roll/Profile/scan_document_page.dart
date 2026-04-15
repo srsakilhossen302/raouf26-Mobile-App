@@ -14,6 +14,8 @@ class ScanDocumentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final bool isSelfie = docType == 'take_a_selfie'.tr ||
+        docType == 'selfie_with_document'.tr;
 
     return Scaffold(
       backgroundColor: isDarkMode
@@ -50,13 +52,15 @@ class ScanDocumentPage extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  Icons.lightbulb_outline_rounded,
+                  isSelfie
+                      ? Icons.face_retouching_natural_rounded
+                      : Icons.lightbulb_outline_rounded,
                   color: Colors.blue,
                   size: 20.sp,
                 ),
                 SizedBox(width: 8.w),
                 Text(
-                  'scanning_tips'.tr,
+                  isSelfie ? 'Selfie Tips'.tr : 'scanning_tips'.tr,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.w700,
@@ -66,10 +70,17 @@ class ScanDocumentPage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 12.h),
-            _buildTipItem('Ensure good lighting', isDarkMode),
-            _buildTipItem('Place document on flat surface', isDarkMode),
-            _buildTipItem('All corners must be visible', isDarkMode),
-            _buildTipItem('Text must be readable', isDarkMode),
+            if (isSelfie) ...[
+              _buildTipItem('Maintain a neutral expression', isDarkMode),
+              _buildTipItem('Ensure your face is clearly visible', isDarkMode),
+              _buildTipItem('Avoid wearing glasses or hats', isDarkMode),
+              _buildTipItem('Face the camera directly', isDarkMode),
+            ] else ...[
+              _buildTipItem('Ensure good lighting', isDarkMode),
+              _buildTipItem('Place document on flat surface', isDarkMode),
+              _buildTipItem('All corners must be visible', isDarkMode),
+              _buildTipItem('Text must be readable', isDarkMode),
+            ],
 
             SizedBox(height: 32.h),
 
@@ -84,10 +95,18 @@ class ScanDocumentPage extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: EdgeInsets.all(24.w),
-                  child: SvgPicture.asset(
-                    AppIcons.passportImg,
-                    fit: BoxFit.contain,
-                  ),
+                  child: isSelfie
+                      ? Icon(
+                          docType == 'take_a_selfie'.tr
+                              ? Icons.face_unlock_rounded
+                              : Icons.account_box_rounded,
+                          size: 100.sp,
+                          color: const Color(0xFF4A80F0),
+                        )
+                      : SvgPicture.asset(
+                          AppIcons.passportImg,
+                          fit: BoxFit.contain,
+                        ),
                 ),
               ),
             ),
@@ -97,6 +116,10 @@ class ScanDocumentPage extends StatelessWidget {
             // Scan Slots
             if (docType == 'passport'.tr) ...[
               _buildScanSlot('scan_passport'.tr, isDarkMode),
+            ] else if (docType == 'take_a_selfie'.tr) ...[
+              _buildScanSlot('Take Selfie'.tr, isDarkMode),
+            ] else if (docType == 'selfie_with_document'.tr) ...[
+              _buildScanSlot('Take Selfie with Document'.tr, isDarkMode),
             ] else ...[
               _buildScanSlot('scan_cin_front'.tr, isDarkMode),
               SizedBox(height: 16.h),

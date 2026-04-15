@@ -15,6 +15,7 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_verif
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/document_verification_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/trips_shipments_page.dart';
 
+import '../../Transporter-Roll/Home/view/transporter_home_view.dart';
 import '../PublishTrips/Views/transport_agreement_page.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -184,7 +185,9 @@ class ProfilePage extends StatelessWidget {
 
             // Switch to Transporter Button
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => const TransporterHomeScreen());
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4A80F0),
                 padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 14.h),

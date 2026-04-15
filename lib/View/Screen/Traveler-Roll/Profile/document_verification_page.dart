@@ -93,6 +93,37 @@ class DocumentVerificationPage extends StatelessWidget {
 
             SizedBox(height: 32.h),
 
+            // Facial Verification
+            _buildSectionTitle(
+              'facial_verification'.tr,
+              'Required to confirm your identity matches your documents.',
+              isDarkMode,
+            ),
+            SizedBox(height: 16.h),
+            _buildDocumentList(
+              isDarkMode: isDarkMode,
+              items: [
+                _buildDocItem(
+                  'take_a_selfie'.tr,
+                  AppIcons.camera,
+                  isDarkMode,
+                  onTap: () =>
+                      Get.to(() => ScanDocumentPage(docType: 'take_a_selfie'.tr)),
+                ),
+                _buildDocItem(
+                  'selfie_with_document'.tr,
+                  AppIcons.verifa,
+                  isDarkMode,
+                  onTap: () => Get.to(
+                    () => ScanDocumentPage(docType: 'selfie_with_document'.tr),
+                  ),
+                  isLast: true,
+                ),
+              ],
+            ),
+
+            SizedBox(height: 32.h),
+
             // Transporter Documents
             _buildSectionTitle(
               'transporter_documents'.tr,
