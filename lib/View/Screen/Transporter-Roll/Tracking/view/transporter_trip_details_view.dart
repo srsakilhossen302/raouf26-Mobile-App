@@ -36,9 +36,37 @@ class TransporterTripDetailsView extends StatelessWidget {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
+          PopupMenuButton<String>(
             icon: Icon(Icons.more_vert, color: isDarkMode ? Colors.white : Colors.black),
+            onSelected: (value) {
+              if (value == 'report') {
+                // Navigate to report issue
+              } else if (value == 'contact') {
+                // Navigate to contact support
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              PopupMenuItem<String>(
+                value: 'report',
+                child: Row(
+                  children: [
+                    Icon(Icons.report_problem_outlined, size: 20.sp, color: Colors.redAccent),
+                    SizedBox(width: 8.w),
+                    Text('report_an_issue'.tr, style: GoogleFonts.montserrat(fontSize: 14.sp)),
+                  ],
+                ),
+              ),
+              PopupMenuItem<String>(
+                value: 'contact',
+                child: Row(
+                  children: [
+                    Icon(Icons.support_agent_outlined, size: 20.sp, color: Colors.blue),
+                    SizedBox(width: 8.w),
+                    Text('contact_support'.tr, style: GoogleFonts.montserrat(fontSize: 14.sp)),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),

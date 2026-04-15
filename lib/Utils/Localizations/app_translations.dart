@@ -822,6 +822,8 @@ class AppTranslations extends Translations {
       'booked_status': 'تم الحجز',
       'urgent': 'عاجل',
       'standard': 'عادي',
+      'report_issue': 'الإبلاغ عن مشكلة',
+      'contact_support': 'الاتصال بالدعم',
     },
   };
 }
