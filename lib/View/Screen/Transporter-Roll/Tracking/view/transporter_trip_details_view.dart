@@ -293,7 +293,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                 height: 55.h,
                 child: ElevatedButton(
                   onPressed: () {
-                    showPickupConfirmationSheet(context);
+                    showPickupConfirmationSheet(context, package);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4A80F0),

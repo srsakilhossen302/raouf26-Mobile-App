@@ -315,7 +315,7 @@ class TrackingListWidget extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    showPickupConfirmationSheet(context);
+                    showPickupConfirmationSheet(context, package);
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 14.h),

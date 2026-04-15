@@ -28,6 +28,23 @@ class TrackingPackageModel {
     required this.packageSize,
     required this.priority,
   });
+
+  factory TrackingPackageModel.fromJson(Map<String, dynamic> json) {
+    return TrackingPackageModel(
+      id: json['id'] ?? '',
+      userName: json['userName'] ?? '',
+      userImage: json['userImage'] ?? '',
+      price: (json['price'] ?? 0).toDouble(),
+      fromCity: json['fromCity'] ?? '',
+      toCity: json['toCity'] ?? '',
+      fromTime: json['fromTime'] ?? '',
+      toTime: json['toTime'] ?? '',
+      currentStatusStep: json['currentStatusStep'] ?? 0,
+      date: json['date'] ?? '',
+      packageSize: json['packageSize'] ?? '',
+      priority: json['priority'] ?? '',
+    );
+  }
 }
 
 class TransporterTrackingController extends GetxController {

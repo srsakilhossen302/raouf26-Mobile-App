@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../controller/transporter_tracking_controller.dart';
 import 'delivery_confirmation_sheet.dart';
 
-void showPickupConfirmationSheet(BuildContext context) {
+void showPickupConfirmationSheet(BuildContext context, TrackingPackageModel package) {
   bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
   // A simple standalone RxInt to manage the selected condition
   var selectedConditionIndex = 1.obs; // Default to minor visible damage selected for mockup
@@ -29,7 +30,7 @@ void showPickupConfirmationSheet(BuildContext context) {
                 alignment: Alignment.center,
                 children: [
                   Text(
-                    "Pickup Confirmation",
+                    "Pickup Confirmation (${package.id})",
                     style: GoogleFonts.montserrat(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
@@ -170,7 +171,7 @@ void showPickupConfirmationSheet(BuildContext context) {
                       child: ElevatedButton(
                         onPressed: () {
                           Get.back();
-                          showDeliveryConfirmationSheet(context);
+                          showDeliveryConfirmationSheet(context, package);
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF4A80F0),

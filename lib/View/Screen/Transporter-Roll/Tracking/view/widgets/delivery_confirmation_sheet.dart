@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../controller/transporter_tracking_controller.dart';
 
-void showDeliveryConfirmationSheet(BuildContext context) {
+void showDeliveryConfirmationSheet(BuildContext context, TrackingPackageModel package) {
   bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
   showModalBottomSheet(
@@ -26,7 +27,7 @@ void showDeliveryConfirmationSheet(BuildContext context) {
                 alignment: Alignment.center,
                 children: [
                   Text(
-                    "Delivery Confirmation",
+                    "Delivery Confirmation (${package.id})",
                     style: GoogleFonts.montserrat(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
@@ -121,7 +122,7 @@ void showDeliveryConfirmationSheet(BuildContext context) {
                       child: TextField(
                         style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
                         decoration: InputDecoration(
-                          hintText: "Enter recipient's full name",
+                          hintText: package.userName.isNotEmpty ? package.userName : "Enter recipient's full name",
                           hintStyle: TextStyle(color: Colors.grey, fontSize: 13.sp),
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
