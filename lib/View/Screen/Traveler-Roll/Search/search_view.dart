@@ -65,37 +65,43 @@ class SearchScreen extends GetView<TravelerSearchController> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  CircleAvatar(
-                                    radius: 24.r,
-                                    backgroundImage: const NetworkImage(
-                                      "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 24.r,
+                                      backgroundImage: const NetworkImage(
+                                        "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: 12.w),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Hi, Zain Malik",
-                                        style: GoogleFonts.montserrat(
-                                          color: Colors.white,
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.w700,
-                                        ),
+                                    SizedBox(width: 12.w),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "Hi, Zain Malik",
+                                            style: GoogleFonts.montserrat(
+                                              color: Colors.white,
+                                              fontSize: 16.sp,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                          Text(
+                                            "Where would you like to send your package?",
+                                            style: GoogleFonts.montserrat(
+                                              color: Colors.white.withOpacity(0.8),
+                                              fontSize: 12.sp,
+                                            ),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        "Ready to Send a Parcel?",
-                                        style: GoogleFonts.montserrat(
-                                          color: Colors.white.withOpacity(0.8),
-                                          fontSize: 12.sp,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                    ),
+                                  ],
+                                ),
                               ),
                               Row(
                                 children: [
@@ -156,39 +162,29 @@ class SearchScreen extends GetView<TravelerSearchController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Enter Your Route",
+                          "Set Your Route",
                           style: GoogleFonts.montserrat(
                             fontSize: 16.sp,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w600,
                             color: isDarkMode ? Colors.white : Colors.black87,
                           ),
                         ),
                         SizedBox(height: 20.h),
                         // Route Inputs
                         Container(
-                          padding: EdgeInsets.all(12.r),
+                          padding: EdgeInsets.all(16.r),
                           decoration: BoxDecoration(
                             color: isDarkMode
                                 ? Colors.white.withOpacity(0.03)
                                 : const Color(0xFFF9FAFB),
                             borderRadius: BorderRadius.circular(16.r),
-                            border: Border.all(
-                              color: isDarkMode
-                                  ? Colors.white10
-                                  : Colors.grey.shade100,
-                            ),
                           ),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Obx(
-                                () => _routeInputField(
-                                  iconPath: AppIcons.delivery,
-                                  label: "Pick Up",
-                                  address: controller.pickUpAddress.value,
-                                  isDarkMode: isDarkMode,
-                                  onPositionTap: () =>
-                                      controller.useMyPosition(),
-                                  onMapTap: () async {
+                                () => GestureDetector(
+                                  onTap: () async {
                                     var result = await Get.to(
                                       () => const MapPickerScreen(
                                         title: "Pickup Point",
@@ -198,44 +194,85 @@ class SearchScreen extends GetView<TravelerSearchController> {
                                       controller.updatePickUp(result);
                                     }
                                   },
-                                  onClearTap: () => controller.clearPickUp(),
+                                  behavior: HitTestBehavior.opaque,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(10.r),
+                                        decoration: BoxDecoration(
+                                          color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+                                          shape: BoxShape.circle,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black.withOpacity(0.05),
+                                              blurRadius: 10,
+                                            ),
+                                          ],
+                                        ),
+                                        child: SvgPicture.asset(
+                                          AppIcons.delivery,
+                                          colorFilter: ColorFilter.mode(
+                                            isDarkMode ? Colors.white : Colors.black87,
+                                            BlendMode.srcIn,
+                                          ),
+                                          width: 20.sp,
+                                          height: 20.sp,
+                                        ),
+                                      ),
+                                      SizedBox(width: 16.w),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Pick Up",
+                                              style: GoogleFonts.montserrat(
+                                                fontSize: 12.sp,
+                                                color: isDarkMode ? Colors.white54 : Colors.grey.shade300,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            SizedBox(height: 2.h),
+                                            Text(
+                                              controller.pickUpAddress.value == "Where should it be picked up?" || controller.pickUpAddress.value.isEmpty 
+                                                  ? "Where should it be picked up?" 
+                                                  : controller.pickUpAddress.value,
+                                              style: GoogleFonts.montserrat(
+                                                fontSize: 14.sp,
+                                                color: controller.pickUpAddress.value == "Where should it be picked up?" || controller.pickUpAddress.value.isEmpty
+                                                    ? Colors.grey.shade400
+                                                    : (isDarkMode ? Colors.white : Colors.black87),
+                                                fontWeight: controller.pickUpAddress.value == "Where should it be picked up?" || controller.pickUpAddress.value.isEmpty ? FontWeight.w500 : FontWeight.w600,
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(left: 12.w),
-                                child: Row(
-                                  children: [
-                                    Column(
-                                      children: List.generate(
-                                        3,
-                                        (index) => Container(
-                                          margin: EdgeInsets.symmetric(
-                                            vertical: 2.h,
-                                          ),
-                                          width: 1.w,
-                                          height: 4.h,
-                                          color: Colors.grey.shade400,
-                                        ),
+                                padding: EdgeInsets.only(left: 19.w, top: 4.h, bottom: 4.h),
+                                child: Column(
+                                  children: List.generate(
+                                    3,
+                                    (index) => Container(
+                                      margin: EdgeInsets.symmetric(
+                                        vertical: 3.h,
                                       ),
+                                      width: 1.w,
+                                      height: 5.h,
+                                      color: isDarkMode ? Colors.white24 : Colors.grey,
                                     ),
-                                    Expanded(
-                                      child: Divider(
-                                        color: isDarkMode
-                                            ? Colors.white10
-                                            : Colors.grey.shade100,
-                                        indent: 20.w,
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
                               Obx(
-                                () => _routeInputField(
-                                  iconPath: AppIcons.location,
-                                  label: "Drop",
-                                  address: controller.dropAddress.value,
-                                  isDarkMode: isDarkMode,
-                                  onMapTap: () async {
+                                () => GestureDetector(
+                                  onTap: () async {
                                     var result = await Get.to(
                                       () => const MapPickerScreen(
                                         title: "Drop Point",
@@ -245,7 +282,64 @@ class SearchScreen extends GetView<TravelerSearchController> {
                                       controller.updateDrop(result);
                                     }
                                   },
-                                  onClearTap: () => controller.clearDrop(),
+                                  behavior: HitTestBehavior.opaque,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.all(10.r),
+                                        decoration: BoxDecoration(
+                                          color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+                                          shape: BoxShape.circle,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black.withOpacity(0.05),
+                                              blurRadius: 10,
+                                            ),
+                                          ],
+                                        ),
+                                        child: SvgPicture.asset(
+                                          AppIcons.location,
+                                          colorFilter: ColorFilter.mode(
+                                            isDarkMode ? Colors.white : Colors.black87,
+                                            BlendMode.srcIn,
+                                          ),
+                                          width: 20.sp,
+                                          height: 20.sp,
+                                        ),
+                                      ),
+                                      SizedBox(width: 16.w),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Drop",
+                                              style: GoogleFonts.montserrat(
+                                                fontSize: 12.sp,
+                                                color: isDarkMode ? Colors.white54 : Colors.grey.shade300,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            SizedBox(height: 2.h),
+                                            Text(
+                                              controller.dropAddress.value == "Where should it be delivered?" || controller.dropAddress.value.isEmpty
+                                                  ? "Where should it be delivered?"
+                                                  : controller.dropAddress.value,
+                                              style: GoogleFonts.montserrat(
+                                                fontSize: 14.sp,
+                                                color: controller.dropAddress.value == "Where should it be delivered?" || controller.dropAddress.value.isEmpty
+                                                    ? Colors.grey.shade400
+                                                    : (isDarkMode ? Colors.white : Colors.black87),
+                                                fontWeight: controller.dropAddress.value == "Where should it be delivered?" || controller.dropAddress.value.isEmpty ? FontWeight.w500 : FontWeight.w600,
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -254,10 +348,10 @@ class SearchScreen extends GetView<TravelerSearchController> {
                         SizedBox(height: 20.h),
                         // Date Selection
                         Text(
-                          "Select Date",
+                          "Pickup Date",
                           style: GoogleFonts.montserrat(
                             fontSize: 14.sp,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w600,
                             color: isDarkMode ? Colors.white : Colors.black87,
                           ),
                         ),
@@ -274,11 +368,6 @@ class SearchScreen extends GetView<TravelerSearchController> {
                                   ? Colors.white.withOpacity(0.03)
                                   : const Color(0xFFF9FAFB),
                               borderRadius: BorderRadius.circular(12.r),
-                              border: Border.all(
-                                color: isDarkMode
-                                    ? Colors.white10
-                                    : Colors.grey.shade100,
-                              ),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -290,23 +379,27 @@ class SearchScreen extends GetView<TravelerSearchController> {
                                       fontSize: 14.sp,
                                       color:
                                           controller.selectedDateStr.value ==
-                                              "Select Date"
-                                          ? Colors.grey
+                                              "Choose pickup date"
+                                          ? Colors.grey.shade400
                                           : (isDarkMode
                                                 ? Colors.white
                                                 : Colors.black87),
                                       fontWeight:
                                           controller.selectedDateStr.value ==
-                                              "Select Date"
+                                              "Choose pickup date"
                                           ? FontWeight.w500
                                           : FontWeight.w600,
                                     ),
                                   ),
                                 ),
-                                Icon(
-                                  Icons.calendar_today_outlined,
-                                  color: Colors.black54,
-                                  size: 20.sp,
+                                SvgPicture.asset(
+                                  AppIcons.date,
+                                  colorFilter: ColorFilter.mode(
+                                    isDarkMode ? Colors.white54 : Colors.black87,
+                                    BlendMode.srcIn,
+                                  ),
+                                  width: 20.sp,
+                                  height: 20.sp,
                                 ),
                               ],
                             ),
@@ -564,107 +657,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
     );
   }
 
-  Widget _routeInputField({
-    required String iconPath,
-    required String label,
-    required String address,
-    required bool isDarkMode,
-    required VoidCallback onMapTap,
-    required VoidCallback onClearTap,
-    VoidCallback? onPositionTap,
-  }) {
-    bool hasAddress = address != "Where should it be delivered?";
 
-    return Row(
-      children: [
-        Container(
-          padding: EdgeInsets.all(8.r),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10),
-            ],
-          ),
-          child: SvgPicture.asset(
-            iconPath,
-            width: 16.sp,
-            height: 16.sp,
-            colorFilter: const ColorFilter.mode(
-              Color(0xFF424242),
-              BlendMode.srcIn,
-            ),
-          ),
-        ),
-        SizedBox(width: 16.w),
-        Expanded(
-          child: GestureDetector(
-            onTap: onMapTap,
-            behavior: HitTestBehavior.opaque,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: GoogleFonts.montserrat(
-                    fontSize: 10.sp,
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  address,
-                  style: GoogleFonts.montserrat(
-                    fontSize: 13.sp,
-                    color: hasAddress
-                        ? (isDarkMode ? Colors.white : Colors.black87)
-                        : Colors.grey.shade400,
-                    fontWeight: hasAddress ? FontWeight.w600 : FontWeight.w500,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-        ),
-        Row(
-          children: [
-            if (onPositionTap != null) ...[
-              GestureDetector(
-                onTap: onPositionTap,
-                child: Icon(
-                  Icons.my_location,
-                  color: const Color(0xFF4A80F0),
-                  size: 20.sp,
-                ),
-              ),
-              SizedBox(width: 12.w),
-            ],
-            GestureDetector(
-              onTap: onMapTap,
-              child: Icon(
-                Icons.map_outlined,
-                color: Colors.black54,
-                size: 20.sp,
-              ),
-            ),
-            if (hasAddress) ...[
-              SizedBox(width: 12.w),
-              GestureDetector(
-                onTap: onClearTap,
-                child: Icon(
-                  Icons.cancel,
-                  color: Colors.grey.shade400,
-                  size: 20.sp,
-                ),
-              ),
-            ],
-          ],
-        ),
-      ],
-    );
-  }
 
   Widget _recentRideItem(
     String from,

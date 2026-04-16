@@ -6,16 +6,17 @@ class TravelerSearchController extends GetxController {
   final RxString pickUpLocation = "".obs;
   final RxString dropLocation = "".obs;
   final Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
-  final RxString selectedDateStr = "Select Date".obs;
+  final RxString selectedDateStr = "Choose pickup date".obs;
+
 
   // Address labels for display
-  final RxString pickUpAddress = "Where should it be delivered?".obs;
+  final RxString pickUpAddress = "Where should it be picked up?".obs;
   final RxString dropAddress = "Where should it be delivered?".obs;
 
   void updatePickUp(String value) {
     pickUpLocation.value = value;
     pickUpAddress.value = value.isEmpty
-        ? "Where should it be delivered?"
+        ? "Where should it be picked up?"
         : value;
   }
 
@@ -35,12 +36,12 @@ class TravelerSearchController extends GetxController {
 
   void clearDate() {
     selectedDate.value = null;
-    selectedDateStr.value = "Select Date";
+    selectedDateStr.value = "Choose pickup date";
   }
 
   void clearPickUp() {
     pickUpLocation.value = "";
-    pickUpAddress.value = "Where should it be delivered?";
+    pickUpAddress.value = "Where should it be picked up?";
   }
 
   void clearDrop() {
