@@ -17,7 +17,7 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
     return Scaffold(
       backgroundColor: isDarkMode
           ? const Color(0xFF121212)
-          : const Color(0xFFF8F9FE),
+          : const Color(0xFFF9FAFB),
       floatingActionButton: CustomBottomNavBar.buildFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomBottomNavBar(selectedIndex: 1),
@@ -50,7 +50,7 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
                 filled: true,
                 fillColor: isDarkMode
                     ? Colors.white.withOpacity(0.05)
-                    : Colors.white,
+                    : const Color(0xFFF5F5F5),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.r),
                   borderSide: BorderSide.none,
@@ -63,13 +63,14 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
           // Filters
           SizedBox(
             height: 45.h,
-            child: Obx(
-              () => ListView.builder(
+            child: Obx(() {
+              final selectedIndex = controller.selectedFilter.value;
+              return ListView.builder(
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 itemCount: controller.filters.length,
                 itemBuilder: (context, index) {
-                  bool isSelected = controller.selectedFilter.value == index;
+                  bool isSelected = selectedIndex == index;
                   return GestureDetector(
                     onTap: () => controller.updateFilter(index),
                     child: Container(
@@ -83,7 +84,7 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
                             ? (isDarkMode
                                   ? Colors.white10
                                   : const Color(0xFF1A1A1A))
-                            : Colors.transparent,
+                            : (isDarkMode ? Colors.transparent : Colors.white),
                         borderRadius: BorderRadius.circular(8.r),
                         border: Border.all(
                           color: isSelected
@@ -112,42 +113,36 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
                     ),
                   );
                 },
-              ),
-            ),
+              );
+            }),
           ),
 
           SizedBox(height: 20.h),
 
           // Parcel List
           Expanded(
-            child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              children: [
-                _parcelCard(
-                  name: "Ahmed Bin Salah",
-                  date: "Thu 20 Jan, 2026",
-                  status: "In Transit",
-                  statusStep: 2,
-                  from: "Tunisia",
-                  to: "France",
-                  price: "2.5 TND/ kg",
-                  total: "37.50 TND",
-                  isDarkMode: isDarkMode,
-                ),
-                SizedBox(height: 20.h),
-                _parcelCard(
-                  name: "Ahmed Bin Salah",
-                  date: "Thu 20 Jan, 2026",
-                  status: "Delivered",
-                  statusStep: 3,
-                  from: "Tunisia",
-                  to: "France",
-                  price: "2.5 TND/ kg",
-                  total: "37.50 TND",
-                  isDarkMode: isDarkMode,
-                  isDelivered: true,
-                ),
-              ],
+            child: Obx(
+              () => ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                itemCount: controller.filteredParcels.length,
+                separatorBuilder: (context, index) => SizedBox(height: 20.h),
+                itemBuilder: (context, index) {
+                  final parcel = controller.filteredParcels[index];
+                  return CustomParcelCard(
+                    name: parcel['name'],
+                    date: parcel['date'],
+                    status: parcel['status'],
+                    statusStep: parcel['statusStep'],
+                    from: parcel['from'],
+                    to: parcel['to'],
+                    price: parcel['price'],
+                    total: parcel['total'],
+                    isDarkMode: isDarkMode,
+                    isDelivered: parcel['isDelivered'],
+                    isCancelled: parcel['isCancelled'] ?? false,
+                  );
+                },
+              ),
             ),
           ),
         ],
@@ -155,18 +150,38 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
     );
   }
 
-  Widget _parcelCard({
-    required String name,
-    required String date,
-    required String status,
-    required int statusStep,
-    required String from,
-    required String to,
-    required String price,
-    required String total,
-    required bool isDarkMode,
-    bool isDelivered = false,
-  }) {
+}
+
+class CustomParcelCard extends StatelessWidget {
+  final String name;
+  final String date;
+  final String status;
+  final int statusStep;
+  final String from;
+  final String to;
+  final String price;
+  final String total;
+  final bool isDarkMode;
+  final bool isDelivered;
+  final bool isCancelled;
+
+  const CustomParcelCard({
+    super.key,
+    required this.name,
+    required this.date,
+    required this.status,
+    required this.statusStep,
+    required this.from,
+    required this.to,
+    required this.price,
+    required this.total,
+    required this.isDarkMode,
+    this.isDelivered = false,
+    this.isCancelled = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
@@ -216,22 +231,6 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
                             BlendMode.srcIn,
                           ),
                         ),
-                        SizedBox(width: 12.w),
-                        Icon(
-                          Icons.qr_code_2,
-                          size: 16.sp,
-                          color: const Color(0xFF4A80F0),
-                        ),
-                        SizedBox(width: 8.w),
-                        SvgPicture.asset(
-                          "assets/icons/Location-icons.svg",
-                          width: 16.sp,
-                          height: 16.sp,
-                          colorFilter: const ColorFilter.mode(
-                            Color(0xFF4A80F0),
-                            BlendMode.srcIn,
-                          ),
-                        ),
                       ],
                     ),
                     SizedBox(height: 4.h),
@@ -248,9 +247,11 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
                 decoration: BoxDecoration(
-                  color: isDelivered
-                      ? const Color(0xFFE6F7ED)
-                      : const Color(0xFFE8EFFF),
+                  color: isCancelled
+                      ? const Color(0xFFFEE2E2)
+                      : isDelivered
+                          ? const Color(0xFFE6F7ED)
+                          : const Color(0xFFE8EFFF),
                   borderRadius: BorderRadius.circular(20.r),
                 ),
                 child: Text(
@@ -258,9 +259,11 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
                   style: GoogleFonts.montserrat(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.w600,
-                    color: isDelivered
-                        ? const Color(0xFF22C55E)
-                        : const Color(0xFF4A80F0),
+                    color: isCancelled
+                        ? const Color(0xFFEF4444)
+                        : isDelivered
+                            ? const Color(0xFF22C55E)
+                            : const Color(0xFF4A80F0),
                   ),
                 ),
               ),
@@ -270,13 +273,11 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
           SizedBox(height: 20.h),
 
           // Status Tracker
-          if (!isDelivered) ...[
+          if (!isDelivered && !isCancelled) ...[
             Container(
               padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.w),
               decoration: BoxDecoration(
-                color: isDarkMode
-                    ? Colors.white.withOpacity(0.03)
-                    : const Color(0xFFF9FAFB),
+                color: Colors.transparent,
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: Column(
@@ -284,14 +285,14 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _statusLabel("Booked", isDarkMode),
-                      _statusLabel("Picked Up", isDarkMode),
-                      _statusLabel("In Transit", isDarkMode),
-                      _statusLabel("Delivered", isDarkMode),
+                      _statusLabel("Booked", isDarkMode, isActive: 0 <= statusStep),
+                      _statusLabel("Picked Up", isDarkMode, isActive: 1 <= statusStep),
+                      _statusLabel("In Transit", isDarkMode, isActive: 2 <= statusStep),
+                      _statusLabel("Delivered", isDarkMode, isActive: 3 <= statusStep),
                     ],
                   ),
                   SizedBox(height: 8.h),
-                  _buildProgressLine(statusStep),
+                  _buildProgressLine(statusStep, isDarkMode),
                 ],
               ),
             ),
@@ -299,41 +300,34 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
           ],
 
           // Route Info
-          Row(
+          Column(
             children: [
-              Column(
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
-                    "assets/icons/delveri-Icons.svg",
-                    width: 20.sp,
-                    height: 20.sp,
-                    colorFilter: const ColorFilter.mode(
-                      Colors.grey,
-                      BlendMode.srcIn,
-                    ),
-                  ),
                   Container(
-                    height: 20.h,
-                    width: 1.w,
-                    color: Colors.grey.shade300,
-                  ),
-                  SvgPicture.asset(
-                    "assets/icons/Location-icons.svg",
-                    width: 20.sp,
-                    height: 20.sp,
-                    colorFilter: const ColorFilter.mode(
-                      Colors.grey,
-                      BlendMode.srcIn,
+                    width: 32.r,
+                    height: 32.r,
+                    decoration: BoxDecoration(
+                      color: isDarkMode ? Colors.white10 : const Color(0xFFF5F5F5),
+                      shape: BoxShape.circle,
+                    ),
+                    alignment: Alignment.center,
+                    child: SvgPicture.asset(
+                      "assets/icons/delveri-Icons.svg",
+                      width: 16.sp,
+                      height: 16.sp,
+                      colorFilter: ColorFilter.mode(
+                        isDarkMode ? Colors.white70 : Colors.black87,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
-                ],
-              ),
-              SizedBox(width: 12.w),
-              Expanded(
-                child: Column(
-                  children: [
-                    Row(
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _locationInfo(from, "20 Jan", isDarkMode),
                         Text(
@@ -341,13 +335,59 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
                           style: GoogleFonts.montserrat(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
+                            color: isDarkMode ? Colors.white : Colors.black,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 12.h),
-                    Row(
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Container(
+                    width: 32.r,
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        SizedBox(height: 4.h),
+                        Container(width: 2.w, height: 2.h, decoration: BoxDecoration(color: Colors.grey.shade400, shape: BoxShape.circle)),
+                        SizedBox(height: 4.h),
+                        Container(width: 2.w, height: 2.h, decoration: BoxDecoration(color: Colors.grey.shade400, shape: BoxShape.circle)),
+                        SizedBox(height: 4.h),
+                        Container(width: 2.w, height: 2.h, decoration: BoxDecoration(color: Colors.grey.shade400, shape: BoxShape.circle)),
+                        SizedBox(height: 4.h),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 32.r,
+                    height: 32.r,
+                    decoration: BoxDecoration(
+                      color: isDarkMode ? Colors.white10 : const Color(0xFFF5F5F5),
+                      shape: BoxShape.circle,
+                    ),
+                    alignment: Alignment.center,
+                    child: SvgPicture.asset(
+                      "assets/icons/Location-icons.svg",
+                      width: 16.sp,
+                      height: 16.sp,
+                      colorFilter: ColorFilter.mode(
+                        isDarkMode ? Colors.white70 : Colors.black87,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _locationInfo(to, "20 Jan", isDarkMode),
                         Text(
@@ -355,17 +395,20 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
                           style: GoogleFonts.montserrat(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
+                            color: isDarkMode ? Colors.white : Colors.black,
                           ),
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
 
-          SizedBox(height: 20.h),
+          SizedBox(height: 16.h),
+          Divider(color: isDarkMode ? Colors.white10 : Colors.grey.shade200, thickness: 1, height: 1),
+          SizedBox(height: 16.h),
 
           // Pricing
           Row(
@@ -377,6 +420,73 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
           ),
 
           SizedBox(height: 20.h),
+
+          if (!isDelivered && !isCancelled) ...[
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.qr_code_2,
+                      size: 16.sp,
+                      color: const Color(0xFF4A80F0),
+                    ),
+                    label: Text(
+                      "Show QR",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: isDarkMode ? Colors.white : Colors.black87,
+                      ),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      side: BorderSide(
+                        color: isDarkMode ? Colors.white10 : Colors.grey.shade300,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 12.w),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    onPressed: () {},
+                    icon: SvgPicture.asset(
+                      "assets/icons/Location-icons.svg",
+                      width: 16.sp,
+                      height: 16.sp,
+                      colorFilter: const ColorFilter.mode(
+                        Color(0xFF4A80F0),
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    label: Text(
+                      "Track on Map",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w600,
+                        color: isDarkMode ? Colors.white : Colors.black87,
+                      ),
+                    ),
+                    style: OutlinedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 12.h),
+                      side: BorderSide(
+                        color: isDarkMode ? Colors.white10 : Colors.grey.shade300,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 16.h),
+          ],
 
           // Message Button
           SizedBox(
@@ -406,18 +516,20 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
     );
   }
 
-  Widget _statusLabel(String label, bool isDarkMode) {
+  Widget _statusLabel(String label, bool isDarkMode, {bool isActive = false}) {
     return Text(
       label,
       style: GoogleFonts.montserrat(
         fontSize: 10.sp,
         fontWeight: FontWeight.w500,
-        color: isDarkMode ? Colors.white70 : Colors.black87,
+        color: isActive 
+             ? (isDarkMode ? Colors.white : Colors.black87)
+             : (isDarkMode ? Colors.white38 : Colors.grey.shade400),
       ),
     );
   }
 
-  Widget _buildProgressLine(int step) {
+  Widget _buildProgressLine(int step, bool isDarkMode) {
     return Row(
       children: List.generate(7, (index) {
         if (index % 2 == 0) {
@@ -428,7 +540,7 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
             height: 12.r,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: isActive ? const Color(0xFF4A80F0) : Colors.transparent,
+              color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
               border: Border.all(
                 color: isActive
                     ? const Color(0xFF4A80F0)
