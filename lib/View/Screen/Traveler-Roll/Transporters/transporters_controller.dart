@@ -99,7 +99,54 @@ class TransportersController extends GetxController {
       estimatedTotal: "45.00 TND",
       alsoTravelingTo: ["Austria", "Poland"],
     ),
+    Transporter(
+      name: "Sami Jendoubi",
+      imageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
+      rating: 4.5,
+      totalTrips: 50,
+      vehicleType: "Utility Van",
+      from: "Tunisia",
+      to: "Italy",
+      fromDate: "20 Jan",
+      toDate: "20 Jan",
+      fromTime: "08:30 AM",
+      toTime: "10:45 PM",
+      pricePerKg: "2 TND/ kg",
+      estimatedTotal: "30.00 TND",
+      alsoTravelingTo: ["France"],
+    ),
+    Transporter(
+      name: "Karim Brahmi",
+      imageUrl: "https://randomuser.me/api/portraits/men/4.jpg",
+      rating: 5.0,
+      totalTrips: 10,
+      vehicleType: "Utility Van",
+      from: "Tunisia",
+      to: "Spain",
+      fromDate: "20 Jan",
+      toDate: "20 Jan",
+      fromTime: "08:30 AM",
+      toTime: "10:45 PM",
+      pricePerKg: "4 TND/ kg",
+      estimatedTotal: "60.00 TND",
+      alsoTravelingTo: ["Portugal"],
+    ),
   ];
+
+  List<Transporter> get filteredTransporters {
+    if (selectedFilter.value == "All") {
+      return transporters;
+    } else if (selectedFilter.value == "Most Trips") {
+      List<Transporter> sorted = List.from(transporters);
+      sorted.sort((a, b) => b.totalTrips.compareTo(a.totalTrips));
+      return sorted;
+    } else if (selectedFilter.value == "Top Rated") {
+      List<Transporter> sorted = List.from(transporters);
+      sorted.sort((a, b) => b.rating.compareTo(a.rating));
+      return sorted;
+    }
+    return transporters;
+  }
 
   void setFilter(String filter) {
     selectedFilter.value = filter;

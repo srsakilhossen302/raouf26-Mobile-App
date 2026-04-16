@@ -184,18 +184,20 @@ class TransportersView extends GetView<TransportersController> {
 
           // Transporters List
           Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              itemCount: controller.transporters.length,
-              itemBuilder: (context, index) {
-                final transporter = controller.transporters[index];
-                return GestureDetector(
-                  onTap: () => Get.to(
-                    () => TransporterDetailsView(transporter: transporter),
-                  ),
-                  child: _transporterCard(transporter, isDarkMode),
-                );
-              },
+            child: Obx(
+              () => ListView.builder(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                itemCount: controller.filteredTransporters.length,
+                itemBuilder: (context, index) {
+                  final transporter = controller.filteredTransporters[index];
+                  return GestureDetector(
+                    onTap: () => Get.to(
+                      () => TransporterDetailsView(transporter: transporter),
+                    ),
+                    child: _transporterCard(transporter, isDarkMode),
+                  );
+                },
+              ),
             ),
           ),
         ],
