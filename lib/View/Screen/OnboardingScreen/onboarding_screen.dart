@@ -9,7 +9,6 @@ import '../SignUpScreen/signup_screen.dart';
 import '../ChooseRoleScreen/choose_role_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -57,10 +56,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   SvgPicture.asset(
                     AppIcons.logo,
                     height: 30.h,
-                    colorFilter: ColorFilter.mode(
-                      isDarkMode ? Colors.white : Colors.black,
-                      BlendMode.srcIn,
-                    ),
+                    // colorFilter: ColorFilter.mode(
+                    //   // isDarkMode ? Colors.white : Colors.black,
+                    //   // BlendMode.srcIn,
+                    // ),
                   ),
                 ],
               ),
@@ -104,11 +103,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   return Column(
                     children: [
                       const Spacer(),
-                      Image.asset(
-                        onboardingData[index]["image"]!,
-                        height: 320.h,
-                        fit: BoxFit.contain,
-                      ),
+                      if (onboardingData[index]["image"]!.isEmpty)
+                        SizedBox(height: 320.h)
+                      else if (onboardingData[index]["image"]!.endsWith(".svg"))
+                        SvgPicture.asset(
+                          onboardingData[index]["image"]!,
+                          height: 320.h,
+                          fit: BoxFit.contain,
+                        )
+                      else
+                        Image.asset(
+                          onboardingData[index]["image"]!,
+                          height: 320.h,
+                          fit: BoxFit.contain,
+                        ),
                       const Spacer(),
                       // Bottom Sheet Style Content
                       Container(
@@ -193,8 +201,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   borderRadius: BorderRadius.circular(16.r),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: const Color(0xFF4A80F0)
-                                          .withOpacity(0.3),
+                                      color: const Color(
+                                        0xFF4A80F0,
+                                      ).withOpacity(0.3),
                                       blurRadius: 12,
                                       offset: const Offset(0, 6),
                                     ),

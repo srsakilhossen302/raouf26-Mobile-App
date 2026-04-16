@@ -1,7 +1,8 @@
 class AppIcons {
   static const String basePath = "assets/icons";
   //static const String logo = "$basePath/Logoipsum.svg";
-  static const String logo = "$basePath/Apps-Logo.svg";
+  //static const String logo = "$basePath/Apps-Logo.svg";
+  static const String logo = "$basePath/AppsLOgo.svg";
   static const String google = "$basePath/Google-icons.svg";
   static const String apple = "$basePath/Apple-icons.svg";
   static const String facebook = "$basePath/Facebook-icons.svg";
@@ -69,4 +70,6 @@ class AppIcons {
   static const String vehicleRegistration =
       "$basePath/Vehicle Registration.svg";
   static const String passportImg = "$basePath/passport-img.svg";
+  static const String onboarding1 = "$basePath/Onboding1.svg";
+  static const String onboarding3 = "$basePath/Onbodio3.svg";
 }
