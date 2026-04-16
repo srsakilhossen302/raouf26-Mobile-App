@@ -141,7 +141,7 @@ class DashboardScreen extends GetView<DashboardController> {
               padding: EdgeInsets.all(20.r),
               child: Column(
                 children: [
-                  _sectionHeader("statistics".tr, isDarkMode),
+                  _sectionHeader("statistics".tr, isDarkMode, controller.statisticsFilter),
                   SizedBox(height: 16.h),
                   Container(
                     padding: EdgeInsets.all(20.r),
@@ -175,7 +175,7 @@ class DashboardScreen extends GetView<DashboardController> {
                     ),
                   ),
                   SizedBox(height: 24.h),
-                  _sectionHeader("total_earnings".tr, isDarkMode),
+                  _sectionHeader("total_earnings".tr, isDarkMode, controller.earningsFilter),
                   SizedBox(height: 16.h),
                   Container(
                     padding: EdgeInsets.all(20.r),
@@ -628,7 +628,7 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _sectionHeader(String title, bool isDarkMode) {
+  Widget _sectionHeader(String title, bool isDarkMode, RxString filterState) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -640,23 +640,65 @@ class DashboardScreen extends GetView<DashboardController> {
             color: isDarkMode ? Colors.white : Colors.black,
           ),
         ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-          decoration: BoxDecoration(
-            color: isDarkMode ? Colors.white10 : Colors.grey.shade100,
-            borderRadius: BorderRadius.circular(8.r),
+        PopupMenuButton<String>(
+          onSelected: (String value) {
+            filterState.value = value;
+          },
+          color: isDarkMode ? const Color(0xFF2A2A2A) : Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.r),
           ),
-          child: Row(
-            children: [
-              Text(
-                "Weekly",
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  color: isDarkMode ? Colors.white70 : Colors.black87,
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+            PopupMenuItem<String>(
+              value: 'Days',
+              child: Text(
+                'Days',
+                style: GoogleFonts.montserrat(
+                  color: isDarkMode ? Colors.white : Colors.black87,
+                  fontSize: 14.sp,
                 ),
               ),
-              Icon(Icons.keyboard_arrow_down, size: 16.sp, color: Colors.grey),
-            ],
+            ),
+            PopupMenuItem<String>(
+              value: 'Weekly',
+              child: Text(
+                'Weekly',
+                style: GoogleFonts.montserrat(
+                  color: isDarkMode ? Colors.white : Colors.black87,
+                  fontSize: 14.sp,
+                ),
+              ),
+            ),
+            PopupMenuItem<String>(
+              value: 'Monthly',
+              child: Text(
+                'Monthly',
+                style: GoogleFonts.montserrat(
+                  color: isDarkMode ? Colors.white : Colors.black87,
+                  fontSize: 14.sp,
+                ),
+              ),
+            ),
+          ],
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+            decoration: BoxDecoration(
+              color: isDarkMode ? Colors.white10 : Colors.grey.shade100,
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+            child: Row(
+              children: [
+                Obx(() => Text(
+                      filterState.value,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: isDarkMode ? Colors.white70 : Colors.black87,
+                      ),
+                    )),
+                SizedBox(width: 4.w),
+                Icon(Icons.keyboard_arrow_down, size: 16.sp, color: Colors.grey),
+              ],
+            ),
           ),
         ),
       ],

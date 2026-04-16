@@ -9,6 +9,10 @@ class DashboardController extends GetxController {
   final RxString totalEarnings = "€1,240".obs;
   final RxString clientsCount = "42".obs;
 
+  // Filter options
+  final RxString statisticsFilter = "Weekly".obs;
+  final RxString earningsFilter = "Weekly".obs;
+
   @override
   void onInit() {
     super.onInit();
