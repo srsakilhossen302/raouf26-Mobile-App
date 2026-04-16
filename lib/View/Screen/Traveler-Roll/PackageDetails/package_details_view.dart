@@ -140,6 +140,12 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                       "assets/icons/Medicines-icons.svg",
                       isDarkMode,
                     ),
+                    SizedBox(width: 10.w),
+                    _categoryChip(
+                      "Other",
+                      "assets/icons/Other-icons.svg",
+                      isDarkMode,
+                    ),
                   ],
                 ),
               ),
