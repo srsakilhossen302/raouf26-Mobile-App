@@ -42,19 +42,6 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(
-              isDarkMode ? Icons.light_mode : Icons.dark_mode,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
-            onPressed: () {
-              Get.changeThemeMode(
-                isDarkMode ? ThemeMode.light : ThemeMode.dark,
-              );
-            },
-          ),
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),

@@ -35,19 +35,6 @@ class SignUpScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Icon(
-              isDarkMode ? Icons.light_mode : Icons.dark_mode,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
-            onPressed: () {
-              Get.changeThemeMode(
-                isDarkMode ? ThemeMode.light : ThemeMode.dark,
-              );
-            },
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
