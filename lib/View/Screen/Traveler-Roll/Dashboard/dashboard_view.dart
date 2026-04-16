@@ -77,20 +77,21 @@ class DashboardScreen extends GetView<DashboardController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "dashboard_title".tr,
-                                style: TextStyle(
+                                "Dashboard",
+                                style: GoogleFonts.montserrat(
                                   fontSize: 24.sp,
                                   fontWeight: FontWeight.bold,
                                   color: isDarkMode
                                       ? Colors.white
-                                      : Colors.black,
+                                      : Colors.black87,
                                 ),
                               ),
                               SizedBox(height: 4.h),
                               Text(
-                                "dashboard_subtitle".tr,
-                                style: TextStyle(
+                                "Manage your shipments and trips in one place",
+                                style: GoogleFonts.montserrat(
                                   fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
                                   color: isDarkMode
                                       ? Colors.white60
                                       : Colors.grey.shade600,
@@ -98,28 +99,28 @@ class DashboardScreen extends GetView<DashboardController> {
                               ),
                               SizedBox(height: 24.h),
                               Text(
-                                "quick_actions".tr,
-                                style: TextStyle(
+                                "Quick Actions",
+                                style: GoogleFonts.montserrat(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.bold,
                                   color: isDarkMode
                                       ? Colors.white
-                                      : Colors.black,
+                                      : Colors.black87,
                                 ),
                               ),
                               SizedBox(height: 16.h),
                               Row(
                                 children: [
                                   _quickActionCard(
-                                    title: "send_package".tr,
-                                    subtitle: "ship_with_traveler".tr,
+                                    title: "Send Package",
+                                    subtitle: "Send with a traveler or transporter",
                                     icon: AppIcons.sendPackage,
                                     isDarkMode: isDarkMode,
                                   ),
                                   SizedBox(width: 16.w),
                                   _quickActionCard(
-                                    title: "carry_package".tr,
-                                    subtitle: "earn_on_trip".tr,
+                                    title: "Carry Package",
+                                    subtitle: "Earn money from trips you already take",
                                     icon: AppIcons.carryPackage,
                                     isDarkMode: isDarkMode,
                                   ),
@@ -568,46 +569,57 @@ class DashboardScreen extends GetView<DashboardController> {
         padding: EdgeInsets.all(16.r),
         decoration: BoxDecoration(
           color: isDarkMode
-              ? Colors.white.withOpacity(0.03)
-              : const Color(0xFFF8F9FE),
+              ? const Color(0xFF2A2A2A)
+              : Colors.white,
           borderRadius: BorderRadius.circular(16.r),
-          border: Border.all(
-            color: isDarkMode ? Colors.white12 : Colors.grey.shade100,
-          ),
+          boxShadow: isDarkMode
+              ? []
+              : [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.03),
+                    blurRadius: 15,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+          border: isDarkMode
+              ? Border.all(color: Colors.white10)
+              : Border.all(color: Colors.grey.shade100),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.all(8.r),
+              padding: EdgeInsets.all(12.r),
               decoration: BoxDecoration(
-                color: const Color(0xFF4A80F0).withOpacity(0.1),
+                color: const Color(0xFF4A80F0).withOpacity(0.08),
                 shape: BoxShape.circle,
               ),
               child: SvgPicture.asset(
                 icon,
-                height: 20.r,
+                height: 24.r,
+                width: 24.r,
                 colorFilter: const ColorFilter.mode(
                   Color(0xFF4A80F0),
                   BlendMode.srcIn,
                 ),
               ),
             ),
-            SizedBox(height: 12.h),
+            SizedBox(height: 16.h),
             Text(
               title,
-              style: TextStyle(
+              style: GoogleFonts.montserrat(
                 fontSize: 14.sp,
-                fontWeight: FontWeight.bold,
-                color: isDarkMode ? Colors.white : Colors.black,
+                fontWeight: FontWeight.w700,
+                color: isDarkMode ? Colors.white : Colors.black87,
               ),
             ),
-            SizedBox(height: 4.h),
+            SizedBox(height: 6.h),
             Text(
               subtitle,
-              style: TextStyle(
-                fontSize: 10.sp,
+              style: GoogleFonts.montserrat(
+                fontSize: 12.sp,
                 color: isDarkMode ? Colors.white54 : Colors.grey.shade500,
+                height: 1.4,
               ),
             ),
           ],
