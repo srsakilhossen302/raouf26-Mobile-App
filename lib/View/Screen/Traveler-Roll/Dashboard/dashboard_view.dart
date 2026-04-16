@@ -3,12 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/PublishTrips/Views/publish_trips_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../../../../Utils/AppIcons/app_icons.dart';
 import '../../../../Utils/AppImg/app_img.dart';
 import '../../../Widget/custom_bottom_nav_bar.dart';
 import 'dashboard_controller.dart';
 import '../Search/map_picker_screen.dart';
+import '../Search/search_view.dart';
 import '../PackageDetails/package_details_view.dart';
 import '../Profile/withdraw_funds_page.dart';
 import 'active_parcels_page.dart';
@@ -118,6 +120,7 @@ class DashboardScreen extends GetView<DashboardController> {
                                     subtitle: "Send with a traveler or transporter",
                                     icon: AppIcons.sendPackage,
                                     isDarkMode: isDarkMode,
+                                    onTap: () => Get.to(() => const SearchScreen()),
                                   ),
                                   SizedBox(width: 16.w),
                                   _quickActionCard(
@@ -125,6 +128,7 @@ class DashboardScreen extends GetView<DashboardController> {
                                     subtitle: "Earn money from trips you already take",
                                     icon: AppIcons.carryPackage,
                                     isDarkMode: isDarkMode,
+                                    onTap: () => Get.to(() => const PublishTripsScreen()),
                                   ),
                                 ],
                               ),
@@ -574,11 +578,14 @@ class DashboardScreen extends GetView<DashboardController> {
     required String subtitle,
     required String icon,
     required bool isDarkMode,
+    VoidCallback? onTap,
   }) {
     return Expanded(
-      child: Container(
-        padding: EdgeInsets.all(16.r),
-        decoration: BoxDecoration(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.all(16.r),
+          decoration: BoxDecoration(
           color: isDarkMode
               ? const Color(0xFF2A2A2A)
               : Colors.white,
