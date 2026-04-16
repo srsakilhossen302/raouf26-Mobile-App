@@ -643,6 +643,7 @@ class DashboardScreen extends GetView<DashboardController> {
           ],
         ),
       ),
+      )
     );
   }
 
