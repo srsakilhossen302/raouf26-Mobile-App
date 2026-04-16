@@ -10,6 +10,7 @@ import '../../../Widget/custom_bottom_nav_bar.dart';
 import 'dashboard_controller.dart';
 import '../Search/map_picker_screen.dart';
 import '../PackageDetails/package_details_view.dart';
+import '../Profile/withdraw_funds_page.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({super.key});
@@ -153,11 +154,15 @@ class DashboardScreen extends GetView<DashboardController> {
                     ),
                     child: Column(
                       children: [
-                        _statsRow(
-                          icon: AppIcons.totalEarnings,
-                          label: "total_earnings".tr,
-                          value: controller.totalEarnings.value,
-                          isDarkMode: isDarkMode,
+                        GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+                          onTap: () => _showWithdrawDialog(context, controller.totalEarnings.value, isDarkMode),
+                          child: _statsRow(
+                            icon: AppIcons.totalEarnings,
+                            label: "total_earnings".tr,
+                            value: controller.totalEarnings.value,
+                            isDarkMode: isDarkMode,
+                          ),
                         ),
                         Divider(
                           height: 32.h,
@@ -775,6 +780,96 @@ class DashboardScreen extends GetView<DashboardController> {
         borderRadius: BorderRadius.circular(4.r),
       ),
 
+    );
+  }
+
+  void _showWithdrawDialog(BuildContext context, String balance, bool isDarkMode) {
+    Get.dialog(
+      Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.all(24.r),
+          decoration: BoxDecoration(
+            color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+            borderRadius: BorderRadius.circular(20.r),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: EdgeInsets.all(16.r),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF4A80F0).withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: SvgPicture.asset(
+                  AppIcons.totalEarnings,
+                  height: 32.r,
+                  colorFilter: const ColorFilter.mode(
+                    Color(0xFF4A80F0),
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+              SizedBox(height: 20.h),
+              Text(
+                "Total Balance",
+                style: GoogleFonts.montserrat(
+                  fontSize: 16.sp,
+                  color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SizedBox(height: 8.h),
+              Text(
+                balance,
+                style: GoogleFonts.montserrat(
+                  fontSize: 32.sp,
+                  fontWeight: FontWeight.bold,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
+              SizedBox(height: 30.h),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.back(); // Close the dialog
+                    Get.to(() => const WithdrawFundsPage());
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4A80F0),
+                    padding: EdgeInsets.symmetric(vertical: 14.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: Text(
+                    "Withdraw",
+                    style: GoogleFonts.montserrat(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 12.h),
+              TextButton(
+                onPressed: () => Get.back(),
+                child: Text(
+                  "Cancel",
+                  style: GoogleFonts.montserrat(
+                    fontSize: 14.sp,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
