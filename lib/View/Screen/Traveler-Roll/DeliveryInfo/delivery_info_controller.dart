@@ -15,6 +15,16 @@ class DeliveryInfoController extends GetxController {
     "Meet the transporter"
   ];
 
+  // Delivery Speed Options
+  final RxString selectedDeliverySpeed = "Normal".obs;
+  final List<String> deliverySpeedOptions = [
+    "Normal",
+    "Urgent",
+    "ASAP"
+  ];
+
+  void setDeliverySpeed(String speed) => selectedDeliverySpeed.value = speed;
+
   // Delivery Method Options
   final RxString selectedDeliveryMethod = "Recipient address".obs;
   final List<String> deliveryMethodOptions = [
@@ -22,6 +32,16 @@ class DeliveryInfoController extends GetxController {
     "Drop point",
     "Via post"
   ];
+
+  // Delivery Preference Options
+  final RxString selectedDeliveryPreference = "Drop Point".obs;
+  final List<String> deliveryPreferenceOptions = [
+    "Drop Point",
+    "Recipient's Address",
+    "Via Post"
+  ];
+
+  void setDeliveryPreference(String pref) => selectedDeliveryPreference.value = pref;
 
   // Mock Contacts
   final List<Map<String, String>> contacts = [

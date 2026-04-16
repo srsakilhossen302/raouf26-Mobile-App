@@ -230,13 +230,17 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             Obx(
               () => Column(
                 children: [
-                   Row(
+                  Row(
                     children: [
                       Expanded(
                         child: _selectionChip(
                           label: controller.pickupMethodOptions[0],
-                          isSelected: controller.selectedPickupMethod.value == controller.pickupMethodOptions[0],
-                          onTap: () => controller.setPickupMethod(controller.pickupMethodOptions[0]),
+                          isSelected:
+                              controller.selectedPickupMethod.value ==
+                              controller.pickupMethodOptions[0],
+                          onTap: () => controller.setPickupMethod(
+                            controller.pickupMethodOptions[0],
+                          ),
                           isDarkMode: isDarkMode,
                         ),
                       ),
@@ -244,21 +248,29 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
                       Expanded(
                         child: _selectionChip(
                           label: controller.pickupMethodOptions[1],
-                          isSelected: controller.selectedPickupMethod.value == controller.pickupMethodOptions[1],
-                          onTap: () => controller.setPickupMethod(controller.pickupMethodOptions[1]),
+                          isSelected:
+                              controller.selectedPickupMethod.value ==
+                              controller.pickupMethodOptions[1],
+                          onTap: () => controller.setPickupMethod(
+                            controller.pickupMethodOptions[1],
+                          ),
                           isDarkMode: isDarkMode,
                         ),
                       ),
                     ],
                   ),
                   SizedBox(height: 10.h),
-                   Row(
+                  Row(
                     children: [
                       Expanded(
                         child: _selectionChip(
                           label: controller.pickupMethodOptions[2],
-                          isSelected: controller.selectedPickupMethod.value == controller.pickupMethodOptions[2],
-                          onTap: () => controller.setPickupMethod(controller.pickupMethodOptions[2]),
+                          isSelected:
+                              controller.selectedPickupMethod.value ==
+                              controller.pickupMethodOptions[2],
+                          onTap: () => controller.setPickupMethod(
+                            controller.pickupMethodOptions[2],
+                          ),
                           isDarkMode: isDarkMode,
                         ),
                       ),
@@ -285,13 +297,17 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             Obx(
               () => Column(
                 children: [
-                   Row(
+                  Row(
                     children: [
                       Expanded(
                         child: _selectionChip(
                           label: controller.deliveryMethodOptions[0],
-                          isSelected: controller.selectedDeliveryMethod.value == controller.deliveryMethodOptions[0],
-                          onTap: () => controller.setDeliveryMethod(controller.deliveryMethodOptions[0]),
+                          isSelected:
+                              controller.selectedDeliveryMethod.value ==
+                              controller.deliveryMethodOptions[0],
+                          onTap: () => controller.setDeliveryMethod(
+                            controller.deliveryMethodOptions[0],
+                          ),
                           isDarkMode: isDarkMode,
                         ),
                       ),
@@ -299,26 +315,167 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
                       Expanded(
                         child: _selectionChip(
                           label: controller.deliveryMethodOptions[1],
-                          isSelected: controller.selectedDeliveryMethod.value == controller.deliveryMethodOptions[1],
-                          onTap: () => controller.setDeliveryMethod(controller.deliveryMethodOptions[1]),
+                          isSelected:
+                              controller.selectedDeliveryMethod.value ==
+                              controller.deliveryMethodOptions[1],
+                          onTap: () => controller.setDeliveryMethod(
+                            controller.deliveryMethodOptions[1],
+                          ),
                           isDarkMode: isDarkMode,
                         ),
                       ),
                     ],
                   ),
                   SizedBox(height: 10.h),
-                   Row(
+                  Row(
                     children: [
                       Expanded(
                         child: _selectionChip(
                           label: controller.deliveryMethodOptions[2],
-                          isSelected: controller.selectedDeliveryMethod.value == controller.deliveryMethodOptions[2],
-                          onTap: () => controller.setDeliveryMethod(controller.deliveryMethodOptions[2]),
+                          isSelected:
+                              controller.selectedDeliveryMethod.value ==
+                              controller.deliveryMethodOptions[2],
+                          onTap: () => controller.setDeliveryMethod(
+                            controller.deliveryMethodOptions[2],
+                          ),
                           isDarkMode: isDarkMode,
                         ),
                       ),
                       const Expanded(child: SizedBox()),
                     ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 24.h),
+
+            // Delivery Options
+            Row(
+              children: [
+                _sectionTitle("Delivery Options", isDarkMode),
+                SizedBox(width: 8.w),
+              ],
+            ),
+            SizedBox(height: 8.h),
+            Text(
+              "Select delivery speed and preferred carrier type.",
+              style: GoogleFonts.montserrat(
+                fontSize: 12.sp,
+                color: Colors.grey,
+              ),
+            ),
+            SizedBox(height: 24.h),
+
+            // Delivery Speed
+            Text(
+              "Delivery Speed",
+              style: GoogleFonts.montserrat(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+                color: isDarkMode ? Colors.white : Colors.black87,
+              ),
+            ),
+            SizedBox(height: 12.h),
+            Obx(
+              () => Row(
+                children: [
+                  Expanded(
+                    child: _selectionChip(
+                      label: controller.deliverySpeedOptions[0],
+                      isSelected:
+                          controller.selectedDeliverySpeed.value ==
+                          controller.deliverySpeedOptions[0],
+                      onTap: () => controller.setDeliverySpeed(
+                        controller.deliverySpeedOptions[0],
+                      ),
+                      isDarkMode: isDarkMode,
+                    ),
+                  ),
+                  SizedBox(width: 8.w),
+                  Expanded(
+                    child: _selectionChip(
+                      label: controller.deliverySpeedOptions[1],
+                      isSelected:
+                          controller.selectedDeliverySpeed.value ==
+                          controller.deliverySpeedOptions[1],
+                      onTap: () => controller.setDeliverySpeed(
+                        controller.deliverySpeedOptions[1],
+                      ),
+                      isDarkMode: isDarkMode,
+                    ),
+                  ),
+                  SizedBox(width: 8.w),
+                  Expanded(
+                    child: _selectionChip(
+                      label: controller.deliverySpeedOptions[2],
+                      isSelected:
+                          controller.selectedDeliverySpeed.value ==
+                          controller.deliverySpeedOptions[2],
+                      onTap: () => controller.setDeliverySpeed(
+                        controller.deliverySpeedOptions[2],
+                      ),
+                      isDarkMode: isDarkMode,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 24.h),
+
+            // Delivery Handed Over Preference
+            Text(
+              "Delivery Handed Over Preference",
+              style: GoogleFonts.montserrat(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w500,
+                color: isDarkMode ? Colors.white : Colors.black87,
+              ),
+            ),
+            SizedBox(height: 12.h),
+            Obx(
+              () => Row(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: _selectionChip(
+                      label: controller.deliveryPreferenceOptions[0],
+                      isSelected:
+                          controller.selectedDeliveryPreference.value ==
+                          controller.deliveryPreferenceOptions[0],
+                      onTap: () => controller.setDeliveryPreference(
+                        controller.deliveryPreferenceOptions[0],
+                      ),
+                      isDarkMode: isDarkMode,
+                    ),
+                  ),
+                  SizedBox(width: 8.w),
+                  Expanded(
+                    flex: 5,
+                    child: _selectionChip(
+                      label: controller.deliveryPreferenceOptions[1],
+                      isSelected:
+                          controller.selectedDeliveryPreference.value ==
+                          controller.deliveryPreferenceOptions[1],
+                      onTap: () => controller.setDeliveryPreference(
+                        controller.deliveryPreferenceOptions[1],
+                      ),
+                      isDarkMode: isDarkMode,
+                    ),
+                  ),
+                  SizedBox(width: 8.w),
+                  Expanded(
+                    flex: 4,
+                    child: _selectionChip(
+                      label: controller.deliveryPreferenceOptions[2],
+                      isSelected:
+                          controller.selectedDeliveryPreference.value ==
+                          controller.deliveryPreferenceOptions[2],
+                      onTap: () => controller.setDeliveryPreference(
+                        controller.deliveryPreferenceOptions[2],
+                      ),
+                      isDarkMode: isDarkMode,
+                    ),
                   ),
                 ],
               ),
@@ -443,7 +600,9 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             style: GoogleFonts.montserrat(
               fontSize: 13.sp,
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-              color: isSelected ? const Color(0xFF4A80F0) : Colors.grey,
+              color: isSelected
+                  ? const Color(0xFF4A80F0)
+                  : (isDarkMode ? Colors.white70 : Colors.black87),
             ),
           ),
         ),
