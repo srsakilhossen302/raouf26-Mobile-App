@@ -11,6 +11,7 @@ import 'dashboard_controller.dart';
 import '../Search/map_picker_screen.dart';
 import '../PackageDetails/package_details_view.dart';
 import '../Profile/withdraw_funds_page.dart';
+import 'active_parcels_page.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({super.key});
@@ -295,6 +296,7 @@ class DashboardScreen extends GetView<DashboardController> {
                     "Today's Trip",
                     "See all",
                     isDarkMode,
+                    onTapAction: () => Get.to(() => const ActiveParcelsPage()),
                   ),
                   SizedBox(height: 16.h),
                   SingleChildScrollView(
@@ -367,8 +369,9 @@ class DashboardScreen extends GetView<DashboardController> {
   Widget _sectionHeaderWithAction(
     String title,
     String action,
-    bool isDarkMode,
-  ) {
+    bool isDarkMode, {
+    VoidCallback? onTapAction,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -381,9 +384,12 @@ class DashboardScreen extends GetView<DashboardController> {
           ),
         ),
         if (action.isNotEmpty)
-          Text(
-            action,
-            style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+          GestureDetector(
+            onTap: onTapAction,
+            child: Text(
+              action,
+              style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+            ),
           ),
       ],
     );
