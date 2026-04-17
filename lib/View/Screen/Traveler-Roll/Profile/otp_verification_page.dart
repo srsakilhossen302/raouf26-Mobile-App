@@ -44,7 +44,9 @@ class OtpVerificationPage extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: isDarkMode ? const Color(0xFF121212) : const Color(0xFFF8F9FB),
+      backgroundColor: isDarkMode
+          ? const Color(0xFF121212)
+          : const Color(0xFFF8F9FB),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -57,7 +59,7 @@ class OtpVerificationPage extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          title ?? 'verify_email'.tr,
+          title ?? 'Verify Email'.tr,
           style: GoogleFonts.plusJakartaSans(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
@@ -89,7 +91,7 @@ class OtpVerificationPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40.h),
-            
+
             Center(
               child: Pinput(
                 length: 4,
@@ -100,7 +102,7 @@ class OtpVerificationPage extends StatelessWidget {
                 },
               ),
             ),
-            
+
             SizedBox(height: 32.h),
             Center(
               child: RichText(
@@ -123,9 +125,9 @@ class OtpVerificationPage extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             const Spacer(),
-            
+
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
