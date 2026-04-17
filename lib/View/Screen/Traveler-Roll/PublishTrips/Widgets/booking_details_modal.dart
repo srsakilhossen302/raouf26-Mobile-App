@@ -488,20 +488,9 @@ class BookingDetailsScreen extends StatelessWidget {
             time: "08:30 AM",
             isDarkMode: isDarkMode,
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 17.w),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: SvgPicture.asset(
-                AppIcons.partion,
-                height: 30.h,
-                colorFilter: ColorFilter.mode(
-                  const Color(0xFFE0E0E0),
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-          ),
+
+          SizedBox(height: 20.h),
+
           _buildRouteItem(
             icon: AppIcons.location,
             location: "France",
