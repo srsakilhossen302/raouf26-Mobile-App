@@ -21,9 +21,40 @@ import '../../Transporter-Roll/Home/view/transporter_home_view.dart';
 import '../PublishTrips/Views/transport_agreement_page.dart';
 import '../../../Widget/custom_transporter_bottom_nav_bar.dart';
 import '../Search/search_view.dart';
+import 'role_transition_screen.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final ScrollController _scrollController = ScrollController();
+  bool _showFloatingButton = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.offset > 50 && !_showFloatingButton) {
+        setState(() {
+          _showFloatingButton = true;
+        });
+      } else if (_scrollController.offset <= 50 && _showFloatingButton) {
+        setState(() {
+          _showFloatingButton = false;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +65,7 @@ class ProfilePage extends StatelessWidget {
       builder: (context, snapshot) {
         final currentRole = snapshot.data ?? "Traveler";
         final bool isTransporter = currentRole == "Transporter";
+        final bool isTraveler = currentRole == "Traveler";
 
         return Scaffold(
           backgroundColor: isDarkMode
@@ -76,207 +108,239 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
           ),
-          body: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Column(
-              children: [
-                SizedBox(height: 10.h),
-                // User Info Card
-                _buildProfileHeader(isDarkMode),
-                SizedBox(height: 24.h),
+          body: Stack(
+            children: [
+              SingleChildScrollView(
+                controller: _scrollController,
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: Column(
+                  children: [
+                    SizedBox(height: 10.h),
+                    // User Info Card
+                    _buildProfileHeader(isDarkMode),
+                    SizedBox(height: 24.h),
 
-                // App Preferences
-                _buildSection(
-                  title: 'app_preferences'.tr,
-                  isDarkMode: isDarkMode,
-                  items: [
-                    _buildMenuItem(
-                      'account_safety'.tr,
-                      "assets/icons/Account Safety.svg",
-                      isDarkMode,
-                      onTap: () => Get.to(() => const AccountSafetyPage()),
+                    // App Preferences
+                    _buildSection(
+                      title: 'app_preferences'.tr,
+                      isDarkMode: isDarkMode,
+                      items: [
+                        _buildMenuItem(
+                          'account_safety'.tr,
+                          "assets/icons/Account Safety.svg",
+                          isDarkMode,
+                          onTap: () => Get.to(() => const AccountSafetyPage()),
+                        ),
+                        _buildMenuItem(
+                          'payments_wallet'.tr,
+                          "assets/icons/Payments & Wallet.svg",
+                          isDarkMode,
+                          onTap: () => Get.to(() => const PaymentMethodPage()),
+                        ),
+                        _buildMenuItem(
+                          'saved_address'.tr,
+                          "assets/icons/Saved Address.svg",
+                          isDarkMode,
+                          onTap: () => Get.to(() => const SavedAddressPage()),
+                        ),
+                        _buildMenuItem(
+                          'accessibility'.tr,
+                          "assets/icons/Accessibility.svg",
+                          isDarkMode,
+                          onTap: () => Get.to(() => const AccessibilityPage()),
+                        ),
+                        // _buildThemeToggle(isDarkMode),
+                      ],
                     ),
-                    _buildMenuItem(
-                      'payments_wallet'.tr,
-                      "assets/icons/Payments & Wallet.svg",
-                      isDarkMode,
-                      onTap: () => Get.to(() => const PaymentMethodPage()),
-                    ),
-                    _buildMenuItem(
-                      'saved_address'.tr,
-                      "assets/icons/Saved Address.svg",
-                      isDarkMode,
-                      onTap: () => Get.to(() => const SavedAddressPage()),
-                    ),
-                    _buildMenuItem(
-                      'accessibility'.tr,
-                      "assets/icons/Accessibility.svg",
-                      isDarkMode,
-                      onTap: () => Get.to(() => const AccessibilityPage()),
-                    ),
-                    // _buildThemeToggle(isDarkMode),
-                  ],
-                ),
-                SizedBox(height: 24.h),
+                    SizedBox(height: 24.h),
 
-                // Verification
-                _buildSection(
-                  title: 'verification'.tr,
-                  isDarkMode: isDarkMode,
-                  items: [
-                    _buildMenuItem(
-                      'account_verification'.tr,
-                      "assets/icons/Account Verification.svg",
-                      isDarkMode,
-                      onTap: () =>
-                          Get.to(() => const AccountVerificationPage()),
+                    // Verification
+                    _buildSection(
+                      title: 'verification'.tr,
+                      isDarkMode: isDarkMode,
+                      items: [
+                        _buildMenuItem(
+                          'account_verification'.tr,
+                          "assets/icons/Account Verification.svg",
+                          isDarkMode,
+                          onTap: () =>
+                              Get.to(() => const AccountVerificationPage()),
+                        ),
+                        _buildMenuItem(
+                          'documents_verification'.tr,
+                          "assets/icons/Documents-icons.svg",
+                          isDarkMode,
+                          onTap: () =>
+                              Get.to(() => const DocumentVerificationPage()),
+                        ),
+                        _buildMenuItem(
+                          'transport_agreement'.tr,
+                          "assets/icons/Transport Agreement.svg",
+                          isDarkMode,
+                          onTap: () => Get.to(
+                            () =>
+                                TransportAgreementPage(isDarkMode: isDarkMode),
+                          ),
+                        ),
+                      ],
                     ),
-                    _buildMenuItem(
-                      'documents_verification'.tr,
-                      "assets/icons/Documents-icons.svg",
-                      isDarkMode,
-                      onTap: () =>
-                          Get.to(() => const DocumentVerificationPage()),
+                    SizedBox(height: 24.h),
+
+                    // Activities
+                    _buildSection(
+                      title: 'activities'.tr,
+                      isDarkMode: isDarkMode,
+                      items: [
+                        _buildMenuItem(
+                          'trips_shipments'.tr,
+                          "assets/icons/Trips & Shipments.svg",
+                          isDarkMode,
+                          onTap: () => Get.to(() => const TripsShipmentsPage()),
+                        ),
+                      ],
                     ),
-                    _buildMenuItem(
-                      'transport_agreement'.tr,
-                      "assets/icons/Transport Agreement.svg",
-                      isDarkMode,
-                      onTap: () => Get.to(
-                        () => TransportAgreementPage(isDarkMode: isDarkMode),
+                    SizedBox(height: 24.h),
+
+                    // Others
+                    _buildSection(
+                      title: 'others'.tr,
+                      isDarkMode: isDarkMode,
+                      items: [
+                        _buildMenuItem(
+                          'report_an_issue'.tr,
+                          "assets/icons/Report an Issue.svg",
+                          isDarkMode,
+                          onTap: () =>
+                              _showReportIssueBottomSheet(context, isDarkMode),
+                        ),
+                        _buildMenuItem(
+                          'help_center'.tr,
+                          "assets/icons/Help Center.svg",
+                          isDarkMode,
+                        ),
+                        _buildMenuItem(
+                          'terms_of_service'.tr,
+                          "assets/icons/Terms of Service.svg",
+                          isDarkMode,
+                        ),
+                        _buildMenuItem(
+                          'privacy_policy'.tr,
+                          "assets/icons/Privacy Policy.svg",
+                          isDarkMode,
+                        ),
+                        _buildMenuItem(
+                          'rate_sendit_app'.tr,
+                          "assets/icons/Rate Sendit App.svg",
+                          isDarkMode,
+                        ),
+                        _buildMenuItem(
+                          'manage_account'.tr,
+                          "assets/icons/Manage Account.svg",
+                          isDarkMode,
+                          onTap: () => Get.to(() => const ManageAccountPage()),
+                        ),
+                        _buildMenuItem(
+                          'log_out'.tr,
+                          "assets/icons/Log Out.svg",
+                          isDarkMode,
+                          isLast: true,
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 32.h),
+                    SizedBox(height: 16.h),
+                    Text(
+                      "${'version'.tr} 1.1.0",
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 12.sp,
+                        color: Colors.grey,
                       ),
                     ),
+                    SizedBox(height: 100.h), // Extra space for floating button
                   ],
                 ),
-                SizedBox(height: 24.h),
+              ),
 
-                // Activities
-                _buildSection(
-                  title: 'activities'.tr,
-                  isDarkMode: isDarkMode,
-                  items: [
-                    _buildMenuItem(
-                      'trips_shipments'.tr,
-                      "assets/icons/Trips & Shipments.svg",
-                      isDarkMode,
-                      onTap: () => Get.to(() => const TripsShipmentsPage()),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 24.h),
-
-                // Others
-                _buildSection(
-                  title: 'others'.tr,
-                  isDarkMode: isDarkMode,
-                  items: [
-                    _buildMenuItem(
-                      'report_an_issue'.tr,
-                      "assets/icons/Report an Issue.svg",
-                      isDarkMode,
-                      onTap: () =>
-                          _showReportIssueBottomSheet(context, isDarkMode),
-                    ),
-                    _buildMenuItem(
-                      'help_center'.tr,
-                      "assets/icons/Help Center.svg",
-                      isDarkMode,
-                    ),
-                    _buildMenuItem(
-                      'terms_of_service'.tr,
-                      "assets/icons/Terms of Service.svg",
-                      isDarkMode,
-                    ),
-                    _buildMenuItem(
-                      'privacy_policy'.tr,
-                      "assets/icons/Privacy Policy.svg",
-                      isDarkMode,
-                    ),
-                    _buildMenuItem(
-                      'rate_sendit_app'.tr,
-                      "assets/icons/Rate Sendit App.svg",
-                      isDarkMode,
-                    ),
-                    _buildMenuItem(
-                      'manage_account'.tr,
-                      "assets/icons/Manage Account.svg",
-                      isDarkMode,
-                      onTap: () => Get.to(() => const ManageAccountPage()),
-                    ),
-                    _buildMenuItem(
-                      'log_out'.tr,
-                      "assets/icons/Log Out.svg",
-                      isDarkMode,
-                      isLast: true,
-                    ),
-                  ],
-                ),
-                SizedBox(height: 32.h),
-
-                // Role Switch Button
-                FutureBuilder<String?>(
-                  future: SharedPreferenceHelper.getUserRole(),
-                  builder: (context, snapshot) {
-                    final currentRole = snapshot.data ?? "Traveler";
-                    final bool isTraveler = currentRole == "Traveler";
-
-                    return ElevatedButton.icon(
-                      onPressed: () async {
-                        if (isTraveler) {
-                          await SharedPreferenceHelper.saveUserRole(
-                            "Transporter",
+              // Airbnb style floating switch button
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 300),
+                bottom: _showFloatingButton ? 30.h : -60.h,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 300),
+                    opacity: _showFloatingButton ? 1.0 : 0.0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 20,
+                            offset: const Offset(0, 10),
+                          ),
+                        ],
+                      ),
+                      child: ElevatedButton.icon(
+                        onPressed: () async {
+                          Get.to(
+                            () => RoleTransitionScreen(
+                              isSwitchingToTransporter: isTraveler,
+                              onComplete: () async {
+                                if (isTraveler) {
+                                  await SharedPreferenceHelper.saveUserRole(
+                                    "Transporter",
+                                  );
+                                  Get.offAll(
+                                    () => const TransporterHomeScreen(),
+                                  );
+                                } else {
+                                  await SharedPreferenceHelper.saveUserRole(
+                                    "Traveler",
+                                  );
+                                  Get.offAll(() => const SearchScreen());
+                                }
+                              },
+                            ),
                           );
-                          Get.offAll(() => const TransporterHomeScreen());
-                        } else {
-                          await SharedPreferenceHelper.saveUserRole("Traveler");
-                          Get.offAll(() => const SearchScreen());
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF4A80F0),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 24.w,
-                          vertical: 14.h,
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF4A80F0),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 24.w,
+                            vertical: 14.h,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.r),
+                          ),
+                          elevation: 0,
                         ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.r),
+                        icon: SvgPicture.asset(
+                          isTraveler
+                              ? "assets/icons/Switch to Transporter.svg"
+                              : "assets/icons/Switch to Transporter.svg",
+                          width: 20.w,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.white,
+                            BlendMode.srcIn,
+                          ),
                         ),
-                        elevation: 0,
-                      ),
-                      icon: SvgPicture.asset(
-                        isTraveler
-                            ? "assets/icons/Switch to Transporter.svg"
-                            : "assets/icons/Switch to Transporter.svg", // Using same or different icon
-                        width: 20.w,
-                        colorFilter: const ColorFilter.mode(
-                          Colors.white,
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                      label: Text(
-                        isTraveler
-                            ? 'switch_to_transporter'.tr
-                            : 'Switch to Traveler',
-                        style: GoogleFonts.plusJakartaSans(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                        label: Text(
+                          isTraveler
+                              ? 'switch_to_transporter'.tr
+                              : 'Switch to Traveler',
+                          style: GoogleFonts.plusJakartaSans(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    );
-                  },
-                ),
-                SizedBox(height: 16.h),
-                Text(
-                  "${'version'.tr} 1.1.0",
-                  style: GoogleFonts.plusJakartaSans(
-                    fontSize: 12.sp,
-                    color: Colors.grey,
+                    ),
                   ),
                 ),
-                SizedBox(height: 40.h),
-              ],
-            ),
+              ),
+            ],
           ),
         );
       },
