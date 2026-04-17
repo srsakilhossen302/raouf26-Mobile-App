@@ -73,7 +73,15 @@ class _ProfilePageState extends State<ProfilePage> {
               : const Color(0xFFF8F9FB),
           floatingActionButton: isTransporter
               ? FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.snackbar(
+                      "Action",
+                      "Post a new trip feature coming soon!",
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: const Color(0xFF4A80F0),
+                      colorText: Colors.white,
+                    );
+                  },
                   backgroundColor: const Color(0xFF4A80F0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.r),
@@ -217,21 +225,41 @@ class _ProfilePageState extends State<ProfilePage> {
                           'help_center'.tr,
                           "assets/icons/Help Center.svg",
                           isDarkMode,
+                          onTap: () => Get.snackbar(
+                            "Help Center",
+                            "Opening help center...",
+                            snackPosition: SnackPosition.BOTTOM,
+                          ),
                         ),
                         _buildMenuItem(
                           'terms_of_service'.tr,
                           "assets/icons/Terms of Service.svg",
                           isDarkMode,
+                          onTap: () => Get.snackbar(
+                            "Terms of Service",
+                            "Displaying terms of service...",
+                            snackPosition: SnackPosition.BOTTOM,
+                          ),
                         ),
                         _buildMenuItem(
                           'privacy_policy'.tr,
                           "assets/icons/Privacy Policy.svg",
                           isDarkMode,
+                          onTap: () => Get.snackbar(
+                            "Privacy Policy",
+                            "Displaying privacy policy...",
+                            snackPosition: SnackPosition.BOTTOM,
+                          ),
                         ),
                         _buildMenuItem(
                           'rate_sendit_app'.tr,
                           "assets/icons/Rate Sendit App.svg",
                           isDarkMode,
+                          onTap: () => Get.snackbar(
+                            "Rate App",
+                            "Redirecting to store...",
+                            snackPosition: SnackPosition.BOTTOM,
+                          ),
                         ),
                         _buildMenuItem(
                           'manage_account'.tr,
@@ -244,6 +272,61 @@ class _ProfilePageState extends State<ProfilePage> {
                           "assets/icons/Log Out.svg",
                           isDarkMode,
                           isLast: true,
+                          onTap: () {
+                            Get.dialog(
+                              AlertDialog(
+                                backgroundColor: isDarkMode
+                                    ? const Color(0xFF1E1E1E)
+                                    : Colors.white,
+                                title: Text(
+                                  'log_out'.tr,
+                                  style: GoogleFonts.plusJakartaSans(
+                                    fontWeight: FontWeight.bold,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
+                                ),
+                                content: Text(
+                                  'Are you sure you want to log out?',
+                                  style: GoogleFonts.plusJakartaSans(
+                                    color: isDarkMode
+                                        ? Colors.white70
+                                        : Colors.black87,
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Get.back(),
+                                    child: Text(
+                                      'Cancel',
+                                      style: GoogleFonts.plusJakartaSans(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      // Add actual logout logic here (clear prefs, etc.)
+                                      Get.back();
+                                      Get.snackbar(
+                                        "Logged Out",
+                                        "You have been successfully logged out",
+                                        snackPosition: SnackPosition.BOTTOM,
+                                      );
+                                    },
+                                    child: Text(
+                                      'log_out'.tr,
+                                      style: GoogleFonts.plusJakartaSans(
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -593,10 +676,12 @@ class _ProfilePageState extends State<ProfilePage> {
 }
 
 void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
+  final TextEditingController descriptionController = TextEditingController();
+  String selectedCategory = "App Issue";
+
   Get.bottomSheet(
     StatefulBuilder(
-      builder: (context, setState) {
-        String selectedCategory = "App Issue";
+      builder: (context, setModalState) {
         return Container(
           padding: EdgeInsets.all(24.w),
           decoration: BoxDecoration(
@@ -664,31 +749,31 @@ void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
                       "App Issue",
                       selectedCategory == "App Issue",
                       isDarkMode,
-                      (val) => setState(() => selectedCategory = val),
+                      (val) => setModalState(() => selectedCategory = val),
                     ),
                     _buildCategoryChip(
                       "Account",
                       selectedCategory == "Account",
                       isDarkMode,
-                      (val) => setState(() => selectedCategory = val),
+                      (val) => setModalState(() => selectedCategory = val),
                     ),
                     _buildCategoryChip(
                       "Payment",
                       selectedCategory == "Payment",
                       isDarkMode,
-                      (val) => setState(() => selectedCategory = val),
+                      (val) => setModalState(() => selectedCategory = val),
                     ),
                     _buildCategoryChip(
                       "Transporter Issue",
                       selectedCategory == "Transporter Issue",
                       isDarkMode,
-                      (val) => setState(() => selectedCategory = val),
+                      (val) => setModalState(() => selectedCategory = val),
                     ),
                     _buildCategoryChip(
                       "Others",
                       selectedCategory == "Others",
                       isDarkMode,
-                      (val) => setState(() => selectedCategory = val),
+                      (val) => setModalState(() => selectedCategory = val),
                     ),
                   ],
                 ),
@@ -703,6 +788,7 @@ void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
                 ),
                 SizedBox(height: 12.h),
                 TextField(
+                  controller: descriptionController,
                   maxLines: 4,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 14.sp,
@@ -734,39 +820,69 @@ void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
                   ),
                 ),
                 SizedBox(height: 12.h),
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 24.h),
-                  decoration: BoxDecoration(
-                    color: isDarkMode
-                        ? Colors.white.withOpacity(0.05)
-                        : const Color(0xFFF8F9FB),
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.description_outlined,
-                        color: Colors.grey,
-                        size: 32.sp,
-                      ),
-                      SizedBox(height: 8.h),
-                      Text(
-                        "Add Image or Document",
-                        style: GoogleFonts.plusJakartaSans(
-                          fontSize: 13.sp,
+                GestureDetector(
+                  onTap: () {
+                    Get.snackbar(
+                      "Coming Soon",
+                      "Image upload feature is under development",
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.blueAccent,
+                      colorText: Colors.white,
+                    );
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(vertical: 24.h),
+                    decoration: BoxDecoration(
+                      color: isDarkMode
+                          ? Colors.white.withOpacity(0.05)
+                          : const Color(0xFFF8F9FB),
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.description_outlined,
                           color: Colors.grey,
-                          fontWeight: FontWeight.w500,
+                          size: 32.sp,
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 8.h),
+                        Text(
+                          "Add Image or Document",
+                          style: GoogleFonts.plusJakartaSans(
+                            fontSize: 13.sp,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 32.h),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () => Get.back(),
+                    onPressed: () {
+                      if (descriptionController.text.trim().isEmpty) {
+                        Get.snackbar(
+                          "Error",
+                          "Please describe the issue",
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.redAccent,
+                          colorText: Colors.white,
+                        );
+                        return;
+                      }
+                      Get.back();
+                      Get.snackbar(
+                        "Success",
+                        "Your report has been submitted successfully",
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: Colors.green,
+                        colorText: Colors.white,
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF4A80F0),
                       padding: EdgeInsets.symmetric(vertical: 16.h),
