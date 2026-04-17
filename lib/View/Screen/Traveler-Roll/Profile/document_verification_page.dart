@@ -93,36 +93,36 @@ class DocumentVerificationPage extends StatelessWidget {
 
             SizedBox(height: 32.h),
 
-            // Facial Verification
-            _buildSectionTitle(
-              'facial_verification'.tr,
-              'facial_verification_desc'.tr,
-              isDarkMode,
-            ),
-            SizedBox(height: 16.h),
-            _buildDocumentList(
-              isDarkMode: isDarkMode,
-              items: [
-                _buildDocItem(
-                  'take_a_selfie'.tr,
-                  AppIcons.camera,
-                  isDarkMode,
-                  onTap: () =>
-                      Get.to(() => ScanDocumentPage(docType: 'take_a_selfie'.tr)),
-                ),
-                _buildDocItem(
-                  'selfie_with_document'.tr,
-                  AppIcons.verifa,
-                  isDarkMode,
-                  onTap: () => Get.to(
-                    () => ScanDocumentPage(docType: 'selfie_with_document'.tr),
-                  ),
-                  isLast: true,
-                ),
-              ],
-            ),
+            // // Facial Verification
+            // _buildSectionTitle(
+            //   'facial_verification'.tr,
+            //   'facial_verification_desc'.tr,
+            //   isDarkMode,
+            // ),
+            // SizedBox(height: 16.h),
+            // _buildDocumentList(
+            //   isDarkMode: isDarkMode,
+            //   items: [
+            //     _buildDocItem(
+            //       'take_a_selfie'.tr,
+            //       AppIcons.camera,
+            //       isDarkMode,
+            //       onTap: () =>
+            //           Get.to(() => ScanDocumentPage(docType: 'take_a_selfie'.tr)),
+            //     ),
+            //     _buildDocItem(
+            //       'selfie_with_document'.tr,
+            //       AppIcons.verifa,
+            //       isDarkMode,
+            //       onTap: () => Get.to(
+            //         () => ScanDocumentPage(docType: 'selfie_with_document'.tr),
+            //       ),
+            //       isLast: true,
+            //     ),
+            //   ],
+            // ),
 
-            SizedBox(height: 32.h),
+            // SizedBox(height: 32.h),
 
             // Transporter Documents
             _buildSectionTitle(
@@ -203,7 +203,6 @@ class DocumentVerificationPage extends StatelessWidget {
                         height: 1.5,
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -264,18 +263,13 @@ class DocumentVerificationPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 20.h),
-          _buildWhyItem(
-            'build_trust'.tr,
-            'build_trust_desc'.tr,
-            isDarkMode,
-          ),
+          _buildWhyItem('build_trust'.tr, 'build_trust_desc'.tr, isDarkMode),
           SizedBox(height: 16.h),
           _buildWhyItem(
             'more_opportunities'.tr,
             'more_opportunities_desc'.tr,
             isDarkMode,
           ),
-
         ],
       ),
     );

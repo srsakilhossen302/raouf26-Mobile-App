@@ -14,8 +14,8 @@ class ScanDocumentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final bool isSelfie = docType == 'take_a_selfie'.tr ||
-        docType == 'selfie_with_document'.tr;
+    final bool isSelfie =
+        docType == 'take_a_selfie'.tr || docType == 'selfie_with_document'.tr;
 
     return Scaffold(
       backgroundColor: isDarkMode
@@ -116,14 +116,29 @@ class ScanDocumentPage extends StatelessWidget {
             // Scan Slots
             if (docType == 'passport'.tr) ...[
               _buildScanSlot('scan_passport'.tr, isDarkMode),
+              SizedBox(height: 16.h),
+              _buildScanSlot('take_selfie'.tr, isDarkMode),
+              SizedBox(height: 16.h),
+              _buildScanSlot('take_selfie_with_doc'.tr, isDarkMode),
             ] else if (docType == 'take_a_selfie'.tr) ...[
               _buildScanSlot('take_selfie'.tr, isDarkMode),
             ] else if (docType == 'selfie_with_document'.tr) ...[
+              _buildScanSlot('take_selfie_with_doc'.tr, isDarkMode),
+            ] else if (docType == 'vehicle_registration'.tr ||
+                docType == 'residence_certificate'.tr) ...[
+              _buildScanSlot(docType, isDarkMode),
+              SizedBox(height: 16.h),
+              _buildScanSlot('take_selfie'.tr, isDarkMode),
+              SizedBox(height: 16.h),
               _buildScanSlot('take_selfie_with_doc'.tr, isDarkMode),
             ] else ...[
               _buildScanSlot('scan_cin_front'.tr, isDarkMode),
               SizedBox(height: 16.h),
               _buildScanSlot('scan_cin_back'.tr, isDarkMode),
+              SizedBox(height: 16.h),
+              _buildScanSlot('take_selfie'.tr, isDarkMode),
+              SizedBox(height: 16.h),
+              _buildScanSlot('take_selfie_with_doc'.tr, isDarkMode),
             ],
 
             SizedBox(height: 40.h),
@@ -140,7 +155,7 @@ class ScanDocumentPage extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'scan_document'.tr,
+                  'submit_request'.tr,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
@@ -257,7 +272,6 @@ class ScanDocumentPage extends StatelessWidget {
                       color: Colors.grey,
                     ),
                   ),
-
                 ],
               ),
             ),

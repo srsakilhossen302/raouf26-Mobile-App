@@ -58,12 +58,12 @@ class AccountSafetyPage extends StatelessWidget {
             _buildSectionCard(
               isDarkMode: isDarkMode,
               items: [
-                _buildMenuItem(
-                  'kyc_verification'.tr,
-                  Icons.verified_user_rounded,
-                  isDarkMode,
-                  onTap: () => Get.to(() => const VerifyIdentityScreen()),
-                ),
+                // _buildMenuItem(
+                //   'kyc_verification'.tr,
+                //   Icons.verified_user_rounded,
+                //   isDarkMode,
+                //   onTap: () => Get.to(() => const VerifyIdentityScreen()),
+                // ),
                 _buildMenuItem(
                   'update_email'.tr,
                   Icons.mail_outline_rounded,
