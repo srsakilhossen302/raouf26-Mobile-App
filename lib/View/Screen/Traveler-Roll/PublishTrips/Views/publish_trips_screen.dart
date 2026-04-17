@@ -134,26 +134,46 @@ class PublishTripsScreen extends StatelessWidget {
         child: Obx(() {
           bool isSelected = controller.selectedTab.value == index;
 
-          // Split label to highlight numbers in red
-          List<TextSpan> spans = [];
-          if (label.contains('(') && label.contains(')')) {
-            final parts = label.split('(');
-            spans.add(TextSpan(text: parts[0]));
-            final numberPart = parts[1].split(')');
-            spans.add(
-              TextSpan(
-                text: '(${numberPart[0]})',
-                style: TextStyle(
-                  color: isSelected ? Colors.white : Colors.red,
-                  fontWeight: FontWeight.bold,
+          // Highlight the number 3 in red for the Requests tab
+          Widget labelWidget;
+          if (label == "Requests (3)") {
+            labelWidget = RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 14.sp,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                  color: isSelected
+                      ? Colors.white
+                      : (isDarkMode ? Colors.white70 : const Color(0xFF9E9E9E)),
                 ),
+                children: [
+                  const TextSpan(text: "Requests ("),
+                  TextSpan(
+                    text: "3",
+                    style: TextStyle(
+                      color: isSelected ? Colors.white : Colors.red,
+                      fontWeight: isSelected
+                          ? FontWeight.w700
+                          : FontWeight.bold,
+                    ),
+                  ),
+                  const TextSpan(text: ")"),
+                ],
               ),
             );
-            if (numberPart.length > 1) {
-              spans.add(TextSpan(text: numberPart[1]));
-            }
           } else {
-            spans.add(TextSpan(text: label));
+            labelWidget = Text(
+              label,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.plusJakartaSans(
+                fontSize: 14.sp,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                color: isSelected
+                    ? Colors.white
+                    : (isDarkMode ? Colors.white70 : const Color(0xFF9E9E9E)),
+              ),
+            );
           }
 
           return Container(
@@ -162,19 +182,7 @@ class PublishTripsScreen extends StatelessWidget {
               color: isSelected ? const Color(0xFF4A80F0) : Colors.transparent,
               borderRadius: BorderRadius.circular(8.r),
             ),
-            child: Center(
-              child: Text.rich(
-                TextSpan(children: spans),
-                textAlign: TextAlign.center,
-                style: GoogleFonts.plusJakartaSans(
-                  fontSize: 14.sp,
-                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                  color: isSelected
-                      ? Colors.white
-                      : (isDarkMode ? Colors.white70 : const Color(0xFF9E9E9E)),
-                ),
-              ),
-            ),
+            child: Center(child: labelWidget),
           );
         }),
       ),

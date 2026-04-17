@@ -200,7 +200,7 @@ class VerificationStatusPage extends StatelessWidget {
               isDarkMode,
             ),
             _buildCheckItem(
-              'email_address'.tr,
+              'Email Address'.tr,
               'Verified on 15 Jan 2026',
               true,
               isDarkMode,
