@@ -84,15 +84,15 @@ class MessagesController extends GetxController {
       'role': 'traveler',
     },
     {
-      'name': 'John Mike',
-      'message': 'Hello! Is there enough space for a 12kg parcel ...',
-      'time': '05:05 AM',
+      'name': 'Marco Rossi',
+      'message': 'I have reached the pickup point. Where are you?',
+      'time': 'Yesterday',
       'isSupport': false,
       'isUnread': false,
       'image': 'https://via.placeholder.com/150',
-      'subtitle': 'Booking Request Rome → Zurich',
-      'status': '',
-      'role': 'traveler',
+      'subtitle': 'Pickup Update',
+      'status': 'In Transit',
+      'role': 'transporter',
     },
   ].obs;
 
@@ -101,7 +101,20 @@ class MessagesController extends GetxController {
 
   List<Map<String, dynamic>> get filteredMessages {
     if (selectedTab.value == 0) return messages;
-    String role = selectedTab.value == 1 ? 'traveler' : 'client';
+    String role;
+    switch (selectedTab.value) {
+      case 1:
+        role = 'traveler';
+        break;
+      case 2:
+        role = 'client';
+        break;
+      case 3:
+        role = 'transporter';
+        break;
+      default:
+        role = 'all';
+    }
     return messages
         .where((msg) => msg['isSupport'] == true || msg['role'] == role)
         .toList();

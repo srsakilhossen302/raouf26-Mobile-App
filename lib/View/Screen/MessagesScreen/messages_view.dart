@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
 import 'package:raouf26mobileapp/View/Screen/MessagesScreen/messages_controller.dart';
 import 'package:raouf26mobileapp/View/Screen/MessagesScreen/chat_view.dart';
 import 'package:raouf26mobileapp/View/Screen/MessagesScreen/archive_view.dart';
@@ -134,6 +136,8 @@ class MessagesScreen extends StatelessWidget {
                   _buildFilterTab(controller, "Traveler", 1, isDarkMode),
                   SizedBox(width: 10.w),
                   _buildFilterTab(controller, "Client", 2, isDarkMode),
+                  SizedBox(width: 10.w),
+                  _buildFilterTab(controller, "Transporter", 3, isDarkMode),
                 ],
               ),
             ),
@@ -154,22 +158,38 @@ class MessagesScreen extends StatelessWidget {
                       motion: const ScrollMotion(),
                       extentRatio: 0.4,
                       children: [
-                        SlidableAction(
+                        CustomSlidableAction(
                           onPressed: (context) =>
                               controller.archiveMessage(message),
                           backgroundColor: Colors.grey.shade100,
                           foregroundColor: Colors.grey.shade700,
-                          icon: Icons.archive_outlined,
                           borderRadius: BorderRadius.circular(12.r),
+                          child: SvgPicture.asset(
+                            AppIcons.achitacar,
+                            width: 20.w,
+                            height: 20.h,
+                            colorFilter: ColorFilter.mode(
+                              Colors.grey.shade700,
+                              BlendMode.srcIn,
+                            ),
+                          ),
                         ),
                         SizedBox(width: 8.w),
-                        SlidableAction(
+                        CustomSlidableAction(
                           onPressed: (context) =>
                               controller.deleteMessage(message),
                           backgroundColor: Colors.red.shade50,
                           foregroundColor: Colors.red,
-                          icon: Icons.delete_outline,
                           borderRadius: BorderRadius.circular(12.r),
+                          child: SvgPicture.asset(
+                            AppIcons.deleteIcon,
+                            width: 20.w,
+                            height: 20.h,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.red,
+                              BlendMode.srcIn,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -184,13 +204,17 @@ class MessagesScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: Obx(() => controller.userRole.value == "Transporter"
-          ? CustomTransporterBottomNavBar.buildFloatingActionButton()
-          : CustomBottomNavBar.buildFloatingActionButton()),
+      floatingActionButton: Obx(
+        () => controller.userRole.value == "Transporter"
+            ? CustomTransporterBottomNavBar.buildFloatingActionButton()
+            : CustomBottomNavBar.buildFloatingActionButton(),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Obx(() => controller.userRole.value == "Transporter"
-          ? const CustomTransporterBottomNavBar(selectedIndex: 3)
-          : const CustomBottomNavBar(selectedIndex: 3)),
+      bottomNavigationBar: Obx(
+        () => controller.userRole.value == "Transporter"
+            ? const CustomTransporterBottomNavBar(selectedIndex: 3)
+            : const CustomBottomNavBar(selectedIndex: 3),
+      ),
     );
   }
 
@@ -209,8 +233,8 @@ class MessagesScreen extends StatelessWidget {
           decoration: BoxDecoration(
             color: isSelected
                 ? (isDarkMode ? Colors.white : const Color(0xFF1A1A1A))
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular(8.r),
+                : (isDarkMode ? Colors.transparent : Colors.white),
+            borderRadius: BorderRadius.circular(12.r),
             border: Border.all(
               color: isSelected
                   ? (isDarkMode ? Colors.white : const Color(0xFF1A1A1A))
@@ -221,10 +245,10 @@ class MessagesScreen extends StatelessWidget {
             label,
             style: GoogleFonts.montserrat(
               fontSize: 14.sp,
-              fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
               color: isSelected
                   ? (isDarkMode ? Colors.black : Colors.white)
-                  : Colors.grey,
+                  : (isDarkMode ? Colors.white70 : Colors.grey.shade600),
             ),
           ),
         ),
