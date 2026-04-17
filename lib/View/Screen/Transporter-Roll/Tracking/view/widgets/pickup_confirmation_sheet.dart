@@ -35,45 +35,29 @@ void showPickupConfirmationSheet(
                 right: 20.w,
                 bottom: 10.h,
               ),
-              child: Stack(
-                alignment: Alignment.center,
+              child: Row(
                 children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: GestureDetector(
-                      onTap: () {
-                        // QR Scanner logic
-                      },
-                      child: Icon(
-                        Icons.qr_code_scanner,
-                        color: isDarkMode ? Colors.white : Colors.black,
-                        size: 24.sp,
-                      ),
+                  GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Icon(
+                      Icons.arrow_back_ios,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                      size: 20.sp,
                     ),
                   ),
+                  SizedBox(width: 12.w),
                   Text(
-                    '${'pickup_confirmation'.tr} (${package.id})',
+                    'Pickup Confirmation (${package.id})',
                     style: GoogleFonts.montserrat(
                       fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w600,
                       color: isDarkMode ? Colors.white : Colors.black,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: GestureDetector(
-                      onTap: () => Get.back(),
-                      child: Icon(
-                        Icons.close,
-                        color: isDarkMode ? Colors.white : Colors.black,
-                        size: 24.sp,
-                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            Divider(color: isDarkMode ? Colors.white24 : Colors.grey.shade200),
+            Divider(color: isDarkMode ? Colors.white10 : Colors.grey.shade100),
 
             Expanded(
               child: SingleChildScrollView(
@@ -82,73 +66,111 @@ void showPickupConfirmationSheet(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'confirm_pickup'.tr,
+                      'Confirm Pickup',
                       style: GoogleFonts.montserrat(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w700,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 8.h),
+                    Text(
+                      'Are you sure you want to mark this package as picked up?',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14.sp,
+                        color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
+                        height: 1.4,
+                      ),
+                    ),
+                    SizedBox(height: 24.h),
+
+                    // Verify Parcel Section
+                    Text(
+                      'Verify Parcel',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
                       ),
                     ),
                     SizedBox(height: 4.h),
                     Text(
-                      'verify_parcel'.tr,
+                      'Scan the parcel QR code to confirm pickup.\nIf unavailable, upload proof manually.',
                       style: GoogleFonts.montserrat(
                         fontSize: 13.sp,
-                        color: Colors.grey,
-                        height: 1.5,
+                        color: isDarkMode ? Colors.white38 : Colors.grey.shade500,
+                        height: 1.4,
                       ),
                     ),
-                    SizedBox(height: 24.h),
-
-                    // Upload Pickup Proof
-                    Text(
-                      'upload_pickup_proof'.tr,
-                      style: GoogleFonts.montserrat(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
-                        color: isDarkMode ? Colors.white : Colors.black,
-                      ),
-                    ),
-                    SizedBox(height: 10.h),
-                    Container(
+                    SizedBox(height: 20.h),
+                    
+                    // Scan QR Code Button
+                    SizedBox(
                       width: double.infinity,
-                      padding: EdgeInsets.symmetric(vertical: 30.h),
-                      decoration: BoxDecoration(
-                        color: isDarkMode
-                            ? Colors.white10
-                            : const Color(0xFFF8F9FB),
-                        borderRadius: BorderRadius.circular(12.r),
+                      height: 52.h,
+                      child: ElevatedButton.icon(
+                        onPressed: () {
+                          // QR Scanner logic
+                        },
+                        icon: Icon(Icons.qr_code_scanner_rounded, color: Colors.white, size: 22.sp),
+                        label: Text(
+                          'Scan QR Code',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF4A80F0),
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                        ),
                       ),
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.camera_alt_outlined,
-                            color: Colors.grey,
-                            size: 30.sp,
+                    ),
+                    SizedBox(height: 12.h),
+                    
+                    // Upload Proof Button
+                    SizedBox(
+                      width: double.infinity,
+                      height: 52.h,
+                      child: OutlinedButton.icon(
+                        onPressed: () {
+                          // Image picker logic
+                        },
+                        icon: Icon(Icons.camera_alt_outlined, color: Colors.grey, size: 22.sp),
+                        label: Text(
+                          'Upload Proof Instead',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.grey.shade700,
                           ),
-                          SizedBox(height: 8.h),
-                          Text(
-                            'take_photo_or_upload'.tr,
-                            style: GoogleFonts.montserrat(
-                              fontSize: 12.sp,
-                              color: Colors.grey,
-                            ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF8F9FB),
+                          side: BorderSide.none,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12.r),
                           ),
-                        ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 24.h),
 
                     // Package Condition
                     Text(
-                      'package_condition'.tr,
+                      'Package Condition',
                       style: GoogleFonts.montserrat(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
                       ),
                     ),
-                    SizedBox(height: 10.h),
+                    SizedBox(height: 12.h),
                     Obx(
                       () => _buildConditionRadioTile(
                         'package_good'.tr,
@@ -177,51 +199,43 @@ void showPickupConfirmationSheet(
                     ),
                     SizedBox(height: 24.h),
 
-                    // Add Note (Optional)
-                    Row(
-                      children: [
-                        Text(
-                          'add_note'.tr,
-                          style: GoogleFonts.montserrat(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.bold,
-                            color: isDarkMode ? Colors.white : Colors.black,
-                          ),
+                    // Add Note
+                    RichText(
+                      text: TextSpan(
+                        text: 'Add Note',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w700,
+                          color: isDarkMode ? Colors.white : Colors.black,
                         ),
-                        Text(
-                          'optional_label'.tr,
-                          style: GoogleFonts.montserrat(
-                            fontSize: 14.sp,
-                            color: Colors.grey,
+                        children: [
+                          TextSpan(
+                            text: '(Optional)',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    SizedBox(height: 10.h),
+                    SizedBox(height: 12.h),
                     Container(
                       height: 100.h,
+                      width: double.infinity,
                       decoration: BoxDecoration(
-                        color: isDarkMode
-                            ? Colors.white10
-                            : const Color(0xFFF8F9FB),
+                        color: isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF8F9FB),
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: TextField(
                         maxLines: null,
-                        style: TextStyle(
-                          color: isDarkMode ? Colors.white : Colors.black,
-                        ),
+                        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
                         decoration: InputDecoration(
-                          hintText: 'type_here'.tr,
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 13.sp,
-                          ),
+                          hintText: 'Type here...',
+                          hintStyle: TextStyle(color: Colors.grey, fontSize: 14.sp),
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16.w,
-                            vertical: 14.h,
-                          ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                         ),
                       ),
                     ),
@@ -234,7 +248,13 @@ void showPickupConfirmationSheet(
                       child: ElevatedButton(
                         onPressed: () {
                           Get.back();
-                          showDeliveryConfirmationSheet(context, package);
+                          Get.snackbar(
+                            "Success",
+                            "Package picked up successfully!",
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: Colors.green,
+                            colorText: Colors.white,
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF4A80F0),
@@ -244,7 +264,7 @@ void showPickupConfirmationSheet(
                           ),
                         ),
                         child: Text(
-                          "confirm_pickup".tr,
+                          'Confirm Pickup',
                           style: GoogleFonts.montserrat(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
