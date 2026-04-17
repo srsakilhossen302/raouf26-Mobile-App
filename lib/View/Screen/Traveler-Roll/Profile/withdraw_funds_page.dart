@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/withdraw_confirmation_page.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/withdraw_funds_controller.dart';
 
 class WithdrawFundsPage extends StatelessWidget {
   const WithdrawFundsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final WithdrawFundsController controller = Get.put(
+      WithdrawFundsController(),
+    );
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -41,7 +47,7 @@ class WithdrawFundsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 20.h),
-            
+
             // Available Balance Card
             Container(
               width: double.infinity,
@@ -74,7 +80,7 @@ class WithdrawFundsPage extends StatelessWidget {
                       ),
                       SizedBox(width: 8.w),
                       Text(
-                        '2,450.00 TND',
+                        '${controller.availableBalance.toStringAsFixed(2)} TND',
                         style: GoogleFonts.plusJakartaSans(
                           fontSize: 32.sp,
                           fontWeight: FontWeight.w800,
@@ -86,9 +92,9 @@ class WithdrawFundsPage extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             SizedBox(height: 32.h),
-            
+
             // Amount Input
             Text(
               'withdraw_amount'.tr,
@@ -100,6 +106,7 @@ class WithdrawFundsPage extends StatelessWidget {
             ),
             SizedBox(height: 12.h),
             TextField(
+              controller: controller.amountController,
               keyboardType: TextInputType.number,
               style: GoogleFonts.plusJakartaSans(
                 fontSize: 24.sp,
@@ -138,22 +145,48 @@ class WithdrawFundsPage extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             SizedBox(height: 16.h),
-            
+
             // Quick Options
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildQuickOption('25%', isDarkMode),
-                _buildQuickOption('50%', isDarkMode),
-                _buildQuickOption('75%', isDarkMode),
-                _buildQuickOption('Max', isDarkMode),
-              ],
+            Obx(
+              () => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildQuickOption(
+                    '25%',
+                    isDarkMode,
+                    0.25,
+                    controller.selectedPercentage.value == 0.25,
+                    () => controller.setAmountByPercentage(0.25),
+                  ),
+                  _buildQuickOption(
+                    '50%',
+                    isDarkMode,
+                    0.50,
+                    controller.selectedPercentage.value == 0.50,
+                    () => controller.setAmountByPercentage(0.50),
+                  ),
+                  _buildQuickOption(
+                    '75%',
+                    isDarkMode,
+                    0.75,
+                    controller.selectedPercentage.value == 0.75,
+                    () => controller.setAmountByPercentage(0.75),
+                  ),
+                  _buildQuickOption(
+                    'Max',
+                    isDarkMode,
+                    1.0,
+                    controller.selectedPercentage.value == 1.0,
+                    () => controller.setAmountByPercentage(1.0),
+                  ),
+                ],
+              ),
             ),
-            
+
             SizedBox(height: 32.h),
-            
+
             // Payout Method Selection
             Text(
               'select_payout_method'.tr,
@@ -164,13 +197,55 @@ class WithdrawFundsPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 12.h),
-            
-            _buildMethodTile('Bank Account', '**** 8823', Icons.account_balance, isDarkMode),
-            SizedBox(height: 12.h),
-            _buildMethodTile('PayPal', 'john.doe@email.com', Icons.payment, isDarkMode),
-            
+
+            Obx(
+              () => Column(
+                children: [
+                  _buildMethodTile(
+                    'Bank Account',
+                    '**** 8823',
+                    Icons.account_balance,
+                    isDarkMode,
+                    0,
+                    controller.selectedMethodIndex.value == 0,
+                    () => controller.selectMethod(0),
+                  ),
+                  SizedBox(height: 12.h),
+                  _buildMethodTile(
+                    'PayPal',
+                    'john.doe@email.com',
+                    AppIcons.payPal,
+                    isDarkMode,
+                    1,
+                    controller.selectedMethodIndex.value == 1,
+                    () => controller.selectMethod(1),
+                  ),
+                  SizedBox(height: 12.h),
+                  _buildMethodTile(
+                    'Google Pay',
+                    'john.doe@gmail.com',
+                    AppIcons.googlePay,
+                    isDarkMode,
+                    2,
+                    controller.selectedMethodIndex.value == 2,
+                    () => controller.selectMethod(2),
+                  ),
+                  SizedBox(height: 12.h),
+                  _buildMethodTile(
+                    'Stripe',
+                    'stripe_acc_123...',
+                    AppIcons.visaCard,
+                    isDarkMode,
+                    3,
+                    controller.selectedMethodIndex.value == 3,
+                    () => controller.selectMethod(3),
+                  ),
+                ],
+              ),
+            ),
+
             SizedBox(height: 40.h),
-            
+
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -199,59 +274,101 @@ class WithdrawFundsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildQuickOption(String label, bool isDarkMode) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-      decoration: BoxDecoration(
-        color: isDarkMode ? Colors.white.withOpacity(0.05) : Colors.white,
-        borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(color: Colors.grey.withOpacity(0.2)),
-      ),
-      child: Text(
-        label,
-        style: GoogleFonts.plusJakartaSans(
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w600,
-          color: isDarkMode ? Colors.white : Colors.black,
+  Widget _buildQuickOption(
+    String label,
+    bool isDarkMode,
+    double value,
+    bool isSelected,
+    VoidCallback onTap,
+  ) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? const Color(0xFF4A80F0)
+              : (isDarkMode ? Colors.white.withOpacity(0.05) : Colors.white),
+          borderRadius: BorderRadius.circular(8.r),
+          border: Border.all(
+            color: isSelected
+                ? const Color(0xFF4A80F0)
+                : Colors.grey.withOpacity(0.2),
+          ),
+        ),
+        child: Text(
+          label,
+          style: GoogleFonts.plusJakartaSans(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w600,
+            color: isSelected
+                ? Colors.white
+                : (isDarkMode ? Colors.white : Colors.black),
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildMethodTile(String title, String subtitle, IconData icon, bool isDarkMode) {
-    return Container(
-      padding: EdgeInsets.all(16.w),
-      decoration: BoxDecoration(
-        color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: Colors.grey.withOpacity(0.1)),
-      ),
-      child: Row(
-        children: [
-          Icon(icon, color: const Color(0xFF4A80F0)),
-          SizedBox(width: 16.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: GoogleFonts.plusJakartaSans(
-                  fontWeight: FontWeight.w700,
-                  color: isDarkMode ? Colors.white : Colors.black,
-                ),
-              ),
-              Text(
-                subtitle,
-                style: GoogleFonts.plusJakartaSans(
-                  fontSize: 12.sp,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
+  Widget _buildMethodTile(
+    String title,
+    String subtitle,
+    dynamic icon,
+    bool isDarkMode,
+    int index,
+    bool isSelected,
+    VoidCallback onTap,
+  ) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(16.w),
+        decoration: BoxDecoration(
+          color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(
+            color: isSelected
+                ? const Color(0xFF4A80F0)
+                : Colors.grey.withOpacity(0.1),
+            width: isSelected ? 2 : 1,
           ),
-          const Spacer(),
-          const Icon(Icons.radio_button_checked, color: Color(0xFF4A80F0)),
-        ],
+        ),
+        child: Row(
+          children: [
+            if (icon is IconData)
+              Icon(
+                icon,
+                color: isSelected ? const Color(0xFF4A80F0) : Colors.grey,
+              )
+            else if (icon is String)
+              SvgPicture.asset(icon, width: 32.w, fit: BoxFit.contain),
+            SizedBox(width: 16.w),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.plusJakartaSans(
+                    fontWeight: FontWeight.w700,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
+                ),
+                Text(
+                  subtitle,
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: 12.sp,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
+            ),
+            const Spacer(),
+            Icon(
+              isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
+              color: const Color(0xFF4A80F0),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -199,8 +199,20 @@ class PaymentMethodPage extends StatelessWidget {
                   onTap: () => Get.to(() => const AddBankAccountPage()),
                 ),
                 _buildPaymentItem(
+                  'stripe'.tr,
+                  AppIcons.visaCard,
+                  isDarkMode,
+                  onTap: () {},
+                ),
+                _buildPaymentItem(
                   'paypal'.tr,
                   AppIcons.payPal,
+                  isDarkMode,
+                  onTap: () {},
+                ),
+                _buildPaymentItem(
+                  'google_pay'.tr,
+                  AppIcons.googlePay,
                   isDarkMode,
                   onTap: () {},
                   isLast: true,
