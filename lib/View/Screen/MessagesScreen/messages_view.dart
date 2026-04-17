@@ -17,6 +17,7 @@ class MessagesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(MessagesController());
+    controller.refreshRole(); // Refresh role on every build
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -34,6 +35,18 @@ class MessagesScreen extends StatelessWidget {
         ),
         centerTitle: true,
         actions: [
+          Obx(
+            () => controller.userRole.value == "Transporter"
+                ? IconButton(
+                    onPressed: () => _showCreateDialog(context, isDarkMode),
+                    icon: Icon(
+                      Icons.add_circle_outline,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                      size: 24.sp,
+                    ),
+                  )
+                : const SizedBox(),
+          ),
           PopupMenuButton<int>(
             icon: Icon(
               Icons.settings_outlined,
@@ -48,7 +61,13 @@ class MessagesScreen extends StatelessWidget {
               if (value == 0) {
                 Get.to(() => const ArchiveView());
               } else if (value == 1) {
-                // Give Feedback
+                Get.snackbar(
+                  "Give Feedback",
+                  "Feedback feature is coming soon!",
+                  snackPosition: SnackPosition.BOTTOM,
+                  backgroundColor: Colors.blueAccent,
+                  colorText: Colors.white,
+                );
               }
             },
             itemBuilder: (context) => [
@@ -138,6 +157,29 @@ class MessagesScreen extends StatelessWidget {
                   _buildFilterTab(controller, "Client", 2, isDarkMode),
                   SizedBox(width: 10.w),
                   _buildFilterTab(controller, "Transporter", 3, isDarkMode),
+                  Obx(
+                    () => controller.userRole.value == "Transporter"
+                        ? Padding(
+                            padding: EdgeInsets.only(left: 10.w),
+                            child: GestureDetector(
+                              onTap: () =>
+                                  _showCreateDialog(context, isDarkMode),
+                              child: Container(
+                                padding: EdgeInsets.all(8.r),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF4A80F0),
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                  size: 20.sp,
+                                ),
+                              ),
+                            ),
+                          )
+                        : const SizedBox(),
+                  ),
                 ],
               ),
             ),
@@ -205,7 +247,15 @@ class MessagesScreen extends StatelessWidget {
       ),
       floatingActionButton: Obx(
         () => controller.userRole.value == "Transporter"
-            ? CustomTransporterBottomNavBar.buildFloatingActionButton()
+            ? FloatingActionButton(
+                onPressed: () => _showCreateDialog(context, isDarkMode),
+                backgroundColor: const Color(0xFF4A80F0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.r),
+                ),
+                elevation: 4,
+                child: Icon(Icons.add, color: Colors.white, size: 28.sp),
+              )
             : CustomBottomNavBar.buildFloatingActionButton(),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -214,6 +264,300 @@ class MessagesScreen extends StatelessWidget {
             ? const CustomTransporterBottomNavBar(selectedIndex: 3)
             : const CustomBottomNavBar(selectedIndex: 3),
       ),
+    );
+  }
+
+  void _showCreateDialog(BuildContext context, bool isDarkMode) {
+    Get.dialog(
+      Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.r),
+        ),
+        backgroundColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+        child: Padding(
+          padding: EdgeInsets.all(24.r),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Create channel / group",
+                style: GoogleFonts.montserrat(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w700,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
+              SizedBox(height: 24.h),
+              _buildCreateOption(
+                icon: Icons.people_outline,
+                title: "Create Group",
+                subtitle: "sender + receiver + transporter",
+                isDarkMode: isDarkMode,
+                onTap: () {
+                  Get.back();
+                  _showCreateSheet(context, "Group", isDarkMode);
+                },
+              ),
+              SizedBox(height: 16.h),
+              _buildCreateOption(
+                icon: Icons.campaign_outlined,
+                title: "Create Channel",
+                subtitle: "trip updates, route posts",
+                isDarkMode: isDarkMode,
+                onTap: () {
+                  Get.back();
+                  _showCreateSheet(context, "Channel", isDarkMode);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCreateOption({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required bool isDarkMode,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12.r),
+      child: Container(
+        padding: EdgeInsets.all(16.r),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: isDarkMode ? Colors.white12 : Colors.grey.shade200,
+          ),
+          borderRadius: BorderRadius.circular(12.r),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(10.r),
+              decoration: BoxDecoration(
+                color: const Color(0xFF4A80F0).withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: const Color(0xFF4A80F0), size: 24.sp),
+            ),
+            SizedBox(width: 16.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w600,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  Text(
+                    subtitle,
+                    style: GoogleFonts.montserrat(
+                      fontSize: 12.sp,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showCreateSheet(BuildContext context, String type, bool isDarkMode) {
+    final bool isGroup = type == "Group";
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController descController = TextEditingController();
+
+    if (isGroup) {
+      nameController.text =
+          "Tunis \u2192 Paris | 22 Jan"; // Auto-generated mockup
+    }
+
+    Get.bottomSheet(
+      Container(
+        padding: EdgeInsets.all(24.r),
+        decoration: BoxDecoration(
+          color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Create $type",
+                    style: GoogleFonts.montserrat(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => Get.back(),
+                    icon: Icon(
+                      Icons.close,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 24.h),
+              _buildLabel("$type Name", isDarkMode),
+              _buildTextField(nameController, "Enter name", isDarkMode),
+              SizedBox(height: 16.h),
+              _buildLabel(isGroup ? "Linked Trip" : "Linked Route", isDarkMode),
+              _buildTextField(
+                null,
+                "Select trip",
+                isDarkMode,
+                isDropdown: true,
+              ),
+              if (isGroup) ...[
+                SizedBox(height: 16.h),
+                _buildLabel("Linked Parcel (Optional)", isDarkMode),
+                _buildTextField(
+                  null,
+                  "Select parcel",
+                  isDarkMode,
+                  isDropdown: true,
+                ),
+              ],
+              SizedBox(height: 16.h),
+              _buildLabel(
+                isGroup ? "Add Participants" : "Add Followers",
+                isDarkMode,
+              ),
+              _buildTextField(null, "Add users", isDarkMode, isDropdown: true),
+              if (!isGroup) ...[
+                SizedBox(height: 16.h),
+                _buildLabel("Description (Optional)", isDarkMode),
+                _buildTextField(
+                  descController,
+                  "Type here...",
+                  isDarkMode,
+                  maxLines: 3,
+                ),
+              ],
+              SizedBox(height: 32.h),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.back();
+                    Get.snackbar(
+                      "Success",
+                      "$type created successfully!",
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: Colors.green,
+                      colorText: Colors.white,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4A80F0),
+                    padding: EdgeInsets.symmetric(vertical: 16.h),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                  ),
+                  child: Text(
+                    "Create $type",
+                    style: GoogleFonts.montserrat(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20.h),
+            ],
+          ),
+        ),
+      ),
+      isScrollControlled: true,
+    );
+  }
+
+  Widget _buildLabel(String label, bool isDarkMode) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 8.h),
+      child: Text(
+        label,
+        style: GoogleFonts.montserrat(
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w600,
+          color: isDarkMode ? Colors.white : Colors.black,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTextField(
+    TextEditingController? controller,
+    String hint,
+    bool isDarkMode, {
+    bool isDropdown = false,
+    int maxLines = 1,
+  }) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      decoration: BoxDecoration(
+        color: isDarkMode
+            ? Colors.white.withOpacity(0.05)
+            : Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: isDropdown
+          ? InkWell(
+              onTap: () {},
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 14.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      hint,
+                      style: GoogleFonts.montserrat(
+                        fontSize: 14.sp,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+                  ],
+                ),
+              ),
+            )
+          : TextField(
+              controller: controller,
+              maxLines: maxLines,
+              style: GoogleFonts.montserrat(
+                fontSize: 14.sp,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
+              decoration: InputDecoration(
+                hintText: hint,
+                hintStyle: GoogleFonts.montserrat(
+                  fontSize: 14.sp,
+                  color: Colors.grey,
+                ),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.symmetric(vertical: 14.h),
+              ),
+            ),
     );
   }
 

@@ -9,11 +9,13 @@ class MessagesController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _fetchUserRole();
+    refreshRole();
   }
 
-  Future<void> _fetchUserRole() async {
-    userRole.value = await SharedPreferenceHelper.getUserRole() ?? "Traveler";
+  Future<void> refreshRole() async {
+    final role = await SharedPreferenceHelper.getUserRole();
+    userRole.value = role ?? "Traveler";
+    debugPrint("Current User Role in MessagesController: ${userRole.value}");
   }
 
   final RxList<Map<String, dynamic>> messages = <Map<String, dynamic>>[
