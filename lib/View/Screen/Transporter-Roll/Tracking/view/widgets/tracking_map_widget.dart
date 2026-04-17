@@ -86,15 +86,48 @@ class TrackingMapWidget extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                package.userName,
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: isDarkMode
-                                      ? Colors.white
-                                      : Colors.black,
-                                ),
+                              Row(
+                                children: [
+                                  Text(
+                                    package.userName,
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                  SizedBox(width: 12.w),
+                                  // Quick Actions
+                                  _buildQuickActionIcon(
+                                    Icons.near_me_rounded,
+                                    Colors.blue,
+                                    () => Get.snackbar(
+                                      "Navigate",
+                                      "Starting navigation to ${package.toCity}...",
+                                      snackPosition: SnackPosition.BOTTOM,
+                                    ),
+                                  ),
+                                  _buildQuickActionIcon(
+                                    Icons.message_rounded,
+                                    Colors.green,
+                                    () => Get.snackbar(
+                                      "Message",
+                                      "Opening chat with ${package.userName}...",
+                                      snackPosition: SnackPosition.BOTTOM,
+                                    ),
+                                  ),
+                                  _buildQuickActionIcon(
+                                    Icons.call_rounded,
+                                    Colors.orange,
+                                    () => Get.snackbar(
+                                      "Call",
+                                      "Calling ${package.userName}...",
+                                      snackPosition: SnackPosition.BOTTOM,
+                                    ),
+                                  ),
+                                ],
                               ),
                               Text(
                                 package.id,
@@ -208,7 +241,9 @@ class TrackingMapWidget extends StatelessWidget {
                           onPressed: () => _onCTAPressed(context, package),
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.symmetric(vertical: 14.h),
-                            backgroundColor: package.currentStatusStep == 3 ? Colors.green : const Color(0xFF4A80F0),
+                            backgroundColor: package.currentStatusStep == 3
+                                ? Colors.green
+                                : const Color(0xFF4A80F0),
                             elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12.r),
@@ -287,10 +322,15 @@ class TrackingMapWidget extends StatelessWidget {
 
   String _getCTAText(int statusStep) {
     switch (statusStep) {
-      case 0: return 'confirm_pickup'.tr;
-      case 1: return 'mark_in_transit'.tr;
-      case 2: return 'confirm_delivery'.tr;
-      case 3: default: return 'view_proof'.tr;
+      case 0:
+        return 'confirm_pickup'.tr;
+      case 1:
+        return 'mark_in_transit'.tr;
+      case 2:
+        return 'confirm_delivery'.tr;
+      case 3:
+      default:
+        return 'view_proof'.tr;
     }
   }
 
@@ -310,5 +350,20 @@ class TrackingMapWidget extends StatelessWidget {
         // Future logic to view proof of delivery
         break;
     }
+  }
+
+  Widget _buildQuickActionIcon(IconData icon, Color color, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(6.r),
+        margin: EdgeInsets.only(right: 8.w),
+        decoration: BoxDecoration(
+          color: color.withOpacity(0.1),
+          shape: BoxShape.circle,
+        ),
+        child: Icon(icon, color: color, size: 18.sp),
+      ),
+    );
   }
 }
