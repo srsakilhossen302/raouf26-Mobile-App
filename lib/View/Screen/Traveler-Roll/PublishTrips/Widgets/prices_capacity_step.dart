@@ -66,35 +66,68 @@ class PricesCapacityStep extends StatelessWidget {
           Obx(
             () => GestureDetector(
               onTap: () {
-                showCountryPicker(
-                  context: context,
-                  showPhoneCode: false,
-                  onSelect: (Country country) {
-                    controller.selectedCountryName.value = country.name;
-                    controller.selectedCountryFlag.value = country.flagEmoji;
-                    // Note: country_picker doesn't provide currency code directly.
-                    // You might need a mapping or another package for full currency support.
-                    controller.selectedCurrency.value = country.countryCode;
-                  },
-                  countryListTheme: CountryListThemeData(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(24.r),
+                final List<Map<String, String>> currencies = [
+                  {"code": "TND", "name": "Tunisian Dinar", "flag": "🇹🇳"},
+                  {"code": "EUR", "name": "Euro", "flag": "🇪🇺"},
+                  {"code": "USD", "name": "US Dollar", "flag": "🇺🇸"},
+                  {"code": "GBP", "name": "British Pound", "flag": "🇬🇧"},
+                ];
+
+                Get.bottomSheet(
+                  Container(
+                    padding: EdgeInsets.all(24.w),
+                    decoration: BoxDecoration(
+                      color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
                     ),
-                    inputDecoration: InputDecoration(
-                      hintText: 'Search country',
-                      prefixIcon: const Icon(Icons.search),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                        borderSide: BorderSide.none,
-                      ),
-                      filled: true,
-                      fillColor: isDarkMode
-                          ? Colors.white10
-                          : const Color(0xFFF5F7FA),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Select Currency",
+                          style: GoogleFonts.plusJakartaSans(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w700,
+                            color: isDarkMode ? Colors.white : Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 20.h),
+                        ...currencies.map((currency) {
+                          bool isSelected = controller.selectedCurrency.value == currency["code"];
+                          return ListTile(
+                            onTap: () {
+                              controller.selectedCurrency.value = currency["code"]!;
+                              controller.selectedCountryName.value = currency["name"]!;
+                              controller.selectedCountryFlag.value = currency["flag"]!;
+                              Get.back();
+                            },
+                            leading: Text(
+                              currency["flag"]!,
+                              style: TextStyle(fontSize: 24.sp),
+                            ),
+                            title: Text(
+                              currency["name"]!,
+                              style: GoogleFonts.plusJakartaSans(
+                                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                                color: isDarkMode ? Colors.white : Colors.black,
+                              ),
+                            ),
+                            trailing: Text(
+                              currency["code"]!,
+                              style: GoogleFonts.plusJakartaSans(
+                                fontWeight: FontWeight.w700,
+                                color: isSelected ? const Color(0xFF4A80F0) : Colors.grey,
+                              ),
+                            ),
+                            selected: isSelected,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                          );
+                        }).toList(),
+                      ],
                     ),
-                    backgroundColor: isDarkMode
-                        ? const Color(0xFF1E1E1E)
-                        : Colors.white,
                   ),
                 );
               },
