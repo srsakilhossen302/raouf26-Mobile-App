@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../Models/trip_model.dart';
+import 'publish_trip_flow_screen.dart';
 
 class TripDetailsScreen extends StatelessWidget {
   final TripModel trip;
@@ -104,6 +105,7 @@ class TripDetailsScreen extends StatelessWidget {
                   _buildDetailsCard(
                     title: "Route Details",
                     isDarkMode: isDarkMode,
+                    onEdit: () => Get.to(() => const PublishTripFlowScreen()),
                     child: Column(
                       children: [
                         _buildRoutePoint(
@@ -170,6 +172,7 @@ class TripDetailsScreen extends StatelessWidget {
                   _buildDetailsCard(
                     title: "Trip Details",
                     isDarkMode: isDarkMode,
+                    onEdit: () => Get.to(() => const PublishTripFlowScreen()),
                     child: Column(
                       children: [
                         _buildDetailRow(
@@ -264,6 +267,7 @@ class TripDetailsScreen extends StatelessWidget {
     required String title,
     required Widget child,
     required bool isDarkMode,
+    VoidCallback? onEdit,
   }) {
     return Container(
       padding: EdgeInsets.all(20.w),
@@ -285,13 +289,17 @@ class TripDetailsScreen extends StatelessWidget {
                   color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
                 ),
               ),
-              SvgPicture.asset(
-                AppIcons.edit,
-                width: 20.w,
-                height: 20.w,
-                colorFilter: ColorFilter.mode(
-                  isDarkMode ? Colors.white60 : Colors.black54,
-                  BlendMode.srcIn,
+              GestureDetector(
+                onTap: onEdit,
+                behavior: HitTestBehavior.opaque,
+                child: SvgPicture.asset(
+                  AppIcons.edit,
+                  width: 20.w,
+                  height: 20.w,
+                  colorFilter: ColorFilter.mode(
+                    isDarkMode ? Colors.white60 : Colors.black54,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
             ],
