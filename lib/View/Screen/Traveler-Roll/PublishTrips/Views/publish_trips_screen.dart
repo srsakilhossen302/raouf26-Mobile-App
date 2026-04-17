@@ -133,21 +133,44 @@ class PublishTripsScreen extends StatelessWidget {
         onTap: () => controller.changeTab(index),
         child: Obx(() {
           bool isSelected = controller.selectedTab.value == index;
+
+          // Split label to highlight numbers in red
+          List<TextSpan> spans = [];
+          if (label.contains('(') && label.contains(')')) {
+            final parts = label.split('(');
+            spans.add(TextSpan(text: parts[0]));
+            final numberPart = parts[1].split(')');
+            spans.add(TextSpan(
+              text: '(${numberPart[0]})',
+              style: TextStyle(
+                color: isSelected ? Colors.white : Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+            ));
+            if (numberPart.length > 1) {
+              spans.add(TextSpan(text: numberPart[1]));
+            }
+          } else {
+            spans.add(TextSpan(text: label));
+          }
+
           return Container(
             padding: EdgeInsets.symmetric(vertical: 10.h),
             decoration: BoxDecoration(
               color: isSelected ? const Color(0xFF4A80F0) : Colors.transparent,
               borderRadius: BorderRadius.circular(8.r),
             ),
-            child: Text(
-              label,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.plusJakartaSans(
-                fontSize: 14.sp,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                color: isSelected
-                    ? Colors.white
-                    : (isDarkMode ? Colors.white70 : const Color(0xFF9E9E9E)),
+            child: Center(
+              child: Text.rich(
+                TextSpan(children: spans),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 14.sp,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                  color: isSelected
+                      ? Colors.white
+                      : (isDarkMode ? Colors.white70 : const Color(0xFF9E9E9E)),
+                ),
               ),
             ),
           );
@@ -559,6 +582,27 @@ class PublishTripsScreen extends StatelessWidget {
         onTap: () => controller.changeRequestSubTab(index),
         child: Obx(() {
           bool isSelected = controller.requestSubTab.value == index;
+
+          // Split label to highlight numbers in red
+          List<TextSpan> spans = [];
+          if (label.contains('(') && label.contains(')')) {
+            final parts = label.split('(');
+            spans.add(TextSpan(text: parts[0]));
+            final numberPart = parts[1].split(')');
+            spans.add(TextSpan(
+              text: '(${numberPart[0]})',
+              style: TextStyle(
+                color: Colors.red, // Keep it red even when selected for contrast or white?
+                fontWeight: FontWeight.bold,
+              ),
+            ));
+            if (numberPart.length > 1) {
+              spans.add(TextSpan(text: numberPart[1]));
+            }
+          } else {
+            spans.add(TextSpan(text: label));
+          }
+
           return Container(
             padding: EdgeInsets.symmetric(vertical: 8.h),
             decoration: BoxDecoration(
@@ -572,15 +616,17 @@ class PublishTripsScreen extends StatelessWidget {
                     : (isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0)),
               ),
             ),
-            child: Text(
-              label,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.plusJakartaSans(
-                fontSize: 14.sp,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                color: isSelected
-                    ? (isDarkMode ? Colors.black : Colors.white)
-                    : (isDarkMode ? Colors.white70 : const Color(0xFF9E9E9E)),
+            child: Center(
+              child: Text.rich(
+                TextSpan(children: spans),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 14.sp,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                  color: isSelected
+                      ? (isDarkMode ? Colors.black : Colors.white)
+                      : (isDarkMode ? Colors.white70 : const Color(0xFF9E9E9E)),
+                ),
               ),
             ),
           );
