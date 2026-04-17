@@ -283,70 +283,70 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
 
             SizedBox(height: 24.h),
 
-            // Delivery Method
-            _sectionTitle("Delivery Method", isDarkMode),
-            SizedBox(height: 8.h),
-            Text(
-              "How should the package reach the receiver?",
-              style: GoogleFonts.montserrat(
-                fontSize: 12.sp,
-                color: Colors.grey,
-              ),
-            ),
-            SizedBox(height: 16.h),
-            Obx(
-              () => Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _selectionChip(
-                          label: controller.deliveryMethodOptions[0],
-                          isSelected:
-                              controller.selectedDeliveryMethod.value ==
-                              controller.deliveryMethodOptions[0],
-                          onTap: () => controller.setDeliveryMethod(
-                            controller.deliveryMethodOptions[0],
-                          ),
-                          isDarkMode: isDarkMode,
-                        ),
-                      ),
-                      SizedBox(width: 10.w),
-                      Expanded(
-                        child: _selectionChip(
-                          label: controller.deliveryMethodOptions[1],
-                          isSelected:
-                              controller.selectedDeliveryMethod.value ==
-                              controller.deliveryMethodOptions[1],
-                          onTap: () => controller.setDeliveryMethod(
-                            controller.deliveryMethodOptions[1],
-                          ),
-                          isDarkMode: isDarkMode,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10.h),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _selectionChip(
-                          label: controller.deliveryMethodOptions[2],
-                          isSelected:
-                              controller.selectedDeliveryMethod.value ==
-                              controller.deliveryMethodOptions[2],
-                          onTap: () => controller.setDeliveryMethod(
-                            controller.deliveryMethodOptions[2],
-                          ),
-                          isDarkMode: isDarkMode,
-                        ),
-                      ),
-                      const Expanded(child: SizedBox()),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            // // Delivery Method
+            // _sectionTitle("Delivery Method", isDarkMode),
+            // SizedBox(height: 8.h),
+            // Text(
+            //   "How should the package reach the receiver?",
+            //   style: GoogleFonts.montserrat(
+            //     fontSize: 12.sp,
+            //     color: Colors.grey,
+            //   ),
+            // ),
+            // SizedBox(height: 16.h),
+            // Obx(
+            //   () => Column(
+            //     children: [
+            //       Row(
+            //         children: [
+            //           Expanded(
+            //             child: _selectionChip(
+            //               label: controller.deliveryMethodOptions[0],
+            //               isSelected:
+            //                   controller.selectedDeliveryMethod.value ==
+            //                   controller.deliveryMethodOptions[0],
+            //               onTap: () => controller.setDeliveryMethod(
+            //                 controller.deliveryMethodOptions[0],
+            //               ),
+            //               isDarkMode: isDarkMode,
+            //             ),
+            //           ),
+            //           SizedBox(width: 10.w),
+            //           Expanded(
+            //             child: _selectionChip(
+            //               label: controller.deliveryMethodOptions[1],
+            //               isSelected:
+            //                   controller.selectedDeliveryMethod.value ==
+            //                   controller.deliveryMethodOptions[1],
+            //               onTap: () => controller.setDeliveryMethod(
+            //                 controller.deliveryMethodOptions[1],
+            //               ),
+            //               isDarkMode: isDarkMode,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //       SizedBox(height: 10.h),
+            //       Row(
+            //         children: [
+            //           Expanded(
+            //             child: _selectionChip(
+            //               label: controller.deliveryMethodOptions[2],
+            //               isSelected:
+            //                   controller.selectedDeliveryMethod.value ==
+            //                   controller.deliveryMethodOptions[2],
+            //               onTap: () => controller.setDeliveryMethod(
+            //                 controller.deliveryMethodOptions[2],
+            //               ),
+            //               isDarkMode: isDarkMode,
+            //             ),
+            //           ),
+            //           const Expanded(child: SizedBox()),
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ),
             SizedBox(height: 24.h),
 
             // Delivery Options

@@ -669,9 +669,9 @@ class DashboardScreen extends GetView<DashboardController> {
           ),
           itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
             PopupMenuItem<String>(
-              value: 'Days',
+              value: 'Daily',
               child: Text(
-                'Days',
+                'Daily',
                 style: GoogleFonts.montserrat(
                   color: isDarkMode ? Colors.white : Colors.black87,
                   fontSize: 14.sp,

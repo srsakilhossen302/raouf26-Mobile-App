@@ -148,7 +148,7 @@ class MessagesScreen extends StatelessWidget {
             child: Obx(() {
               final messages = controller.filteredMessages;
               return ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.zero,
                 itemCount: messages.length,
                 itemBuilder: (context, index) {
                   final message = messages[index];
@@ -163,7 +163,7 @@ class MessagesScreen extends StatelessWidget {
                               controller.archiveMessage(message),
                           backgroundColor: Colors.grey.shade100,
                           foregroundColor: Colors.grey.shade700,
-                          borderRadius: BorderRadius.circular(12.r),
+                          borderRadius: BorderRadius.zero,
                           child: SvgPicture.asset(
                             AppIcons.achitacar,
                             width: 20.w,
@@ -174,13 +174,12 @@ class MessagesScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(width: 8.w),
                         CustomSlidableAction(
                           onPressed: (context) =>
                               controller.deleteMessage(message),
                           backgroundColor: Colors.red.shade50,
                           foregroundColor: Colors.red,
-                          borderRadius: BorderRadius.circular(12.r),
+                          borderRadius: BorderRadius.zero,
                           child: SvgPicture.asset(
                             AppIcons.deleteIcon,
                             width: 20.w,
@@ -262,7 +261,7 @@ class MessagesScreen extends StatelessWidget {
     bool hasStatus = message['status'] != null && message['status'].isNotEmpty;
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12.h),
+      padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 20.w),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

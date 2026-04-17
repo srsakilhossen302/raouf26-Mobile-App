@@ -168,13 +168,13 @@ class TransportersView extends GetView<TransportersController> {
                       color: Colors.black87,
                     ),
                   ),
-
-                  Spacer(),
-                  SvgPicture.asset(
-                    AppIcons.location,
-                    width: 20.w,
-                    height: 20.h,
-                  ),
+                  //
+                  // Spacer(),
+                  // SvgPicture.asset(
+                  //   AppIcons.location,
+                  //   width: 20.w,
+                  //   height: 20.h,
+                  // ),
                 ],
               ),
             ),
