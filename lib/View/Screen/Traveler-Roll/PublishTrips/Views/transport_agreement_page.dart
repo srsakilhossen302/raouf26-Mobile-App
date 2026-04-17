@@ -27,13 +27,6 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: widget.isDarkMode ? Colors.white : Colors.black,
-          ),
-          onPressed: () => Get.back(),
-        ),
         centerTitle: true,
         title: Text(
           "Transport Agreement",

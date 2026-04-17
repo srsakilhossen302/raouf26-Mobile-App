@@ -27,13 +27,6 @@ class PublishTripFlowScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        leading: IconButton(
-          onPressed: () => controller.previousStep(),
-          icon: Icon(
-            Icons.arrow_back,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
-        ),
         title: Text(
           "Publish Your Trip",
           style: GoogleFonts.plusJakartaSans(

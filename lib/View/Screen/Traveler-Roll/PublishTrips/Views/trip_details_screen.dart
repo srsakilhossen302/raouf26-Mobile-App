@@ -23,13 +23,6 @@ class TripDetailsScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: Icon(
-            Icons.arrow_back,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
-        ),
         actions: [
           PopupMenuButton<int>(
             icon: Icon(
@@ -122,18 +115,13 @@ class TripDetailsScreen extends StatelessWidget {
                           isDarkMode: isDarkMode,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 12.w),
+                          padding: EdgeInsets.only(left: 20.w),
                           child: Align(
                             alignment: Alignment.centerLeft,
-                            child: SvgPicture.asset(
-                              AppIcons.partion,
+                            child: Container(
+                              width: 1.w,
                               height: 30.h,
-                              colorFilter: ColorFilter.mode(
-                                isDarkMode
-                                    ? Colors.white24
-                                    : const Color(0xFFE0E0E0),
-                                BlendMode.srcIn,
-                              ),
+                              color: isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
                             ),
                           ),
                         ),

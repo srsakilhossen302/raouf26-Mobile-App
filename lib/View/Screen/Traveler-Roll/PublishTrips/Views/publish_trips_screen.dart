@@ -28,19 +28,6 @@ class PublishTripsScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        leading: IconButton(
-          onPressed: () {
-            if (Get.isDarkMode) {
-              Get.changeThemeMode(ThemeMode.light);
-            } else {
-              Get.changeThemeMode(ThemeMode.dark);
-            }
-          },
-          icon: Icon(
-            isDarkMode ? Icons.wb_sunny_outlined : Icons.nightlight_round,
-            color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-          ),
-        ),
         title: Obx(() {
           String title = "Publish Trips";
           if (controller.selectedTab.value == 1) title = "Trips";
@@ -396,14 +383,11 @@ class PublishTripsScreen extends StatelessWidget {
             isDarkMode: isDarkMode,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 12.w),
-            child: SvgPicture.asset(
-              AppIcons.partion,
+            padding: EdgeInsets.only(left: 20.w),
+            child: Container(
+              width: 1.w,
               height: 30.h,
-              colorFilter: ColorFilter.mode(
-                isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
-                BlendMode.srcIn,
-              ),
+              color: isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
             ),
           ),
           _buildRoutePoint(
@@ -706,14 +690,11 @@ class PublishTripsScreen extends StatelessWidget {
             isDarkMode: isDarkMode,
           ),
           Padding(
-            padding: EdgeInsets.only(left: 12.w),
-            child: SvgPicture.asset(
-              AppIcons.partion,
+            padding: EdgeInsets.only(left: 20.w),
+            child: Container(
+              width: 1.w,
               height: 30.h,
-              colorFilter: ColorFilter.mode(
-                isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
-                BlendMode.srcIn,
-              ),
+              color: isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
             ),
           ),
           _buildRoutePoint(
