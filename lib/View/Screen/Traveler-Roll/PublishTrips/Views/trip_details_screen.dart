@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/PublishTrips/Controllers/publish_trip_flow_controller.dart';
 import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../Models/trip_model.dart';
 import 'publish_trip_flow_screen.dart';
@@ -105,7 +106,14 @@ class TripDetailsScreen extends StatelessWidget {
                   _buildDetailsCard(
                     title: "Route Details",
                     isDarkMode: isDarkMode,
-                    onEdit: () => Get.to(() => const PublishTripFlowScreen()),
+                    onEdit: () {
+                      final controller = Get.put(PublishTripFlowController());
+                      controller.populateFromTrip(trip);
+                      controller.currentStep.value = 1;
+                      controller.isEditMode.value = true;
+                      controller.targetStep.value = 1;
+                      Get.to(() => const PublishTripFlowScreen());
+                    },
                     child: Column(
                       children: [
                         _buildRoutePoint(
@@ -123,7 +131,9 @@ class TripDetailsScreen extends StatelessWidget {
                             child: Container(
                               width: 1.w,
                               height: 30.h,
-                              color: isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
+                              color: isDarkMode
+                                  ? Colors.white24
+                                  : const Color(0xFFE0E0E0),
                             ),
                           ),
                         ),
@@ -172,7 +182,14 @@ class TripDetailsScreen extends StatelessWidget {
                   _buildDetailsCard(
                     title: "Trip Details",
                     isDarkMode: isDarkMode,
-                    onEdit: () => Get.to(() => const PublishTripFlowScreen()),
+                    onEdit: () {
+                      final controller = Get.put(PublishTripFlowController());
+                      controller.populateFromTrip(trip);
+                      controller.currentStep.value = 2;
+                      controller.isEditMode.value = true;
+                      controller.targetStep.value = 5;
+                      Get.to(() => const PublishTripFlowScreen());
+                    },
                     child: Column(
                       children: [
                         _buildDetailRow(

@@ -143,7 +143,7 @@ class TripDetailsStep extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () => controller.currentStep.value = 0,
+              onPressed: () => controller.nextStep(),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4A80F0),
                 padding: EdgeInsets.symmetric(vertical: 16.h),

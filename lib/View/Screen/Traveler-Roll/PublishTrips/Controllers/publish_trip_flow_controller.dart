@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../Models/trip_model.dart';
 
 class PublishTripFlowController extends GetxController {
   final RxInt currentStep = 0.obs;
+  final RxBool isEditMode = false.obs;
+  final RxInt targetStep = 0.obs;
   final Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
   final Rx<DateTime> focusedDate = DateTime.now().obs;
 
@@ -51,7 +54,31 @@ class PublishTripFlowController extends GetxController {
   final tripDescriptionController = TextEditingController();
   final addRuleController = TextEditingController();
 
+  void populateFromTrip(TripModel trip) {
+    departureController.text = trip.departureCity;
+    destinationController.text = trip.arrivalCity;
+    departureText.value = trip.departureCity;
+    destinationText.value = trip.arrivalCity;
+    departureTime.value = trip.departureTime;
+    arrivalTime.value = trip.arrivalTime;
+    capacityController.text = trip.maxWeight;
+    pricePerPackageController.text = trip.pricePerKg;
+    selectedTravelMode.value = trip.travelMode;
+
+    // Handle stops (comma separated string in model to list)
+    stops.clear();
+    if (trip.stops.isNotEmpty) {
+      stops.addAll(trip.stops.split(',').map((e) => e.trim()));
+    }
+  }
+
   void nextStep() {
+    if (isEditMode.value && currentStep.value == targetStep.value) {
+      Get.back();
+      isEditMode.value = false;
+      return;
+    }
+
     if (currentStep.value == 0) {
       if (departureTime.value.isNotEmpty && arrivalTime.value.isNotEmpty) {
         currentStep.value = 2;

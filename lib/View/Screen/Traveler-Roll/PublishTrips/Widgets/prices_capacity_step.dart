@@ -212,7 +212,7 @@ class PricesCapacityStep extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () => controller.currentStep.value = 3,
+              onPressed: () => controller.nextStep(),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4A80F0),
                 padding: EdgeInsets.symmetric(vertical: 16.h),
