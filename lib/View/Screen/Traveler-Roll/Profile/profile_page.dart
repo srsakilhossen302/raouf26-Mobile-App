@@ -97,8 +97,8 @@ class ProfilePage extends StatelessWidget {
                       onTap: () => Get.to(() => const AccountSafetyPage()),
                     ),
                     _buildMenuItem(
-                      'payments_payouts'.tr,
-                      "assets/icons/Payments & Payouts.svg",
+                      'payments_wallet'.tr,
+                      "assets/icons/Payments & Wallet.svg",
                       isDarkMode,
                       onTap: () => Get.to(() => const PaymentMethodPage()),
                     ),

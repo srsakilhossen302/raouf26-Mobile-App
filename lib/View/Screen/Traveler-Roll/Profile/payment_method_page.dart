@@ -31,7 +31,7 @@ class PaymentMethodPage extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          'payment_method'.tr,
+          'payments_wallet'.tr,
           style: GoogleFonts.plusJakartaSans(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
@@ -98,6 +98,25 @@ class PaymentMethodPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(height: 8.h),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 4.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(20.r),
+                    ),
+                    child: Text(
+                      'pending_earnings'.tr + ': 450.00 TND',
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 12.sp,
+                        color: Colors.white.withOpacity(0.9),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
                   SizedBox(height: 20.h),
                   SizedBox(
                     width: double.infinity,
@@ -139,6 +158,12 @@ class PaymentMethodPage extends StatelessWidget {
                   onTap: () => Get.to(() => const AddPaymentMethodPage()),
                 ),
                 _buildPaymentItem(
+                  'stripe'.tr,
+                  AppIcons.visaCard,
+                  isDarkMode,
+                  onTap: () {},
+                ),
+                _buildPaymentItem(
                   'apple_pay'.tr,
                   AppIcons.applePay,
                   isDarkMode,
@@ -147,6 +172,12 @@ class PaymentMethodPage extends StatelessWidget {
                 _buildPaymentItem(
                   'google_pay'.tr,
                   AppIcons.googlePay,
+                  isDarkMode,
+                  onTap: () {},
+                ),
+                _buildPaymentItem(
+                  'tn_marketplace'.tr,
+                  "assets/images/image.png",
                   isDarkMode,
                   onTap: () {},
                   isLast: true,
@@ -225,6 +256,7 @@ class PaymentMethodPage extends StatelessWidget {
     required VoidCallback onTap,
     bool isLast = false,
   }) {
+    bool isImage = iconPath.endsWith('.png') || iconPath.endsWith('.jpg');
     return Column(
       children: [
         ListTile(
@@ -243,7 +275,9 @@ class PaymentMethodPage extends StatelessWidget {
                 width: 1,
               ),
             ),
-            child: SvgPicture.asset(iconPath, fit: BoxFit.contain),
+            child: isImage
+                ? Image.asset(iconPath, fit: BoxFit.contain)
+                : SvgPicture.asset(iconPath, fit: BoxFit.contain),
           ),
           title: Text(
             title,
