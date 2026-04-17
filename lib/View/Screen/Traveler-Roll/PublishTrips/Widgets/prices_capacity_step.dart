@@ -35,13 +35,6 @@ class PricesCapacityStep extends StatelessWidget {
                   color: isDarkMode ? Colors.white : Colors.black,
                 ),
               ),
-              IconButton(
-                onPressed: () => Get.back(),
-                icon: Icon(
-                  Icons.close,
-                  color: isDarkMode ? Colors.white : Colors.black,
-                ),
-              ),
             ],
           ),
           Text(
@@ -77,8 +70,12 @@ class PricesCapacityStep extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.all(24.w),
                     decoration: BoxDecoration(
-                      color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+                      color: isDarkMode
+                          ? const Color(0xFF1E1E1E)
+                          : Colors.white,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(24.r),
+                      ),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -94,12 +91,17 @@ class PricesCapacityStep extends StatelessWidget {
                         ),
                         SizedBox(height: 20.h),
                         ...currencies.map((currency) {
-                          bool isSelected = controller.selectedCurrency.value == currency["code"];
+                          bool isSelected =
+                              controller.selectedCurrency.value ==
+                              currency["code"];
                           return ListTile(
                             onTap: () {
-                              controller.selectedCurrency.value = currency["code"]!;
-                              controller.selectedCountryName.value = currency["name"]!;
-                              controller.selectedCountryFlag.value = currency["flag"]!;
+                              controller.selectedCurrency.value =
+                                  currency["code"]!;
+                              controller.selectedCountryName.value =
+                                  currency["name"]!;
+                              controller.selectedCountryFlag.value =
+                                  currency["flag"]!;
                               Get.back();
                             },
                             leading: Text(
@@ -109,7 +111,9 @@ class PricesCapacityStep extends StatelessWidget {
                             title: Text(
                               currency["name"]!,
                               style: GoogleFonts.plusJakartaSans(
-                                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                                fontWeight: isSelected
+                                    ? FontWeight.w700
+                                    : FontWeight.w500,
                                 color: isDarkMode ? Colors.white : Colors.black,
                               ),
                             ),
@@ -117,7 +121,9 @@ class PricesCapacityStep extends StatelessWidget {
                               currency["code"]!,
                               style: GoogleFonts.plusJakartaSans(
                                 fontWeight: FontWeight.w700,
-                                color: isSelected ? const Color(0xFF4A80F0) : Colors.grey,
+                                color: isSelected
+                                    ? const Color(0xFF4A80F0)
+                                    : Colors.grey,
                               ),
                             ),
                             selected: isSelected,

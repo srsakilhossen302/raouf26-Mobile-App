@@ -26,6 +26,7 @@ class PublishTripFlowScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
           "Publish Your Trip",

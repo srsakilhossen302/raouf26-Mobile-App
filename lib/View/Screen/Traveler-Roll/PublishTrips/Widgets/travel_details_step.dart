@@ -46,13 +46,13 @@ class TravelDetailsStep extends StatelessWidget {
                   color: isDarkMode ? Colors.white : Colors.black,
                 ),
               ),
-              IconButton(
-                onPressed: () => Get.back(),
-                icon: Icon(
-                  Icons.close,
-                  color: isDarkMode ? Colors.white : Colors.black,
-                ),
-              ),
+              // IconButton(
+              //   onPressed: () => Get.back(),
+              //   icon: Icon(
+              //     Icons.close,
+              //     color: isDarkMode ? Colors.white : Colors.black,
+              //   ),
+              // ),
             ],
           ),
           Text(

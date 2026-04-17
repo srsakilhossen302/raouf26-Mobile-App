@@ -49,14 +49,6 @@ class TimePickerDialog extends StatelessWidget {
                       ),
                     ),
                   ),
-                  IconButton(
-                    onPressed: () => Get.back(),
-                    icon: Icon(
-                      Icons.close,
-                      size: 24.sp,
-                      color: isDarkMode ? Colors.white70 : Colors.black87,
-                    ),
-                  ),
                 ],
               ),
               SizedBox(height: 24.h),

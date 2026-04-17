@@ -10,6 +10,9 @@ class PublishTripsController extends GetxController {
   void onInit() {
     super.onInit();
     _fetchUserRole();
+    if (Get.arguments != null && Get.arguments is int) {
+      selectedTab.value = Get.arguments;
+    }
   }
 
   Future<void> _fetchUserRole() async {

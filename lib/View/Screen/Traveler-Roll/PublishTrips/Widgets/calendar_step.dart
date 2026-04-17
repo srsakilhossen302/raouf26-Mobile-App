@@ -201,23 +201,7 @@ class CalendarStep extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 12.w),
-                    GestureDetector(
-                      onTap: () {
-                        controller.clearSelection();
-                        controller.departureTime.value = "";
-                        controller.arrivalTime.value = "";
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(12.w),
-                        decoration: BoxDecoration(
-                          color: isDarkMode
-                              ? Colors.white10
-                              : const Color(0xFFF5F5F5),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(Icons.close, size: 20),
-                      ),
-                    ),
+                    // Clear selection button removed as per request to remove all back/close icons in flow
                   ],
                 ),
                 SizedBox(height: 16.h),

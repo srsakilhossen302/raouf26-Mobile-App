@@ -33,13 +33,6 @@ class TripDetailsStep extends StatelessWidget {
                   color: isDarkMode ? Colors.white : Colors.black,
                 ),
               ),
-              IconButton(
-                onPressed: () => controller.previousStep(),
-                icon: Icon(
-                  Icons.close,
-                  color: isDarkMode ? Colors.white : Colors.black,
-                ),
-              ),
             ],
           ),
           Text(

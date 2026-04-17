@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/PublishTrips/Views/publish_trips_screen.dart';
 
 class TripPublishedPage extends StatelessWidget {
   final bool isDarkMode;
@@ -16,13 +17,13 @@ class TripPublishedPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
-          onPressed: () => Get.back(),
-        ),
+        // leading: IconButton(
+        //   icon: Icon(
+        //     Icons.arrow_back,
+        //     color: isDarkMode ? Colors.white : Colors.black,
+        //   ),
+        //   onPressed: () => Get.back(),
+        // ),
         centerTitle: true,
         title: Text(
           "Trip Published",
@@ -91,7 +92,8 @@ class TripPublishedPage extends StatelessWidget {
               const Color(0xFF4A80F0),
               Colors.white,
               null,
-              onPressed: () => Get.back(),
+              onPressed: () =>
+                  Get.offAll(() => const PublishTripsScreen(), arguments: 1),
             ),
             SizedBox(height: 12.h),
             _buildActionButton(
