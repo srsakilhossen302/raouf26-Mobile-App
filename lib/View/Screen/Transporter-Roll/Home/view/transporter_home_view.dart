@@ -10,6 +10,7 @@ import '../../Notifications/view/transporter_notifications_view.dart';
 import '../../NewRequests/view/transporter_new_requests_view.dart';
 import '../../RateDelivery/view/rate_delivery_sheet.dart';
 import '../../../Traveler-Roll/Profile/profile_page.dart';
+import '../../../Traveler-Roll/Profile/payment_method_page.dart';
 
 class TransporterHomeScreen extends StatelessWidget {
   const TransporterHomeScreen({super.key});
@@ -230,6 +231,7 @@ class TransporterHomeScreen extends StatelessWidget {
                           AppIcons.totalEarnings,
                           Colors.blue,
                           isDarkMode,
+                          onTap: () => Get.to(() => const PaymentMethodPage()),
                         ),
                         SizedBox(width: 8.w),
                         _buildStatCard(
@@ -264,56 +266,60 @@ class TransporterHomeScreen extends StatelessWidget {
     String value,
     String iconPath,
     Color color,
-    bool isDarkMode,
-  ) {
+    bool isDarkMode, {
+    VoidCallback? onTap,
+  }) {
     return Expanded(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 16.h),
-        decoration: BoxDecoration(
-          color: isDarkMode ? Colors.white.withOpacity(0.05) : Colors.white,
-          borderRadius: BorderRadius.circular(16.r),
-          border: isDarkMode
-              ? null
-              : Border.all(color: Colors.grey.shade100, width: 1.5),
-          boxShadow: [
-            if (!isDarkMode)
-              BoxShadow(
-                color: Colors.black.withOpacity(0.01),
-                blurRadius: 4,
-                offset: const Offset(0, 2),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 16.h),
+          decoration: BoxDecoration(
+            color: isDarkMode ? Colors.white.withOpacity(0.05) : Colors.white,
+            borderRadius: BorderRadius.circular(16.r),
+            border: isDarkMode
+                ? null
+                : Border.all(color: Colors.grey.shade100, width: 1.5),
+            boxShadow: [
+              if (!isDarkMode)
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.01),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+            ],
+          ),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.all(10.r),
+                decoration: BoxDecoration(
+                  color: color.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: SvgPicture.asset(
+                  iconPath,
+                  colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
+                  height: 20.sp,
+                  width: 20.sp,
+                ),
               ),
-          ],
-        ),
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(10.r),
-              decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
-                shape: BoxShape.circle,
+              SizedBox(height: 12.h),
+              Text(
+                value,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.bold,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
-              child: SvgPicture.asset(
-                iconPath,
-                colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
-                height: 20.sp,
-                width: 20.sp,
+              SizedBox(height: 2.h),
+              Text(
+                label,
+                style: TextStyle(fontSize: 10.sp, color: Colors.grey),
               ),
-            ),
-            SizedBox(height: 12.h),
-            Text(
-              value,
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.bold,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
-            ),
-            SizedBox(height: 2.h),
-            Text(
-              label,
-              style: TextStyle(fontSize: 10.sp, color: Colors.grey),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

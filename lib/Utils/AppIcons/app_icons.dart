@@ -74,4 +74,6 @@ class AppIcons {
   static const String onboarding3 = "$basePath/Onbodio3.svg";
   static const String achitacar = "$basePath/achitacar-icons.svg";
   static const String deleteIcon = "$basePath/delete-icons.svg";
+  static const String fullMapIcons = "$basePath/Full-Map.svg";
+  static const String manuIcons = "$basePath/Menu-Icons.svg";
 }
