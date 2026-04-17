@@ -117,7 +117,7 @@ class TripDetailsScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         _buildRoutePoint(
-                          icon: AppIcons.departure,
+                          icon: AppIcons.trackingNavbar,
                           city: trip.departureCity,
                           date: trip.departureDate,
                           time: trip.departureTime,
@@ -128,12 +128,18 @@ class TripDetailsScreen extends StatelessWidget {
                           padding: EdgeInsets.only(left: 20.w),
                           child: Align(
                             alignment: Alignment.centerLeft,
-                            child: Container(
-                              width: 1.w,
-                              height: 30.h,
-                              color: isDarkMode
-                                  ? Colors.white24
-                                  : const Color(0xFFE0E0E0),
+                            child: Column(
+                              children: List.generate(
+                                3,
+                                (index) => Container(
+                                  width: 1.w,
+                                  height: 4.h,
+                                  margin: EdgeInsets.symmetric(vertical: 2.h),
+                                  color: isDarkMode
+                                      ? Colors.white24
+                                      : const Color(0xFFE0E0E0),
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -375,7 +381,7 @@ class TripDetailsScreen extends StatelessWidget {
             color: isDarkMode
                 ? const Color(0xFF2C2C2C)
                 : const Color(0xFFF5F7FA),
-            shape: BoxShape.circle,
+            borderRadius: BorderRadius.circular(8.r),
           ),
           child: SvgPicture.asset(
             icon,

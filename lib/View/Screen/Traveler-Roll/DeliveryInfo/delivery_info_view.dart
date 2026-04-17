@@ -425,11 +425,19 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
 
             // Delivery Handed Over Preference
             Text(
-              "Delivery Handed Over Preference",
+              "Preferred Delivery",
               style: GoogleFonts.montserrat(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w500,
                 color: isDarkMode ? Colors.white : Colors.black87,
+              ),
+            ),
+            SizedBox(height: 6.h),
+            Text(
+              "Tell us how you’d prefer to receive it. We’ll consider this when possible.",
+              style: GoogleFonts.montserrat(
+                fontSize: 12.sp,
+                color: Colors.grey,
               ),
             ),
             SizedBox(height: 12.h),

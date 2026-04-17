@@ -224,7 +224,7 @@ class BookingDetailsScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  "welcome_subtitle".tr,
+                  "You have agreed to carry this parcel.".tr,
                   style: GoogleFonts.plusJakartaSans(
                     fontSize: 14.sp,
                     color: const Color(0xFF666666),
@@ -481,22 +481,45 @@ class BookingDetailsScreen extends StatelessWidget {
       isDarkMode: isDarkMode,
       child: Column(
         children: [
-          _buildRouteItem(
-            icon: AppIcons.departure,
-            location: "Tunisia",
-            date: "20 Jan",
-            time: "08:30 AM",
-            isDarkMode: isDarkMode,
-          ),
-
-          SizedBox(height: 20.h),
-
-          _buildRouteItem(
-            icon: AppIcons.location,
-            location: "France",
-            date: "20 Jan",
-            time: "10:45 PM",
-            isDarkMode: isDarkMode,
+          Stack(
+            children: [
+              // Dashed line
+              Positioned(
+                left: 17.w,
+                top: 35.h,
+                bottom: 35.h,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: List.generate(
+                    3,
+                    (index) => Container(
+                      width: 1.w,
+                      height: 4.h,
+                      color: const Color(0xFFD9D9D9),
+                    ),
+                  ),
+                ),
+              ),
+              Column(
+                children: [
+                  _buildRouteItem(
+                    icon: AppIcons.trackingNavbar,
+                    location: "Tunisia",
+                    date: "20 Jan",
+                    time: "08:30 AM",
+                    isDarkMode: isDarkMode,
+                  ),
+                  SizedBox(height: 30.h),
+                  _buildRouteItem(
+                    icon: AppIcons.location,
+                    location: "France",
+                    date: "20 Jan",
+                    time: "10:45 PM",
+                    isDarkMode: isDarkMode,
+                  ),
+                ],
+              ),
+            ],
           ),
           SizedBox(height: 20.h),
           const Divider(height: 1, color: Color(0xFFF0F0F0)),
@@ -526,8 +549,8 @@ class BookingDetailsScreen extends StatelessWidget {
             icon,
             width: 18.w,
             height: 18.w,
-            colorFilter: const ColorFilter.mode(
-              Color(0xFF4A80F0),
+            colorFilter: ColorFilter.mode(
+              isDarkMode ? Colors.white60 : const Color(0xFF666666),
               BlendMode.srcIn,
             ),
           ),

@@ -140,13 +140,15 @@ class PublishTripsScreen extends StatelessWidget {
             final parts = label.split('(');
             spans.add(TextSpan(text: parts[0]));
             final numberPart = parts[1].split(')');
-            spans.add(TextSpan(
-              text: '(${numberPart[0]})',
-              style: TextStyle(
-                color: isSelected ? Colors.white : Colors.red,
-                fontWeight: FontWeight.bold,
+            spans.add(
+              TextSpan(
+                text: '(${numberPart[0]})',
+                style: TextStyle(
+                  color: isSelected ? Colors.white : Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ));
+            );
             if (numberPart.length > 1) {
               spans.add(TextSpan(text: numberPart[1]));
             }
@@ -398,7 +400,7 @@ class PublishTripsScreen extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           _buildRoutePoint(
-            icon: AppIcons.departure,
+            icon: AppIcons.trackingNavbar,
             city: "Tunisia",
             date: "03 March",
             time: "08:30 AM",
@@ -407,10 +409,16 @@ class PublishTripsScreen extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(left: 20.w),
-            child: Container(
-              width: 1.w,
-              height: 30.h,
-              color: isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
+            child: Column(
+              children: List.generate(
+                3,
+                (index) => Container(
+                  width: 1.w,
+                  height: 4.h,
+                  margin: EdgeInsets.symmetric(vertical: 2.h),
+                  color: isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
+                ),
+              ),
             ),
           ),
           _buildRoutePoint(
@@ -481,7 +489,7 @@ class PublishTripsScreen extends StatelessWidget {
             color: isDarkMode
                 ? const Color(0xFF2C2C2C)
                 : const Color(0xFFF5F7FA),
-            shape: BoxShape.circle,
+            borderRadius: BorderRadius.circular(8.r),
           ),
           child: SvgPicture.asset(
             icon,
@@ -589,13 +597,16 @@ class PublishTripsScreen extends StatelessWidget {
             final parts = label.split('(');
             spans.add(TextSpan(text: parts[0]));
             final numberPart = parts[1].split(')');
-            spans.add(TextSpan(
-              text: '(${numberPart[0]})',
-              style: TextStyle(
-                color: Colors.red, // Keep it red even when selected for contrast or white?
-                fontWeight: FontWeight.bold,
+            spans.add(
+              TextSpan(
+                text: '(${numberPart[0]})',
+                style: TextStyle(
+                  color: Colors
+                      .red, // Keep it red even when selected for contrast or white?
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ));
+            );
             if (numberPart.length > 1) {
               spans.add(TextSpan(text: numberPart[1]));
             }
@@ -728,7 +739,7 @@ class PublishTripsScreen extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           _buildRoutePoint(
-            icon: AppIcons.departure,
+            icon: AppIcons.trackingNavbar,
             city: "Tunisia",
             date: "20 Jan",
             time: "08:30 AM",

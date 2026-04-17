@@ -141,7 +141,7 @@ class ReviewPublishStep extends StatelessWidget {
                 ),
                 SizedBox(height: 16.h),
                 _buildRouteItem(
-                  iconPath: AppIcons.departure,
+                  iconPath: AppIcons.trackingNavbar,
                   label: "Departure: ${controller.departureController.text}",
                   isDarkMode: isDarkMode,
                 ),
@@ -420,7 +420,7 @@ class ReviewPublishStep extends StatelessWidget {
           padding: EdgeInsets.all(8.w),
           decoration: BoxDecoration(
             color: Colors.white,
-            shape: BoxShape.circle,
+            borderRadius: BorderRadius.circular(8.r),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.05),
