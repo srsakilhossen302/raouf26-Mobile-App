@@ -60,7 +60,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                 value: 'contact',
                 child: Row(
                   children: [
-                    Icon(Icons.support_agent_outlined, size: 20.sp, color: Colors.blue),
+                    Icon(Icons.headset_mic_outlined, size: 20.sp, color: Colors.blue),
                     SizedBox(width: 8.w),
                     Text('contact_support'.tr, style: GoogleFonts.montserrat(fontSize: 14.sp)),
                   ],
