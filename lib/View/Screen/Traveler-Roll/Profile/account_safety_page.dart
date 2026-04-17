@@ -10,12 +10,16 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/change_pin_pa
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/trusted_devices_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/login_history_page.dart';
 import 'package:raouf26mobileapp/View/Screen/VerifyIdentityScreen/verify_identity_screen.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_safety_controller.dart';
 
 class AccountSafetyPage extends StatelessWidget {
   const AccountSafetyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final AccountSafetyController controller = Get.put(
+      AccountSafetyController(),
+    );
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -49,56 +53,58 @@ class AccountSafetyPage extends StatelessWidget {
           children: [
             SizedBox(height: 10.h),
             // Protection Status Card
-            _buildProtectionStatusCard(isDarkMode),
+            Obx(() => _buildProtectionStatusCard(isDarkMode, controller)),
             SizedBox(height: 24.h),
 
             // Security Preferences
             _buildSectionTitle('security_preferences'.tr, isDarkMode),
             SizedBox(height: 12.h),
-            _buildSectionCard(
-              isDarkMode: isDarkMode,
-              items: [
-                // _buildMenuItem(
-                //   'kyc_verification'.tr,
-                //   Icons.verified_user_rounded,
-                //   isDarkMode,
-                //   onTap: () => Get.to(() => const VerifyIdentityScreen()),
-                // ),
-                _buildMenuItem(
-                  'update_email'.tr,
-                  Icons.mail_outline_rounded,
-                  isDarkMode,
-                  onTap: () => Get.to(() => const EmailVerificationPage()),
-                ),
-                _buildMenuItem(
-                  'change_pin'.tr,
-                  Icons.more_horiz_rounded,
-                  isDarkMode,
-                  onTap: () => Get.to(() => const ChangePinPage()),
-                ),
-                _buildSwitchItem(
-                  'face_recognition'.tr,
-                  Icons.face_unlock_rounded,
-                  true,
-                  (val) {},
-                  isDarkMode,
-                ),
-                _buildSwitchItem(
-                  'biometric_login'.tr,
-                  Icons.fingerprint_rounded,
-                  true,
-                  (val) {},
-                  isDarkMode,
-                ),
-                _buildSwitchItem(
-                  'two_layers_protection'.tr,
-                  Icons.shield_outlined,
-                  true,
-                  (val) {},
-                  isDarkMode,
-                  isLast: true,
-                ),
-              ],
+            Obx(
+              () => _buildSectionCard(
+                isDarkMode: isDarkMode,
+                items: [
+                  // _buildMenuItem(
+                  //   'kyc_verification'.tr,
+                  //   Icons.verified_user_rounded,
+                  //   isDarkMode,
+                  //   onTap: () => Get.to(() => const VerifyIdentityScreen()),
+                  // ),
+                  _buildMenuItem(
+                    'update_email'.tr,
+                    Icons.mail_outline_rounded,
+                    isDarkMode,
+                    onTap: () => Get.to(() => const EmailVerificationPage()),
+                  ),
+                  _buildMenuItem(
+                    'change_pin'.tr,
+                    Icons.more_horiz_rounded,
+                    isDarkMode,
+                    onTap: () => Get.to(() => const ChangePinPage()),
+                  ),
+                  _buildSwitchItem(
+                    'face_recognition'.tr,
+                    Icons.face_unlock_rounded,
+                    controller.isFaceRecognitionEnabled.value,
+                    (val) => controller.toggleFaceRecognition(val),
+                    isDarkMode,
+                  ),
+                  _buildSwitchItem(
+                    'biometric_login'.tr,
+                    Icons.fingerprint_rounded,
+                    controller.isBiometricLoginEnabled.value,
+                    (val) => controller.toggleBiometricLogin(val),
+                    isDarkMode,
+                  ),
+                  _buildSwitchItem(
+                    'two_layers_protection'.tr,
+                    Icons.shield_outlined,
+                    controller.isTwoLayersProtectionEnabled.value,
+                    (val) => controller.toggleTwoLayersProtection(val),
+                    isDarkMode,
+                    isLast: true,
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: 24.h),
 
@@ -130,7 +136,10 @@ class AccountSafetyPage extends StatelessWidget {
     );
   }
 
-  Widget _buildProtectionStatusCard(bool isDarkMode) {
+  Widget _buildProtectionStatusCard(
+    bool isDarkMode,
+    AccountSafetyController controller,
+  ) {
     return Container(
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
@@ -154,18 +163,18 @@ class AccountSafetyPage extends StatelessWidget {
                 width: 60.w,
                 height: 60.w,
                 child: CircularProgressIndicator(
-                  value: 0.25,
+                  value: controller.safetyScore,
                   strokeWidth: 6.w,
                   backgroundColor: isDarkMode
                       ? Colors.white10
                       : const Color(0xFFF5F7FA),
-                  valueColor: const AlwaysStoppedAnimation<Color>(
-                    Color(0xFF4A80F0),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    controller.scoreColor,
                   ),
                 ),
               ),
               Text(
-                "25%",
+                "${controller.safetyScorePercentage}%",
                 style: GoogleFonts.plusJakartaSans(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
