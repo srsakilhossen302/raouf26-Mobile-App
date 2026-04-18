@@ -39,7 +39,7 @@ class AccountVerificationPage extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,7 +137,7 @@ class AccountVerificationPage extends StatelessWidget {
               ),
             ),
 
-            const Spacer(),
+            SizedBox(height: 60.h), // Replaced Spacer with fixed spacing
 
             SizedBox(
               width: double.infinity,

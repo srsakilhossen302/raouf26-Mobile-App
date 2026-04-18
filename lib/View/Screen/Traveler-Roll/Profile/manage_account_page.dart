@@ -47,16 +47,16 @@ class ManageAccountPage extends StatelessWidget {
               fallbackIcon: Icons.delete_outline_rounded,
               imagePath: "assets/images/brokenHard.png",
             ),
-            SizedBox(height: 16.h),
-            _buildManageItem(
-              title: 'switch_account'.tr,
-              icon: "assets/icons/Switch Account.svg",
-              isDarkMode: isDarkMode,
-              onTap: () {
-                // Handle switch account
-              },
-              fallbackIcon: Icons.swap_horiz_rounded,
-            ),
+            // SizedBox(height: 16.h),
+            // _buildManageItem(
+            //   title: 'switch_account'.tr,
+            //   icon: "assets/icons/Switch Account.svg",
+            //   isDarkMode: isDarkMode,
+            //   onTap: () {
+            //     // Handle switch account
+            //   },
+            //   fallbackIcon: Icons.swap_horiz_rounded,
+            // ),
           ],
         ),
       ),
