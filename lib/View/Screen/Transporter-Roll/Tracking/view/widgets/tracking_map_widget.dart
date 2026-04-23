@@ -86,41 +86,48 @@ class TrackingMapWidget extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Text(
+                                package.userName,
+                                style: GoogleFonts.manrope(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: isDarkMode ? Colors.white : Colors.black,
+                                ),
+                              ),
+                              Text(
+                                package.id,
+                                style: GoogleFonts.manrope(
+                                  fontSize: 12.sp,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              SizedBox(height: 12.h),
+                              // Quick Actions
                               Row(
                                 children: [
-                                  Text(
-                                    package.userName,
-                                    style: GoogleFonts.montserrat(
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.bold,
-                                      color: isDarkMode
-                                          ? Colors.white
-                                          : Colors.black,
-                                    ),
-                                  ),
-                                  SizedBox(width: 12.w),
-                                  // Quick Actions
                                   _buildQuickActionIcon(
                                     Icons.near_me_rounded,
-                                    Colors.blue,
+                                    Colors.grey,
                                     () => Get.snackbar(
                                       "Navigate",
                                       "Starting navigation to ${package.toCity}...",
                                       snackPosition: SnackPosition.BOTTOM,
                                     ),
                                   ),
+                                  SizedBox(width: 12.w),
                                   _buildQuickActionIcon(
                                     Icons.message_rounded,
-                                    Colors.green,
+                                    Colors.grey,
                                     () => Get.snackbar(
                                       "Message",
                                       "Opening chat with ${package.userName}...",
                                       snackPosition: SnackPosition.BOTTOM,
                                     ),
                                   ),
+                                  SizedBox(width: 12.w),
                                   _buildQuickActionIcon(
                                     Icons.call_rounded,
-                                    Colors.orange,
+                                    Colors.grey,
                                     () => Get.snackbar(
                                       "Call",
                                       "Calling ${package.userName}...",
@@ -129,20 +136,13 @@ class TrackingMapWidget extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Text(
-                                package.id,
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 12.sp,
-                                  color: Colors.grey,
-                                ),
-                              ),
                             ],
                           ),
                         ],
                       ),
                       Text(
                         "€${package.price.toStringAsFixed(0)}",
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
                           color: isDarkMode ? Colors.white : Colors.black,
@@ -227,7 +227,7 @@ class TrackingMapWidget extends StatelessWidget {
                           ),
                           child: Text(
                             'view_details'.tr,
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
                               color: isDarkMode ? Colors.white : Colors.black,
@@ -251,7 +251,7 @@ class TrackingMapWidget extends StatelessWidget {
                           ),
                           child: Text(
                             _getCTAText(package.currentStatusStep),
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -310,7 +310,7 @@ class TrackingMapWidget extends StatelessWidget {
         SizedBox(height: 8.h),
         Text(
           city,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 12.sp,
             fontWeight: FontWeight.bold,
             color: isDarkMode ? Colors.white : Colors.black,
