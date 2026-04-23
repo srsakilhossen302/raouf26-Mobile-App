@@ -12,120 +12,130 @@ class TripPublishedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        // leading: IconButton(
-        //   icon: Icon(
-        //     Icons.arrow_back,
-        //     color: isDarkMode ? Colors.white : Colors.black,
-        //   ),
-        //   onPressed: () => Get.back(),
-        // ),
-        centerTitle: true,
-        title: Text(
-          "Trip Published",
-          style: GoogleFonts.plusJakartaSans(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w700,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
-        ),
-        actions: [],
+    return Container(
+      height: Get.height * 0.65, // Extend up to the middle
+      padding: EdgeInsets.symmetric(horizontal: 24.w),
+      decoration: BoxDecoration(
+        color: isDarkMode ? const Color(0xFF121212) : Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Spacer(flex: 2),
-            // Success Checkmark Icon
-            Container(
-              width: 140.w,
-              height: 140.w,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: const Color(0xFF4A80F0).withOpacity(0.1),
-              ),
-              child: Center(
-                child: Container(
-                  width: 100.w,
-                  height: 100.w,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Color(0xFF4A80F0),
+      child: Column(
+        children: [
+          SizedBox(height: 12.h),
+          // Drag Handle
+          Container(
+            width: 40.w,
+            height: 4.h,
+            decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(2.r),
+            ),
+          ),
+          SizedBox(height: 16.h),
+          Text(
+            "Trip Published",
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w700,
+              color: isDarkMode ? Colors.white : Colors.black,
+            ),
+          ),
+          SizedBox(height: 24.h),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Success Checkmark Icon
+                  Container(
+                    width: 100.w,
+                    height: 100.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: const Color(0xFF4A80F0).withOpacity(0.1),
+                    ),
+                    child: Center(
+                      child: Container(
+                        width: 70.w,
+                        height: 70.w,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xFF4A80F0),
+                        ),
+                        child: Icon(Icons.check, color: Colors.white, size: 40.sp),
+                      ),
+                    ),
                   ),
-                  child: Icon(Icons.check, color: Colors.white, size: 60.sp),
-                ),
+                  SizedBox(height: 24.h),
+
+                  // Title
+                  Text(
+                    "Your Trip Is Live!",
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w700,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+
+                  // Subtitle
+                  Text(
+                    "Your trip is now live and visible to senders looking\nfor delivery help.",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: 13.sp,
+                      color: Colors.grey,
+                      height: 1.5,
+                    ),
+                  ),
+                  SizedBox(height: 32.h),
+
+                  // Action Buttons
+                  _buildActionButton(
+                    "View Trip Details",
+                    const Color(0xFF4A80F0),
+                    Colors.white,
+                    null,
+                    onPressed: () {
+                      Get.back(); // close bottom sheet
+                      Get.offAll(() => const PublishTripsScreen(), arguments: 1);
+                    },
+                  ),
+                  SizedBox(height: 12.h),
+                  _buildActionButton(
+                    "Share on Facebook",
+                    Colors.white,
+                    Colors.black,
+                    AppIcons.facebook,
+                    isOutline: true,
+                    onPressed: () {},
+                  ),
+                  SizedBox(height: 12.h),
+                  _buildActionButton(
+                    "Share on WhatsApp",
+                    Colors.white,
+                    Colors.black,
+                    AppIcons.whatsapp,
+                    isOutline: true,
+                    onPressed: () {},
+                  ),
+                  SizedBox(height: 12.h),
+                  _buildActionButton(
+                    "Share Link",
+                    Colors.white,
+                    Colors.black,
+                    null,
+                    iconData: Icons.ios_share,
+                    isOutline: true,
+                    onPressed: () {},
+                  ),
+                  SizedBox(height: 24.h),
+                ],
               ),
             ),
-            SizedBox(height: 32.h),
-
-            // Title
-            Text(
-              "Your Trip Is Live!",
-              style: GoogleFonts.plusJakartaSans(
-                fontSize: 22.sp,
-                fontWeight: FontWeight.w700,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
-            ),
-            SizedBox(height: 12.h),
-
-            // Subtitle
-            Text(
-              "Your trip is now live and visible to senders looking\nfor delivery help.",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.plusJakartaSans(
-                fontSize: 14.sp,
-                color: Colors.grey,
-                height: 1.5,
-              ),
-            ),
-            const Spacer(flex: 3),
-
-            // Action Buttons
-            _buildActionButton(
-              "View Trip Details",
-              const Color(0xFF4A80F0),
-              Colors.white,
-              null,
-              onPressed: () =>
-                  Get.offAll(() => const PublishTripsScreen(), arguments: 1),
-            ),
-            SizedBox(height: 12.h),
-            _buildActionButton(
-              "Share on Facebook",
-              Colors.white,
-              Colors.black,
-              AppIcons.facebook,
-              isOutline: true,
-              onPressed: () {},
-            ),
-            SizedBox(height: 12.h),
-            _buildActionButton(
-              "Share on WhatsApp",
-              Colors.white,
-              Colors.black,
-              AppIcons.whatsapp,
-              isOutline: true,
-              onPressed: () {},
-            ),
-            SizedBox(height: 12.h),
-            _buildActionButton(
-              "Share Link",
-              Colors.white,
-              Colors.black,
-              null,
-              iconData: Icons.ios_share,
-              isOutline: true,
-              onPressed: () {},
-            ),
-            SizedBox(height: 32.h),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

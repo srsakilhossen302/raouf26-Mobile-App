@@ -218,9 +218,11 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
               child: ElevatedButton(
                 onPressed: isAgreed
                     ? () {
-                        Get.to(
-                          () =>
-                              TripPublishedPage(isDarkMode: widget.isDarkMode),
+                        Get.bottomSheet(
+                          TripPublishedPage(isDarkMode: widget.isDarkMode),
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          barrierColor: Colors.black.withOpacity(0.5), // Semi-transparent background
                         );
                       }
                     : null, // Disabled if not agreed
