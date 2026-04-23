@@ -28,18 +28,18 @@ class TransporterTrackingView extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: Text(
-          'tracking'.tr,
-          style: GoogleFonts.montserrat(
+          'Tracking',
+          style: GoogleFonts.manrope(
             color: isDarkMode ? Colors.white : Colors.black,
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w700,
           ),
         ),
         actions: [
-          Obx(
-            () => IconButton(
-              onPressed: controller.toggleView,
-              icon: SvgPicture.asset(
+          IconButton(
+            onPressed: controller.toggleView,
+            icon: Obx(
+              () => SvgPicture.asset(
                 controller.isMapView.value
                     ? AppIcons.manuIcons
                     : AppIcons.fullMapIcons,
@@ -48,7 +48,6 @@ class TransporterTrackingView extends StatelessWidget {
                   BlendMode.srcIn,
                 ),
                 width: 24.w,
-                height: 24.h,
               ),
             ),
           ),

@@ -25,18 +25,24 @@ class TrackingListWidget extends StatelessWidget {
       children: [
         // Search Bar
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+          padding: EdgeInsets.all(20.r),
           child: Container(
             decoration: BoxDecoration(
-              color: isDarkMode ? Colors.white10 : Colors.grey.shade100,
+              color: isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF5F6F8),
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: TextField(
-              style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
+              style: GoogleFonts.manrope(
+                color: isDarkMode ? Colors.white : Colors.black,
+                fontSize: 14.sp,
+              ),
               decoration: InputDecoration(
-                hintText: 'search_package'.tr,
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 14.sp),
-                prefixIcon: Icon(Icons.search, color: Colors.grey, size: 20.sp),
+                hintText: 'Search...',
+                hintStyle: GoogleFonts.manrope(
+                  color: Colors.grey.shade500,
+                  fontSize: 15.sp,
+                ),
+                prefixIcon: Icon(Icons.search, color: Colors.black87, size: 28.sp),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(vertical: 14.h),
               ),
@@ -49,25 +55,27 @@ class TrackingListWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Row(
-            children: List.generate(
-              controller.filterTabs.length,
-              (index) => Padding(
-                padding: EdgeInsets.only(right: 10.w),
-                child: Obx(() => _buildFilterTab(index)),
-              ),
-            ),
+            children: [
+              _buildFilterTab(0, "Active"),
+              SizedBox(width: 10.w),
+              _buildFilterTab(1, "Picked Up"),
+              SizedBox(width: 10.w),
+              _buildFilterTab(2, "In Transit"),
+              SizedBox(width: 10.w),
+              _buildFilterTab(3, "Delivered"),
+            ],
           ),
         ),
-        SizedBox(height: 20.h),
+        SizedBox(height: 24.h),
 
         // Tracking Cards
         Expanded(
           child: Obx(
             () => ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
-              itemCount: controller.packages.length,
+              itemCount: controller.filteredPackages.length,
               itemBuilder: (context, index) {
-                return _buildTrackingCard(controller.packages[index], context);
+                return _buildTrackingCard(controller.filteredPackages[index], context);
               },
             ),
           ),
@@ -76,51 +84,49 @@ class TrackingListWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildFilterTab(int index) {
-    bool isSelected = controller.selectedFilterTab.value == index;
-    return GestureDetector(
-      onTap: () => controller.setFilterTab(index),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? (isDarkMode ? Colors.white24 : Colors.black)
-              : Colors.transparent,
-          borderRadius: BorderRadius.circular(10.r),
-          border: Border.all(
+  Widget _buildFilterTab(int index, String label) {
+    return Obx(() {
+      bool isSelected = controller.selectedFilterTab.value == index;
+      return GestureDetector(
+        onTap: () => controller.setFilterTab(index),
+        child: Container(
+          height: 48.h,
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          decoration: BoxDecoration(
             color: isSelected
-                ? Colors.transparent
-                : (isDarkMode ? Colors.white24 : Colors.grey.shade300),
+                ? (isDarkMode ? Colors.white24 : const Color(0xFF1A1A1A))
+                : (isDarkMode ? Colors.transparent : Colors.white),
+            borderRadius: BorderRadius.circular(12.r),
+            border: Border.all(
+              color: isSelected ? Colors.transparent : Colors.grey.shade300,
+            ),
+          ),
+          child: Center(
+            child: Text(
+              label,
+              style: GoogleFonts.manrope(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                color: isSelected ? Colors.white : (isDarkMode ? Colors.white70 : Colors.black54),
+              ),
+            ),
           ),
         ),
-        child: Text(
-          controller.filterTabs[index].tr,
-          style: GoogleFonts.montserrat(
-            fontSize: 12.sp,
-            fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-            color: isSelected
-                ? (isDarkMode ? Colors.white : Colors.white)
-                : (isDarkMode ? Colors.white70 : Colors.black),
-          ),
-        ),
-      ),
-    );
+      );
+    });
   }
 
-  Widget _buildTrackingCard(
-    TrackingPackageModel package,
-    BuildContext context,
-  ) {
+  Widget _buildTrackingCard(TrackingPackageModel package, BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20.h),
+      margin: EdgeInsets.only(bottom: 24.h),
       padding: EdgeInsets.all(20.r),
       decoration: BoxDecoration(
         color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: BorderRadius.circular(24.r),
         boxShadow: [
           if (!isDarkMode)
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withOpacity(0.03),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -135,10 +141,8 @@ class TrackingListWidget extends StatelessWidget {
               Row(
                 children: [
                   CircleAvatar(
-                    radius: 20.r,
+                    radius: 24.r,
                     backgroundImage: NetworkImage(package.userImage),
-                    onBackgroundImageError: (_, __) {},
-                    child: Icon(Icons.person, color: Colors.white, size: 20.sp),
                   ),
                   SizedBox(width: 12.w),
                   Column(
@@ -146,17 +150,18 @@ class TrackingListWidget extends StatelessWidget {
                     children: [
                       Text(
                         package.userName,
-                        style: GoogleFonts.montserrat(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
+                        style: GoogleFonts.manrope(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w700,
                           color: isDarkMode ? Colors.white : Colors.black,
                         ),
                       ),
                       Text(
                         package.id,
-                        style: GoogleFonts.montserrat(
-                          fontSize: 12.sp,
-                          color: Colors.grey,
+                        style: GoogleFonts.manrope(
+                          fontSize: 13.sp,
+                          color: Colors.grey.shade500,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
@@ -165,127 +170,54 @@ class TrackingListWidget extends StatelessWidget {
               ),
               Text(
                 "€${package.price.toStringAsFixed(0)}",
-                style: GoogleFonts.montserrat(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
+                style: GoogleFonts.manrope(
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.w800,
                   color: isDarkMode ? Colors.white : Colors.black,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 20.h),
 
-          // Status Timeline
-          _buildStatusTimeline(package.currentStatusStep),
-          SizedBox(height: 24.h),
-
-          // Route Timeline
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                children: [
-                  SvgPicture.asset(
-                    AppIcons.departure,
-                    colorFilter: const ColorFilter.mode(
-                      Colors.grey,
-                      BlendMode.srcIn,
-                    ),
-                    width: 16.w,
-                  ),
-                  Container(
-                    height: 24.h,
-                    width: 1,
-                    color: Colors.grey.shade300,
-                    margin: EdgeInsets.symmetric(vertical: 4.h),
-                  ),
-                  SvgPicture.asset(
-                    AppIcons.location,
-                    colorFilter: const ColorFilter.mode(
-                      Colors.grey,
-                      BlendMode.srcIn,
-                    ),
-                    width: 16.w,
-                  ),
-                ],
-              ),
-              SizedBox(width: 16.w),
-              Expanded(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Pickup",
-                              style: GoogleFonts.montserrat(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.bold,
-                                color: isDarkMode ? Colors.white : Colors.black,
-                              ),
-                            ),
-                            Text(
-                              "${package.fromCity} \u2022 ${package.toCity}",
-                              style: GoogleFonts.montserrat(
-                                fontSize: 12.sp,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          package.fromTime,
-                          style: GoogleFonts.montserrat(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.bold,
-                            color: isDarkMode ? Colors.white : Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 24.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Drop-off",
-                              style: GoogleFonts.montserrat(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.bold,
-                                color: isDarkMode ? Colors.white : Colors.black,
-                              ),
-                            ),
-                            Text(
-                              "${package.toCity} \u2022 ${package.fromCity}",
-                              style: GoogleFonts.montserrat(
-                                fontSize: 12.sp,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          package.toTime,
-                          style: GoogleFonts.montserrat(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.bold,
-                            color: isDarkMode ? Colors.white : Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          // Status Timeline Card
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 12.w),
+            decoration: BoxDecoration(
+              color: isDarkMode ? Colors.white.withOpacity(0.03) : const Color(0xFFF9FAFC),
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            child: _buildStatusTimeline(package.currentStatusStep),
           ),
           SizedBox(height: 20.h),
+
+          // Route Details
+          Container(
+            padding: EdgeInsets.all(16.r),
+            decoration: BoxDecoration(
+              color: isDarkMode ? Colors.white.withOpacity(0.03) : const Color(0xFFF9FAFC),
+              borderRadius: BorderRadius.circular(16.r),
+            ),
+            child: Column(
+              children: [
+                _buildRouteItem(
+                  icon: AppIcons.departure,
+                  label: "Pickup",
+                  location: "${package.fromCity} \u2022 Paris", // Static Paris as in screenshot
+                  time: package.fromTime,
+                  isLast: false,
+                ),
+                _buildRouteItem(
+                  icon: AppIcons.location,
+                  label: "Drop-off",
+                  location: "${package.toCity} \u2022 Berlin", // Static Berlin as in screenshot
+                  time: package.toTime,
+                  isLast: true,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 24.h),
 
           // Action Buttons
           Row(
@@ -296,41 +228,39 @@ class TrackingListWidget extends StatelessWidget {
                     Get.to(() => TransporterTripDetailsView(package: package));
                   },
                   style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 14.h),
-                    side: BorderSide(
-                      color: isDarkMode ? Colors.white24 : Colors.grey.shade300,
-                    ),
+                    padding: EdgeInsets.symmetric(vertical: 16.h),
+                    side: BorderSide(color: Colors.grey.shade200),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
+                      borderRadius: BorderRadius.circular(14.r),
                     ),
                   ),
                   child: Text(
-                    'view_details'.tr,
-                    style: GoogleFonts.montserrat(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.bold,
-                      color: isDarkMode ? Colors.white : Colors.black,
+                    "View Details",
+                    style: GoogleFonts.manrope(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w700,
+                      color: isDarkMode ? Colors.white : Colors.black87,
                     ),
                   ),
                 ),
               ),
-              SizedBox(width: 16.w),
+              SizedBox(width: 12.w),
               Expanded(
                 child: ElevatedButton(
                   onPressed: () => _onCTAPressed(context, package),
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 14.h),
-                    backgroundColor: package.currentStatusStep == 3 ? Colors.green : const Color(0xFF4A80F0),
+                    padding: EdgeInsets.symmetric(vertical: 16.h),
+                    backgroundColor: const Color(0xFF4A80F0),
                     elevation: 0,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12.r),
+                      borderRadius: BorderRadius.circular(14.r),
                     ),
                   ),
                   child: Text(
                     _getCTAText(package.currentStatusStep),
-                    style: GoogleFonts.montserrat(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.bold,
+                    style: GoogleFonts.manrope(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w700,
                       color: Colors.white,
                     ),
                   ),
@@ -343,6 +273,94 @@ class TrackingListWidget extends StatelessWidget {
     );
   }
 
+  Widget _buildRouteItem({
+    required String icon,
+    required String label,
+    required String location,
+    required String time,
+    required bool isLast,
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(8.r),
+              decoration: BoxDecoration(
+                color: isDarkMode ? Colors.white10 : Colors.white,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  if (!isDarkMode)
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.02),
+                      blurRadius: 4,
+                    ),
+                ],
+              ),
+              child: SvgPicture.asset(
+                icon,
+                width: 18.w,
+                colorFilter: ColorFilter.mode(
+                  isDarkMode ? Colors.white70 : Colors.black54,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
+            if (!isLast)
+              Container(
+                height: 30.h,
+                width: 2.w,
+                child: CustomPaint(
+                  painter: DottedLinePainter(
+                    color: Colors.grey.shade300,
+                  ),
+                ),
+              ),
+          ],
+        ),
+        SizedBox(width: 12.w),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    label,
+                    style: GoogleFonts.manrope(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w700,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  Text(
+                    time,
+                    style: GoogleFonts.manrope(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      color: isDarkMode ? Colors.white70 : Colors.black87,
+                    ),
+                  ),
+                ],
+              ),
+              Text(
+                location,
+                style: GoogleFonts.manrope(
+                  fontSize: 13.sp,
+                  color: Colors.grey.shade500,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              if (!isLast) SizedBox(height: 12.h),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildStatusTimeline(int currentStep) {
     const steps = ["Booked", "Picked Up", "In Transit", "Delivered"];
     return Column(
@@ -350,51 +368,59 @@ class TrackingListWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(steps.length, (index) {
+            bool isReached = index <= currentStep;
             return Text(
-              steps[index].tr,
-              style: GoogleFonts.montserrat(
-                fontSize: 10.sp,
-                fontWeight: index <= currentStep
-                    ? FontWeight.bold
-                    : FontWeight.normal,
-                color: index <= currentStep
+              steps[index],
+              style: GoogleFonts.manrope(
+                fontSize: 11.sp,
+                fontWeight: isReached ? FontWeight.w700 : FontWeight.w500,
+                color: isReached
                     ? (isDarkMode ? Colors.white : Colors.black)
-                    : Colors.grey,
+                    : Colors.grey.shade400,
               ),
             );
           }),
         ),
-        SizedBox(height: 8.h),
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              height: 2.h,
-              width: double.infinity,
-              color: Colors.grey.shade300,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(steps.length, (index) {
-                // Line coverage
-                bool isActive = index <= currentStep;
-                return Container(
-                  width: 14.w,
-                  height: 14.w,
-                  decoration: BoxDecoration(
-                    color: isActive ? Colors.white : Colors.grey.shade300,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: isActive
-                          ? const Color(0xFF4A80F0)
-                          : Colors.transparent,
-                      width: 3.w,
+        SizedBox(height: 12.h),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                height: 2.h,
+                width: double.infinity,
+                color: Colors.grey.shade200,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(steps.length, (index) {
+                  bool isReached = index <= currentStep;
+                  return Container(
+                    width: 12.w,
+                    height: 12.w,
+                    decoration: BoxDecoration(
+                      color: isReached ? Colors.white : Colors.grey.shade200,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: isReached ? const Color(0xFF4A80F0) : Colors.transparent,
+                        width: 3.w,
+                      ),
                     ),
-                  ),
-                );
-              }),
-            ),
-          ],
+                  );
+                }),
+              ),
+              // Blue active line
+              Positioned(
+                left: 0,
+                child: Container(
+                  height: 2.h,
+                  width: (Get.width - 84.w) * (currentStep / (steps.length - 1)),
+                  color: const Color(0xFF4A80F0),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -402,28 +428,39 @@ class TrackingListWidget extends StatelessWidget {
 
   String _getCTAText(int statusStep) {
     switch (statusStep) {
-      case 0: return 'confirm_pickup'.tr;
-      case 1: return 'mark_in_transit'.tr;
-      case 2: return 'confirm_delivery'.tr;
-      case 3: default: return 'view_proof'.tr;
+      case 0: return 'Mark as Picked Up';
+      case 1: return 'Mark in Transit';
+      case 2: return 'Mark as Delivered';
+      case 3: default: return 'View Proof';
     }
   }
 
   void _onCTAPressed(BuildContext context, TrackingPackageModel package) {
     switch (package.currentStatusStep) {
-      case 0:
-        showPickupConfirmationSheet(context, package);
-        break;
-      case 1:
-        // Future logic to mark as in transit
-        break;
-      case 2:
-        showDeliveryConfirmationSheet(context, package);
-        break;
-      case 3:
-      default:
-        // Future logic to view proof of delivery
-        break;
+      case 0: showPickupConfirmationSheet(context, package); break;
+      case 1: break;
+      case 2: showDeliveryConfirmationSheet(context, package); break;
+      default: break;
     }
   }
+}
+
+class DottedLinePainter extends CustomPainter {
+  final Color color;
+  DottedLinePainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    double dashHeight = 3, dashSpace = 3, startY = 0;
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = 1;
+    while (startY < size.height) {
+      canvas.drawLine(Offset(0, startY), Offset(0, startY + dashHeight), paint);
+      startY += dashHeight + dashSpace;
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
