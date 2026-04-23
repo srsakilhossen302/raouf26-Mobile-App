@@ -93,7 +93,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
                               SizedBox(width: 12.w),
                               Text(
                                 "Search Location...",
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   color: Colors.grey,
                                   fontSize: 14.sp,
                                 ),
@@ -122,7 +122,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
                   ),
                   child: Text(
                     widget.title,
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       color: Colors.white,
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w600,
@@ -201,7 +201,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
                     children: [
                       Text(
                         widget.title,
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w700,
                           color: isDarkMode ? Colors.white : Colors.black87,
@@ -220,7 +220,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
                           SizedBox(width: 4.w),
                           Text(
                             "Auto detecting as you move",
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 10.sp,
                               color: Colors.grey,
                             ),
@@ -239,7 +239,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
                     ),
                     child: Text(
                       _currentAddress,
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         color: isDarkMode ? Colors.white70 : Colors.black87,
                       ),
@@ -260,7 +260,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
                       ),
                       child: Text(
                         "Confirm Location",
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           color: Colors.white,
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w700,

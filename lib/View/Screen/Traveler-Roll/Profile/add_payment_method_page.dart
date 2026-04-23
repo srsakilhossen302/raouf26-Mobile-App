@@ -29,7 +29,7 @@ class AddPaymentMethodPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'add_payment_method'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -100,7 +100,7 @@ class AddPaymentMethodPage extends StatelessWidget {
                 ),
                 child: Text(
                   'add_payment_method'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
@@ -126,7 +126,7 @@ class AddPaymentMethodPage extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -134,13 +134,13 @@ class AddPaymentMethodPage extends StatelessWidget {
         ),
         SizedBox(height: 8.h),
         TextField(
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             color: isDarkMode ? Colors.white : Colors.black,
           ),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: GoogleFonts.plusJakartaSans(
+            hintStyle: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: isDarkMode ? Colors.white30 : Colors.grey[400],
             ),

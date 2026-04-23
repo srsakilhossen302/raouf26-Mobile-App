@@ -48,7 +48,7 @@ void showPickupConfirmationSheet(
                   SizedBox(width: 12.w),
                   Text(
                     'Pickup Confirmation (${package.id})',
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
                       color: isDarkMode ? Colors.white : Colors.black,
@@ -67,7 +67,7 @@ void showPickupConfirmationSheet(
                   children: [
                     Text(
                       'Confirm Pickup',
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 22.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -76,7 +76,7 @@ void showPickupConfirmationSheet(
                     SizedBox(height: 8.h),
                     Text(
                       'Are you sure you want to mark this package as picked up?',
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
                         height: 1.4,
@@ -87,7 +87,7 @@ void showPickupConfirmationSheet(
                     // Verify Parcel Section
                     Text(
                       'Verify Parcel',
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -96,7 +96,7 @@ void showPickupConfirmationSheet(
                     SizedBox(height: 4.h),
                     Text(
                       'Scan the parcel QR code to confirm pickup.\nIf unavailable, upload proof manually.',
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 13.sp,
                         color: isDarkMode ? Colors.white38 : Colors.grey.shade500,
                         height: 1.4,
@@ -115,7 +115,7 @@ void showPickupConfirmationSheet(
                         icon: Icon(Icons.qr_code_scanner_rounded, color: Colors.white, size: 22.sp),
                         label: Text(
                           'Scan QR Code',
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 15.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
@@ -143,7 +143,7 @@ void showPickupConfirmationSheet(
                         icon: Icon(Icons.camera_alt_outlined, color: Colors.grey, size: 22.sp),
                         label: Text(
                           'Upload Proof Instead',
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 15.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.grey.shade700,
@@ -164,7 +164,7 @@ void showPickupConfirmationSheet(
                     // Package Condition
                     Text(
                       'Package Condition',
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -203,7 +203,7 @@ void showPickupConfirmationSheet(
                     RichText(
                       text: TextSpan(
                         text: 'Add Note',
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.w700,
                           color: isDarkMode ? Colors.white : Colors.black,
@@ -211,7 +211,7 @@ void showPickupConfirmationSheet(
                         children: [
                           TextSpan(
                             text: '(Optional)',
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w400,
                               color: Colors.grey,
@@ -265,7 +265,7 @@ void showPickupConfirmationSheet(
                         ),
                         child: Text(
                           'Confirm Pickup',
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -307,7 +307,7 @@ Widget _buildConditionRadioTile(
         children: [
           Text(
             title,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 13.sp,
               color: isDarkMode ? Colors.white : Colors.black87,
               fontWeight: FontWeight.w500,

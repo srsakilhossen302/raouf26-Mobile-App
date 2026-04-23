@@ -28,7 +28,7 @@ class TripsShipmentsPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'trips_shipments'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -129,7 +129,7 @@ class TripsShipmentsPage extends StatelessWidget {
         ),
         title: Text(
           'transaction_history'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 15.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -147,7 +147,7 @@ class TripsShipmentsPage extends StatelessWidget {
   Widget _buildSectionTitle(String title, bool isDarkMode) {
     return Text(
       title,
-      style: GoogleFonts.plusJakartaSans(
+      style: GoogleFonts.manrope(
         fontSize: 16.sp,
         fontWeight: FontWeight.w700,
         color: isDarkMode ? Colors.white : Colors.black,
@@ -201,7 +201,7 @@ class TripsShipmentsPage extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -212,7 +212,7 @@ class TripsShipmentsPage extends StatelessWidget {
                 children: [
                   Text(
                     subtitle,
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 12.sp,
                       color: Colors.grey,
                     ),
@@ -223,7 +223,7 @@ class TripsShipmentsPage extends StatelessWidget {
                   ),
                   Text(
                     statusLabel,
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 12.sp,
                       color: statusColor,
                       fontWeight: FontWeight.w600,
@@ -235,7 +235,7 @@ class TripsShipmentsPage extends StatelessWidget {
           ),
           Text(
             amount,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 16.sp,
               fontWeight: FontWeight.w700,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -263,7 +263,7 @@ class TripsShipmentsPage extends StatelessWidget {
               children: [
                 Text(
                   'About Trips & Shipments',
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w800,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -299,7 +299,7 @@ class TripsShipmentsPage extends StatelessWidget {
             SizedBox(height: 32.h),
             Text(
               "Status Colors",
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -354,7 +354,7 @@ class TripsShipmentsPage extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -363,7 +363,7 @@ class TripsShipmentsPage extends StatelessWidget {
               SizedBox(height: 4.h),
               Text(
                 desc,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 12.sp,
                   color: Colors.grey,
                   height: 1.4,
@@ -387,7 +387,7 @@ class TripsShipmentsPage extends StatelessWidget {
         SizedBox(width: 12.w),
         Text(
           text,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 13.sp,
             color: Colors.grey[600],
             fontWeight: FontWeight.w500,

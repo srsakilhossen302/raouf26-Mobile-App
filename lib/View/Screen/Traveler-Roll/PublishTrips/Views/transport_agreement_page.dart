@@ -30,7 +30,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
         centerTitle: true,
         title: Text(
           "Transport Agreement",
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 16.sp,
             fontWeight: FontWeight.w700,
             color: widget.isDarkMode ? Colors.white : Colors.black,
@@ -108,7 +108,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
                 children: [
                   Text(
                     "Type or draw your signature to confirm and authorize this agreement.",
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 12.sp,
                       color: Colors.grey,
                     ),
@@ -134,7 +134,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
                   SizedBox(height: 16.h),
                   Text(
                     isTypeMode ? "Type Your Signature" : "Draw Your Signature",
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w600,
                     ),
@@ -161,7 +161,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
                               border: InputBorder.none,
                               contentPadding: EdgeInsets.all(16.w),
                             ),
-                            style: GoogleFonts.plusJakartaSans(fontSize: 16.sp),
+                            style: GoogleFonts.manrope(fontSize: 16.sp),
                           )
                         : const Center(
                             child: Text(
@@ -198,7 +198,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
                     onTap: () => setState(() => isAgreed = !isAgreed),
                     child: Text(
                       "I have read and agree to the Digital agreements and legal acceptance terms.",
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 13.sp,
                         color: widget.isDarkMode
                             ? Colors.white70
@@ -237,7 +237,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
                 ),
                 child: Text(
                   "Sign & Activate",
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: isAgreed ? Colors.white : Colors.white70,
@@ -275,7 +275,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
         children: [
           Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 15.sp,
               fontWeight: FontWeight.w700,
             ),
@@ -295,7 +295,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
         children: [
           Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
             ),
@@ -303,7 +303,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
           SizedBox(height: 4.h),
           Text(
             desc,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 12.sp,
               color: Colors.grey,
               height: 1.5,
@@ -336,7 +336,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
           children: [
             Text(
               label,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
               ),
@@ -384,7 +384,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
         child: Center(
           child: Text(
             label,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isActive ? Colors.white : Colors.grey,

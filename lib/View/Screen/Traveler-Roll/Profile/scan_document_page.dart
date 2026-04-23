@@ -34,7 +34,7 @@ class ScanDocumentPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           docType,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -61,7 +61,7 @@ class ScanDocumentPage extends StatelessWidget {
                 SizedBox(width: 8.w),
                 Text(
                   isSelfie ? 'selfie_tips'.tr : 'scanning_tips'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -156,7 +156,7 @@ class ScanDocumentPage extends StatelessWidget {
                 ),
                 child: Text(
                   'submit_request'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -191,7 +191,7 @@ class ScanDocumentPage extends StatelessWidget {
           Expanded(
             child: Text(
               tip.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 13.sp,
                 color: isDarkMode ? Colors.white70 : Colors.black54,
                 fontWeight: FontWeight.w500,
@@ -209,7 +209,7 @@ class ScanDocumentPage extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -258,7 +258,7 @@ class ScanDocumentPage extends StatelessWidget {
                   SizedBox(height: 12.h),
                   Text(
                     'tap_to_scan'.tr,
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.w600,
                       color: const Color(0xFF4A80F0),
@@ -267,7 +267,7 @@ class ScanDocumentPage extends StatelessWidget {
                   SizedBox(height: 4.h),
                   Text(
                     'no_doc_scanned'.tr,
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 11.sp,
                       color: Colors.grey,
                     ),

@@ -65,7 +65,7 @@ class TripRulesStep extends StatelessWidget {
         children: [
           Text(
             "Trip Rules & Details",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 20.sp,
               fontWeight: FontWeight.w700,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -73,7 +73,7 @@ class TripRulesStep extends StatelessWidget {
           ),
           Text(
             "Define what you accept and the rules senders should follow.",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: Colors.grey,
             ),
@@ -94,7 +94,7 @@ class TripRulesStep extends StatelessWidget {
               children: [
                 Text(
                   "Recommended Guidelines",
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -103,7 +103,7 @@ class TripRulesStep extends StatelessWidget {
                 SizedBox(height: 4.h),
                 Text(
                   "These best practices help you avoid disputes and ensure smooth deliveries.",
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     color: Colors.grey,
                   ),
@@ -133,7 +133,7 @@ class TripRulesStep extends StatelessWidget {
                             children: [
                               Text(
                                 g["title"]!,
-                                style: GoogleFonts.plusJakartaSans(
+                                style: GoogleFonts.manrope(
                                   fontSize: 13.sp,
                                   fontWeight: FontWeight.w600,
                                   color: isDarkMode
@@ -143,7 +143,7 @@ class TripRulesStep extends StatelessWidget {
                               ),
                               Text(
                                 g["subtitle"]!,
-                                style: GoogleFonts.plusJakartaSans(
+                                style: GoogleFonts.manrope(
                                   fontSize: 12.sp,
                                   color: Colors.grey,
                                 ),
@@ -174,7 +174,7 @@ class TripRulesStep extends StatelessWidget {
               children: [
                 Text(
                   "Suggested Rules",
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -183,7 +183,7 @@ class TripRulesStep extends StatelessWidget {
                 SizedBox(height: 4.h),
                 Text(
                   "Tap to quickly add common trip rules.",
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     color: Colors.grey,
                   ),
@@ -205,7 +205,7 @@ class TripRulesStep extends StatelessWidget {
                         Expanded(
                           child: Text(
                             rule,
-                            style: GoogleFonts.plusJakartaSans(
+                            style: GoogleFonts.manrope(
                               fontSize: 13.sp,
                               color: isDarkMode ? Colors.white : Colors.black,
                             ),
@@ -244,7 +244,7 @@ class TripRulesStep extends StatelessWidget {
           // Add Your Rule
           Text(
             "Add Your Rule",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -257,7 +257,7 @@ class TripRulesStep extends StatelessWidget {
             style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
             decoration: InputDecoration(
               hintText: "Type here ...",
-              hintStyle: GoogleFonts.plusJakartaSans(
+              hintStyle: GoogleFonts.manrope(
                 color: Colors.grey,
                 fontSize: 14.sp,
               ),
@@ -286,7 +286,7 @@ class TripRulesStep extends StatelessWidget {
               icon: const Icon(Icons.add, color: Colors.grey),
               label: Text(
                 "Add a Rule",
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -312,7 +312,7 @@ class TripRulesStep extends StatelessWidget {
                     children: [
                       Text(
                         "Added Rules",
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           color: isDarkMode ? Colors.white : Colors.black,
@@ -327,7 +327,7 @@ class TripRulesStep extends StatelessWidget {
                               (rule) => Chip(
                                 label: Text(
                                   rule,
-                                  style: GoogleFonts.plusJakartaSans(
+                                  style: GoogleFonts.manrope(
                                     fontSize: 12.sp,
                                     color: isDarkMode
                                         ? Colors.white
@@ -355,7 +355,7 @@ class TripRulesStep extends StatelessWidget {
           // What You Accept?
           Text(
             "What You Accept?",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -423,7 +423,7 @@ class TripRulesStep extends StatelessWidget {
                         Expanded(
                           child: Text(
                             option["label"],
-                            style: GoogleFonts.plusJakartaSans(
+                            style: GoogleFonts.manrope(
                               fontSize: 14.sp,
                               fontWeight: isSelected
                                   ? FontWeight.w600
@@ -469,7 +469,7 @@ class TripRulesStep extends StatelessWidget {
           // Trip Description
           Text(
             "Trip Description",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -482,7 +482,7 @@ class TripRulesStep extends StatelessWidget {
             style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
             decoration: InputDecoration(
               hintText: "Add any important notes for senders ...",
-              hintStyle: GoogleFonts.plusJakartaSans(
+              hintStyle: GoogleFonts.manrope(
                 color: Colors.grey,
                 fontSize: 14.sp,
               ),

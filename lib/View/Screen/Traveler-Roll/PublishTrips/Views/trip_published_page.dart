@@ -34,7 +34,7 @@ class TripPublishedPage extends StatelessWidget {
           SizedBox(height: 16.h),
           Text(
             "Trip Published",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 16.sp,
               fontWeight: FontWeight.w700,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -71,7 +71,7 @@ class TripPublishedPage extends StatelessWidget {
                   // Title
                   Text(
                     "Your Trip Is Live!",
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w700,
                       color: isDarkMode ? Colors.white : Colors.black,
@@ -83,7 +83,7 @@ class TripPublishedPage extends StatelessWidget {
                   Text(
                     "Your trip is now live and visible to senders looking\nfor delivery help.",
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 13.sp,
                       color: Colors.grey,
                       height: 1.5,
@@ -179,7 +179,7 @@ class TripPublishedPage extends StatelessWidget {
             ],
             Text(
               label,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w600,
                 color: textColor,

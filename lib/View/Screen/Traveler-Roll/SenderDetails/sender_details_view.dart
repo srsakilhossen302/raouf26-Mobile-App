@@ -29,7 +29,7 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
         ),
         title: Text(
           "Delivery Details",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 16.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -56,7 +56,7 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
           children: [
             Text(
               "Sender Details",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -65,7 +65,7 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
             SizedBox(height: 8.h),
             Text(
               "Add the sender's information and pickup details.",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: Colors.grey,
               ),
@@ -105,7 +105,7 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
                 ),
                 child: Text(
                   "Use My Details",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -149,7 +149,7 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
                         ),
                         label: Text(
                           "Adjust Location",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.black,
@@ -194,7 +194,7 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
                           child: Obx(
                             () => Text(
                               controller.selectedAddress.value,
-                              style: GoogleFonts.montserrat(
+                              style: GoogleFonts.manrope(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w500,
                                 color: isDarkMode ? Colors.white : Colors.black,
@@ -231,7 +231,7 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
                 ),
                 child: Text(
                   "Continue",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     color: Colors.white,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
@@ -248,7 +248,7 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
   Widget _sectionTitle(String title, bool isDarkMode) {
     return Text(
       title,
-      style: GoogleFonts.montserrat(
+      style: GoogleFonts.manrope(
         fontSize: 14.sp,
         fontWeight: FontWeight.w600,
         color: isDarkMode ? Colors.white : Colors.black,
@@ -269,12 +269,12 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
       ),
       child: TextField(
         controller: controller,
-        style: GoogleFonts.montserrat(
+        style: GoogleFonts.manrope(
           color: isDarkMode ? Colors.white : Colors.black,
         ),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: GoogleFonts.montserrat(
+          hintStyle: GoogleFonts.manrope(
             color: Colors.grey,
             fontSize: 14.sp,
           ),
@@ -323,7 +323,7 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
                 SizedBox(width: 8.w),
                 Text(
                   "+216",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontWeight: FontWeight.w600,
                     color: isDarkMode ? Colors.white : Colors.black,
                   ),
@@ -336,12 +336,12 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
             child: TextField(
               controller: controller.phoneNumberController,
               keyboardType: TextInputType.phone,
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
               decoration: InputDecoration(
                 hintText: "00000000",
-                hintStyle: GoogleFonts.montserrat(
+                hintStyle: GoogleFonts.manrope(
                   color: Colors.grey,
                   fontSize: 14.sp,
                 ),

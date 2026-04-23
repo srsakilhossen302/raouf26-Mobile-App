@@ -39,7 +39,7 @@ class AccountSafetyPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'account_safety'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -175,7 +175,7 @@ class AccountSafetyPage extends StatelessWidget {
               ),
               Text(
                 "${controller.safetyScorePercentage}%",
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -190,7 +190,7 @@ class AccountSafetyPage extends StatelessWidget {
               children: [
                 Text(
                   'account_protection_status'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 15.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -199,7 +199,7 @@ class AccountSafetyPage extends StatelessWidget {
                 SizedBox(height: 4.h),
                 Text(
                   'protection_status_desc'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     color: isDarkMode ? Colors.white70 : Colors.grey[600],
                     height: 1.4,
@@ -218,7 +218,7 @@ class AccountSafetyPage extends StatelessWidget {
       padding: EdgeInsets.only(left: 4.w),
       child: Text(
         title,
-        style: GoogleFonts.plusJakartaSans(
+        style: GoogleFonts.manrope(
           fontSize: 15.sp,
           fontWeight: FontWeight.w700,
           color: isDarkMode ? Colors.white : Colors.black,
@@ -275,7 +275,7 @@ class AccountSafetyPage extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -325,7 +325,7 @@ class AccountSafetyPage extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,

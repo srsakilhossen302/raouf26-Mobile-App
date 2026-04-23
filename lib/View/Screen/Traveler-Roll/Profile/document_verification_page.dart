@@ -31,7 +31,7 @@ class DocumentVerificationPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'documents_verification'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -188,7 +188,7 @@ class DocumentVerificationPage extends StatelessWidget {
                   children: [
                     Text(
                       'not_verified'.tr,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -197,7 +197,7 @@ class DocumentVerificationPage extends StatelessWidget {
                     SizedBox(height: 8.h),
                     Text(
                       'not_verified_desc'.tr,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 13.sp,
                         color: isDarkMode ? Colors.white70 : Colors.black54,
                         height: 1.5,
@@ -223,7 +223,7 @@ class DocumentVerificationPage extends StatelessWidget {
               ),
               child: Text(
                 'get_verified'.tr,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w700,
                   color: Colors.white,
@@ -256,7 +256,7 @@ class DocumentVerificationPage extends StatelessWidget {
         children: [
           Text(
             'why_verify_identity'.tr,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 16.sp,
               fontWeight: FontWeight.w700,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -297,7 +297,7 @@ class DocumentVerificationPage extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black87,
@@ -306,7 +306,7 @@ class DocumentVerificationPage extends StatelessWidget {
               SizedBox(height: 4.h),
               Text(
                 desc,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 12.sp,
                   color: Colors.grey,
                   height: 1.4,
@@ -327,7 +327,7 @@ class DocumentVerificationPage extends StatelessWidget {
         children: [
           Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 16.sp,
               fontWeight: FontWeight.w700,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -336,7 +336,7 @@ class DocumentVerificationPage extends StatelessWidget {
           SizedBox(height: 4.h),
           Text(
             subtitle,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 13.sp,
               color: Colors.grey,
             ),
@@ -402,7 +402,7 @@ class DocumentVerificationPage extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 15.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,

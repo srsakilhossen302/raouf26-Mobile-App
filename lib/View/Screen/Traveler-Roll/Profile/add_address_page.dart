@@ -32,7 +32,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
         centerTitle: true,
         title: Text(
           'add_new_address'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -47,7 +47,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
             SizedBox(height: 20.h),
             Text(
               'address_type'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -58,7 +58,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
             SizedBox(height: 32.h),
             Text(
               'address'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -81,7 +81,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                 ),
                 child: Text(
                   'save_address'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -137,7 +137,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
             SizedBox(width: 16.w),
             Text(
               title,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -165,13 +165,13 @@ class _AddAddressPageState extends State<AddAddressPage> {
         ),
       ),
       child: TextField(
-        style: GoogleFonts.plusJakartaSans(
+        style: GoogleFonts.manrope(
           fontSize: 14.sp,
           color: isDarkMode ? Colors.white : Colors.black,
         ),
         decoration: InputDecoration(
           hintText: 'enter_address'.tr,
-          hintStyle: GoogleFonts.plusJakartaSans(
+          hintStyle: GoogleFonts.manrope(
             fontSize: 14.sp,
             color: isDarkMode ? Colors.white30 : Colors.grey[400],
           ),

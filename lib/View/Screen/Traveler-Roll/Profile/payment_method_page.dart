@@ -32,7 +32,7 @@ class PaymentMethodPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'payments_wallet'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -69,7 +69,7 @@ class PaymentMethodPage extends StatelessWidget {
                 children: [
                   Text(
                     'available_balance'.tr,
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       color: Colors.white.withOpacity(0.8),
                     ),
@@ -90,7 +90,7 @@ class PaymentMethodPage extends StatelessWidget {
                       SizedBox(width: 8.w),
                       Text(
                         '2,450.00 TND',
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           fontSize: 32.sp,
                           fontWeight: FontWeight.w800,
                           color: Colors.white,
@@ -110,7 +110,7 @@ class PaymentMethodPage extends StatelessWidget {
                     ),
                     child: Text(
                       'pending_earnings'.tr + ': 450.00 TND',
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 12.sp,
                         color: Colors.white.withOpacity(0.9),
                         fontWeight: FontWeight.w600,
@@ -133,7 +133,7 @@ class PaymentMethodPage extends StatelessWidget {
                       ),
                       child: Text(
                         'withdraw_funds'.tr,
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -231,7 +231,7 @@ class PaymentMethodPage extends StatelessWidget {
       padding: EdgeInsets.only(left: 4.w),
       child: Text(
         title,
-        style: GoogleFonts.plusJakartaSans(
+        style: GoogleFonts.manrope(
           fontSize: 15.sp,
           fontWeight: FontWeight.w700,
           color: isDarkMode ? Colors.white : Colors.black,
@@ -293,7 +293,7 @@ class PaymentMethodPage extends StatelessWidget {
           ),
           title: Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,

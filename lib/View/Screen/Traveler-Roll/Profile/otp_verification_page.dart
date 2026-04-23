@@ -23,7 +23,7 @@ class OtpVerificationPage extends StatelessWidget {
     final defaultPinTheme = PinTheme(
       width: 70.w,
       height: 70.h,
-      textStyle: GoogleFonts.plusJakartaSans(
+      textStyle: GoogleFonts.manrope(
         fontSize: 24.sp,
         fontWeight: FontWeight.w700,
         color: isDarkMode ? Colors.white : Colors.black,
@@ -60,7 +60,7 @@ class OtpVerificationPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           title ?? 'Verify Email'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -75,7 +75,7 @@ class OtpVerificationPage extends StatelessWidget {
             SizedBox(height: 20.h),
             Text(
               'enter_otp_code'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w800,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -84,7 +84,7 @@ class OtpVerificationPage extends StatelessWidget {
             SizedBox(height: 12.h),
             Text(
               description ?? 'otp_sent_desc'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey[600],
                 height: 1.5,
@@ -108,7 +108,7 @@ class OtpVerificationPage extends StatelessWidget {
               child: RichText(
                 text: TextSpan(
                   text: '${'resend_code_in'.tr} ',
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
                     color: isDarkMode ? Colors.white54 : Colors.grey[600],
@@ -116,7 +116,7 @@ class OtpVerificationPage extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: "00:28",
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         color: isDarkMode ? Colors.white : Colors.black,
                         fontWeight: FontWeight.w700,
                       ),
@@ -142,7 +142,7 @@ class OtpVerificationPage extends StatelessWidget {
                 ),
                 child: Text(
                   'verify'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,

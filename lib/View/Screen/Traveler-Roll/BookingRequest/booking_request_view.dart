@@ -60,7 +60,7 @@ class BookingRequestView extends GetView<BookingRequestController> {
                   children: [
                     Text(
                       controller.transporterName.value,
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -76,7 +76,7 @@ class BookingRequestView extends GetView<BookingRequestController> {
                 ),
                 Text(
                   "Online",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     color: Colors.grey,
                   ),
@@ -121,7 +121,7 @@ class BookingRequestView extends GetView<BookingRequestController> {
                         Expanded(
                           child: Text(
                             "Message is blocked until transporter accepts your reservation",
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 13.sp,
                               color: isDarkMode
                                   ? Colors.white70
@@ -153,7 +153,7 @@ class BookingRequestView extends GetView<BookingRequestController> {
                               children: [
                                 Text(
                                   "Booking Request",
-                                  style: GoogleFonts.montserrat(
+                                  style: GoogleFonts.manrope(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -170,7 +170,7 @@ class BookingRequestView extends GetView<BookingRequestController> {
                                   ),
                                   child: Text(
                                     controller.deliverySpeed.value,
-                                    style: GoogleFonts.montserrat(
+                                    style: GoogleFonts.manrope(
                                       fontSize: 10.sp,
                                       fontWeight: FontWeight.w600,
                                       color: Colors.orange,
@@ -204,7 +204,7 @@ class BookingRequestView extends GetView<BookingRequestController> {
                             children: [
                               Text(
                                 "Route",
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -264,7 +264,7 @@ class BookingRequestView extends GetView<BookingRequestController> {
                             children: [
                               Text(
                                 "Package Summary",
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -288,7 +288,7 @@ class BookingRequestView extends GetView<BookingRequestController> {
                                 children: [
                                   Text(
                                     "Package Photos",
-                                    style: GoogleFonts.montserrat(
+                                    style: GoogleFonts.manrope(
                                       fontSize: 13.sp,
                                       color: Colors.grey,
                                     ),
@@ -313,7 +313,7 @@ class BookingRequestView extends GetView<BookingRequestController> {
                                 children: [
                                   Text(
                                     "Status",
-                                    style: GoogleFonts.montserrat(
+                                    style: GoogleFonts.manrope(
                                       fontSize: 13.sp,
                                       color: Colors.grey,
                                     ),
@@ -328,7 +328,7 @@ class BookingRequestView extends GetView<BookingRequestController> {
                                       SizedBox(width: 4.w),
                                       Text(
                                         controller.bookingStatus.value,
-                                        style: GoogleFonts.montserrat(
+                                        style: GoogleFonts.manrope(
                                           fontSize: 13.sp,
                                           color: const Color(0xFF4A80F0),
                                           fontWeight: FontWeight.w600,
@@ -371,7 +371,7 @@ class BookingRequestView extends GetView<BookingRequestController> {
                 ),
                 child: Text(
                   "Cancel Reservation",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
@@ -402,14 +402,14 @@ class BookingRequestView extends GetView<BookingRequestController> {
             children: [
               Text(
                 city,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
                 date,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 11.sp,
                   color: Colors.grey,
                 ),
@@ -419,7 +419,7 @@ class BookingRequestView extends GetView<BookingRequestController> {
         ),
         Text(
           time,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 12.sp,
             fontWeight: FontWeight.w600,
           ),
@@ -441,11 +441,11 @@ class BookingRequestView extends GetView<BookingRequestController> {
         children: [
           Text(
             label,
-            style: GoogleFonts.montserrat(fontSize: 13.sp, color: Colors.grey),
+            style: GoogleFonts.manrope(fontSize: 13.sp, color: Colors.grey),
           ),
           Text(
             value,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 13.sp,
               fontWeight: isBold ? FontWeight.w700 : FontWeight.w600,
             ),

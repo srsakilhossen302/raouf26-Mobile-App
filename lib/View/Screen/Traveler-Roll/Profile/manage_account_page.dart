@@ -28,7 +28,7 @@ class ManageAccountPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'manage_account'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -108,7 +108,7 @@ class ManageAccountPage extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -188,7 +188,7 @@ class ManageAccountPage extends StatelessWidget {
               SizedBox(height: 24.h),
               Text(
                 'delete_your_account_q'.tr,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -198,7 +198,7 @@ class ManageAccountPage extends StatelessWidget {
               SizedBox(height: 12.h),
               Text(
                 'delete_account_desc'.tr,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
                   height: 1.5,
@@ -224,7 +224,7 @@ class ManageAccountPage extends StatelessWidget {
                       ),
                       child: Text(
                         'cancel'.tr,
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           color: isDarkMode ? Colors.white : Colors.black,
@@ -249,7 +249,7 @@ class ManageAccountPage extends StatelessWidget {
                       ),
                       child: Text(
                         'delete_account'.tr,
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,

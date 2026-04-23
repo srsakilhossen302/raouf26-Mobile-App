@@ -29,7 +29,7 @@ class PricesCapacityStep extends StatelessWidget {
             children: [
               Text(
                 "Set Your Prices & Capacity",
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -39,7 +39,7 @@ class PricesCapacityStep extends StatelessWidget {
           ),
           Text(
             "Choose your delivery price and set the maximum capacity for this trip.",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: Colors.grey,
             ),
@@ -49,7 +49,7 @@ class PricesCapacityStep extends StatelessWidget {
           // Select Currency
           Text(
             "Select Currency",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -83,7 +83,7 @@ class PricesCapacityStep extends StatelessWidget {
                       children: [
                         Text(
                           "Select Currency",
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 18.sp,
                             fontWeight: FontWeight.w700,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -110,7 +110,7 @@ class PricesCapacityStep extends StatelessWidget {
                             ),
                             title: Text(
                               currency["name"]!,
-                              style: GoogleFonts.plusJakartaSans(
+                              style: GoogleFonts.manrope(
                                 fontWeight: isSelected
                                     ? FontWeight.w700
                                     : FontWeight.w500,
@@ -119,7 +119,7 @@ class PricesCapacityStep extends StatelessWidget {
                             ),
                             trailing: Text(
                               currency["code"]!,
-                              style: GoogleFonts.plusJakartaSans(
+                              style: GoogleFonts.manrope(
                                 fontWeight: FontWeight.w700,
                                 color: isSelected
                                     ? const Color(0xFF4A80F0)
@@ -153,7 +153,7 @@ class PricesCapacityStep extends StatelessWidget {
                     Expanded(
                       child: Text(
                         "${controller.selectedCountryName.value} (${controller.selectedCurrency.value})",
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           color: isDarkMode ? Colors.white : Colors.black,
                           fontWeight: FontWeight.w600,
                         ),
@@ -191,7 +191,7 @@ class PricesCapacityStep extends StatelessWidget {
           // What Can You Carry?
           Text(
             "What Can You Carry?",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -222,7 +222,7 @@ class PricesCapacityStep extends StatelessWidget {
           // Available Space
           Text(
             "Available Space",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -234,9 +234,9 @@ class PricesCapacityStep extends StatelessWidget {
             style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
             decoration: InputDecoration(
               hintText: "Enter Weight e.g. 10 kg",
-              hintStyle: GoogleFonts.plusJakartaSans(color: Colors.grey),
+              hintStyle: GoogleFonts.manrope(color: Colors.grey),
               suffixText: "kg",
-              suffixStyle: GoogleFonts.plusJakartaSans(color: Colors.grey),
+              suffixStyle: GoogleFonts.manrope(color: Colors.grey),
               filled: true,
               fillColor: isDarkMode ? Colors.white10 : const Color(0xFFF5F7FA),
               border: OutlineInputBorder(
@@ -261,7 +261,7 @@ class PricesCapacityStep extends StatelessWidget {
               ),
               child: Text(
                 "Confirm",
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
@@ -286,7 +286,7 @@ class PricesCapacityStep extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -298,7 +298,7 @@ class PricesCapacityStep extends StatelessWidget {
           style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: GoogleFonts.plusJakartaSans(color: Colors.grey),
+            hintStyle: GoogleFonts.manrope(color: Colors.grey),
             filled: true,
             fillColor: isDarkMode ? Colors.white10 : const Color(0xFFF5F7FA),
             border: OutlineInputBorder(
@@ -353,7 +353,7 @@ class PricesCapacityStep extends StatelessWidget {
             SizedBox(width: 16.w),
             Text(
               label,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
                 color: isDarkMode ? Colors.white : Colors.black,

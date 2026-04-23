@@ -26,7 +26,7 @@ class TransporterNewRequestsView extends StatelessWidget {
         ),
         title: Text(
           "New Requests",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             color: isDarkMode ? Colors.white : Colors.black,
             fontSize: 18.sp,
             fontWeight: FontWeight.bold,
@@ -94,7 +94,7 @@ class NewRequestCard extends StatelessWidget {
                       children: [
                         Text(
                           request.userName,
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -107,7 +107,7 @@ class NewRequestCard extends StatelessWidget {
                     SizedBox(height: 2.h),
                     Text(
                       request.timeAgo,
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 12.sp,
                         color: Colors.grey,
                       ),
@@ -123,7 +123,7 @@ class NewRequestCard extends StatelessWidget {
                 ),
                 child: Text(
                   request.status,
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.orange,
@@ -167,19 +167,19 @@ class NewRequestCard extends StatelessWidget {
                           children: [
                             Text(
                               request.fromCity,
-                              style: GoogleFonts.montserrat(
+                              style: GoogleFonts.manrope(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
                                 color: isDarkMode ? Colors.white : Colors.black,
                               ),
                             ),
                             Text(request.fromDate,
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                     fontSize: 12.sp, color: Colors.grey)),
                           ],
                         ),
                         Text(request.fromTime,
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.bold,
                                 color:
@@ -195,19 +195,19 @@ class NewRequestCard extends StatelessWidget {
                           children: [
                             Text(
                               request.toCity,
-                              style: GoogleFonts.montserrat(
+                              style: GoogleFonts.manrope(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
                                 color: isDarkMode ? Colors.white : Colors.black,
                               ),
                             ),
                             Text(request.toDate,
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                     fontSize: 12.sp, color: Colors.grey)),
                           ],
                         ),
                         Text(request.toTime,
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.bold,
                                 color:
@@ -232,7 +232,7 @@ class NewRequestCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("Status",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                       fontSize: 14.sp, color: Colors.grey)),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
@@ -242,7 +242,7 @@ class NewRequestCard extends StatelessWidget {
                 ),
                 child: Text(
                   request.packageStatus,
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.red,
@@ -260,7 +260,7 @@ class NewRequestCard extends StatelessWidget {
               children: [
                 Text(
                   "Package Details & Photos",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
                     color: isDarkMode ? Colors.white : Colors.black87,
@@ -303,12 +303,12 @@ class NewRequestCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("Total Estimate",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                       color: isDarkMode ? Colors.white : Colors.black)),
               Text("€${request.totalEstimate.toStringAsFixed(0)}",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
                       color: isDarkMode ? Colors.white : Colors.black)),
@@ -329,7 +329,7 @@ class NewRequestCard extends StatelessWidget {
                   ),
                   child: Text(
                     "Reject",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.red,
@@ -350,7 +350,7 @@ class NewRequestCard extends StatelessWidget {
                   ),
                   child: Text(
                     "Accept",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -371,9 +371,9 @@ class NewRequestCard extends StatelessWidget {
       children: [
         Text(label,
             style:
-                GoogleFonts.montserrat(fontSize: 14.sp, color: Colors.grey)),
+                GoogleFonts.manrope(fontSize: 14.sp, color: Colors.grey)),
         Text(value,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
                 color: isDarkMode ? Colors.white : Colors.black)),

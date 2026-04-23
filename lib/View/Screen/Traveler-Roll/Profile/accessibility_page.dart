@@ -36,7 +36,7 @@ class _AccessibilityPageState extends State<AccessibilityPage> {
         centerTitle: true,
         title: Text(
           'app_accessibility'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -134,7 +134,7 @@ class _AccessibilityPageState extends State<AccessibilityPage> {
                   children: [
                     Text(
                       title,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -153,7 +153,7 @@ class _AccessibilityPageState extends State<AccessibilityPage> {
                         ),
                         child: Text(
                           'beta'.tr,
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 10.sp,
                             fontWeight: FontWeight.w800,
                             color: isDarkMode ? const Color(0xFF4A80F0) : Colors.white,
@@ -167,7 +167,7 @@ class _AccessibilityPageState extends State<AccessibilityPage> {
                 SizedBox(height: 6.h),
                 Text(
                   subtitle,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 13.sp,
                     color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
                     height: 1.5,

@@ -53,7 +53,7 @@ class CameraScanScreen extends StatelessWidget {
               children: [
                 Text(
                   'position_document_frame'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     color: Colors.white,
                     fontWeight: FontWeight.w500,

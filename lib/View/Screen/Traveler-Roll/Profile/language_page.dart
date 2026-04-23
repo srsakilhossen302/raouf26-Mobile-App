@@ -47,7 +47,7 @@ class _LanguagePageState extends State<LanguagePage> {
         centerTitle: true,
         title: Text(
           'languages'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -63,7 +63,7 @@ class _LanguagePageState extends State<LanguagePage> {
               padding: EdgeInsets.only(left: 4.w, bottom: 12.h),
               child: Text(
                 'select_language'.tr,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -109,7 +109,7 @@ class _LanguagePageState extends State<LanguagePage> {
                     ),
                     title: Text(
                       lang['name']!,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         fontWeight: isSelected
                             ? FontWeight.w700

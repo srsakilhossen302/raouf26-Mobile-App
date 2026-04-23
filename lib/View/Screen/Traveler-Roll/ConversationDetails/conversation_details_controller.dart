@@ -68,7 +68,7 @@ class ConversationDetailsController extends GetxController {
               SizedBox(height: 24.h),
               Text(
                 "Removed from Starred",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w700,
                   color: Colors.black,
@@ -78,7 +78,7 @@ class ConversationDetailsController extends GetxController {
               Text(
                 "This conversation has been removed from your important chats.",
                 textAlign: TextAlign.center,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 13.sp,
                   color: Colors.grey,
                   height: 1.4,
@@ -118,7 +118,7 @@ class ConversationDetailsController extends GetxController {
               SizedBox(height: 24.h),
               Text(
                 "Added to Starred",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w700,
                   color: Colors.black,
@@ -128,7 +128,7 @@ class ConversationDetailsController extends GetxController {
               Text(
                 "This conversation is now marked as important.",
                 textAlign: TextAlign.center,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 13.sp,
                   color: Colors.grey,
                   height: 1.4,

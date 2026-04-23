@@ -27,7 +27,7 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
         centerTitle: true,
         title: Text(
           "My Parcels",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -42,7 +42,7 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
             child: TextField(
               decoration: InputDecoration(
                 hintText: "Search ...",
-                hintStyle: GoogleFonts.montserrat(
+                hintStyle: GoogleFonts.manrope(
                   color: isDarkMode ? Colors.white38 : Colors.grey,
                   fontSize: 14.sp,
                 ),
@@ -97,7 +97,7 @@ class MyParcelsScreen extends GetView<MyParcelsController> {
                       child: Center(
                         child: Text(
                           controller.filters[index],
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 14.sp,
                             fontWeight: isSelected
                                 ? FontWeight.w600
@@ -215,7 +215,7 @@ class CustomParcelCard extends StatelessWidget {
                       children: [
                         Text(
                           name,
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w700,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -236,7 +236,7 @@ class CustomParcelCard extends StatelessWidget {
                     SizedBox(height: 4.h),
                     Text(
                       date,
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 12.sp,
                         color: Colors.grey,
                       ),
@@ -256,7 +256,7 @@ class CustomParcelCard extends StatelessWidget {
                 ),
                 child: Text(
                   status,
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.w600,
                     color: isCancelled
@@ -332,7 +332,7 @@ class CustomParcelCard extends StatelessWidget {
                         _locationInfo(from, "20 Jan", isDarkMode),
                         Text(
                           "08:30 AM",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -392,7 +392,7 @@ class CustomParcelCard extends StatelessWidget {
                         _locationInfo(to, "20 Jan", isDarkMode),
                         Text(
                           "10:45 PM",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -434,7 +434,7 @@ class CustomParcelCard extends StatelessWidget {
                     ),
                     label: Text(
                       "Show QR",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
                         color: isDarkMode ? Colors.white : Colors.black87,
@@ -466,7 +466,7 @@ class CustomParcelCard extends StatelessWidget {
                     ),
                     label: Text(
                       "Track on Map",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w600,
                         color: isDarkMode ? Colors.white : Colors.black87,
@@ -503,7 +503,7 @@ class CustomParcelCard extends StatelessWidget {
               ),
               child: Text(
                 "Message",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   color: Colors.white,
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
@@ -519,7 +519,7 @@ class CustomParcelCard extends StatelessWidget {
   Widget _statusLabel(String label, bool isDarkMode, {bool isActive = false}) {
     return Text(
       label,
-      style: GoogleFonts.montserrat(
+      style: GoogleFonts.manrope(
         fontSize: 10.sp,
         fontWeight: FontWeight.w500,
         color: isActive 
@@ -569,7 +569,7 @@ class CustomParcelCard extends StatelessWidget {
       children: [
         Text(
           city,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -577,7 +577,7 @@ class CustomParcelCard extends StatelessWidget {
         ),
         Text(
           date,
-          style: GoogleFonts.montserrat(fontSize: 10.sp, color: Colors.grey),
+          style: GoogleFonts.manrope(fontSize: 10.sp, color: Colors.grey),
         ),
       ],
     );
@@ -596,11 +596,11 @@ class CustomParcelCard extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
+          style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
         ),
         Text(
           value,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: isBold ? FontWeight.w800 : FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,

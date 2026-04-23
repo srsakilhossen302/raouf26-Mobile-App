@@ -29,7 +29,7 @@ class TransporterTripDetailsView extends StatelessWidget {
         ),
         title: Text(
           package.id.replaceAll("#", ""),
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             color: isDarkMode ? Colors.white : Colors.black,
             fontSize: 18.sp,
             fontWeight: FontWeight.bold,
@@ -52,7 +52,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                   children: [
                     Icon(Icons.report_problem_outlined, size: 20.sp, color: Colors.redAccent),
                     SizedBox(width: 8.w),
-                    Text('report_an_issue'.tr, style: GoogleFonts.montserrat(fontSize: 14.sp)),
+                    Text('report_an_issue'.tr, style: GoogleFonts.manrope(fontSize: 14.sp)),
                   ],
                 ),
               ),
@@ -62,7 +62,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                   children: [
                     Icon(Icons.headset_mic_outlined, size: 20.sp, color: Colors.blue),
                     SizedBox(width: 8.w),
-                    Text('contact_support'.tr, style: GoogleFonts.montserrat(fontSize: 14.sp)),
+                    Text('contact_support'.tr, style: GoogleFonts.manrope(fontSize: 14.sp)),
                   ],
                 ),
               ),
@@ -110,7 +110,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                               children: [
                                 Text(
                                   package.userName,
-                                  style: GoogleFonts.montserrat(
+                                  style: GoogleFonts.manrope(
                                     fontSize: 16.sp,
                                     fontWeight: FontWeight.bold,
                                     color: isDarkMode ? Colors.white : Colors.black,
@@ -118,7 +118,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                                 ),
                                 Text(
                                   package.id,
-                                  style: GoogleFonts.montserrat(
+                                  style: GoogleFonts.manrope(
                                     fontSize: 12.sp,
                                     color: Colors.grey,
                                   ),
@@ -135,7 +135,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                           ),
                           child: Text(
                             _getStatusText(package.currentStatusStep),
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
                               color: _getStatusColor(package.currentStatusStep),
@@ -176,16 +176,16 @@ class TransporterTripDetailsView extends StatelessWidget {
                                     children: [
                                       Text(
                                         'pickup_status'.tr,
-                                        style: GoogleFonts.montserrat(
+                                        style: GoogleFonts.manrope(
                                           fontSize: 14.sp,
                                           fontWeight: FontWeight.bold,
                                           color: isDarkMode ? Colors.white : Colors.black,
                                         ),
                                       ),
-                                      Text("${package.fromCity} \u2022 ${package.toCity}", style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey)),
+                                      Text("${package.fromCity} \u2022 ${package.toCity}", style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey)),
                                     ],
                                   ),
-                                  Text(package.fromTime, style: GoogleFonts.montserrat(fontSize: 12.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
+                                  Text(package.fromTime, style: GoogleFonts.manrope(fontSize: 12.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
                                 ],
                               ),
                               SizedBox(height: 24.h),
@@ -197,16 +197,16 @@ class TransporterTripDetailsView extends StatelessWidget {
                                     children: [
                                       Text(
                                         'drop_off'.tr,
-                                        style: GoogleFonts.montserrat(
+                                        style: GoogleFonts.manrope(
                                           fontSize: 14.sp,
                                           fontWeight: FontWeight.bold,
                                           color: isDarkMode ? Colors.white : Colors.black,
                                         ),
                                       ),
-                                      Text("${package.toCity} \u2022 ${package.fromCity}", style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey)),
+                                      Text("${package.toCity} \u2022 ${package.fromCity}", style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey)),
                                     ],
                                   ),
-                                  Text(package.toTime, style: GoogleFonts.montserrat(fontSize: 12.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
+                                  Text(package.toTime, style: GoogleFonts.manrope(fontSize: 12.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
                                 ],
                               ),
                             ],
@@ -228,7 +228,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('status'.tr, style: GoogleFonts.montserrat(fontSize: 14.sp, color: Colors.grey)),
+                        Text('status'.tr, style: GoogleFonts.manrope(fontSize: 14.sp, color: Colors.grey)),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
                           decoration: BoxDecoration(
@@ -237,7 +237,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                           ),
                           child: Text(
                             package.priority,
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.orange,
@@ -297,7 +297,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                                   SizedBox(width: 4.w),
                                   Text(
                                     'open_full_map'.tr,
-                                    style: GoogleFonts.montserrat(
+                                    style: GoogleFonts.manrope(
                                       fontSize: 10.sp,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
@@ -328,7 +328,7 @@ class TransporterTripDetailsView extends StatelessWidget {
                   ),
                   child: Text(
                     _getCTAText(package.currentStatusStep),
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -348,10 +348,10 @@ class TransporterTripDetailsView extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: GoogleFonts.montserrat(fontSize: 14.sp, color: Colors.grey)),
+        Text(label, style: GoogleFonts.manrope(fontSize: 14.sp, color: Colors.grey)),
         Text(
           value,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: isBold ? FontWeight.bold : FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -370,7 +370,7 @@ class TransporterTripDetailsView extends StatelessWidget {
           children: List.generate(steps.length, (index) {
             return Text(
               steps[index].tr,
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 10.sp,
                 fontWeight: index <= currentStep ? FontWeight.bold : FontWeight.normal,
                 color: index <= currentStep

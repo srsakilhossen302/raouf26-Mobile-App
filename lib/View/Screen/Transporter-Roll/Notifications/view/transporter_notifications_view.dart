@@ -40,7 +40,7 @@ class TransporterNotificationsView extends StatelessWidget {
                         children: [
                           Text(
                             "Notifications",
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 22.sp,
                               fontWeight: FontWeight.bold,
                               color: isDarkMode ? Colors.white : Colors.black,
@@ -143,7 +143,7 @@ class TransporterNotificationsView extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.bold,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -152,7 +152,7 @@ class TransporterNotificationsView extends StatelessWidget {
               SizedBox(height: 4.h),
               Text(
                 subtitle,
-                style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
+                style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
               ),
             ],
           ),
@@ -162,7 +162,7 @@ class TransporterNotificationsView extends StatelessWidget {
           children: [
             Text(
               time,
-              style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
+              style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
             ),
             SizedBox(height: 8.h),
             if (isUnread)

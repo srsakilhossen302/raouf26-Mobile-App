@@ -37,7 +37,7 @@ class TransporterDetailsView extends StatelessWidget {
         ),
         title: Text(
           "Transporter Details",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -56,7 +56,7 @@ class TransporterDetailsView extends StatelessWidget {
                 children: [
                   Text(
                     "Tue 20 Jan, 2026",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 24.sp,
                       fontWeight: FontWeight.w700,
                       color: isDarkMode ? Colors.white : Colors.black,
@@ -78,7 +78,7 @@ class TransporterDetailsView extends StatelessWidget {
                       children: [
                         Text(
                           "Complete Route",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
                             color: isDarkMode ? Colors.white70 : Colors.black87,
@@ -105,7 +105,7 @@ class TransporterDetailsView extends StatelessWidget {
                                   SizedBox(height: 4.h),
                                   Text(
                                     transporter.from,
-                                    style: GoogleFonts.montserrat(
+                                    style: GoogleFonts.manrope(
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -124,7 +124,7 @@ class TransporterDetailsView extends StatelessWidget {
                                   SizedBox(height: 4.h),
                                   Text(
                                     transporter.to,
-                                    style: GoogleFonts.montserrat(
+                                    style: GoogleFonts.manrope(
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -182,7 +182,7 @@ class TransporterDetailsView extends StatelessWidget {
                         children: [
                           Text(
                             "Pricing",
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w700,
                             ),
@@ -234,7 +234,7 @@ class TransporterDetailsView extends StatelessWidget {
                       children: [
                         Text(
                           "Discount Code",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w700,
                           ),
@@ -259,7 +259,7 @@ class TransporterDetailsView extends StatelessWidget {
                                   decoration: InputDecoration(
                                     hintText: "Enter Code",
                                     border: InputBorder.none,
-                                    hintStyle: GoogleFonts.montserrat(
+                                    hintStyle: GoogleFonts.manrope(
                                       fontSize: 14.sp,
                                       color: Colors.grey,
                                     ),
@@ -283,7 +283,7 @@ class TransporterDetailsView extends StatelessWidget {
                               ),
                               child: Text(
                                 "Apply",
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -297,7 +297,7 @@ class TransporterDetailsView extends StatelessWidget {
                               padding: EdgeInsets.only(top: 8.h),
                               child: Text(
                                 controller.codeError.value,
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   fontSize: 12.sp,
                                   color: Colors.red,
                                 ),
@@ -309,7 +309,7 @@ class TransporterDetailsView extends StatelessWidget {
                               padding: EdgeInsets.only(top: 8.h),
                               child: Text(
                                 controller.successMessage.value,
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   fontSize: 12.sp,
                                   color: Colors.green,
                                 ),
@@ -346,7 +346,7 @@ class TransporterDetailsView extends StatelessWidget {
                                 children: [
                                   Text(
                                     transporter.name,
-                                    style: GoogleFonts.montserrat(
+                                    style: GoogleFonts.manrope(
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.w700,
                                     ),
@@ -361,7 +361,7 @@ class TransporterDetailsView extends StatelessWidget {
                               ),
                               Text(
                                 "Verified Profile",
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   fontSize: 12.sp,
                                   color: Colors.grey,
                                 ),
@@ -380,7 +380,7 @@ class TransporterDetailsView extends StatelessWidget {
                           ),
                           child: Text(
                             transporter.vehicleType,
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 10.sp,
                               fontWeight: FontWeight.w600,
                               color: Colors.blue,
@@ -424,7 +424,7 @@ class TransporterDetailsView extends StatelessWidget {
                       ),
                       child: Text(
                         "Contact",
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w700,
                           color: const Color(0xFF4A80F0),
@@ -452,7 +452,7 @@ class TransporterDetailsView extends StatelessWidget {
                       ),
                       child: Text(
                         "Book Now",
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
@@ -521,7 +521,7 @@ class TransporterDetailsView extends StatelessWidget {
             SizedBox(height: 24.h),
             Text(
               "Payment Confirmation",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w700,
               ),
@@ -529,7 +529,7 @@ class TransporterDetailsView extends StatelessWidget {
             SizedBox(height: 8.h),
             Text(
               "Your payment is protected and handled securely.",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: Colors.grey,
               ),
@@ -589,7 +589,7 @@ class TransporterDetailsView extends StatelessWidget {
                 ),
                 child: Text(
                   "Confirm & Book",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -611,7 +611,7 @@ class TransporterDetailsView extends StatelessWidget {
                 ),
                 child: Text(
                   "Save as Draft",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
@@ -657,7 +657,7 @@ class TransporterDetailsView extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
                 ),
@@ -665,7 +665,7 @@ class TransporterDetailsView extends StatelessWidget {
               SizedBox(height: 4.h),
               Text(
                 subtitle,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 12.sp,
                   color: Colors.grey,
                   height: 1.4,
@@ -696,7 +696,7 @@ class TransporterDetailsView extends StatelessWidget {
               children: [
                 Text(
                   time,
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w700,
                   ),
@@ -729,7 +729,7 @@ class TransporterDetailsView extends StatelessWidget {
               children: [
                 Text(
                   address,
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 13.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -738,7 +738,7 @@ class TransporterDetailsView extends StatelessWidget {
                 ),
                 Text(
                   date,
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 11.sp,
                     color: Colors.grey,
                   ),
@@ -766,7 +766,7 @@ class TransporterDetailsView extends StatelessWidget {
         children: [
           Text(
             label,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: color ?? (isDarkMode ? Colors.white70 : Colors.black54),
             ),
@@ -788,7 +788,7 @@ class TransporterDetailsView extends StatelessWidget {
               ],
               Text(
                 value,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: isBold ? FontWeight.w700 : FontWeight.w600,
                   color: color ?? (isDarkMode ? Colors.white : Colors.black),

@@ -61,7 +61,7 @@ class BookingDetailsScreen extends StatelessWidget {
                     SizedBox(width: 12.w),
                     Text(
                       "report_an_issue".tr,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         color: isDarkMode ? Colors.white70 : Colors.black87,
                       ),
@@ -81,7 +81,7 @@ class BookingDetailsScreen extends StatelessWidget {
                     SizedBox(width: 12.w),
                     Text(
                       "cancel_booking".tr,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         color: Colors.redAccent,
                       ),
@@ -101,7 +101,7 @@ class BookingDetailsScreen extends StatelessWidget {
                     SizedBox(width: 12.w),
                     Text(
                       "contact_support".tr,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         color: isDarkMode ? Colors.white70 : Colors.black87,
                       ),
@@ -114,7 +114,7 @@ class BookingDetailsScreen extends StatelessWidget {
         ],
         title: Text(
           "booking_details".tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -178,7 +178,7 @@ class BookingDetailsScreen extends StatelessWidget {
             ),
             child: Text(
               "pickup".tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
@@ -216,7 +216,7 @@ class BookingDetailsScreen extends StatelessWidget {
               children: [
                 Text(
                   "accepted".tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: const Color(0xFF1A1A1A),
@@ -225,7 +225,7 @@ class BookingDetailsScreen extends StatelessWidget {
                 SizedBox(height: 4.h),
                 Text(
                   "You have agreed to carry this parcel.".tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     color: const Color(0xFF666666),
                   ),
@@ -280,7 +280,7 @@ class BookingDetailsScreen extends StatelessWidget {
   Widget _buildStepLabel(String label, bool isActive) {
     return Text(
       label,
-      style: GoogleFonts.plusJakartaSans(
+      style: GoogleFonts.manrope(
         fontSize: 12.sp,
         fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
         color: isActive ? const Color(0xFF1A1A1A) : const Color(0xFF9E9E9E),
@@ -337,7 +337,7 @@ class BookingDetailsScreen extends StatelessWidget {
                       children: [
                         Text(
                           "Mukaram Hussain",
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w700,
                             color: isDarkMode
@@ -355,7 +355,7 @@ class BookingDetailsScreen extends StatelessWidget {
                     ),
                     Text(
                       "Client",
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 12.sp,
                         color: const Color(0xFF9E9E9E),
                       ),
@@ -391,7 +391,7 @@ class BookingDetailsScreen extends StatelessWidget {
               ),
               child: Text(
                 "message".tr,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                   color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -420,7 +420,7 @@ class BookingDetailsScreen extends StatelessWidget {
           SizedBox(height: 16.h),
           Text(
             "Package Photos",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: const Color(0xFF9E9E9E),
             ),
@@ -441,7 +441,7 @@ class BookingDetailsScreen extends StatelessWidget {
             children: [
               Text(
                 "Status",
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   color: const Color(0xFF9E9E9E),
                 ),
@@ -454,7 +454,7 @@ class BookingDetailsScreen extends StatelessWidget {
                 ),
                 child: Text(
                   "Urgent",
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.w600,
                     color: const Color(0xFFF79009),
@@ -562,7 +562,7 @@ class BookingDetailsScreen extends StatelessWidget {
             children: [
               Text(
                 location,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                   color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -570,7 +570,7 @@ class BookingDetailsScreen extends StatelessWidget {
               ),
               Text(
                 date,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 10.sp,
                   color: const Color(0xFF9E9E9E),
                 ),
@@ -580,7 +580,7 @@ class BookingDetailsScreen extends StatelessWidget {
         ),
         Text(
           time,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 12.sp,
             color: isDarkMode ? Colors.white70 : const Color(0xFF666666),
           ),
@@ -629,7 +629,7 @@ class BookingDetailsScreen extends StatelessWidget {
           if (title != null) ...[
             Text(
               title,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -663,14 +663,14 @@ class BookingDetailsScreen extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             color: const Color(0xFF9E9E9E),
           ),
         ),
         Text(
           value,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: isBold ? FontWeight.w800 : FontWeight.w600,
             color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),

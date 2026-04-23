@@ -32,7 +32,7 @@ class TransportersView extends GetView<TransportersController> {
         ),
         title: Text(
           "Transporters",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -78,7 +78,7 @@ class TransportersView extends GetView<TransportersController> {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: "Search Location...",
-                  hintStyle: GoogleFonts.montserrat(
+                  hintStyle: GoogleFonts.manrope(
                     color: Colors.grey,
                     fontSize: 14.sp,
                   ),
@@ -122,7 +122,7 @@ class TransportersView extends GetView<TransportersController> {
                               child: Center(
                                 child: Text(
                                   filter,
-                                  style: GoogleFonts.montserrat(
+                                  style: GoogleFonts.manrope(
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w600,
                                     color:
@@ -162,7 +162,7 @@ class TransportersView extends GetView<TransportersController> {
                   SizedBox(width: 8.w),
                   Text(
                     "4 Transporters Found!",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.black87,
@@ -237,7 +237,7 @@ class TransportersView extends GetView<TransportersController> {
                       children: [
                         Text(
                           transporter.name,
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 15.sp,
                             fontWeight: FontWeight.w700,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -257,7 +257,7 @@ class TransportersView extends GetView<TransportersController> {
                         SizedBox(width: 4.w),
                         Text(
                           "${transporter.rating} • ${transporter.totalTrips} Trips",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 12.sp,
                             color: Colors.grey,
                           ),
@@ -300,7 +300,7 @@ class TransportersView extends GetView<TransportersController> {
                       SizedBox(width: 6.w),
                       Text(
                         "Best Match",
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 11.sp,
                           fontWeight: FontWeight.w700,
                           color: const Color(0xFF4A80F0),
@@ -318,7 +318,7 @@ class TransportersView extends GetView<TransportersController> {
                   ),
                   child: Text(
                     transporter.vehicleType,
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 10.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.blue,
@@ -374,14 +374,14 @@ class TransportersView extends GetView<TransportersController> {
                 children: [
                   Text(
                     "Price Per kg",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 11.sp,
                       color: Colors.grey,
                     ),
                   ),
                   Text(
                     transporter.pricePerKg,
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w700,
                     ),
@@ -393,14 +393,14 @@ class TransportersView extends GetView<TransportersController> {
                 children: [
                   Text(
                     "Estimated Total",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 11.sp,
                       color: Colors.grey,
                     ),
                   ),
                   Text(
                     transporter.estimatedTotal,
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w700,
                     ),
@@ -414,7 +414,7 @@ class TransportersView extends GetView<TransportersController> {
             children: [
               Text(
                 "Also traveling to ${transporter.alsoTravelingTo.join(', ')}",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 12.sp,
                   color: Colors.grey,
                 ),
@@ -443,7 +443,7 @@ class TransportersView extends GetView<TransportersController> {
             children: [
               Text(
                 city,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w600,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -451,7 +451,7 @@ class TransportersView extends GetView<TransportersController> {
               ),
               Text(
                 date,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 11.sp,
                   color: Colors.grey,
                 ),
@@ -461,7 +461,7 @@ class TransportersView extends GetView<TransportersController> {
         ),
         Text(
           time,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 12.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white70 : Colors.black87,
@@ -498,7 +498,7 @@ class TransportersView extends GetView<TransportersController> {
                 ),
                 Text(
                   "Filters",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -508,7 +508,7 @@ class TransportersView extends GetView<TransportersController> {
                   onPressed: () => controller.resetFilters(),
                   child: Text(
                     "Clear all",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       color: const Color(0xFF4A80F0),
                       fontWeight: FontWeight.w600,
                     ),
@@ -624,7 +624,7 @@ class TransportersView extends GetView<TransportersController> {
                     ),
                     child: Text(
                       "Reset",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
                       ),
@@ -645,7 +645,7 @@ class TransportersView extends GetView<TransportersController> {
                     ),
                     child: Text(
                       "Apply",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),
@@ -663,7 +663,7 @@ class TransportersView extends GetView<TransportersController> {
   Widget _filterTitle(String title, bool isDarkMode) {
     return Text(
       title,
-      style: GoogleFonts.montserrat(
+      style: GoogleFonts.manrope(
         fontSize: 15.sp,
         fontWeight: FontWeight.w700,
         color: isDarkMode ? Colors.white : Colors.black,
@@ -697,7 +697,7 @@ class TransportersView extends GetView<TransportersController> {
           SizedBox(width: 12.w),
           Text(
             title,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -707,7 +707,7 @@ class TransportersView extends GetView<TransportersController> {
             SizedBox(width: 4.w),
             Text(
               subtitle,
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 12.sp,
                 color: Colors.grey,
               ),
@@ -739,7 +739,7 @@ class TransportersView extends GetView<TransportersController> {
           SizedBox(width: 12.w),
           Text(
             "TND",
-            style: GoogleFonts.montserrat(fontWeight: FontWeight.w600),
+            style: GoogleFonts.manrope(fontWeight: FontWeight.w600),
           ),
           const Spacer(),
           const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
@@ -764,7 +764,7 @@ class TransportersView extends GetView<TransportersController> {
                   : DateFormat(
                       'dd MMM, yyyy',
                     ).format(controller.selectedDate.value!),
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 color: Colors.grey,
                 fontSize: 14.sp,
               ),
@@ -798,14 +798,14 @@ class TransportersView extends GetView<TransportersController> {
             children: [
               Text(
                 "${controller.priceRange.value.start.toInt()} TND/ kg",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Text(
                 "${controller.priceRange.value.end.toInt()} TND/ kg",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
                 ),

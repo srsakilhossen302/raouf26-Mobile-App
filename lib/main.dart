@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'View/Screen/SplashScreen/splash_screen.dart';
 import 'Utils/Localizations/app_translations.dart';
@@ -68,6 +69,8 @@ class MyApp extends StatelessWidget {
                 brightness: Brightness.light,
               ),
               useMaterial3: true,
+              fontFamily: GoogleFonts.manrope().fontFamily,
+              textTheme: GoogleFonts.manropeTextTheme(),
             ),
             themeMode: themeController.isDarkMode.value
                 ? ThemeMode.dark
@@ -80,6 +83,8 @@ class MyApp extends StatelessWidget {
                 brightness: Brightness.dark,
               ),
               useMaterial3: true,
+              fontFamily: GoogleFonts.manrope().fontFamily,
+              textTheme: GoogleFonts.manropeTextTheme(ThemeData.dark().textTheme),
             ),
             home: const SplashScreen(),
           ),

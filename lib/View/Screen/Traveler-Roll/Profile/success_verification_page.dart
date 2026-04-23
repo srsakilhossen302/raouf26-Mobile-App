@@ -27,7 +27,7 @@ class SuccessVerificationPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'verification_successful'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -77,7 +77,7 @@ class SuccessVerificationPage extends StatelessWidget {
               SizedBox(height: 40.h),
               Text(
                 'now_verified'.tr,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w800,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -87,7 +87,7 @@ class SuccessVerificationPage extends StatelessWidget {
               Text(
                 'account_verified_desc'.tr,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   color: Colors.grey,
                   height: 1.5,
@@ -108,7 +108,7 @@ class SuccessVerificationPage extends StatelessWidget {
                   ),
                   child: Text(
                     'continue'.tr,
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
                       color: Colors.white,

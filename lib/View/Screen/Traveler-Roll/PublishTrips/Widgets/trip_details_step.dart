@@ -27,7 +27,7 @@ class TripDetailsStep extends StatelessWidget {
             children: [
               Text(
                 "Departure & Destination",
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -37,7 +37,7 @@ class TripDetailsStep extends StatelessWidget {
           ),
           Text(
             "Set your starting point and final destination for this trip.",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: Colors.grey,
             ),
@@ -59,7 +59,7 @@ class TripDetailsStep extends StatelessWidget {
             ),
             label: Text(
               "Use my current location",
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 12.sp,
                 color: const Color(0xFF4A80F0),
               ),
@@ -84,7 +84,7 @@ class TripDetailsStep extends StatelessWidget {
           SizedBox(height: 24.h),
           Text(
             "Add a Stop (Optional)",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -102,7 +102,7 @@ class TripDetailsStep extends StatelessWidget {
             ),
             label: Text(
               "Add a Stop",
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: Colors.grey,
               ),
@@ -168,7 +168,7 @@ class TripDetailsStep extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -187,7 +187,7 @@ class TripDetailsStep extends StatelessWidget {
           },
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: GoogleFonts.plusJakartaSans(color: Colors.grey),
+            hintStyle: GoogleFonts.manrope(color: Colors.grey),
             suffixIcon: suffixIcon != null
                 ? Icon(suffixIcon, color: Colors.grey)
                 : null,
@@ -215,7 +215,7 @@ class TripDetailsStep extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -235,7 +235,7 @@ class TripDetailsStep extends StatelessWidget {
               children: [
                 Text(
                   value.isEmpty ? hint : value,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     color: value.isEmpty
                         ? Colors.grey
                         : (isDarkMode ? Colors.white : Colors.black),
@@ -272,7 +272,7 @@ class TripDetailsStep extends StatelessWidget {
             Expanded(
               child: Text(
                 location,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 12.sp,
                   color: isDarkMode ? Colors.white : Colors.black,
                 ),

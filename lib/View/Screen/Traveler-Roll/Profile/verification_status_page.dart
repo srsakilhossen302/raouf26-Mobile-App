@@ -27,7 +27,7 @@ class VerificationStatusPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'verification_status'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -67,7 +67,7 @@ class VerificationStatusPage extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       "ZM",
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w700,
                         color: const Color(0xFF4A80F0),
@@ -81,7 +81,7 @@ class VerificationStatusPage extends StatelessWidget {
                       children: [
                         Text(
                           "Zain Malik",
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w700,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -90,7 +90,7 @@ class VerificationStatusPage extends StatelessWidget {
                         SizedBox(height: 2.h),
                         Text(
                           "zainmalik02325@gmail.com",
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 13.sp,
                             color: Colors.grey,
                           ),
@@ -140,7 +140,7 @@ class VerificationStatusPage extends StatelessWidget {
                       ),
                       Text(
                         "90%",
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w700,
                           color: isDarkMode ? Colors.white : Colors.black,
@@ -155,7 +155,7 @@ class VerificationStatusPage extends StatelessWidget {
                       children: [
                         Text(
                           'verification_progress'.tr,
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 15.sp,
                             fontWeight: FontWeight.w700,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -164,7 +164,7 @@ class VerificationStatusPage extends StatelessWidget {
                         SizedBox(height: 4.h),
                         Text(
                           "90% complete - Just one more step to finish verification.",
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 12.sp,
                             color: Colors.grey,
                             height: 1.4,
@@ -184,7 +184,7 @@ class VerificationStatusPage extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 'verified_information'.tr,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -289,7 +289,7 @@ class VerificationStatusPage extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -298,7 +298,7 @@ class VerificationStatusPage extends StatelessWidget {
                 SizedBox(height: 2.h),
                 Text(
                   subtitle,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     color: Colors.grey,
                   ),

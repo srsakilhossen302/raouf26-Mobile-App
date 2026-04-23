@@ -216,7 +216,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                       _currentPage == onboardingData.length - 1
                                           ? "get_started".tr
                                           : "continue_button".tr,
-                                      style: GoogleFonts.plusJakartaSans(
+                                      style: GoogleFonts.manrope(
                                         color: Colors.white,
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w700,

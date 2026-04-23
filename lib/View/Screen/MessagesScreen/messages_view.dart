@@ -27,7 +27,7 @@ class MessagesScreen extends StatelessWidget {
         elevation: 0,
         title: Text(
           "Messages",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 20.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -83,7 +83,7 @@ class MessagesScreen extends StatelessWidget {
                     SizedBox(width: 12.w),
                     Text(
                       "Archive",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         color: isDarkMode ? Colors.white : Colors.black,
                       ),
@@ -103,7 +103,7 @@ class MessagesScreen extends StatelessWidget {
                     SizedBox(width: 12.w),
                     Text(
                       "Give Feedback",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         color: isDarkMode ? Colors.white : Colors.black,
                       ),
@@ -130,7 +130,7 @@ class MessagesScreen extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: "Search ...",
-                  hintStyle: GoogleFonts.montserrat(
+                  hintStyle: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     color: Colors.grey,
                   ),
@@ -281,7 +281,7 @@ class MessagesScreen extends StatelessWidget {
             children: [
               Text(
                 "Create channel / group",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -351,7 +351,7 @@ class MessagesScreen extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w600,
                       color: isDarkMode ? Colors.white : Colors.black,
@@ -359,7 +359,7 @@ class MessagesScreen extends StatelessWidget {
                   ),
                   Text(
                     subtitle,
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 12.sp,
                       color: Colors.grey,
                     ),
@@ -400,7 +400,7 @@ class MessagesScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Create $type",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w700,
                       color: isDarkMode ? Colors.white : Colors.black,
@@ -475,7 +475,7 @@ class MessagesScreen extends StatelessWidget {
                   ),
                   child: Text(
                     "Create $type",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
@@ -497,7 +497,7 @@ class MessagesScreen extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 8.h),
       child: Text(
         label,
-        style: GoogleFonts.montserrat(
+        style: GoogleFonts.manrope(
           fontSize: 14.sp,
           fontWeight: FontWeight.w600,
           color: isDarkMode ? Colors.white : Colors.black,
@@ -531,7 +531,7 @@ class MessagesScreen extends StatelessWidget {
                   children: [
                     Text(
                       hint,
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         color: Colors.grey,
                       ),
@@ -544,13 +544,13 @@ class MessagesScreen extends StatelessWidget {
           : TextField(
               controller: controller,
               maxLines: maxLines,
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
               decoration: InputDecoration(
                 hintText: hint,
-                hintStyle: GoogleFonts.montserrat(
+                hintStyle: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   color: Colors.grey,
                 ),
@@ -586,7 +586,7 @@ class MessagesScreen extends StatelessWidget {
           ),
           child: Text(
             label,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
               color: isSelected
@@ -661,7 +661,7 @@ class MessagesScreen extends StatelessWidget {
                   children: [
                     Text(
                       message['name'],
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -681,7 +681,7 @@ class MessagesScreen extends StatelessWidget {
                           ),
                         Text(
                           message['time'],
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 12.sp,
                             color: Colors.grey,
                           ),
@@ -694,7 +694,7 @@ class MessagesScreen extends StatelessWidget {
                 if (isSupport)
                   Text(
                     message['message'],
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 13.sp,
                       color: Colors.grey,
                     ),
@@ -714,7 +714,7 @@ class MessagesScreen extends StatelessWidget {
                         SizedBox(width: 4.w),
                         Text(
                           "${message['status']} ",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 12.sp,
                             color: Colors.orange,
                             fontWeight: FontWeight.w600,
@@ -723,7 +723,7 @@ class MessagesScreen extends StatelessWidget {
                       ],
                       Text(
                         message['subtitle'],
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 12.sp,
                           color: Colors.grey,
                         ),
@@ -733,7 +733,7 @@ class MessagesScreen extends StatelessWidget {
                   SizedBox(height: 4.h),
                   Text(
                     message['message'],
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 13.sp,
                       color: Colors.grey.shade600,
                     ),

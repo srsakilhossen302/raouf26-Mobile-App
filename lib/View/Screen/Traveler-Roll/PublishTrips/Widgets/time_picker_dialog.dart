@@ -41,7 +41,7 @@ class TimePickerDialog extends StatelessWidget {
                         isDeparture
                             ? "Select Departure Time"
                             : "Select Arrival Time",
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
                           color: isDarkMode ? Colors.white : Colors.black,
@@ -95,7 +95,7 @@ class TimePickerDialog extends StatelessWidget {
                                 return Center(
                                   child: Text(
                                     (index + 1).toString().padLeft(2, '0'),
-                                    style: GoogleFonts.plusJakartaSans(
+                                    style: GoogleFonts.manrope(
                                       fontSize: isSelected ? 24.sp : 18.sp,
                                       fontWeight: isSelected
                                           ? FontWeight.w700
@@ -114,7 +114,7 @@ class TimePickerDialog extends StatelessWidget {
                         ),
                         Text(
                           ":",
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w700,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -143,7 +143,7 @@ class TimePickerDialog extends StatelessWidget {
                                 return Center(
                                   child: Text(
                                     index.toString().padLeft(2, '0'),
-                                    style: GoogleFonts.plusJakartaSans(
+                                    style: GoogleFonts.manrope(
                                       fontSize: isSelected ? 24.sp : 18.sp,
                                       fontWeight: isSelected
                                           ? FontWeight.w700
@@ -185,7 +185,7 @@ class TimePickerDialog extends StatelessWidget {
                                 return Center(
                                   child: Text(
                                     period,
-                                    style: GoogleFonts.plusJakartaSans(
+                                    style: GoogleFonts.manrope(
                                       fontSize: isSelected ? 24.sp : 18.sp,
                                       fontWeight: isSelected
                                           ? FontWeight.w700
@@ -231,7 +231,7 @@ class TimePickerDialog extends StatelessWidget {
                   ),
                   child: Text(
                     "Confirm",
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       color: Colors.white,
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,

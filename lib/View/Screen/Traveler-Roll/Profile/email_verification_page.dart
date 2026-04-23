@@ -30,7 +30,7 @@ class EmailVerificationPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'email_verification'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -45,7 +45,7 @@ class EmailVerificationPage extends StatelessWidget {
             SizedBox(height: 20.h),
             Text(
               'email_verification'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -54,7 +54,7 @@ class EmailVerificationPage extends StatelessWidget {
             SizedBox(height: 12.h),
             Text(
               'enter_email_desc'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey[600],
                 height: 1.5,
@@ -63,7 +63,7 @@ class EmailVerificationPage extends StatelessWidget {
             SizedBox(height: 40.h),
             Text(
               'email'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -73,13 +73,13 @@ class EmailVerificationPage extends StatelessWidget {
             TextField(
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
               decoration: InputDecoration(
                 hintText: 'Enter Your Email',
-                hintStyle: GoogleFonts.plusJakartaSans(
+                hintStyle: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   color: isDarkMode ? Colors.white30 : Colors.grey[400],
                 ),
@@ -127,7 +127,7 @@ class EmailVerificationPage extends StatelessWidget {
                 ),
                 child: Text(
                   'verify'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,

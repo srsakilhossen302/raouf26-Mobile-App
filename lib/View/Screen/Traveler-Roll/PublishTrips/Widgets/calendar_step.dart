@@ -28,7 +28,7 @@ class CalendarStep extends StatelessWidget {
               children: [
                 Text(
                   "Publish Your Trip",
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -37,7 +37,7 @@ class CalendarStep extends StatelessWidget {
                 SizedBox(height: 8.h),
                 Text(
                   "List your journey and accept delivery requests from trusted senders.",
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     color: isDarkMode
                         ? Colors.white70
@@ -80,7 +80,7 @@ class CalendarStep extends StatelessWidget {
                           headerStyle: HeaderStyle(
                             formatButtonVisible: false,
                             titleCentered: false,
-                            titleTextStyle: GoogleFonts.plusJakartaSans(
+                            titleTextStyle: GoogleFonts.manrope(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w700,
                             ),
@@ -88,20 +88,20 @@ class CalendarStep extends StatelessWidget {
                             rightChevronVisible: false,
                           ),
                           daysOfWeekStyle: DaysOfWeekStyle(
-                            weekdayStyle: GoogleFonts.plusJakartaSans(
+                            weekdayStyle: GoogleFonts.manrope(
                               fontSize: 12.sp,
                               color: Colors.grey,
                             ),
-                            weekendStyle: GoogleFonts.plusJakartaSans(
+                            weekendStyle: GoogleFonts.manrope(
                               fontSize: 12.sp,
                               color: Colors.grey,
                             ),
                           ),
                           calendarStyle: CalendarStyle(
-                            defaultTextStyle: GoogleFonts.plusJakartaSans(
+                            defaultTextStyle: GoogleFonts.manrope(
                               fontSize: 14.sp,
                             ),
-                            weekendTextStyle: GoogleFonts.plusJakartaSans(
+                            weekendTextStyle: GoogleFonts.manrope(
                               fontSize: 14.sp,
                             ),
                             selectedDecoration: const BoxDecoration(
@@ -170,7 +170,7 @@ class CalendarStep extends StatelessWidget {
                               DateFormat('EEE, d MMM')
                                   .format(controller.selectedDate.value!)
                                   .toUpperCase(),
-                              style: GoogleFonts.plusJakartaSans(
+                              style: GoogleFonts.manrope(
                                 color: Colors.white,
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w600,
@@ -179,7 +179,7 @@ class CalendarStep extends StatelessWidget {
                             if (controller.departureTime.value.isNotEmpty) ...[
                               Text(
                                 " - Dep. ${controller.departureTime.value}",
-                                style: GoogleFonts.plusJakartaSans(
+                                style: GoogleFonts.manrope(
                                   color: Colors.white,
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w600,
@@ -189,7 +189,7 @@ class CalendarStep extends StatelessWidget {
                             if (controller.arrivalTime.value.isNotEmpty) ...[
                               Text(
                                 " - Arr. ${controller.arrivalTime.value}",
-                                style: GoogleFonts.plusJakartaSans(
+                                style: GoogleFonts.manrope(
                                   color: Colors.white,
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w600,
@@ -231,7 +231,7 @@ class CalendarStep extends StatelessWidget {
                             SizedBox(height: 12.h),
                             Text(
                               "Departure & Destination",
-                              style: GoogleFonts.plusJakartaSans(
+                              style: GoogleFonts.manrope(
                                 fontSize: 12.sp,
                                 color: Colors.grey,
                               ),
@@ -273,7 +273,7 @@ class CalendarStep extends StatelessWidget {
                               children: [
                                 Text(
                                   "Set Price & Capacity",
-                                  style: GoogleFonts.plusJakartaSans(
+                                  style: GoogleFonts.manrope(
                                     fontSize: 12.sp,
                                     color: Colors.grey,
                                   ),
@@ -307,7 +307,7 @@ class CalendarStep extends StatelessWidget {
                               children: [
                                 Text(
                                   "Set Travel Details",
-                                  style: GoogleFonts.plusJakartaSans(
+                                  style: GoogleFonts.manrope(
                                     fontSize: 12.sp,
                                     color: Colors.grey,
                                   ),
@@ -365,7 +365,7 @@ class CalendarStep extends StatelessWidget {
               text,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 10.sp,
                 color: text == "Departure" || text == "Destination"
                     ? Colors.grey
@@ -387,7 +387,7 @@ class CalendarStep extends StatelessWidget {
       ),
       child: Text(
         hint,
-        style: GoogleFonts.plusJakartaSans(fontSize: 12.sp, color: Colors.grey),
+        style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
       ),
     );
   }

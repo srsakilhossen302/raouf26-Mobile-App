@@ -46,7 +46,7 @@ class _SavedAddressPageState extends State<SavedAddressPage> {
         centerTitle: true,
         title: Text(
           'saved_address_title'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -97,7 +97,7 @@ class _SavedAddressPageState extends State<SavedAddressPage> {
                 icon: Icon(Icons.add, color: Colors.white, size: 20.sp),
                 label: Text(
                   'add_new_address'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
@@ -125,7 +125,7 @@ class _SavedAddressPageState extends State<SavedAddressPage> {
           alignment: Alignment.center,
           child: Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
               color: isSelected
@@ -180,7 +180,7 @@ class _SavedAddressPageState extends State<SavedAddressPage> {
                   children: [
                     Text(
                       item['title']!,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -189,7 +189,7 @@ class _SavedAddressPageState extends State<SavedAddressPage> {
                     SizedBox(height: 4.h),
                     Text(
                       item['address']!,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 13.sp,
                         color: Colors.grey,
                       ),
@@ -234,7 +234,7 @@ class _SavedAddressPageState extends State<SavedAddressPage> {
           SizedBox(width: 12.w),
           Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
               color: isDelete ? Colors.red : (isDarkMode ? Colors.white : Colors.black),
@@ -260,7 +260,7 @@ class _SavedAddressPageState extends State<SavedAddressPage> {
           Text(
             'no_business_address_yet'.tr,
             textAlign: TextAlign.center,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 20.sp,
               fontWeight: FontWeight.w800,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -270,7 +270,7 @@ class _SavedAddressPageState extends State<SavedAddressPage> {
           Text(
             'no_business_address_desc'.tr,
             textAlign: TextAlign.center,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: Colors.grey,
               height: 1.5,

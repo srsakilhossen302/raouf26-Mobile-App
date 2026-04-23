@@ -25,7 +25,7 @@ class ReviewPublishStep extends StatelessWidget {
         children: [
           Text(
             "Review & Publish",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 22.sp,
               fontWeight: FontWeight.w700,
               color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -34,7 +34,7 @@ class ReviewPublishStep extends StatelessWidget {
           SizedBox(height: 4.h),
           Text(
             "Check your trip details before publishing and receiving delivery requests.",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: Colors.grey,
               height: 1.4,
@@ -125,7 +125,7 @@ class ReviewPublishStep extends StatelessWidget {
                                 SizedBox(width: 4.w),
                                 Text(
                                   "Adjust Location",
-                                  style: GoogleFonts.plusJakartaSans(
+                                  style: GoogleFonts.manrope(
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black,
@@ -161,14 +161,14 @@ class ReviewPublishStep extends StatelessWidget {
                     children: [
                       Text(
                         "Stops",
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           fontSize: 13.sp,
                           color: Colors.grey,
                         ),
                       ),
                       Text(
                         controller.stops.join(", "),
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w600,
                           color: isDarkMode ? Colors.white : Colors.black,
@@ -299,7 +299,7 @@ class ReviewPublishStep extends StatelessWidget {
                     children: [
                       Text(
                         "Description & Notes",
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           fontSize: 13.sp,
                           color: Colors.grey,
                         ),
@@ -309,7 +309,7 @@ class ReviewPublishStep extends StatelessWidget {
                         child: Text(
                           controller.tripDescriptionController.text,
                           textAlign: TextAlign.right,
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w500,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -338,7 +338,7 @@ class ReviewPublishStep extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: GoogleFonts.plusJakartaSans(
+        style: GoogleFonts.manrope(
           color: Colors.white,
           fontSize: 10.sp,
           fontWeight: FontWeight.w600,
@@ -384,7 +384,7 @@ class ReviewPublishStep extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -443,7 +443,7 @@ class ReviewPublishStep extends StatelessWidget {
         Expanded(
           child: Text(
             label,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
               color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -469,7 +469,7 @@ class ReviewPublishStep extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 13.sp,
                   color: Colors.grey,
                 ),
@@ -479,7 +479,7 @@ class ReviewPublishStep extends StatelessWidget {
                 child: Text(
                   value,
                   textAlign: TextAlign.right,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 13.sp,
                     fontWeight: FontWeight.w600,
                     color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),

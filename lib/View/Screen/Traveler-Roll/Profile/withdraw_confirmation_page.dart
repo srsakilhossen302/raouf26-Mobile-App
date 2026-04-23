@@ -28,7 +28,7 @@ class WithdrawConfirmationPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'withdrawal_confirmation'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -44,7 +44,7 @@ class WithdrawConfirmationPage extends StatelessWidget {
             // Amount Summary
             Text(
               'Total Withdrawal',
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 16.sp,
                 color: Colors.grey,
               ),
@@ -65,7 +65,7 @@ class WithdrawConfirmationPage extends StatelessWidget {
                 SizedBox(width: 8.w),
                 Text(
                   '1,000.00 TND',
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 32.sp,
                     fontWeight: FontWeight.w800,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -115,7 +115,7 @@ class WithdrawConfirmationPage extends StatelessWidget {
                 ),
                 child: Text(
                   'confirm_withdrawal'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -138,7 +138,7 @@ class WithdrawConfirmationPage extends StatelessWidget {
         children: [
           Text(
             label,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: isDarkMode ? Colors.white70 : Colors.grey[600],
             ),
@@ -160,7 +160,7 @@ class WithdrawConfirmationPage extends StatelessWidget {
               ],
               Text(
                 value,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: isBold ? FontWeight.w800 : FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,

@@ -30,7 +30,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
         ),
         title: Text(
           "Conversation Details",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -65,7 +65,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
                             children: [
                               Text(
                                 controller.transporterName.value,
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   fontSize: 15.sp,
                                   fontWeight: FontWeight.w700,
                                   color: isDarkMode
@@ -83,7 +83,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
                           ),
                           Text(
                             controller.tripInfo.value,
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 12.sp,
                               color: Colors.grey,
                             ),
@@ -190,7 +190,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
                       children: [
                         Text(
                           controller.transporterName.value,
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w700,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -198,7 +198,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
                         ),
                         Text(
                           "Tunis → Paris",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 11.sp,
                             color: Colors.grey,
                           ),
@@ -216,7 +216,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
                             SizedBox(width: 4.w),
                             Text(
                               "4.8",
-                              style: GoogleFonts.montserrat(
+                              style: GoogleFonts.manrope(
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w600,
                                 color: isDarkMode ? Colors.white : Colors.black,
@@ -299,7 +299,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
       padding: EdgeInsets.only(bottom: 12.h),
       child: Text(
         title,
-        style: GoogleFonts.montserrat(
+        style: GoogleFonts.manrope(
           fontSize: 15.sp,
           fontWeight: FontWeight.w700,
           color: isDarkMode ? Colors.white : Colors.black,
@@ -348,7 +348,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
             children: [
               Text(
                 name,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black87,
@@ -356,7 +356,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
               ),
               Text(
                 role,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 12.sp,
                   color: Colors.grey,
                 ),
@@ -373,7 +373,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
             ),
             child: Text(
               "Me",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 10.sp,
                 fontWeight: FontWeight.w600,
                 color: const Color(0xFF4A80F0),
@@ -418,7 +418,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
             Expanded(
               child: Text(
                 title,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                   color: isDarkMode ? Colors.white : Colors.black87,
@@ -443,7 +443,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
       children: [
         Text(
           "• ",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             color: isDarkMode ? Colors.white70 : Colors.black87,
           ),
@@ -451,7 +451,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
         Expanded(
           child: RichText(
             text: TextSpan(
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 12.sp,
                 color: isDarkMode ? Colors.white70 : Colors.black87,
                 height: 1.4,

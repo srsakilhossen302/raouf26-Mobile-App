@@ -30,7 +30,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
         ),
         title: Text(
           "Delivery Details",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 16.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -54,7 +54,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
           children: [
             Text(
               "Package Information",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -63,7 +63,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
             SizedBox(height: 8.h),
             Text(
               "Enter the size, weight, and photos of your package.",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: Colors.grey,
               ),
@@ -106,7 +106,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
             _sectionTitle("What Kind of Package?", isDarkMode),
             Text(
               "You can select multiple categories",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 12.sp,
                 color: Colors.grey,
               ),
@@ -155,7 +155,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
             _sectionTitle("Package Photos", isDarkMode),
             Text(
               "Please provide the photos of the package's exterior and interior for verification (Max 5 photos each).",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 12.sp,
                 color: Colors.grey,
               ),
@@ -181,7 +181,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
               children: [
                 Text(
                   "Need storage until pickup?",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -207,7 +207,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
               ),
               child: Text(
                 "If your package is large or requires special handling (e.g. furniture), you may need to pay for storage until pickup.",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 12.sp,
                   color: Colors.grey.shade600,
                   height: 1.5,
@@ -232,7 +232,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                     children: [
                       Text(
                         "3 Days of Storage",
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 10.sp,
                           color: const Color(0xFF4A80F0),
                           fontWeight: FontWeight.w600,
@@ -241,7 +241,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                       Obx(
                         () => Text(
                           controller.storageDateRange.value,
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
                             color: isDarkMode ? Colors.white : Colors.black87,
@@ -274,7 +274,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                 ),
                 child: Text(
                   "Continue",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     color: Colors.white,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
@@ -292,7 +292,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
   Widget _sectionTitle(String title, bool isDarkMode) {
     return Text(
       title,
-      style: GoogleFonts.montserrat(
+      style: GoogleFonts.manrope(
         fontSize: 16.sp,
         fontWeight: FontWeight.w700,
         color: isDarkMode ? Colors.white : Colors.black87,
@@ -324,7 +324,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                   children: [
                     TextSpan(
                       text: title,
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black87,
@@ -333,7 +333,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                     if (subtitle.isNotEmpty)
                       TextSpan(
                         text: " $subtitle",
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w500,
                           color: Colors.grey,
@@ -390,13 +390,13 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
       child: TextField(
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: GoogleFonts.montserrat(
+          hintStyle: GoogleFonts.manrope(
             fontSize: 14.sp,
             color: Colors.grey.shade400,
           ),
           border: InputBorder.none,
           suffixText: suffix,
-          suffixStyle: GoogleFonts.montserrat(
+          suffixStyle: GoogleFonts.manrope(
             fontSize: 14.sp,
             color: Colors.black87,
             fontWeight: FontWeight.w600,
@@ -437,7 +437,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
             SizedBox(width: 6.w),
             Text(
               title,
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 12.sp,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                 color: isSelected
@@ -462,7 +462,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
       children: [
         Text(
           label,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white70 : Colors.black54,
@@ -543,7 +543,7 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                           SizedBox(height: 4.h),
                           Text(
                             "Add Photo",
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 10.sp,
                               color: Colors.grey.shade400,
                             ),

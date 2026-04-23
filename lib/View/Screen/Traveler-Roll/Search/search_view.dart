@@ -82,7 +82,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                                         children: [
                                           Text(
                                             "Hi, Zain Malik",
-                                            style: GoogleFonts.montserrat(
+                                            style: GoogleFonts.manrope(
                                               color: Colors.white,
                                               fontSize: 16.sp,
                                               fontWeight: FontWeight.w700,
@@ -90,7 +90,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                                           ),
                                           Text(
                                             "Where would you like to send your package?",
-                                            style: GoogleFonts.montserrat(
+                                            style: GoogleFonts.manrope(
                                               color: Colors.white.withOpacity(0.8),
                                               fontSize: 12.sp,
                                             ),
@@ -163,7 +163,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                       children: [
                         Text(
                           "Set Your Route",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w600,
                             color: isDarkMode ? Colors.white : Colors.black87,
@@ -226,7 +226,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                                           children: [
                                             Text(
                                               "Pick Up",
-                                              style: GoogleFonts.montserrat(
+                                              style: GoogleFonts.manrope(
                                                 fontSize: 12.sp,
                                                 color: isDarkMode ? Colors.white54 : Colors.grey.shade300,
                                                 fontWeight: FontWeight.w600,
@@ -237,7 +237,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                                               controller.pickUpAddress.value == "Where should it be picked up?" || controller.pickUpAddress.value.isEmpty 
                                                   ? "Where should it be picked up?" 
                                                   : controller.pickUpAddress.value,
-                                              style: GoogleFonts.montserrat(
+                                              style: GoogleFonts.manrope(
                                                 fontSize: 14.sp,
                                                 color: controller.pickUpAddress.value == "Where should it be picked up?" || controller.pickUpAddress.value.isEmpty
                                                     ? Colors.grey.shade400
@@ -314,7 +314,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                                           children: [
                                             Text(
                                               "Drop",
-                                              style: GoogleFonts.montserrat(
+                                              style: GoogleFonts.manrope(
                                                 fontSize: 12.sp,
                                                 color: isDarkMode ? Colors.white54 : Colors.grey.shade300,
                                                 fontWeight: FontWeight.w600,
@@ -325,7 +325,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                                               controller.dropAddress.value == "Where should it be delivered?" || controller.dropAddress.value.isEmpty
                                                   ? "Where should it be delivered?"
                                                   : controller.dropAddress.value,
-                                              style: GoogleFonts.montserrat(
+                                              style: GoogleFonts.manrope(
                                                 fontSize: 14.sp,
                                                 color: controller.dropAddress.value == "Where should it be delivered?" || controller.dropAddress.value.isEmpty
                                                     ? Colors.grey.shade400
@@ -349,7 +349,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                         // Date Selection
                         Text(
                           "Pickup Date",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
                             color: isDarkMode ? Colors.white : Colors.black87,
@@ -375,7 +375,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                                 Obx(
                                   () => Text(
                                     controller.selectedDateStr.value,
-                                    style: GoogleFonts.montserrat(
+                                    style: GoogleFonts.manrope(
                                       fontSize: 14.sp,
                                       color:
                                           controller.selectedDateStr.value ==
@@ -422,7 +422,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                             ),
                             child: Text(
                               "Continue",
-                              style: GoogleFonts.montserrat(
+                              style: GoogleFonts.manrope(
                                 color: Colors.white,
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.w700,
@@ -449,7 +449,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                     children: [
                       Text(
                         "Recent Rides",
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w700,
                           color: isDarkMode ? Colors.white : Colors.black87,
@@ -459,7 +459,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                         onPressed: () {},
                         child: Text(
                           "See all",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 12.sp,
                             color: Colors.grey,
                           ),
@@ -541,7 +541,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                     const SizedBox(width: 24),
                     Text(
                       "Select a Date",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -573,7 +573,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                   headerStyle: HeaderStyle(
                     formatButtonVisible: false,
                     titleCentered: true,
-                    titleTextStyle: GoogleFonts.montserrat(
+                    titleTextStyle: GoogleFonts.manrope(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
                       color: isDarkMode ? Colors.white : Colors.black,
@@ -596,23 +596,23 @@ class SearchScreen extends GetView<TravelerSearchController> {
                       color: Color(0xFF4A80F0),
                       shape: BoxShape.circle,
                     ),
-                    defaultTextStyle: GoogleFonts.montserrat(
+                    defaultTextStyle: GoogleFonts.manrope(
                       color: isDarkMode ? Colors.white : Colors.black,
                     ),
-                    weekendTextStyle: GoogleFonts.montserrat(
+                    weekendTextStyle: GoogleFonts.manrope(
                       color: isDarkMode ? Colors.white70 : Colors.black54,
                     ),
-                    outsideTextStyle: GoogleFonts.montserrat(
+                    outsideTextStyle: GoogleFonts.manrope(
                       color: isDarkMode ? Colors.white24 : Colors.grey.shade400,
                     ),
                   ),
                   daysOfWeekStyle: DaysOfWeekStyle(
-                    weekdayStyle: GoogleFonts.montserrat(
+                    weekdayStyle: GoogleFonts.manrope(
                       color: Colors.grey,
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w600,
                     ),
-                    weekendStyle: GoogleFonts.montserrat(
+                    weekendStyle: GoogleFonts.manrope(
                       color: isDarkMode
                           ? Colors.redAccent.withOpacity(0.7)
                           : Colors.redAccent,
@@ -639,7 +639,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                     ),
                     child: Text(
                       "Confirm",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         color: Colors.white,
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
@@ -700,7 +700,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                   children: [
                     Text(
                       from,
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black87,
@@ -715,7 +715,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                     SizedBox(width: 8.w),
                     Text(
                       to,
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black87,
@@ -726,7 +726,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                 SizedBox(height: 4.h),
                 Text(
                   "$date  •  $time",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     color: Colors.grey,
                   ),

@@ -56,7 +56,7 @@ class TripDetailsScreen extends StatelessWidget {
                     SizedBox(width: 12.w),
                     Text(
                       "report_an_issue".tr,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         color: isDarkMode ? Colors.white70 : Colors.black87,
                       ),
@@ -76,7 +76,7 @@ class TripDetailsScreen extends StatelessWidget {
                     SizedBox(width: 12.w),
                     Text(
                       "contact_support".tr,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         color: isDarkMode ? Colors.white70 : Colors.black87,
                       ),
@@ -89,7 +89,7 @@ class TripDetailsScreen extends StatelessWidget {
         ],
         title: Text(
           "Trip Details",
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -159,7 +159,7 @@ class TripDetailsScreen extends StatelessWidget {
                           children: [
                             Text(
                               "Stops",
-                              style: GoogleFonts.plusJakartaSans(
+                              style: GoogleFonts.manrope(
                                 fontSize: 14.sp,
                                 color: isDarkMode
                                     ? Colors.white38
@@ -170,7 +170,7 @@ class TripDetailsScreen extends StatelessWidget {
                               child: Text(
                                 trip.stops,
                                 textAlign: TextAlign.right,
-                                style: GoogleFonts.plusJakartaSans(
+                                style: GoogleFonts.manrope(
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w500,
                                   color: isDarkMode
@@ -248,7 +248,7 @@ class TripDetailsScreen extends StatelessWidget {
                     ),
                     child: Text(
                       "Complete Trip",
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
@@ -270,7 +270,7 @@ class TripDetailsScreen extends StatelessWidget {
                     ),
                     child: Text(
                       "Delete Trip",
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w600,
                         color: const Color(0xFFFF3B3B),
@@ -306,7 +306,7 @@ class TripDetailsScreen extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -343,7 +343,7 @@ class TripDetailsScreen extends StatelessWidget {
           Expanded(
             child: Text(
               label,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: isDarkMode ? Colors.white38 : const Color(0xFF9E9E9E),
               ),
@@ -353,7 +353,7 @@ class TripDetailsScreen extends StatelessWidget {
             child: Text(
               value,
               textAlign: TextAlign.right,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w500,
                 color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -400,7 +400,7 @@ class TripDetailsScreen extends StatelessWidget {
             children: [
               Text(
                 city,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                   color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -408,7 +408,7 @@ class TripDetailsScreen extends StatelessWidget {
               ),
               Text(
                 date,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 12.sp,
                   color: isDarkMode ? Colors.white60 : const Color(0xFF9E9E9E),
                 ),
@@ -418,7 +418,7 @@ class TripDetailsScreen extends StatelessWidget {
         ),
         Text(
           time,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 12.sp,
             fontWeight: FontWeight.w500,
             color: isDarkMode ? Colors.white70 : const Color(0xFF666666),

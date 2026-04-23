@@ -35,7 +35,7 @@ class ReviewDeliveryView extends GetView<ReviewDeliveryController> {
           children: [
             Text(
               "Review Delivery Details",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 22.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -44,7 +44,7 @@ class ReviewDeliveryView extends GetView<ReviewDeliveryController> {
             SizedBox(height: 8.h),
             Text(
               "Please review your information before finding a transporter.",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: Colors.grey,
               ),
@@ -74,7 +74,7 @@ class ReviewDeliveryView extends GetView<ReviewDeliveryController> {
                   alignment: Alignment.centerRight,
                   child: Text(
                     controller.storageDays.value,
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 12.sp,
                       color: Colors.grey,
                     ),
@@ -194,7 +194,7 @@ class ReviewDeliveryView extends GetView<ReviewDeliveryController> {
                 ),
                 child: Text(
                   "Find Transporter",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     color: Colors.white,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
@@ -230,7 +230,7 @@ class ReviewDeliveryView extends GetView<ReviewDeliveryController> {
             children: [
               Text(
                 title,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -271,7 +271,7 @@ class ReviewDeliveryView extends GetView<ReviewDeliveryController> {
         children: [
           Text(
             label,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 13.sp,
               color: Colors.grey.shade600,
             ),
@@ -280,7 +280,7 @@ class ReviewDeliveryView extends GetView<ReviewDeliveryController> {
             child: Text(
               value,
               textAlign: TextAlign.right,
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 13.sp,
                 fontWeight: isBold ? FontWeight.w700 : FontWeight.w600,
                 color: color ?? (Get.isDarkMode ? Colors.white : Colors.black),
@@ -300,7 +300,7 @@ class ReviewDeliveryView extends GetView<ReviewDeliveryController> {
         children: [
           Text(
             "Package Photos",
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 13.sp,
               color: Colors.grey.shade600,
             ),
@@ -340,7 +340,7 @@ class ReviewDeliveryView extends GetView<ReviewDeliveryController> {
         Expanded(
           child: Text(
             text,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 13.sp,
               color: Get.isDarkMode ? Colors.white : Colors.black,
             ),

@@ -52,7 +52,7 @@ class CompliancePage extends StatelessWidget {
               // Title
               Text(
                 title,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -63,7 +63,7 @@ class CompliancePage extends StatelessWidget {
               // Description
               Text(
                 description,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 15.sp,
                   color: Colors.grey[600],
                   height: 1.6,
@@ -97,7 +97,7 @@ class CompliancePage extends StatelessWidget {
                   ),
                   child: Text(
                     buttonText,
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,

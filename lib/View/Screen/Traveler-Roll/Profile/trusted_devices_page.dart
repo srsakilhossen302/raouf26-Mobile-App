@@ -25,7 +25,7 @@ class TrustedDevicesPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'trusted_devices'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -40,7 +40,7 @@ class TrustedDevicesPage extends StatelessWidget {
             SizedBox(height: 20.h),
             Text(
               'your_active_devices'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -49,7 +49,7 @@ class TrustedDevicesPage extends StatelessWidget {
             SizedBox(height: 12.h),
             Text(
               'trusted_devices_desc'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey[600],
                 height: 1.5,
@@ -58,7 +58,7 @@ class TrustedDevicesPage extends StatelessWidget {
             SizedBox(height: 32.h),
             Text(
               'active_devices'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -91,7 +91,7 @@ class TrustedDevicesPage extends StatelessWidget {
                 ),
                 child: Text(
                   'remove_all'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -131,7 +131,7 @@ class TrustedDevicesPage extends StatelessWidget {
           Expanded(
             child: Text(
               name,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -143,7 +143,7 @@ class TrustedDevicesPage extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 'remove'.tr,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.redAccent,

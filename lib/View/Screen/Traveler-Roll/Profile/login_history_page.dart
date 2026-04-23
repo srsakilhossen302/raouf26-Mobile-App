@@ -25,7 +25,7 @@ class LoginHistoryPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'login_history_title'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -122,7 +122,7 @@ class LoginHistoryPage extends StatelessWidget {
                     Expanded(
                       child: Text(
                         deviceName,
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w700,
                           color: isDarkMode ? Colors.white : Colors.black,
@@ -134,7 +134,7 @@ class LoginHistoryPage extends StatelessWidget {
                 SizedBox(height: 4.h),
                 Text(
                   "$location • $time",
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     color: isDarkMode ? Colors.white70 : Colors.grey[600],
                   ),
@@ -149,7 +149,7 @@ class LoginHistoryPage extends StatelessWidget {
                     ),
                     child: Text(
                       "Attempt failed",
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 10.sp,
                         fontWeight: FontWeight.w700,
                         color: Colors.red,

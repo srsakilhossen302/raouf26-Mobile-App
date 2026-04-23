@@ -142,7 +142,7 @@ class CustomTransporterBottomNavBar extends StatelessWidget {
           SizedBox(height: 4.h),
           Text(
             label,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 11.sp,
               color: isActive ? activeColor : inactiveColor,
               fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,

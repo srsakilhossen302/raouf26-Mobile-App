@@ -22,7 +22,7 @@ class TripSummaryStep extends StatelessWidget {
         children: [
           Text(
             "Publish Your Trip",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 24.sp,
               fontWeight: FontWeight.w700,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -30,7 +30,7 @@ class TripSummaryStep extends StatelessWidget {
           ),
           Text(
             "List your journey and accept delivery requests from trusted senders.",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: Colors.grey,
             ),
@@ -94,7 +94,7 @@ class TripSummaryStep extends StatelessWidget {
             children: [
               Text(
                 "February, 2026",
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
                 ),
@@ -131,7 +131,7 @@ class TripSummaryStep extends StatelessWidget {
           SizedBox(height: 12.h),
           Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 12.sp,
               color: Colors.grey,
             ),
@@ -139,7 +139,7 @@ class TripSummaryStep extends StatelessWidget {
           SizedBox(height: 4.h),
           Text(
             value,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -165,7 +165,7 @@ class TripSummaryStep extends StatelessWidget {
         children: [
           Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 10.sp,
               color: Colors.grey,
             ),
@@ -173,7 +173,7 @@ class TripSummaryStep extends StatelessWidget {
           SizedBox(height: 4.h),
           Text(
             hint,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 12.sp,
               color: Colors.grey,
             ),

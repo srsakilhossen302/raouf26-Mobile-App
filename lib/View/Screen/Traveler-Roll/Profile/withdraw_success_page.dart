@@ -35,7 +35,7 @@ class WithdrawSuccessPage extends StatelessWidget {
               SizedBox(height: 32.h),
               Text(
                 'withdrawal_requested'.tr,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w800,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -45,7 +45,7 @@ class WithdrawSuccessPage extends StatelessWidget {
               Text(
                 'Your withdrawal request has been submitted successfully and is being processed.',
                 textAlign: TextAlign.center,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   color: Colors.grey,
                   height: 1.5,
@@ -66,7 +66,7 @@ class WithdrawSuccessPage extends StatelessWidget {
                   ),
                   child: Text(
                     'view_transaction'.tr,
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
@@ -81,7 +81,7 @@ class WithdrawSuccessPage extends StatelessWidget {
                 onPressed: () => Get.back(),
                 child: Text(
                   'Back to Wallet',
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
                     color: const Color(0xFF4A80F0),

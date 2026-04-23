@@ -43,7 +43,7 @@ void showRateDeliverySheet(BuildContext context) {
                   children: [
                     Text(
                       "Rate This Delivery",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 22.sp,
                         fontWeight: FontWeight.bold,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -52,7 +52,7 @@ void showRateDeliverySheet(BuildContext context) {
                     SizedBox(height: 8.h),
                     Text(
                       "Your feedback helps improve the delivery experience.",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         color: Colors.grey,
                       ),
@@ -60,7 +60,7 @@ void showRateDeliverySheet(BuildContext context) {
                     SizedBox(height: 30.h),
                     Text(
                       "How was your experience?",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -83,7 +83,7 @@ void showRateDeliverySheet(BuildContext context) {
                     SizedBox(height: 30.h),
                     Text(
                       "What did you like the most?",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -105,7 +105,7 @@ void showRateDeliverySheet(BuildContext context) {
                     SizedBox(height: 30.h),
                     Text(
                       "Share more about your experience",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -153,7 +153,7 @@ void showRateDeliverySheet(BuildContext context) {
                         ),
                         child: Text(
                           "Submit Review",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -185,7 +185,7 @@ Widget _buildTag(String label, bool isDarkMode) {
     ),
     child: Text(
       label,
-      style: GoogleFonts.montserrat(
+      style: GoogleFonts.manrope(
         fontSize: 12.sp,
         color: isDarkMode ? Colors.white70 : Colors.grey.shade700,
       ),

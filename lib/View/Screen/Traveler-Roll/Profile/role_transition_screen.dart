@@ -63,7 +63,7 @@ class _RoleTransitionScreenState extends State<RoleTransitionScreen> {
           //       widget.isSwitchingToTransporter
           //           ? 'switching_to_transporter'.tr
           //           : 'Switching to Traveler',
-          //       style: GoogleFonts.plusJakartaSans(
+          //       style: GoogleFonts.manrope(
           //         fontSize: 20.sp,
           //         fontWeight: FontWeight.w700,
           //         color: Colors.white, // Text in white as requested

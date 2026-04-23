@@ -34,7 +34,7 @@ class WithdrawFundsPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'withdraw_funds'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -60,7 +60,7 @@ class WithdrawFundsPage extends StatelessWidget {
                 children: [
                   Text(
                     'available_balance'.tr,
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       color: Colors.white.withOpacity(0.8),
                     ),
@@ -81,7 +81,7 @@ class WithdrawFundsPage extends StatelessWidget {
                       SizedBox(width: 8.w),
                       Text(
                         '${controller.availableBalance.toStringAsFixed(2)} TND',
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.manrope(
                           fontSize: 32.sp,
                           fontWeight: FontWeight.w800,
                           color: Colors.white,
@@ -98,7 +98,7 @@ class WithdrawFundsPage extends StatelessWidget {
             // Amount Input
             Text(
               'withdraw_amount'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -108,7 +108,7 @@ class WithdrawFundsPage extends StatelessWidget {
             TextField(
               controller: controller.amountController,
               keyboardType: TextInputType.number,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -130,7 +130,7 @@ class WithdrawFundsPage extends StatelessWidget {
                     SizedBox(width: 4.w),
                     Text(
                       'TND',
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontWeight: FontWeight.w600,
                         color: isDarkMode ? Colors.white70 : Colors.black54,
                       ),
@@ -190,7 +190,7 @@ class WithdrawFundsPage extends StatelessWidget {
             // Payout Method Selection
             Text(
               'select_payout_method'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -259,7 +259,7 @@ class WithdrawFundsPage extends StatelessWidget {
                 ),
                 child: Text(
                   'withdraw_now'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -298,7 +298,7 @@ class WithdrawFundsPage extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
             color: isSelected
@@ -348,14 +348,14 @@ class WithdrawFundsPage extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
                   ),
                 ),
                 Text(
                   subtitle,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     color: Colors.grey,
                   ),

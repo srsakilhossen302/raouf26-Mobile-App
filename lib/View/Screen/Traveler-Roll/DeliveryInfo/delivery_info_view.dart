@@ -29,7 +29,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
         ),
         title: Text(
           "Delivery Details",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 16.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -56,7 +56,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
           children: [
             Text(
               "Delivery Information",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -65,7 +65,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             SizedBox(height: 8.h),
             Text(
               "Enter recipient details and choose delivery options.",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: Colors.grey,
               ),
@@ -149,7 +149,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
                         ),
                         label: Text(
                           "Adjust Location",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.black,
@@ -194,7 +194,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
                           child: Obx(
                             () => Text(
                               controller.selectedAddress.value,
-                              style: GoogleFonts.montserrat(
+                              style: GoogleFonts.manrope(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w500,
                                 color: isDarkMode ? Colors.white : Colors.black,
@@ -221,7 +221,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             SizedBox(height: 8.h),
             Text(
               "How should the package be collected?",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 12.sp,
                 color: Colors.grey,
               ),
@@ -288,7 +288,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             // SizedBox(height: 8.h),
             // Text(
             //   "How should the package reach the receiver?",
-            //   style: GoogleFonts.montserrat(
+            //   style: GoogleFonts.manrope(
             //     fontSize: 12.sp,
             //     color: Colors.grey,
             //   ),
@@ -359,7 +359,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             SizedBox(height: 8.h),
             Text(
               "Select delivery speed and preferred carrier type.",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 12.sp,
                 color: Colors.grey,
               ),
@@ -369,7 +369,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             // Delivery Speed
             Text(
               "Delivery Speed",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w500,
                 color: isDarkMode ? Colors.white : Colors.black87,
@@ -426,7 +426,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             // Delivery Handed Over Preference
             Text(
               "Preferred Delivery",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w500,
                 color: isDarkMode ? Colors.white : Colors.black87,
@@ -435,7 +435,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             SizedBox(height: 6.h),
             Text(
               "Tell us how you’d prefer to receive it. We’ll consider this when possible.",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 12.sp,
                 color: Colors.grey,
               ),
@@ -506,7 +506,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
                 ),
                 child: Text(
                   "Continue",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     color: Colors.white,
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
@@ -524,7 +524,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
   Widget _sectionTitle(String title, bool isDarkMode) {
     return Text(
       title,
-      style: GoogleFonts.montserrat(
+      style: GoogleFonts.manrope(
         fontSize: 14.sp,
         fontWeight: FontWeight.w600,
         color: isDarkMode ? Colors.white : Colors.black,
@@ -553,7 +553,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
         SizedBox(height: 8.h),
         Text(
           "Invite New",
-          style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
+          style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
         ),
       ],
     );
@@ -576,7 +576,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
         SizedBox(height: 8.h),
         Text(
           name,
-          style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
+          style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
         ),
       ],
     );
@@ -605,7 +605,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
           child: Text(
             label,
             textAlign: TextAlign.center,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 13.sp,
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
               color: isSelected
@@ -631,12 +631,12 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
       ),
       child: TextField(
         controller: controller,
-        style: GoogleFonts.montserrat(
+        style: GoogleFonts.manrope(
           color: isDarkMode ? Colors.white : Colors.black,
         ),
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: GoogleFonts.montserrat(
+          hintStyle: GoogleFonts.manrope(
             color: Colors.grey,
             fontSize: 14.sp,
           ),
@@ -684,7 +684,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
                 SizedBox(width: 8.w),
                 Text(
                   "+216",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontWeight: FontWeight.w600,
                     color: isDarkMode ? Colors.white : Colors.black,
                   ),
@@ -697,12 +697,12 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             child: TextField(
               controller: controller.phoneNumberController,
               keyboardType: TextInputType.phone,
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
               decoration: InputDecoration(
                 hintText: "00000000",
-                hintStyle: GoogleFonts.montserrat(
+                hintStyle: GoogleFonts.manrope(
                   color: Colors.grey,
                   fontSize: 14.sp,
                 ),

@@ -22,7 +22,7 @@ class ActiveParcelsPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           "Active Requests",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -116,7 +116,7 @@ class ActiveParcelsPage extends StatelessWidget {
                       children: [
                         Text(
                           name,
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontWeight: FontWeight.bold,
                             fontSize: 14.sp,
                             color: isDarkMode ? Colors.white : Colors.black87,
@@ -128,7 +128,7 @@ class ActiveParcelsPage extends StatelessWidget {
                     ),
                     Text(
                       time,
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         color: Colors.grey,
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
@@ -147,7 +147,7 @@ class ActiveParcelsPage extends StatelessWidget {
                   ),
                   child: Text(
                     status,
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       color: const Color(0xFFF59E0B),
                       fontSize: 10.sp,
                       fontWeight: FontWeight.bold,
@@ -206,7 +206,7 @@ class ActiveParcelsPage extends StatelessWidget {
                             children: [
                               Text(
                                 fromCity,
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14.sp,
                                   color: isDarkMode ? Colors.white : Colors.black87,
@@ -214,7 +214,7 @@ class ActiveParcelsPage extends StatelessWidget {
                               ),
                               Text(
                                 fromDate,
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   color: Colors.grey,
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w500,
@@ -224,7 +224,7 @@ class ActiveParcelsPage extends StatelessWidget {
                           ),
                           Text(
                             fromTime,
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontWeight: FontWeight.w600,
                               fontSize: 12.sp,
                               color: isDarkMode ? Colors.white : Colors.black87,
@@ -241,7 +241,7 @@ class ActiveParcelsPage extends StatelessWidget {
                             children: [
                               Text(
                                 toCity,
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14.sp,
                                   color: isDarkMode ? Colors.white : Colors.black87,
@@ -249,7 +249,7 @@ class ActiveParcelsPage extends StatelessWidget {
                               ),
                               Text(
                                 toDate,
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   color: Colors.grey,
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w500,
@@ -259,7 +259,7 @@ class ActiveParcelsPage extends StatelessWidget {
                           ),
                           Text(
                             toTime,
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontWeight: FontWeight.w600,
                               fontSize: 12.sp,
                               color: isDarkMode ? Colors.white : Colors.black87,
@@ -307,7 +307,7 @@ class ActiveParcelsPage extends StatelessWidget {
                   ),
                   child: Text(
                     "Reject",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       color: Colors.red.shade400,
                       fontWeight: FontWeight.bold,
                       fontSize: 14.sp,
@@ -327,7 +327,7 @@ class ActiveParcelsPage extends StatelessWidget {
                   ),
                   child: Text(
                     "Accept",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 14.sp,
@@ -348,7 +348,7 @@ class ActiveParcelsPage extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
             fontSize: 13.sp,
             fontWeight: FontWeight.w500,
@@ -365,7 +365,7 @@ class ActiveParcelsPage extends StatelessWidget {
             ),
             child: Text(
               pillText,
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 color: isNormal ? Colors.green.shade600 : Colors.red.shade400,
                 fontSize: 10.sp,
                 fontWeight: FontWeight.bold,
@@ -375,7 +375,7 @@ class ActiveParcelsPage extends StatelessWidget {
         else
           Text(
             value,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               color: isDarkMode ? Colors.white : Colors.black87,
               fontSize: 13.sp,
               fontWeight: isBold ? FontWeight.bold : FontWeight.w600,

@@ -25,7 +25,7 @@ class ChangePinPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'change_pin'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -40,7 +40,7 @@ class ChangePinPage extends StatelessWidget {
             SizedBox(height: 20.h),
             Text(
               'secure_your_account'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 24.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -49,7 +49,7 @@ class ChangePinPage extends StatelessWidget {
             SizedBox(height: 12.h),
             Text(
               'secure_pin_desc'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey[600],
                 height: 1.5,
@@ -74,7 +74,7 @@ class ChangePinPage extends StatelessWidget {
                 ),
                 child: Text(
                   'update_pin'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
@@ -97,7 +97,7 @@ class ChangePinPage extends StatelessWidget {
           padding: EdgeInsets.only(left: 4.w, bottom: 8.h),
           child: Text(
             label,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -107,13 +107,13 @@ class ChangePinPage extends StatelessWidget {
         TextField(
           obscureText: true,
           keyboardType: TextInputType.number,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             color: isDarkMode ? Colors.white : Colors.black,
           ),
           decoration: InputDecoration(
             hintText: 'New Password',
-            hintStyle: GoogleFonts.plusJakartaSans(
+            hintStyle: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: isDarkMode ? Colors.white30 : Colors.grey[400],
             ),

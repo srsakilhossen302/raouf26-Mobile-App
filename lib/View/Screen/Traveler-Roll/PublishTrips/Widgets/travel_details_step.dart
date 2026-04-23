@@ -40,7 +40,7 @@ class TravelDetailsStep extends StatelessWidget {
             children: [
               Text(
                 "Travel Details",
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -57,7 +57,7 @@ class TravelDetailsStep extends StatelessWidget {
           ),
           Text(
             "Tell us how you're traveling.",
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 13.sp,
               color: Colors.grey,
             ),
@@ -130,7 +130,7 @@ class TravelDetailsStep extends StatelessWidget {
                         SizedBox(height: 8.h),
                         Text(
                           mode["label"]!,
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 13.sp,
                             fontWeight: isSelected
                                 ? FontWeight.w700
@@ -187,7 +187,7 @@ class TravelDetailsStep extends StatelessWidget {
               ),
               child: Text(
                 "Confirm",
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
@@ -331,7 +331,7 @@ class TravelDetailsStep extends StatelessWidget {
   Widget _buildLabel(String label) {
     return Text(
       label,
-      style: GoogleFonts.plusJakartaSans(
+      style: GoogleFonts.manrope(
         fontSize: 14.sp,
         fontWeight: FontWeight.w600,
         color: isDarkMode ? Colors.white : Colors.black,
@@ -356,11 +356,11 @@ class TravelDetailsStep extends StatelessWidget {
           value: value,
           hint: Text(
             hint,
-            style: GoogleFonts.plusJakartaSans(color: Colors.grey),
+            style: GoogleFonts.manrope(color: Colors.grey),
           ),
           isExpanded: true,
           dropdownColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             color: isDarkMode ? Colors.white : Colors.black,
             fontWeight: FontWeight.w600,
           ),
@@ -397,7 +397,7 @@ class TravelDetailsStep extends StatelessWidget {
                 SizedBox(height: 12.h),
                 Text(
                   "Click to Upload",
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     color: Colors.grey,
                   ),
@@ -425,7 +425,7 @@ class TravelDetailsStep extends StatelessWidget {
           style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: GoogleFonts.plusJakartaSans(color: Colors.grey),
+            hintStyle: GoogleFonts.manrope(color: Colors.grey),
             filled: true,
             fillColor: isDarkMode ? Colors.white10 : const Color(0xFFF5F7FA),
             border: OutlineInputBorder(

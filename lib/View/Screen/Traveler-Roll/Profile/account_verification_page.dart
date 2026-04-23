@@ -32,7 +32,7 @@ class AccountVerificationPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'account_verification'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -49,7 +49,7 @@ class AccountVerificationPage extends StatelessWidget {
             // Full Name
             Text(
               'full_name'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -67,7 +67,7 @@ class AccountVerificationPage extends StatelessWidget {
             // Email
             Text(
               'email'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -86,7 +86,7 @@ class AccountVerificationPage extends StatelessWidget {
             // Phone Number
             Text(
               'phone_number'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -96,7 +96,7 @@ class AccountVerificationPage extends StatelessWidget {
             IntlPhoneField(
               decoration: InputDecoration(
                 hintText: '00000000',
-                hintStyle: GoogleFonts.plusJakartaSans(
+                hintStyle: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   color: isDarkMode ? Colors.white30 : Colors.grey[400],
                 ),
@@ -127,11 +127,11 @@ class AccountVerificationPage extends StatelessWidget {
               onChanged: (phone) {
                 // Handle phone number change
               },
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
-              dropdownTextStyle: GoogleFonts.plusJakartaSans(
+              dropdownTextStyle: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 color: isDarkMode ? Colors.white : Colors.black,
               ),
@@ -158,7 +158,7 @@ class AccountVerificationPage extends StatelessWidget {
                 ),
                 child: Text(
                   'verify_account'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -182,13 +182,13 @@ class AccountVerificationPage extends StatelessWidget {
     return TextField(
       controller: controller,
       keyboardType: keyboardType,
-      style: GoogleFonts.plusJakartaSans(
+      style: GoogleFonts.manrope(
         fontSize: 14.sp,
         color: isDarkMode ? Colors.white : Colors.black,
       ),
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: GoogleFonts.plusJakartaSans(
+        hintStyle: GoogleFonts.manrope(
           fontSize: 14.sp,
           color: isDarkMode ? Colors.white30 : Colors.grey[400],
         ),

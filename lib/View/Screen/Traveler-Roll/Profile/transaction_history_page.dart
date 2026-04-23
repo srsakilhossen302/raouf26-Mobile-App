@@ -27,7 +27,7 @@ class TransactionHistoryPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'transaction_history'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -80,7 +80,7 @@ class TransactionHistoryPage extends StatelessWidget {
                   SizedBox(height: 24.h),
                   Text(
                     'Recent Transactions',
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
                       color: isDarkMode ? Colors.white : Colors.black,
@@ -134,7 +134,7 @@ class TransactionHistoryPage extends StatelessWidget {
             ],
             Text(
               label,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w600,
                 color: isDarkMode ? Colors.white70 : Colors.black87,
@@ -169,7 +169,7 @@ class TransactionHistoryPage extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w700,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -184,7 +184,7 @@ class TransactionHistoryPage extends StatelessWidget {
                           ),
                           child: Text(
                             status.capitalizeFirst!,
-                            style: GoogleFonts.plusJakartaSans(
+                            style: GoogleFonts.manrope(
                               fontSize: 10.sp,
                               fontWeight: FontWeight.w700,
                               color: Colors.green,
@@ -196,7 +196,7 @@ class TransactionHistoryPage extends StatelessWidget {
                     SizedBox(height: 4.h),
                     Text(
                       subtitle,
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 12.sp,
                         color: Colors.grey,
                       ),
@@ -206,7 +206,7 @@ class TransactionHistoryPage extends StatelessWidget {
               ),
               Text(
                 amount,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.w800,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -245,7 +245,7 @@ class TransactionHistoryPage extends StatelessWidget {
                 ),
                 Text(
                   'Filters',
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.w800,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -255,7 +255,7 @@ class TransactionHistoryPage extends StatelessWidget {
                   onPressed: () {},
                   child: Text(
                     'Clear all',
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       color: const Color(0xFF4A80F0),
                       fontWeight: FontWeight.w600,
@@ -269,7 +269,7 @@ class TransactionHistoryPage extends StatelessWidget {
             // Filter by Payment Methods
             Text(
               'Filter by Payment Methods',
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -286,7 +286,7 @@ class TransactionHistoryPage extends StatelessWidget {
             // Choose Transaction Date
             Text(
               'Choose Transaction Date',
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -311,7 +311,7 @@ class TransactionHistoryPage extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 "Custom Date",
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -336,7 +336,7 @@ class TransactionHistoryPage extends StatelessWidget {
                     ),
                     child: Text(
                       "Reset",
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.w700,
                         color: Colors.grey,
@@ -358,7 +358,7 @@ class TransactionHistoryPage extends StatelessWidget {
                     ),
                     child: Text(
                       "Set Filters",
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
@@ -394,7 +394,7 @@ class TransactionHistoryPage extends StatelessWidget {
           SizedBox(width: 12.w),
           Text(
             label,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: isDarkMode ? Colors.white70 : Colors.black87,
               fontWeight: FontWeight.w500,
@@ -428,7 +428,7 @@ class TransactionHistoryPage extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -436,7 +436,7 @@ class TransactionHistoryPage extends StatelessWidget {
                 ),
                 Text(
                   dateRange,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 11.sp,
                     color: Colors.grey,
                   ),

@@ -39,7 +39,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         centerTitle: true,
         title: Text(
           'edit_profile'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -135,7 +135,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 children: [
                   Text(
                     'linked_accounts'.tr,
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.manrope(
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w700,
                       color: isDarkMode ? Colors.white : Colors.black,
@@ -181,7 +181,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
                 child: Text(
                   'save'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
@@ -210,7 +210,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           padding: EdgeInsets.only(left: 4.w, bottom: 8.h),
           child: Text(
             label,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white70 : Colors.grey[700],
@@ -221,7 +221,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           controller: controller,
           keyboardType: keyboardType,
           enabled: enabled,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             color: isDarkMode
                 ? (enabled ? Colors.white : Colors.white38)
@@ -275,7 +275,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         Expanded(
           child: Text(
             label,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,

@@ -22,7 +22,7 @@ class ParcelLabelPreviewView extends StatelessWidget {
           children: [
             Text(
               "Parcel Label Preview",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -62,7 +62,7 @@ class ParcelLabelPreviewView extends StatelessWidget {
                   // Tracking ID
                   Text(
                     "Tracking ID:",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w600,
                       color: isDarkMode ? Colors.white70 : Colors.black87,
@@ -70,7 +70,7 @@ class ParcelLabelPreviewView extends StatelessWidget {
                   ),
                   Text(
                     "SNDT-482913-28JAN",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 12.sp,
                       color: Colors.grey,
                     ),
@@ -104,7 +104,7 @@ class ParcelLabelPreviewView extends StatelessWidget {
                   // SHIPMENT DETAILS
                   Text(
                     "SHIPMENT DETAILS",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 11.sp,
                       fontWeight: FontWeight.w600,
                       color: Colors.grey,
@@ -113,7 +113,7 @@ class ParcelLabelPreviewView extends StatelessWidget {
                   SizedBox(height: 4.h),
                   Text(
                     "Ahmed Bin Salah",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w700,
                       color: isDarkMode ? Colors.white : Colors.black87,
@@ -122,14 +122,14 @@ class ParcelLabelPreviewView extends StatelessWidget {
                   SizedBox(height: 12.h),
                   Text(
                     "Route",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 11.sp,
                       color: Colors.grey,
                     ),
                   ),
                   Text(
                     "Tunis → Paris",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                       color: isDarkMode ? Colors.white : Colors.black87,
@@ -166,7 +166,7 @@ class ParcelLabelPreviewView extends StatelessWidget {
                         SizedBox(height: 12.h),
                         Text(
                           "SNDT48291328JAN",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 11.sp,
                             fontWeight: FontWeight.w600,
                             letterSpacing: 2,
@@ -180,7 +180,7 @@ class ParcelLabelPreviewView extends StatelessWidget {
                   Center(
                     child: Text(
                       "Please attach this label securely to your parcel",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 11.sp,
                         color: Colors.grey,
                       ),
@@ -204,7 +204,7 @@ class ParcelLabelPreviewView extends StatelessWidget {
                 ),
                 child: Text(
                   "Print",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -229,12 +229,12 @@ class ParcelLabelPreviewView extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.montserrat(fontSize: 11.sp, color: Colors.grey),
+          style: GoogleFonts.manrope(fontSize: 11.sp, color: Colors.grey),
         ),
         SizedBox(height: 4.h),
         Text(
           name,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black87,
@@ -243,7 +243,7 @@ class ParcelLabelPreviewView extends StatelessWidget {
         SizedBox(height: 4.h),
         Text(
           address,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 12.sp,
             color: Colors.grey,
             height: 1.4,
@@ -259,12 +259,12 @@ class ParcelLabelPreviewView extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.montserrat(fontSize: 11.sp, color: Colors.grey),
+          style: GoogleFonts.manrope(fontSize: 11.sp, color: Colors.grey),
         ),
         SizedBox(height: 4.h),
         Text(
           value,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 13.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black87,

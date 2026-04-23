@@ -82,7 +82,7 @@ class DashboardScreen extends GetView<DashboardController> {
                             children: [
                               Text(
                                 "Dashboard",
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   fontSize: 24.sp,
                                   fontWeight: FontWeight.bold,
                                   color: isDarkMode
@@ -93,7 +93,7 @@ class DashboardScreen extends GetView<DashboardController> {
                               SizedBox(height: 4.h),
                               Text(
                                 "Manage your shipments and trips in one place",
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.w500,
                                   color: isDarkMode
@@ -104,7 +104,7 @@ class DashboardScreen extends GetView<DashboardController> {
                               SizedBox(height: 24.h),
                               Text(
                                 "Quick Actions",
-                                style: GoogleFonts.montserrat(
+                                style: GoogleFonts.manrope(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.bold,
                                   color: isDarkMode
@@ -625,7 +625,7 @@ class DashboardScreen extends GetView<DashboardController> {
             SizedBox(height: 16.h),
             Text(
               title,
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black87,
@@ -634,7 +634,7 @@ class DashboardScreen extends GetView<DashboardController> {
             SizedBox(height: 6.h),
             Text(
               subtitle,
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 12.sp,
                 color: isDarkMode ? Colors.white54 : Colors.grey.shade500,
                 height: 1.4,
@@ -672,7 +672,7 @@ class DashboardScreen extends GetView<DashboardController> {
               value: 'Daily',
               child: Text(
                 'Daily',
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   color: isDarkMode ? Colors.white : Colors.black87,
                   fontSize: 14.sp,
                 ),
@@ -682,7 +682,7 @@ class DashboardScreen extends GetView<DashboardController> {
               value: 'Weekly',
               child: Text(
                 'Weekly',
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   color: isDarkMode ? Colors.white : Colors.black87,
                   fontSize: 14.sp,
                 ),
@@ -692,7 +692,7 @@ class DashboardScreen extends GetView<DashboardController> {
               value: 'Monthly',
               child: Text(
                 'Monthly',
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   color: isDarkMode ? Colors.white : Colors.black87,
                   fontSize: 14.sp,
                 ),
@@ -835,7 +835,7 @@ class DashboardScreen extends GetView<DashboardController> {
             SizedBox(height: 20.h),
             Text(
               "Total Balance",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 16.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
                 fontWeight: FontWeight.w500,
@@ -844,7 +844,7 @@ class DashboardScreen extends GetView<DashboardController> {
             SizedBox(height: 8.h),
             Text(
               balance,
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 32.sp,
                 fontWeight: FontWeight.bold,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -868,7 +868,7 @@ class DashboardScreen extends GetView<DashboardController> {
                 ),
                 child: Text(
                   "Withdraw",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -881,7 +881,7 @@ class DashboardScreen extends GetView<DashboardController> {
               onPressed: () => Get.back(),
               child: Text(
                 "Cancel",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   color: Colors.grey,
                 ),

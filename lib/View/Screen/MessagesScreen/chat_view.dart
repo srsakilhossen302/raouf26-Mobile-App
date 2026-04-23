@@ -64,7 +64,7 @@ class ChatView extends StatelessWidget {
                   children: [
                     Text(
                       userData['name'],
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -76,7 +76,7 @@ class ChatView extends StatelessWidget {
                 ),
                 Text(
                   "Online",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 12.sp,
                     color: Colors.grey,
                   ),
@@ -141,7 +141,7 @@ class ChatView extends StatelessWidget {
           Expanded(
             child: Text(
               "Keep communication inside the app for better protection and support. Sharing personal contact info is not allowed.",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 11.sp,
                 color: isDarkMode ? Colors.white70 : Colors.black87,
                 fontWeight: FontWeight.w500,
@@ -172,7 +172,7 @@ class ChatView extends StatelessWidget {
                 children: [
                   Text(
                     "Booking Request",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
                       color: isDarkMode ? Colors.white : Colors.black,
@@ -190,7 +190,7 @@ class ChatView extends StatelessWidget {
                     ),
                     child: Text(
                       "Urgent",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 10.sp,
                         color: Colors.orange,
                         fontWeight: FontWeight.w600,
@@ -205,7 +205,7 @@ class ChatView extends StatelessWidget {
           SizedBox(height: 20.h),
           Text(
             "Route",
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w700,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -238,7 +238,7 @@ class ChatView extends StatelessWidget {
 
           Text(
             "Package Summary",
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w700,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -259,7 +259,7 @@ class ChatView extends StatelessWidget {
           SizedBox(height: 12.h),
           Text(
             "Package Photos",
-            style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
+            style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
           ),
           SizedBox(height: 8.h),
           Row(
@@ -301,7 +301,7 @@ class ChatView extends StatelessWidget {
                     ),
                     child: Text(
                       "Reject",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         color: Colors.red,
                         fontWeight: FontWeight.w600,
                       ),
@@ -322,7 +322,7 @@ class ChatView extends StatelessWidget {
                     ),
                     child: Text(
                       "Accept",
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         color: Colors.white,
                         fontWeight: FontWeight.w600,
                       ),
@@ -361,7 +361,7 @@ class ChatView extends StatelessWidget {
             children: [
               Text(
                 city,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -369,7 +369,7 @@ class ChatView extends StatelessWidget {
               ),
               Text(
                 date,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 12.sp,
                   color: Colors.grey,
                 ),
@@ -379,7 +379,7 @@ class ChatView extends StatelessWidget {
         ),
         Text(
           time,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 12.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -403,7 +403,7 @@ class ChatView extends StatelessWidget {
         children: [
           Text(
             label,
-            style: GoogleFonts.montserrat(fontSize: 14.sp, color: Colors.grey),
+            style: GoogleFonts.manrope(fontSize: 14.sp, color: Colors.grey),
           ),
           Row(
             children: [
@@ -413,7 +413,7 @@ class ChatView extends StatelessWidget {
               ],
               Text(
                 value,
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   color:
                       statusColor ?? (isDarkMode ? Colors.white : Colors.black),
@@ -452,7 +452,7 @@ class ChatView extends StatelessWidget {
           Expanded(
             child: Text(
               "The conversation will open once the transporter accepts your delivery request.",
-              style: GoogleFonts.montserrat(
+              style: GoogleFonts.manrope(
                 fontSize: 12.sp,
                 color: const Color(0xFF4A80F0),
                 fontWeight: FontWeight.w500,
@@ -494,7 +494,7 @@ class ChatView extends StatelessWidget {
                 ),
                 child: Text(
                   msg['text'],
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     color: isMe
                         ? Colors.white
@@ -507,7 +507,7 @@ class ChatView extends StatelessWidget {
                 children: [
                   Text(
                     msg['time'],
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 10.sp,
                       color: Colors.grey,
                     ),
@@ -561,7 +561,7 @@ class ChatView extends StatelessWidget {
                 controller: textController,
                 decoration: InputDecoration(
                   hintText: "Type a message ...",
-                  hintStyle: GoogleFonts.montserrat(
+                  hintStyle: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     color: Colors.grey,
                   ),
@@ -616,7 +616,7 @@ class ChatView extends StatelessWidget {
               SizedBox(height: 24.h),
               Text(
                 "Reject Booking Request",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -625,7 +625,7 @@ class ChatView extends StatelessWidget {
               SizedBox(height: 8.h),
               Text(
                 "Please tell the client why you're rejecting this booking request.",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   color: Colors.grey,
                 ),
@@ -633,7 +633,7 @@ class ChatView extends StatelessWidget {
               SizedBox(height: 24.h),
               Text(
                 "Quick Replies",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -665,7 +665,7 @@ class ChatView extends StatelessWidget {
                       ),
                       child: Text(
                         reason,
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 14.sp,
                           color: isSelected
                               ? const Color(0xFF4A80F0)
@@ -682,7 +682,7 @@ class ChatView extends StatelessWidget {
               SizedBox(height: 24.h),
               Text(
                 "Enter Your Reason",
-                style: GoogleFonts.montserrat(
+                style: GoogleFonts.manrope(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w700,
                   color: isDarkMode ? Colors.white : Colors.black,
@@ -701,7 +701,7 @@ class ChatView extends StatelessWidget {
                   maxLines: 3,
                   decoration: InputDecoration(
                     hintText: "Type here ...",
-                    hintStyle: GoogleFonts.montserrat(
+                    hintStyle: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       color: Colors.grey,
                     ),
@@ -727,7 +727,7 @@ class ChatView extends StatelessWidget {
                   ),
                   child: Text(
                     "Confirm Rejection",
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
                     ),

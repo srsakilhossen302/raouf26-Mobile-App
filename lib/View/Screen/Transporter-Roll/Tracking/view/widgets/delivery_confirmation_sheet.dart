@@ -44,7 +44,7 @@ void showDeliveryConfirmationSheet(
                   SizedBox(width: 12.w),
                   Text(
                     'Delivery Confirmation (${package.id})',
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.manrope(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
                       color: isDarkMode ? Colors.white : Colors.black,
@@ -63,7 +63,7 @@ void showDeliveryConfirmationSheet(
                   children: [
                     Text(
                       'Confirm Delivery',
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 22.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -72,7 +72,7 @@ void showDeliveryConfirmationSheet(
                     SizedBox(height: 8.h),
                     Text(
                       'Are you sure you want to mark this package as delivered?',
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 14.sp,
                         color: isDarkMode
                             ? Colors.white60
@@ -85,7 +85,7 @@ void showDeliveryConfirmationSheet(
                     // Verify Parcel Section
                     Text(
                       'Verify Parcel',
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -94,7 +94,7 @@ void showDeliveryConfirmationSheet(
                     SizedBox(height: 4.h),
                     Text(
                       'Scan the parcel QR code to confirm delivery.\nIf unavailable, upload proof manually.',
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 13.sp,
                         color: isDarkMode
                             ? Colors.white38
@@ -119,7 +119,7 @@ void showDeliveryConfirmationSheet(
                         ),
                         label: Text(
                           'Scan QR Code',
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 15.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
@@ -151,7 +151,7 @@ void showDeliveryConfirmationSheet(
                         ),
                         label: Text(
                           'Upload Proof Instead',
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 15.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.grey.shade700,
@@ -174,7 +174,7 @@ void showDeliveryConfirmationSheet(
                     // Recipient Name
                     Text(
                       'Recipient Name',
-                      style: GoogleFonts.montserrat(
+                      style: GoogleFonts.manrope(
                         fontSize: 15.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -214,7 +214,7 @@ void showDeliveryConfirmationSheet(
                     RichText(
                       text: TextSpan(
                         text: 'Signature',
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.w700,
                           color: isDarkMode ? Colors.white : Colors.black,
@@ -222,7 +222,7 @@ void showDeliveryConfirmationSheet(
                         children: [
                           TextSpan(
                             text: '(Optional)',
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w400,
                               color: Colors.grey,
@@ -266,7 +266,7 @@ void showDeliveryConfirmationSheet(
                     RichText(
                       text: TextSpan(
                         text: 'Add Note',
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.w700,
                           color: isDarkMode ? Colors.white : Colors.black,
@@ -274,7 +274,7 @@ void showDeliveryConfirmationSheet(
                         children: [
                           TextSpan(
                             text: '(Optional)',
-                            style: GoogleFonts.montserrat(
+                            style: GoogleFonts.manrope(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w400,
                               color: Colors.grey,
@@ -338,7 +338,7 @@ void showDeliveryConfirmationSheet(
                         ),
                         child: Text(
                           'Confirm Delivery',
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,

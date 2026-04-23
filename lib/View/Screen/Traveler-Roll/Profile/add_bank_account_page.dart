@@ -30,7 +30,7 @@ class AddBankAccountPage extends StatelessWidget {
         centerTitle: true,
         title: Text(
           'bank_account'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -87,7 +87,7 @@ class AddBankAccountPage extends StatelessWidget {
                 ),
                 child: Text(
                   'save'.tr,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
@@ -112,7 +112,7 @@ class AddBankAccountPage extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -120,13 +120,13 @@ class AddBankAccountPage extends StatelessWidget {
         ),
         SizedBox(height: 8.h),
         TextField(
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             color: isDarkMode ? Colors.white : Colors.black,
           ),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: GoogleFonts.plusJakartaSans(
+            hintStyle: GoogleFonts.manrope(
               fontSize: 14.sp,
               color: isDarkMode ? Colors.white30 : Colors.grey[400],
             ),

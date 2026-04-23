@@ -23,7 +23,7 @@ class ArchiveView extends StatelessWidget {
         ),
         title: Text(
           "Archive",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 20.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -45,7 +45,7 @@ class ArchiveView extends StatelessWidget {
                 SizedBox(height: 24.h),
                 Text(
                   "No Archived Chats",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -54,7 +54,7 @@ class ArchiveView extends StatelessWidget {
                 SizedBox(height: 8.h),
                 Text(
                   "Archived chats will appear here.",
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     color: Colors.grey,
                   ),
@@ -93,7 +93,7 @@ class ArchiveView extends StatelessWidget {
               children: [
                 Text(
                   message['name'],
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -101,7 +101,7 @@ class ArchiveView extends StatelessWidget {
                 ),
                 Text(
                   message['message'],
-                  style: GoogleFonts.montserrat(
+                  style: GoogleFonts.manrope(
                     fontSize: 13.sp,
                     color: Colors.grey,
                   ),

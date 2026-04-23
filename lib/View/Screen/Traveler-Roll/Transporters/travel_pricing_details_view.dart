@@ -25,7 +25,7 @@ class TravelPricingDetailsView extends StatelessWidget {
         ),
         title: Text(
           "Conversation Details",
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -53,7 +53,7 @@ class TravelPricingDetailsView extends StatelessWidget {
                       children: [
                         Text(
                           transporter.name,
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 15.sp,
                             fontWeight: FontWeight.w700,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -137,7 +137,7 @@ class TravelPricingDetailsView extends StatelessWidget {
                         SizedBox(height: 12.h),
                         Text(
                           "If you need help, we're available 24/7 from anywhere in the world.",
-                          style: GoogleFonts.montserrat(
+                          style: GoogleFonts.manrope(
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w500,
                             color: isDarkMode ? Colors.white70 : Colors.black87,
@@ -159,7 +159,7 @@ class TravelPricingDetailsView extends StatelessWidget {
                       ),
                       child: Text(
                         "Contact Sendit Support",
-                        style: GoogleFonts.montserrat(
+                        style: GoogleFonts.manrope(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
@@ -182,7 +182,7 @@ class TravelPricingDetailsView extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 12.h),
       child: Text(
         title,
-        style: GoogleFonts.montserrat(
+        style: GoogleFonts.manrope(
           fontSize: 15.sp,
           fontWeight: FontWeight.w700,
           color: isDarkMode ? Colors.white : Colors.black,
@@ -222,7 +222,7 @@ class TravelPricingDetailsView extends StatelessWidget {
           SizedBox(width: 12.w),
           Text(
             label,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
               color: Colors.grey,
@@ -231,7 +231,7 @@ class TravelPricingDetailsView extends StatelessWidget {
           const Spacer(),
           Text(
             value,
-            style: GoogleFonts.montserrat(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -252,7 +252,7 @@ class TravelPricingDetailsView extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: isBold ? FontWeight.w700 : FontWeight.w500,
             color: isBold ? (isDarkMode ? Colors.white : Colors.black) : Colors.grey,
@@ -260,7 +260,7 @@ class TravelPricingDetailsView extends StatelessWidget {
         ),
         Text(
           value,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: isBold ? FontWeight.w700 : FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -282,7 +282,7 @@ class TravelPricingDetailsView extends StatelessWidget {
       child: ExpansionTile(
         title: Text(
           title,
-          style: GoogleFonts.montserrat(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -296,7 +296,7 @@ class TravelPricingDetailsView extends StatelessWidget {
             padding: EdgeInsets.all(16.r),
             child: Text(
               "Placeholder content for $title",
-              style: GoogleFonts.montserrat(fontSize: 12.sp, color: Colors.grey),
+              style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
             ),
           ),
         ],

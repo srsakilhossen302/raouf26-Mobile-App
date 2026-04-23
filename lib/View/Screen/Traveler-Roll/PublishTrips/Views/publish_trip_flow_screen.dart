@@ -30,7 +30,7 @@ class PublishTripFlowScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           "Publish Your Trip",
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
@@ -125,7 +125,7 @@ class PublishTripFlowScreen extends StatelessWidget {
                   : controller.currentStep.value == 5
                   ? "Review"
                   : "Next",
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,

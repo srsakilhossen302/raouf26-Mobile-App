@@ -109,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
             centerTitle: true,
             title: Text(
               'profile'.tr,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.manrope(
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w700,
                 color: isDarkMode ? Colors.white : Colors.black,
@@ -280,7 +280,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     : Colors.white,
                                 title: Text(
                                   'log_out'.tr,
-                                  style: GoogleFonts.plusJakartaSans(
+                                  style: GoogleFonts.manrope(
                                     fontWeight: FontWeight.bold,
                                     color: isDarkMode
                                         ? Colors.white
@@ -289,7 +289,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 content: Text(
                                   'Are you sure you want to log out?',
-                                  style: GoogleFonts.plusJakartaSans(
+                                  style: GoogleFonts.manrope(
                                     color: isDarkMode
                                         ? Colors.white70
                                         : Colors.black87,
@@ -300,7 +300,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     onPressed: () => Get.back(),
                                     child: Text(
                                       'Cancel',
-                                      style: GoogleFonts.plusJakartaSans(
+                                      style: GoogleFonts.manrope(
                                         color: Colors.grey,
                                       ),
                                     ),
@@ -317,7 +317,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     },
                                     child: Text(
                                       'log_out'.tr,
-                                      style: GoogleFonts.plusJakartaSans(
+                                      style: GoogleFonts.manrope(
                                         color: Colors.red,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -334,7 +334,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     SizedBox(height: 16.h),
                     Text(
                       "${'version'.tr} 1.1.0",
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 12.sp,
                         color: Colors.grey,
                       ),
@@ -412,7 +412,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           isTraveler
                               ? 'switch_to_transporter'.tr
                               : 'Switch to Traveler',
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w600,
                             color: Colors.white,
@@ -471,7 +471,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         Text(
                           "Zain Malik",
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w700,
                             color: isDarkMode ? Colors.white : Colors.black,
@@ -483,7 +483,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     Text(
                       "zainmalik02323@gmail.com",
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 12.sp,
                         color: isDarkMode ? Colors.white70 : Colors.grey,
                       ),
@@ -565,7 +565,7 @@ class _ProfilePageState extends State<ProfilePage> {
         SizedBox(height: 8.h),
         Text(
           value,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 16.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : Colors.black,
@@ -573,7 +573,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         Text(
           label,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 11.sp,
             color: isDarkMode ? Colors.white70 : Colors.grey,
           ),
@@ -594,7 +594,7 @@ class _ProfilePageState extends State<ProfilePage> {
           padding: EdgeInsets.only(left: 4.w, bottom: 12.h),
           child: Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 15.sp,
               fontWeight: FontWeight.w700,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -650,7 +650,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           title: Text(
             title,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: isDarkMode ? Colors.white : Colors.black,
@@ -699,7 +699,7 @@ void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
                     const SizedBox(width: 48), // Spacer for centering
                     Text(
                       'Report Issue',
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w800,
                         color: isDarkMode ? Colors.white : Colors.black,
@@ -719,7 +719,7 @@ void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
                 SizedBox(height: 24.h),
                 Text(
                   'Please include the following details in your report',
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -734,7 +734,7 @@ void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
                 SizedBox(height: 24.h),
                 Text(
                   'What is this Report About?',
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -780,7 +780,7 @@ void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
                 SizedBox(height: 24.h),
                 Text(
                   'Describe Issue',
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -790,13 +790,13 @@ void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
                 TextField(
                   controller: descriptionController,
                   maxLines: 4,
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     color: isDarkMode ? Colors.white : Colors.black,
                   ),
                   decoration: InputDecoration(
                     hintText: "Type here ...",
-                    hintStyle: GoogleFonts.plusJakartaSans(
+                    hintStyle: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       color: Colors.grey,
                     ),
@@ -813,7 +813,7 @@ void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
                 SizedBox(height: 24.h),
                 Text(
                   'Add Attachment (Optional)',
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.manrope(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w700,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -849,7 +849,7 @@ void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
                         SizedBox(height: 8.h),
                         Text(
                           "Add Image or Document",
-                          style: GoogleFonts.plusJakartaSans(
+                          style: GoogleFonts.manrope(
                             fontSize: 13.sp,
                             color: Colors.grey,
                             fontWeight: FontWeight.w500,
@@ -893,7 +893,7 @@ void _showReportIssueBottomSheet(BuildContext context, bool isDarkMode) {
                     ),
                     child: Text(
                       "Submit",
-                      style: GoogleFonts.plusJakartaSans(
+                      style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
@@ -921,7 +921,7 @@ Widget _buildTipItem(String tip, bool isDarkMode) {
         SizedBox(width: 8.w),
         Text(
           tip,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 13.sp,
             color: isDarkMode ? Colors.white70 : Colors.black54,
           ),
@@ -952,7 +952,7 @@ Widget _buildCategoryChip(
       ),
       child: Text(
         label,
-        style: GoogleFonts.plusJakartaSans(
+        style: GoogleFonts.manrope(
           fontSize: 13.sp,
           fontWeight: FontWeight.w600,
           color: isSelected
@@ -992,7 +992,7 @@ Widget _buildThemeToggle(bool isDarkMode) {
         ),
         title: Text(
           'dark_mode'.tr,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: FontWeight.w600,
             color: isDarkMode ? Colors.white : Colors.black,
