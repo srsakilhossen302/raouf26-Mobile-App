@@ -17,6 +17,7 @@ class Transporter {
   final String estimatedTotal;
   final List<String> alsoTravelingTo;
   final bool isVerified;
+  final bool isBestMatch;
 
   Transporter({
     required this.name,
@@ -34,6 +35,7 @@ class Transporter {
     required this.estimatedTotal,
     required this.alsoTravelingTo,
     this.isVerified = true,
+    this.isBestMatch = false,
   });
 }
 
@@ -82,6 +84,7 @@ class TransportersController extends GetxController {
       pricePerKg: "2.5 TND/ kg",
       estimatedTotal: "37.50 TND",
       alsoTravelingTo: ["Italy", "Switzerland"],
+      isBestMatch: true,
     ),
     Transporter(
       name: "Mourad Ferjani",
