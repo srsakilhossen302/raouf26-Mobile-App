@@ -26,6 +26,17 @@ class ChatController extends GetxController {
 
   void setUserData(Map<String, dynamic> data) {
     userData.value = data;
+    if (data['isSupport'] == true) {
+      status.value = BookingStatus.accepted;
+      if (messages.isEmpty) {
+        messages.add({
+          'isMe': false,
+          'text': data['message'] ?? 'How can we help you?',
+          'time': 'Just now',
+          'isRead': true,
+        });
+      }
+    }
   }
 
   void acceptBooking() {

@@ -105,7 +105,8 @@ class ChatView extends StatelessWidget {
                   children: [
                     _buildCommunicationWarning(isDarkMode),
 
-                    if (controller.status.value != BookingStatus.accepted)
+                    if (controller.status.value != BookingStatus.accepted &&
+                        userData['isSupport'] != true)
                       _buildBookingRequestCard(controller, isDarkMode),
 
                     if (controller.status.value == BookingStatus.accepted)
