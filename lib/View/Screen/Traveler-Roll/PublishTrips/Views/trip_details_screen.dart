@@ -8,6 +8,7 @@ import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../Models/trip_model.dart';
 import 'publish_trip_flow_screen.dart';
 import '../../../MessagesScreen/chat_view.dart';
+import '../../../MessagesScreen/report_issue_screen.dart';
 
 class TripDetailsScreen extends StatelessWidget {
   final TripModel trip;
@@ -39,7 +40,7 @@ class TripDetailsScreen extends StatelessWidget {
             color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
             onSelected: (value) {
               if (value == 0) {
-                // Handle Report an issue
+                Get.to(() => const ReportIssueScreen());
               } else if (value == 1) {
                 Get.to(() => const ChatView(
                       userData: {

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../../../MessagesScreen/chat_view.dart';
+import '../../../MessagesScreen/report_issue_screen.dart';
 
 class BookingDetailsScreen extends StatelessWidget {
   const BookingDetailsScreen({super.key});
@@ -41,7 +42,7 @@ class BookingDetailsScreen extends StatelessWidget {
             color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
             onSelected: (value) {
               if (value == 0) {
-                // Handle Report an issue
+                Get.to(() => const ReportIssueScreen());
               } else if (value == 1) {
                 // Handle Cancel booking
               } else if (value == 2) {

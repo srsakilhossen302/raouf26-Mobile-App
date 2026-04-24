@@ -8,6 +8,7 @@ import '../controller/transporter_tracking_controller.dart';
 import 'widgets/pickup_confirmation_sheet.dart';
 import 'widgets/delivery_confirmation_sheet.dart';
 import '../../../MessagesScreen/chat_view.dart';
+import '../../../MessagesScreen/report_issue_screen.dart';
 
 class TransporterTripDetailsView extends StatelessWidget {
   final TrackingPackageModel package;
@@ -41,7 +42,7 @@ class TransporterTripDetailsView extends StatelessWidget {
             icon: Icon(Icons.more_vert, color: isDarkMode ? Colors.white : Colors.black),
             onSelected: (value) {
               if (value == 'report') {
-                // Navigate to report issue
+                Get.to(() => const ReportIssueScreen());
               } else if (value == 'contact') {
                 Get.to(() => const ChatView(
                       userData: {
