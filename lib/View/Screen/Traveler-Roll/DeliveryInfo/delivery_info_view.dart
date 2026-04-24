@@ -98,7 +98,7 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
             SizedBox(height: 24.h),
 
             // Recipient's Name Field
-            _sectionTitle("Recipient's Name", isDarkMode),
+            _sectionTitle("Recipient's Name", isDarkMode, subtitle: "Receiver needs a Sendit account to track this parcel."),
             SizedBox(height: 12.h),
             _customTextField(
               controller: controller.recipientNameController,
@@ -521,14 +521,29 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
     );
   }
 
-  Widget _sectionTitle(String title, bool isDarkMode) {
-    return Text(
-      title,
-      style: GoogleFonts.manrope(
-        fontSize: 14.sp,
-        fontWeight: FontWeight.w600,
-        color: isDarkMode ? Colors.white : Colors.black,
-      ),
+  Widget _sectionTitle(String title, bool isDarkMode, {String? subtitle}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: GoogleFonts.manrope(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w600,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
+        if (subtitle != null) ...[
+          SizedBox(height: 4.h),
+          Text(
+            subtitle,
+            style: GoogleFonts.manrope(
+              fontSize: 12.sp,
+              color: Colors.grey,
+            ),
+          ),
+        ],
+      ],
     );
   }
 
