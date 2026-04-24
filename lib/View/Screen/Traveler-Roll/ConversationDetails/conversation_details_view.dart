@@ -166,6 +166,7 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
                     "Print Parcel Label",
                     () => controller.onActionTap("Print Parcel Label"),
                     isDarkMode,
+                    isDisabled: true,
                   ),
                 ],
               ),
@@ -390,44 +391,48 @@ class ConversationDetailsView extends GetView<ConversationDetailsController> {
     VoidCallback onTap,
     bool isDarkMode, {
     bool showArrow = true,
+    bool isDisabled = false,
   }) {
     return InkWell(
-      onTap: onTap,
+      onTap: isDisabled ? null : onTap,
       borderRadius: BorderRadius.circular(16.r),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-        child: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.all(8.r),
-              decoration: BoxDecoration(
-                color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade50,
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-              child: SvgPicture.asset(
-                icon,
-                width: 20.w,
-                height: 20.h,
-                colorFilter: ColorFilter.mode(
-                  isDarkMode ? Colors.white70 : Colors.black87,
-                  BlendMode.srcIn,
+        child: Opacity(
+          opacity: isDisabled ? 0.4 : 1.0,
+          child: Row(
+            children: [
+              Container(
+                padding: EdgeInsets.all(8.r),
+                decoration: BoxDecoration(
+                  color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade50,
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: SvgPicture.asset(
+                  icon,
+                  width: 20.w,
+                  height: 20.h,
+                  colorFilter: ColorFilter.mode(
+                    isDarkMode ? Colors.white70 : Colors.black87,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(width: 16.w),
-            Expanded(
-              child: Text(
-                title,
-                style: GoogleFonts.manrope(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                  color: isDarkMode ? Colors.white : Colors.black87,
+              SizedBox(width: 16.w),
+              Expanded(
+                child: Text(
+                  title,
+                  style: GoogleFonts.manrope(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: isDarkMode ? Colors.white : Colors.black87,
+                  ),
                 ),
               ),
-            ),
-            if (showArrow)
-              Icon(Icons.arrow_forward_ios, size: 16.sp, color: Colors.grey),
-          ],
+              if (showArrow)
+                Icon(Icons.arrow_forward_ios, size: 16.sp, color: Colors.grey),
+            ],
+          ),
         ),
       ),
     );
