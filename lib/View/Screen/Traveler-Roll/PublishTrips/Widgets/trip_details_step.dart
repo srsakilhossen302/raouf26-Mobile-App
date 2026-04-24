@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart' hide TimePickerDialog;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
 import '../Controllers/publish_trip_flow_controller.dart';
 import 'time_picker_dialog.dart';
 
@@ -37,10 +39,7 @@ class TripDetailsStep extends StatelessWidget {
           ),
           Text(
             "Set your starting point and final destination for this trip.",
-            style: GoogleFonts.manrope(
-              fontSize: 14.sp,
-              color: Colors.grey,
-            ),
+            style: GoogleFonts.manrope(fontSize: 14.sp, color: Colors.grey),
           ),
           SizedBox(height: 24.h),
           _buildTextField(
@@ -82,30 +81,48 @@ class TripDetailsStep extends StatelessWidget {
             ),
           ),
           SizedBox(height: 24.h),
-          Text(
-            "Add a Stop (Optional)",
-            style: GoogleFonts.manrope(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w600,
-              color: isDarkMode ? Colors.white : Colors.black,
+          RichText(
+            text: TextSpan(
+              text: "Add a Stop ",
+              style: GoogleFonts.manrope(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
+              children: [
+                TextSpan(
+                  text: "(Optional)",
+                  style: GoogleFonts.manrope(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(height: 12.h),
-          _buildStopItem("40, Sidi Bu Jafar, Sousse, Tunisia", isDarkMode),
-          _buildStopItem("40, Sidi Bu Jafar, Sousse, Tunisia", isDarkMode),
-          TextButton.icon(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.add_location_outlined,
-              size: 16,
-              color: Colors.grey,
+          Container(
+            decoration: BoxDecoration(
+              color: isDarkMode
+                  ? Colors.white.withOpacity(0.05)
+                  : const Color(0xFFF8F9FA),
+              borderRadius: BorderRadius.circular(12.r),
             ),
-            label: Text(
-              "Add a Stop",
-              style: GoogleFonts.manrope(
-                fontSize: 14.sp,
-                color: Colors.grey,
-              ),
+            child: Column(
+              children: [
+                _buildStopRow(
+                  "40, Sidi Bu Jafar, Sousse, Tunisia",
+                  isDarkMode,
+                  showDivider: true,
+                ),
+                _buildStopRow(
+                  "40, Sidi Bu Jafar, Sousse, Tunisia",
+                  isDarkMode,
+                  showDivider: true,
+                ),
+                _buildAddStopAction(isDarkMode),
+              ],
             ),
           ),
           SizedBox(height: 24.h),
@@ -250,39 +267,103 @@ class TripDetailsStep extends StatelessWidget {
     );
   }
 
-  Widget _buildStopItem(String location, bool isDarkMode) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 12.h),
-      child: Container(
-        padding: EdgeInsets.all(12.w),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
-          ),
-          borderRadius: BorderRadius.circular(8.r),
-        ),
-        child: Row(
-          children: [
-            const Icon(
-              Icons.circle_outlined,
-              size: 16,
-              color: Color(0xFF4A80F0),
-            ),
-            SizedBox(width: 12.w),
-            Expanded(
-              child: Text(
-                location,
-                style: GoogleFonts.manrope(
-                  fontSize: 12.sp,
-                  color: isDarkMode ? Colors.white : Colors.black,
+  Widget _buildStopRow(
+    String location,
+    bool isDarkMode, {
+    bool isLast = false,
+    bool showDivider = false,
+  }) {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Container(
+                    width: 14.w,
+                    height: 14.w,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: const Color(0xFF4A80F0),
+                        width: 1.5,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 1.2,
+                    height: 24.h,
+                    child: Column(
+                      children: List.generate(
+                        4,
+                        (index) => Expanded(
+                          child: Container(
+                            width: 1.2,
+                            margin: EdgeInsets.symmetric(vertical: 2.h),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.3),
+                              borderRadius: BorderRadius.circular(1),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(width: 12.w),
+              Expanded(
+                child: Text(
+                  location,
+                  style: GoogleFonts.manrope(
+                    fontSize: 13.sp,
+                    color: isDarkMode ? Colors.white : Colors.black87,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-            const Icon(Icons.menu, size: 16, color: Colors.grey),
-            SizedBox(width: 8.w),
-            const Icon(Icons.close, size: 16, color: Colors.grey),
-          ],
+              Icon(Icons.drag_handle, size: 20.sp, color: Colors.grey.shade400),
+              SizedBox(width: 12.w),
+              Icon(Icons.close, size: 20.sp, color: Colors.grey.shade400),
+            ],
+          ),
         ),
+        if (showDivider)
+          Divider(
+            indent: 42.w,
+            height: 1,
+            color: isDarkMode ? Colors.white10 : Colors.grey.withOpacity(0.1),
+          ),
+      ],
+    );
+  }
+
+  Widget _buildAddStopAction(bool isDarkMode) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            AppIcons.location,
+            width: 18.w,
+            colorFilter: ColorFilter.mode(
+              Colors.grey.shade500,
+              BlendMode.srcIn,
+            ),
+          ),
+          SizedBox(width: 12.w),
+          Text(
+            "Add a Stop",
+            style: GoogleFonts.manrope(
+              fontSize: 14.sp,
+              color: Colors.grey.shade500,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
       ),
     );
   }
