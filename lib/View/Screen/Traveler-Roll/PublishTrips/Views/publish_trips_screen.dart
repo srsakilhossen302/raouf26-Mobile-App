@@ -244,10 +244,11 @@ class PublishTripsScreen extends StatelessWidget {
   }
 
   Widget _buildMyTripsTab(BuildContext context, bool isDarkMode) {
+    final controller = Get.find<PublishTripsController>();
     return Column(
       children: [
         _buildSubTabBar(isDarkMode),
-        _buildFilterChips(isDarkMode),
+        _buildFilterChips(controller, isDarkMode),
         Expanded(
           child: ListView.builder(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
@@ -261,20 +262,41 @@ class PublishTripsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildFilterChips(bool isDarkMode) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
-      child: Row(
-        children: [
-          _buildChip("Tunis", isDarkMode),
-          SizedBox(width: 12.w),
-          _buildChip("Tue 3 March, 2026", isDarkMode),
-        ],
-      ),
-    );
+  Widget _buildFilterChips(PublishTripsController controller, bool isDarkMode) {
+    return Obx(() {
+      if (!controller.showFilterChips.value) return const SizedBox.shrink();
+
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
+          child: Row(
+            children: [
+              if (controller.selectedCity.value.isNotEmpty) ...[
+                _buildChip(
+                  controller.selectedCity.value,
+                  isDarkMode,
+                  onRemove: () => controller.removeCityFilter(),
+                ),
+                SizedBox(width: 12.w),
+              ],
+              if (controller.selectedDate.value.isNotEmpty) ...[
+                _buildChip(
+                  controller.selectedDate.value,
+                  isDarkMode,
+                  onRemove: () => controller.removeDateFilter(),
+                ),
+              ],
+            ],
+          ),
+        ),
+      );
+    });
   }
 
-  Widget _buildChip(String label, bool isDarkMode) {
+  Widget _buildChip(String label, bool isDarkMode, {VoidCallback? onRemove}) {
+    String? flag = _getFlagForLabel(label);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       decoration: BoxDecoration(
@@ -287,16 +309,24 @@ class PublishTripsScreen extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (label == "Tunis") ...[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(2.r),
-              child: Image.network(
-                "https://flagcdn.com/w40/tn.png",
-                width: 20.w,
-                height: 14.h,
-                fit: BoxFit.cover,
-              ),
-            ),
+          if (flag != null) ...[
+            if (flag.startsWith("http"))
+              ClipRRect(
+                borderRadius: BorderRadius.circular(2.r),
+                child: Image.network(
+                  flag,
+                  width: 20.w,
+                  height: 14.h,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Icon(
+                    Icons.flag,
+                    size: 14.sp,
+                    color: Colors.grey,
+                  ),
+                ),
+              )
+            else
+              Text(flag, style: TextStyle(fontSize: 14.sp)),
             SizedBox(width: 8.w),
           ],
           Text(
@@ -308,14 +338,26 @@ class PublishTripsScreen extends StatelessWidget {
             ),
           ),
           SizedBox(width: 8.w),
-          Icon(
-            Icons.close,
-            size: 14.sp,
-            color: isDarkMode ? Colors.white60 : const Color(0xFF9E9E9E),
+          GestureDetector(
+            onTap: onRemove,
+            child: Icon(
+              Icons.close,
+              size: 14.sp,
+              color: isDarkMode ? Colors.white60 : const Color(0xFF9E9E9E),
+            ),
           ),
         ],
       ),
     );
+  }
+
+  String? _getFlagForLabel(String label) {
+    if (label == "Tunis") return "https://flagcdn.com/w40/tn.png";
+    if (label == "France") return "🇫🇷";
+    if (label == "Germany") return "🇩🇪";
+    if (label == "Italy") return "🇮🇹";
+    if (label == "United Kingdom") return "🇬🇧";
+    return null;
   }
 
   Widget _buildSubTabBar(bool isDarkMode) {
@@ -919,6 +961,7 @@ class PublishTripsScreen extends StatelessWidget {
   }
 
   void _showFilters(BuildContext context) {
+    final controller = Get.find<PublishTripsController>();
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     showModalBottomSheet(
       context: context,
@@ -949,13 +992,11 @@ class PublishTripsScreen extends StatelessWidget {
                     style: GoogleFonts.manrope(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w700,
-                      color: isDarkMode
-                          ? Colors.white
-                          : const Color(0xFF1A1A1A),
+                      color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () => controller.resetFilters(),
                     child: Text(
                       "Clear all",
                       style: GoogleFonts.manrope(
@@ -978,51 +1019,76 @@ class PublishTripsScreen extends StatelessWidget {
                       style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
-                        color: isDarkMode
-                            ? Colors.white
-                            : const Color(0xFF1A1A1A),
+                        color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
                       ),
                     ),
                     SizedBox(height: 12.h),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 12.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: isDarkMode
-                            ? const Color(0xFF2C2C2C)
-                            : const Color(0xFFF5F7FA),
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(2.r),
-                            child: Image.network(
-                              "https://flagcdn.com/w40/tn.png",
-                              width: 24.w,
-                              height: 18.h,
-                              fit: BoxFit.cover,
-                            ),
+                    GestureDetector(
+                      onTap: () => _showCountrySelector(context, controller),
+                      child: Obx(
+                        () => Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16.w,
+                            vertical: 12.h,
                           ),
-                          SizedBox(width: 12.w),
-                          Expanded(
-                            child: Text(
-                              "Tunis",
-                              style: GoogleFonts.manrope(
-                                fontSize: 14.sp,
-                                color: isDarkMode
-                                    ? Colors.white
-                                    : const Color(0xFF1A1A1A),
+                          decoration: BoxDecoration(
+                            color: isDarkMode
+                                ? const Color(0xFF2C2C2C)
+                                : const Color(0xFFF5F7FA),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Row(
+                            children: [
+                              if (controller.tempCity.value == "Tunis")
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(2.r),
+                                  child: Image.network(
+                                    "https://flagcdn.com/w40/tn.png",
+                                    width: 24.w,
+                                    height: 18.h,
+                                    fit: BoxFit.cover,
+                                    errorBuilder:
+                                        (context, error, stackTrace) => Icon(
+                                      Icons.flag,
+                                      size: 16.sp,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                )
+                              else
+                                Text(
+                                  controller.tempCity.value == "France"
+                                      ? "🇫🇷"
+                                      : controller.tempCity.value == "Germany"
+                                          ? "🇩🇪"
+                                          : controller.tempCity.value == "Italy"
+                                              ? "🇮🇹"
+                                              : "🌍",
+                                  style: TextStyle(fontSize: 18.sp),
+                                ),
+                              SizedBox(width: 12.w),
+                              Expanded(
+                                child: Text(
+                                  controller.tempCity.value.isEmpty
+                                      ? "Select Country"
+                                      : controller.tempCity.value,
+                                  style: GoogleFonts.manrope(
+                                    fontSize: 14.sp,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : const Color(0xFF1A1A1A),
+                                  ),
+                                ),
                               ),
-                            ),
+                              Icon(
+                                Icons.keyboard_arrow_down,
+                                color: isDarkMode
+                                    ? Colors.white60
+                                    : Colors.black54,
+                              ),
+                            ],
                           ),
-                          Icon(
-                            Icons.keyboard_arrow_down,
-                            color: isDarkMode ? Colors.white60 : Colors.black54,
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                     SizedBox(height: 24.h),
@@ -1031,42 +1097,53 @@ class PublishTripsScreen extends StatelessWidget {
                       style: GoogleFonts.manrope(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
-                        color: isDarkMode
-                            ? Colors.white
-                            : const Color(0xFF1A1A1A),
+                        color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
                       ),
                     ),
                     SizedBox(height: 12.h),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 12.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: isDarkMode
-                            ? const Color(0xFF2C2C2C)
-                            : const Color(0xFFF5F7FA),
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "Select Date",
-                              style: GoogleFonts.manrope(
-                                fontSize: 14.sp,
-                                color: isDarkMode
-                                    ? Colors.white38
-                                    : const Color(0xFF9E9E9E),
+                    GestureDetector(
+                      onTap: () => _selectDate(context, controller),
+                      child: Obx(
+                        () => Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16.w,
+                            vertical: 12.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: isDarkMode
+                                ? const Color(0xFF2C2C2C)
+                                : const Color(0xFFF5F7FA),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  controller.tempDate.value.isEmpty
+                                      ? "Select Date"
+                                      : controller.tempDate.value,
+                                  style: GoogleFonts.manrope(
+                                    fontSize: 14.sp,
+                                    color: controller.tempDate.value.isEmpty
+                                        ? (isDarkMode
+                                            ? Colors.white38
+                                            : const Color(0xFF9E9E9E))
+                                        : (isDarkMode
+                                            ? Colors.white
+                                            : const Color(0xFF1A1A1A)),
+                                  ),
+                                ),
                               ),
-                            ),
+                              Icon(
+                                Icons.calendar_today_outlined,
+                                size: 20.sp,
+                                color: isDarkMode
+                                    ? Colors.white60
+                                    : Colors.black54,
+                              ),
+                            ],
                           ),
-                          Icon(
-                            Icons.calendar_today_outlined,
-                            size: 20.sp,
-                            color: isDarkMode ? Colors.white60 : Colors.black54,
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ],
@@ -1079,7 +1156,10 @@ class PublishTripsScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: OutlinedButton(
-                      onPressed: () => Get.back(),
+                      onPressed: () {
+                        controller.resetFilters();
+                        Get.back();
+                      },
                       style: OutlinedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 16.h),
                         side: BorderSide(
@@ -1106,7 +1186,10 @@ class PublishTripsScreen extends StatelessWidget {
                   SizedBox(width: 16.w),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () => Get.back(),
+                      onPressed: () {
+                        controller.applyFilters();
+                        Get.back();
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF4A80F0),
                         padding: EdgeInsets.symmetric(vertical: 16.h),
@@ -1132,6 +1215,117 @@ class PublishTripsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _showCountrySelector(
+      BuildContext context, PublishTripsController controller) {
+    bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final countries = [
+      {"name": "Tunis", "flag": "🇹🇳", "code": "tn"},
+      {"name": "France", "flag": "🇫🇷", "code": "fr"},
+      {"name": "Germany", "flag": "🇩🇪", "code": "de"},
+      {"name": "Italy", "flag": "🇮🇹", "code": "it"},
+      {"name": "United Kingdom", "flag": "🇬🇧", "code": "gb"},
+    ];
+
+    Get.bottomSheet(
+      Container(
+        padding: EdgeInsets.all(24.w),
+        decoration: BoxDecoration(
+          color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Select Country",
+              style: GoogleFonts.manrope(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w700,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
+            SizedBox(height: 20.h),
+            ...countries
+                .map((country) => ListTile(
+                      onTap: () {
+                        controller.tempCity.value = country["name"]!;
+                        Get.back();
+                      },
+                      leading: Text(country["flag"]!,
+                          style: TextStyle(fontSize: 24.sp)),
+                      title: Text(
+                        country["name"]!,
+                        style: GoogleFonts.manrope(
+                          fontWeight:
+                              controller.tempCity.value == country["name"]
+                                  ? FontWeight.w700
+                                  : FontWeight.w500,
+                          color: isDarkMode ? Colors.white : Colors.black,
+                        ),
+                      ),
+                      trailing: controller.tempCity.value == country["name"]
+                          ? const Icon(Icons.check_circle,
+                              color: Color(0xFF4A80F0))
+                          : null,
+                    ))
+                .toList(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _selectDate(
+      BuildContext context, PublishTripsController controller) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2030),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: Color(0xFF4A80F0),
+              onPrimary: Colors.white,
+              onSurface: Colors.black,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null) {
+      String formattedDate =
+          "${_getDayOfWeek(picked.weekday)} ${picked.day} ${_getMonth(picked.month)}, ${picked.year}";
+      controller.tempDate.value = formattedDate;
+    }
+  }
+
+  String _getDayOfWeek(int day) {
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    return days[day - 1];
+  }
+
+  String _getMonth(int month) {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+    return months[month - 1];
   }
 
   void _showHowItWorks(BuildContext context) {

@@ -19,6 +19,38 @@ class PublishTripsController extends GetxController {
     userRole.value = await SharedPreferenceHelper.getUserRole() ?? "";
   }
 
+  final RxString selectedCity = "".obs;
+  final RxString selectedDate = "".obs;
+  final RxBool showFilterChips = false.obs;
+
+  // Temp variables for the filter sheet
+  final RxString tempCity = "Tunis".obs;
+  final RxString tempDate = "".obs;
+
+  void applyFilters() {
+    selectedCity.value = tempCity.value;
+    selectedDate.value = tempDate.value;
+    showFilterChips.value = true;
+  }
+
+  void resetFilters() {
+    selectedCity.value = "";
+    selectedDate.value = "";
+    tempCity.value = "Tunis";
+    tempDate.value = "";
+    showFilterChips.value = false;
+  }
+
+  void removeCityFilter() {
+    selectedCity.value = "";
+    if (selectedDate.value.isEmpty) showFilterChips.value = false;
+  }
+
+  void removeDateFilter() {
+    selectedDate.value = "";
+    if (selectedCity.value.isEmpty) showFilterChips.value = false;
+  }
+
   void changeTab(int index) {
     selectedTab.value = index;
   }

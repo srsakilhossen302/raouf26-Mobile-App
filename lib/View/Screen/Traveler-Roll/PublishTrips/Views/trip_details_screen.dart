@@ -7,6 +7,7 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/PublishTrips/Controll
 import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../Models/trip_model.dart';
 import 'publish_trip_flow_screen.dart';
+import '../../../MessagesScreen/chat_view.dart';
 
 class TripDetailsScreen extends StatelessWidget {
   final TripModel trip;
@@ -40,7 +41,19 @@ class TripDetailsScreen extends StatelessWidget {
               if (value == 0) {
                 // Handle Report an issue
               } else if (value == 1) {
-                // Handle Contact support
+                Get.to(() => const ChatView(
+                      userData: {
+                        'name': 'Sendit Support',
+                        'message': '24/7 available! How can we help you?',
+                        'time': '',
+                        'isSupport': true,
+                        'isUnread': false,
+                        'image': 'https://via.placeholder.com/150',
+                        'subtitle': '',
+                        'status': '',
+                        'role': 'all',
+                      },
+                    ));
               }
             },
             itemBuilder: (context) => [

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:raouf26mobileapp/View/Screen/MessagesScreen/chat_view.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporters_controller.dart';
 import '../../../../Utils/AppIcons/app_icons.dart';
 
@@ -15,12 +16,17 @@ class TravelPricingDetailsView extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.grey.shade50,
+      backgroundColor: isDarkMode
+          ? const Color(0xFF121212)
+          : Colors.grey.shade50,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: isDarkMode ? Colors.white : Colors.black),
+          icon: Icon(
+            Icons.arrow_back,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
           onPressed: () => Get.back(),
         ),
         title: Text(
@@ -60,7 +66,11 @@ class TravelPricingDetailsView extends StatelessWidget {
                           ),
                         ),
                         SizedBox(width: 4.w),
-                        SvgPicture.asset(AppIcons.verifa, width: 14.w, height: 14.h),
+                        SvgPicture.asset(
+                          AppIcons.verifa,
+                          width: 14.w,
+                          height: 14.h,
+                        ),
                       ],
                     ),
                   ),
@@ -104,11 +114,24 @@ class TravelPricingDetailsView extends StatelessWidget {
               isDarkMode,
               child: Column(
                 children: [
-                  _pricingRow(isDarkMode, label: "Price Per kg", value: transporter.pricePerKg),
+                  _pricingRow(
+                    isDarkMode,
+                    label: "Price Per kg",
+                    value: transporter.pricePerKg,
+                  ),
                   SizedBox(height: 16.h),
-                  _pricingRow(isDarkMode, label: "Package Weight", value: "15 kg"),
+                  _pricingRow(
+                    isDarkMode,
+                    label: "Package Weight",
+                    value: "15 kg",
+                  ),
                   SizedBox(height: 16.h),
-                  _pricingRow(isDarkMode, label: "Total To Pay", value: transporter.estimatedTotal, isBold: true),
+                  _pricingRow(
+                    isDarkMode,
+                    label: "Total To Pay",
+                    value: transporter.estimatedTotal,
+                    isBold: true,
+                  ),
                 ],
               ),
             ),
@@ -133,7 +156,11 @@ class TravelPricingDetailsView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(Icons.headset_mic_outlined, color: const Color(0xFF4A80F0), size: 28.sp),
+                        Icon(
+                          Icons.headset_mic_outlined,
+                          color: const Color(0xFF4A80F0),
+                          size: 28.sp,
+                        ),
                         SizedBox(height: 12.h),
                         Text(
                           "If you need help, we're available 24/7 from anywhere in the world.",
@@ -151,10 +178,28 @@ class TravelPricingDetailsView extends StatelessWidget {
                     width: double.infinity,
                     height: 50.h,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(
+                          () => const ChatView(
+                            userData: {
+                              'name': 'Sendit Support',
+                              'message': '24/7 available! How can we help you?',
+                              'time': '',
+                              'isSupport': true,
+                              'isUnread': false,
+                              'image': 'https://via.placeholder.com/150',
+                              'subtitle': '',
+                              'status': '',
+                              'role': 'all',
+                            },
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF4A80F0),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
                         elevation: 0,
                       ),
                       child: Text(
@@ -191,7 +236,11 @@ class TravelPricingDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionCard(bool isDarkMode, {required Widget child, EdgeInsetsGeometry? padding}) {
+  Widget _buildSectionCard(
+    bool isDarkMode, {
+    required Widget child,
+    EdgeInsetsGeometry? padding,
+  }) {
     return Container(
       width: double.infinity,
       padding: padding ?? EdgeInsets.all(16.r),
@@ -199,14 +248,23 @@ class TravelPricingDetailsView extends StatelessWidget {
         color: isDarkMode ? Colors.grey.shade900 : Colors.white,
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4)),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
         ],
       ),
       child: child,
     );
   }
 
-  Widget _infoRow(bool isDarkMode, {required String icon, required String label, required String value}) {
+  Widget _infoRow(
+    bool isDarkMode, {
+    required String icon,
+    required String label,
+    required String value,
+  }) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.h),
       child: Row(
@@ -217,7 +275,12 @@ class TravelPricingDetailsView extends StatelessWidget {
               color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade50,
               borderRadius: BorderRadius.circular(8.r),
             ),
-            child: SvgPicture.asset(icon, width: 20.w, height: 20.h, colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn)),
+            child: SvgPicture.asset(
+              icon,
+              width: 20.w,
+              height: 20.h,
+              colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
+            ),
           ),
           SizedBox(width: 12.w),
           Text(
@@ -246,7 +309,12 @@ class TravelPricingDetailsView extends StatelessWidget {
     return Divider(height: 1, color: Colors.grey.shade100);
   }
 
-  Widget _pricingRow(bool isDarkMode, {required String label, required String value, bool isBold = false}) {
+  Widget _pricingRow(
+    bool isDarkMode, {
+    required String label,
+    required String value,
+    bool isBold = false,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -255,7 +323,9 @@ class TravelPricingDetailsView extends StatelessWidget {
           style: GoogleFonts.manrope(
             fontSize: 14.sp,
             fontWeight: isBold ? FontWeight.w700 : FontWeight.w500,
-            color: isBold ? (isDarkMode ? Colors.white : Colors.black) : Colors.grey,
+            color: isBold
+                ? (isDarkMode ? Colors.white : Colors.black)
+                : Colors.grey,
           ),
         ),
         Text(
@@ -276,7 +346,11 @@ class TravelPricingDetailsView extends StatelessWidget {
         color: isDarkMode ? Colors.grey.shade900 : Colors.white,
         borderRadius: BorderRadius.circular(12.r),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4)),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
         ],
       ),
       child: ExpansionTile(
@@ -290,7 +364,11 @@ class TravelPricingDetailsView extends StatelessWidget {
         ),
         shape: const RoundedRectangleBorder(side: BorderSide.none),
         collapsedShape: const RoundedRectangleBorder(side: BorderSide.none),
-        trailing: Icon(Icons.keyboard_arrow_down, color: Colors.grey, size: 24.sp),
+        trailing: Icon(
+          Icons.keyboard_arrow_down,
+          color: Colors.grey,
+          size: 24.sp,
+        ),
         children: [
           Padding(
             padding: EdgeInsets.all(16.r),

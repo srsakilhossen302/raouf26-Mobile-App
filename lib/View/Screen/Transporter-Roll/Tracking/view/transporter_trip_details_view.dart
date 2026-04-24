@@ -7,6 +7,7 @@ import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../controller/transporter_tracking_controller.dart';
 import 'widgets/pickup_confirmation_sheet.dart';
 import 'widgets/delivery_confirmation_sheet.dart';
+import '../../../MessagesScreen/chat_view.dart';
 
 class TransporterTripDetailsView extends StatelessWidget {
   final TrackingPackageModel package;
@@ -42,7 +43,19 @@ class TransporterTripDetailsView extends StatelessWidget {
               if (value == 'report') {
                 // Navigate to report issue
               } else if (value == 'contact') {
-                // Navigate to contact support
+                Get.to(() => const ChatView(
+                      userData: {
+                        'name': 'Sendit Support',
+                        'message': '24/7 available! How can we help you?',
+                        'time': '',
+                        'isSupport': true,
+                        'isUnread': false,
+                        'image': 'https://via.placeholder.com/150',
+                        'subtitle': '',
+                        'status': '',
+                        'role': 'all',
+                      },
+                    ));
               }
             },
             itemBuilder: (BuildContext context) => [

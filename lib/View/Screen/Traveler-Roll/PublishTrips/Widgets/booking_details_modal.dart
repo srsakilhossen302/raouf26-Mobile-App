@@ -45,7 +45,19 @@ class BookingDetailsScreen extends StatelessWidget {
               } else if (value == 1) {
                 // Handle Cancel booking
               } else if (value == 2) {
-                // Handle Contact support
+                Get.to(() => const ChatView(
+                      userData: {
+                        'name': 'Sendit Support',
+                        'message': '24/7 available! How can we help you?',
+                        'time': '',
+                        'isSupport': true,
+                        'isUnread': false,
+                        'image': 'https://via.placeholder.com/150',
+                        'subtitle': '',
+                        'status': '',
+                        'role': 'all',
+                      },
+                    ));
               }
             },
             itemBuilder: (context) => [
@@ -471,7 +483,18 @@ class BookingDetailsScreen extends StatelessWidget {
   Widget _buildPackagePhoto(String url) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12.r),
-      child: Image.network(url, width: 80.w, height: 80.w, fit: BoxFit.cover),
+      child: Image.network(
+        url,
+        width: 80.w,
+        height: 80.w,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => Container(
+          width: 80.w,
+          height: 80.w,
+          color: Colors.grey.shade100,
+          child: Icon(Icons.broken_image, color: Colors.grey, size: 24.sp),
+        ),
+      ),
     );
   }
 
