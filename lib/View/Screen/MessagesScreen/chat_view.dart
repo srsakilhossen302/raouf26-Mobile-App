@@ -609,7 +609,7 @@ class ChatView extends StatelessWidget {
                   width: 40.w,
                   height: 4.h,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
+                    color: isDarkMode ? Colors.white24 : Colors.grey.shade300,
                     borderRadius: BorderRadius.circular(2.r),
                   ),
                 ),
@@ -618,8 +618,8 @@ class ChatView extends StatelessWidget {
               Text(
                 "Reject Booking Request",
                 style: GoogleFonts.manrope(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w800,
                   color: isDarkMode ? Colors.white : Colors.black,
                 ),
               ),
@@ -628,7 +628,8 @@ class ChatView extends StatelessWidget {
                 "Please tell the client why you're rejecting this booking request.",
                 style: GoogleFonts.manrope(
                   fontSize: 14.sp,
-                  color: Colors.grey,
+                  color: Colors.grey.shade600,
+                  height: 1.4,
                 ),
               ),
               SizedBox(height: 24.h),
@@ -651,17 +652,22 @@ class ChatView extends StatelessWidget {
                       margin: EdgeInsets.only(bottom: 12.h),
                       padding: EdgeInsets.symmetric(
                         horizontal: 16.w,
-                        vertical: 14.h,
+                        vertical: 16.h,
                       ),
                       decoration: BoxDecoration(
                         color: isSelected
                             ? const Color(0xFF4A80F0).withOpacity(0.05)
-                            : Colors.transparent,
+                            : (isDarkMode
+                                ? Colors.white.withOpacity(0.02)
+                                : Colors.white),
                         borderRadius: BorderRadius.circular(12.r),
                         border: Border.all(
                           color: isSelected
                               ? const Color(0xFF4A80F0)
-                              : Colors.grey.shade200,
+                              : (isDarkMode
+                                  ? Colors.white10
+                                  : Colors.grey.shade200),
+                          width: isSelected ? 1.5 : 1,
                         ),
                       ),
                       child: Text(
@@ -670,7 +676,7 @@ class ChatView extends StatelessWidget {
                           fontSize: 14.sp,
                           color: isSelected
                               ? const Color(0xFF4A80F0)
-                              : (isDarkMode ? Colors.white : Colors.black),
+                              : (isDarkMode ? Colors.white70 : Colors.black87),
                           fontWeight: isSelected
                               ? FontWeight.w600
                               : FontWeight.w500,
@@ -691,20 +697,24 @@ class ChatView extends StatelessWidget {
               ),
               SizedBox(height: 12.h),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
                 decoration: BoxDecoration(
                   color: isDarkMode
-                      ? Colors.grey.shade800
-                      : Colors.grey.shade100,
+                      ? Colors.white.withOpacity(0.05)
+                      : const Color(0xFFF8F9FB),
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: TextField(
-                  maxLines: 3,
+                  maxLines: 4,
+                  style: GoogleFonts.manrope(
+                    fontSize: 14.sp,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
                   decoration: InputDecoration(
                     hintText: "Type here ...",
                     hintStyle: GoogleFonts.manrope(
                       fontSize: 14.sp,
-                      color: Colors.grey,
+                      color: Colors.grey.shade400,
                     ),
                     border: InputBorder.none,
                   ),
@@ -729,6 +739,7 @@ class ChatView extends StatelessWidget {
                   child: Text(
                     "Confirm Rejection",
                     style: GoogleFonts.manrope(
+                      fontSize: 16.sp,
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
                     ),
