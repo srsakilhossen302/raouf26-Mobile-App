@@ -30,7 +30,7 @@ class _IssueWithNumberScreenState extends State<IssueWithNumberScreen> {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          "Issue with number",
+          "Account Recovery",
           style: TextStyle(
             color: isDarkMode ? Colors.white : Colors.black,
             fontSize: 18.sp,
@@ -46,7 +46,7 @@ class _IssueWithNumberScreenState extends State<IssueWithNumberScreen> {
           children: [
             SizedBox(height: 20.h),
             Text(
-              "Trouble Signing In?",
+              "Trouble with your number?",
               style: TextStyle(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
@@ -55,7 +55,7 @@ class _IssueWithNumberScreenState extends State<IssueWithNumberScreen> {
             ),
             SizedBox(height: 8.h),
             Text(
-              "We'll help you recover access to your account quickly and securely.",
+              "We’ll help you recover access to your account quickly and securely.",
               style: TextStyle(
                 fontSize: 16.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
@@ -64,14 +64,14 @@ class _IssueWithNumberScreenState extends State<IssueWithNumberScreen> {
             SizedBox(height: 32.h),
             _issueOption(
               title: "I changed my phone number",
-              subtitle: "I changed my phone number",
+              // subtitle: "I changed my phone number",
               type: "changed",
               isDarkMode: isDarkMode,
             ),
             SizedBox(height: 16.h),
             _issueOption(
-              title: "I no longer have access to this number",
-              subtitle: "I no longer have access to this number",
+              title: "I can’t access this number anymore",
+              // subtitle: "I no longer have access to this number",
               type: "no_access",
               isDarkMode: isDarkMode,
             ),
@@ -107,7 +107,7 @@ class _IssueWithNumberScreenState extends State<IssueWithNumberScreen> {
 
   Widget _issueOption({
     required String title,
-    required String subtitle,
+     // String subtitle,
     required String type,
     required bool isDarkMode,
   }) {
@@ -143,14 +143,14 @@ class _IssueWithNumberScreenState extends State<IssueWithNumberScreen> {
                       color: isDarkMode ? Colors.white : Colors.black,
                     ),
                   ),
-                  SizedBox(height: 4.h),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: isDarkMode ? Colors.white54 : Colors.grey.shade500,
-                    ),
-                  ),
+                  // SizedBox(height: 4.h),
+                  // Text(
+                  //   subtitle,
+                  //   style: TextStyle(
+                  //     fontSize: 12.sp,
+                  //     color: isDarkMode ? Colors.white54 : Colors.grey.shade500,
+                  //   ),
+                  // ),
                 ],
               ),
             ),

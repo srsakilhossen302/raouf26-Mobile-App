@@ -187,6 +187,13 @@ class LogInScreen extends StatelessWidget {
               label: "continue_with_whatsapp".tr,
               onTap: () {},
             ),
+            SizedBox(height: 16.h),
+            _socialButton(
+              isDarkMode: isDarkMode,
+              icon: AppIcons.facebook,
+              label: "continue_with_facebook".tr,
+              onTap: () {},
+            ),
             SizedBox(height: 20.h),
             Center(
               child: GestureDetector(

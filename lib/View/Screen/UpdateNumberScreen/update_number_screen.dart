@@ -24,7 +24,7 @@ class UpdateNumberScreen extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          "Update Your Number",
+          "Account Recovery",
           style: TextStyle(
             color: isDarkMode ? Colors.white : Colors.black,
             fontSize: 18.sp,
@@ -49,7 +49,7 @@ class UpdateNumberScreen extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             Text(
-              "Make sure the country code and number are correct.",
+              "Enter your new number with the correct country code.",
               style: TextStyle(
                 fontSize: 16.sp,
                 color: isDarkMode ? Colors.white70 : Colors.grey.shade600,

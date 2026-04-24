@@ -22,7 +22,7 @@ class VerifyIdentityScreen extends StatelessWidget {
           onPressed: () => Get.back(),
         ),
         title: Text(
-          "Verify Your Identity",
+          "Account Recovery",
           style: TextStyle(
             color: isDarkMode ? Colors.white : Colors.black,
             fontSize: 18.sp,
@@ -59,8 +59,8 @@ class VerifyIdentityScreen extends StatelessWidget {
             _inputLabel(label: "Face Verification", isDarkMode: isDarkMode),
             SizedBox(height: 12.h),
             _buildVerificationAction(
-              "Take a Selfie",
-              Icons.camera_alt_outlined,
+              "Upload Document (ID/Passport)",
+              Icons.badge_outlined,
               isDarkMode,
               onTap: () {},
             ),
