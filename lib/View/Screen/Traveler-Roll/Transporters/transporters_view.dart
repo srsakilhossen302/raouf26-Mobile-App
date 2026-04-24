@@ -719,31 +719,103 @@ class TransportersView extends GetView<TransportersController> {
   }
 
   Widget _currencyDropdown(bool isDarkMode) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
-      decoration: BoxDecoration(
-        color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
-        borderRadius: BorderRadius.circular(12.r),
-      ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(2.r),
-            child: Image.asset(
-              "assets/images/image.png",
-              width: 32.w,
-              height: 20.h,
-              fit: BoxFit.cover,
+    return Obx(
+      () => GestureDetector(
+        onTap: () {
+          final List<Map<String, String>> currencies = [
+            {"code": "TND", "name": "Tunisian Dinar", "flag": "🇹🇳"},
+            {"code": "EUR", "name": "Euro", "flag": "🇪🇺"},
+            {"code": "USD", "name": "US Dollar", "flag": "🇺🇸"},
+            {"code": "GBP", "name": "British Pound", "flag": "🇬🇧"},
+          ];
+
+          Get.bottomSheet(
+            Container(
+              padding: EdgeInsets.all(24.w),
+              decoration: BoxDecoration(
+                color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Select Currency",
+                    style: GoogleFonts.manrope(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  ...currencies.map((currency) {
+                    bool isSelected = controller.selectedCurrency.value == currency["code"];
+                    return ListTile(
+                      onTap: () {
+                        controller.selectedCurrency.value = currency["code"]!;
+                        Get.back();
+                      },
+                      leading: Text(
+                        currency["flag"]!,
+                        style: TextStyle(fontSize: 24.sp),
+                      ),
+                      title: Text(
+                        currency["name"]!,
+                        style: GoogleFonts.manrope(
+                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                          color: isDarkMode ? Colors.white : Colors.black,
+                        ),
+                      ),
+                      trailing: Text(
+                        currency["code"]!,
+                        style: GoogleFonts.manrope(
+                          fontWeight: FontWeight.w700,
+                          color: isSelected ? const Color(0xFF4A80F0) : Colors.grey,
+                        ),
+                      ),
+                      selected: isSelected,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                    );
+                  }).toList(),
+                ],
+              ),
             ),
+          );
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+          decoration: BoxDecoration(
+            color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
+            borderRadius: BorderRadius.circular(12.r),
           ),
-          SizedBox(width: 12.w),
-          Text(
-            "TND",
-            style: GoogleFonts.manrope(fontWeight: FontWeight.w600),
+          child: Row(
+            children: [
+              Text(
+                controller.selectedCurrency.value == "EUR"
+                    ? "🇪🇺"
+                    : controller.selectedCurrency.value == "USD"
+                        ? "🇺🇸"
+                        : controller.selectedCurrency.value == "GBP"
+                            ? "🇬🇧"
+                            : "🇹🇳",
+                style: TextStyle(fontSize: 20.sp),
+              ),
+              SizedBox(width: 12.w),
+              Text(
+                controller.selectedCurrency.value,
+                style: GoogleFonts.manrope(
+                  fontWeight: FontWeight.w600,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
+              ),
+              const Spacer(),
+              const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+            ],
           ),
-          const Spacer(),
-          const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
-        ],
+        ),
       ),
     );
   }
