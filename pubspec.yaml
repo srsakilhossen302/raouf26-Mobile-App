@@ -44,6 +44,7 @@ dependencies:
   flutter_slidable: ^4.0.3
   country_picker: ^2.0.27
   pinput: ^6.0.2
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

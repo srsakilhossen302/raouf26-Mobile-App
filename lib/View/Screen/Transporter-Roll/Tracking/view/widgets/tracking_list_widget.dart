@@ -56,13 +56,13 @@ class TrackingListWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Row(
             children: [
-              _buildFilterTab(0, "Active"),
+              _buildFilterTab(0, "active".tr),
               SizedBox(width: 10.w),
-              _buildFilterTab(1, "Picked Up"),
+              _buildFilterTab(1, "picked_up".tr),
               SizedBox(width: 10.w),
-              _buildFilterTab(2, "In Transit"),
+              _buildFilterTab(2, "in_transit".tr),
               SizedBox(width: 10.w),
-              _buildFilterTab(3, "Delivered"),
+              _buildFilterTab(3, "delivered".tr),
             ],
           ),
         ),
@@ -94,7 +94,7 @@ class TrackingListWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           decoration: BoxDecoration(
             color: isSelected
-                ? (isDarkMode ? Colors.white24 : const Color(0xFF1A1A1A))
+                ? const Color(0xFF4A80F0)
                 : (isDarkMode ? Colors.transparent : Colors.white),
             borderRadius: BorderRadius.circular(12.r),
             border: Border.all(
@@ -225,7 +225,7 @@ class TrackingListWidget extends StatelessWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    Get.to(() => TransporterTripDetailsView(package: package));
+                    Get.to(() => TransporterTripDetailsView(package: package, controller: controller));
                   },
                   style: OutlinedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 16.h),
@@ -396,16 +396,25 @@ class TrackingListWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: List.generate(steps.length, (index) {
                   bool isReached = index <= currentStep;
+                  bool isCompleted = index < currentStep;
                   return Container(
-                    width: 12.w,
-                    height: 12.w,
+                    width: 14.w,
+                    height: 14.w,
                     decoration: BoxDecoration(
-                      color: isReached ? Colors.white : Colors.grey.shade200,
+                      color: isCompleted ? const Color(0xFF4A80F0) : Colors.white,
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: isReached ? const Color(0xFF4A80F0) : Colors.transparent,
-                        width: 3.w,
+                        color: isReached ? const Color(0xFF4A80F0) : Colors.grey.shade200,
+                        width: isReached ? 3.w : 2.w,
                       ),
+                      boxShadow: [
+                        if (isReached)
+                          BoxShadow(
+                            color: const Color(0xFF4A80F0).withOpacity(0.2),
+                            blurRadius: 4,
+                            spreadRadius: 1,
+                          ),
+                      ],
                     ),
                   );
                 }),
@@ -437,10 +446,25 @@ class TrackingListWidget extends StatelessWidget {
 
   void _onCTAPressed(BuildContext context, TrackingPackageModel package) {
     switch (package.currentStatusStep) {
-      case 0: showPickupConfirmationSheet(context, package); break;
-      case 1: break;
-      case 2: showDeliveryConfirmationSheet(context, package); break;
-      default: break;
+      case 0:
+        showPickupConfirmationSheet(context, package, controller);
+        break;
+      case 1:
+        // Transition to In Transit
+        controller.updatePackageStatus(package.id, 2);
+        Get.snackbar(
+          "Success",
+          "Package is now in transit!",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.blue,
+          colorText: Colors.white,
+        );
+        break;
+      case 2:
+        showDeliveryConfirmationSheet(context, package, controller);
+        break;
+      default:
+        break;
     }
   }
 }

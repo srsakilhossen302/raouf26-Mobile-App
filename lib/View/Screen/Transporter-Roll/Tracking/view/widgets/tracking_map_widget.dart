@@ -4,10 +4,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../../Utils/AppIcons/app_icons.dart';
+import '../../../../MessagesScreen/chat_view.dart';
 import '../../controller/transporter_tracking_controller.dart';
 import '../transporter_trip_details_view.dart';
 import 'pickup_confirmation_sheet.dart';
 import 'delivery_confirmation_sheet.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'voice_call_sheet.dart';
 
 class TrackingMapWidget extends StatelessWidget {
   final TransporterTrackingController controller;
@@ -108,31 +111,38 @@ class TrackingMapWidget extends StatelessWidget {
                                   _buildQuickActionIcon(
                                     Icons.near_me_rounded,
                                     Colors.grey,
-                                    () => Get.snackbar(
-                                      "Navigate",
-                                      "Starting navigation to ${package.toCity}...",
-                                      snackPosition: SnackPosition.BOTTOM,
-                                    ),
+                                    () async {
+                                      final url = Uri.parse(
+                                          'https://www.google.com/maps/search/?api=1&query=${package.toCity}');
+                                      if (await canLaunchUrl(url)) {
+                                        await launchUrl(url);
+                                      } else {
+                                        Get.snackbar("Error", "Could not launch maps");
+                                      }
+                                    },
                                   ),
                                   SizedBox(width: 12.w),
                                   _buildQuickActionIcon(
                                     Icons.message_rounded,
                                     Colors.grey,
-                                    () => Get.snackbar(
-                                      "Message",
-                                      "Opening chat with ${package.userName}...",
-                                      snackPosition: SnackPosition.BOTTOM,
-                                    ),
+                                    () => Get.to(() => ChatView(
+                                          userData: {
+                                            'name': package.userName,
+                                            'image': package.userImage,
+                                            'isSupport': false,
+                                            'message': 'Hello, regarding package ${package.id}',
+                                            'from': package.fromCity,
+                                            'to': package.toCity,
+                                            'price': '€${package.price.toStringAsFixed(0)}',
+                                            'weight': package.packageSize,
+                                          },
+                                        )),
                                   ),
                                   SizedBox(width: 12.w),
                                   _buildQuickActionIcon(
                                     Icons.call_rounded,
                                     Colors.grey,
-                                    () => Get.snackbar(
-                                      "Call",
-                                      "Calling ${package.userName}...",
-                                      snackPosition: SnackPosition.BOTTOM,
-                                    ),
+                                    () => showVoiceCallSheet(context, package),
                                   ),
                                 ],
                               ),
@@ -210,8 +220,8 @@ class TrackingMapWidget extends StatelessWidget {
                         child: OutlinedButton(
                           onPressed: () {
                             Get.to(
-                              () =>
-                                  TransporterTripDetailsView(package: package),
+                              () => TransporterTripDetailsView(
+                                  package: package, controller: controller),
                             );
                           },
                           style: OutlinedButton.styleFrom(
@@ -337,17 +347,23 @@ class TrackingMapWidget extends StatelessWidget {
   void _onCTAPressed(BuildContext context, TrackingPackageModel package) {
     switch (package.currentStatusStep) {
       case 0:
-        showPickupConfirmationSheet(context, package);
+        showPickupConfirmationSheet(context, package, controller);
         break;
       case 1:
-        // Future logic to mark as in transit
+        // Transition to In Transit
+        controller.updatePackageStatus(package.id, 2);
+        Get.snackbar(
+          "Success",
+          "Package is now in transit!",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.blue,
+          colorText: Colors.white,
+        );
         break;
       case 2:
-        showDeliveryConfirmationSheet(context, package);
+        showDeliveryConfirmationSheet(context, package, controller);
         break;
-      case 3:
       default:
-        // Future logic to view proof of delivery
         break;
     }
   }

@@ -13,6 +13,7 @@ class TrackingPackageModel {
   final String date;
   final String packageSize;
   final String priority;
+  final String userPhone;
 
   TrackingPackageModel({
     required this.id,
@@ -27,7 +28,40 @@ class TrackingPackageModel {
     required this.date,
     required this.packageSize,
     required this.priority,
+    required this.userPhone,
   });
+
+  TrackingPackageModel copyWith({
+    String? id,
+    String? userName,
+    String? userImage,
+    double? price,
+    String? fromCity,
+    String? toCity,
+    String? fromTime,
+    String? toTime,
+    int? currentStatusStep,
+    String? date,
+    String? packageSize,
+    String? priority,
+    String? userPhone,
+  }) {
+    return TrackingPackageModel(
+      id: id ?? this.id,
+      userName: userName ?? this.userName,
+      userImage: userImage ?? this.userImage,
+      price: price ?? this.price,
+      fromCity: fromCity ?? this.fromCity,
+      toCity: toCity ?? this.toCity,
+      fromTime: fromTime ?? this.fromTime,
+      toTime: toTime ?? this.toTime,
+      currentStatusStep: currentStatusStep ?? this.currentStatusStep,
+      date: date ?? this.date,
+      packageSize: packageSize ?? this.packageSize,
+      priority: priority ?? this.priority,
+      userPhone: userPhone ?? this.userPhone,
+    );
+  }
 
   factory TrackingPackageModel.fromJson(Map<String, dynamic> json) {
     return TrackingPackageModel(
@@ -43,6 +77,7 @@ class TrackingPackageModel {
       date: json['date'] ?? '',
       packageSize: json['packageSize'] ?? '',
       priority: json['priority'] ?? '',
+      userPhone: json['userPhone'] ?? '',
     );
   }
 }
@@ -67,6 +102,7 @@ class TransporterTrackingController extends GetxController {
       date: "Jan 29, 2026",
       packageSize: "Medium (15kg)",
       priority: "urgent",
+      userPhone: "+1234567890",
     ),
     TrackingPackageModel(
       id: "#PKG-002",
@@ -81,6 +117,7 @@ class TransporterTrackingController extends GetxController {
       date: "Jan 29, 2026",
       packageSize: "Small (5kg)",
       priority: "standard",
+      userPhone: "+1234567891",
     ),
     TrackingPackageModel(
       id: "#PKG-003",
@@ -95,6 +132,7 @@ class TransporterTrackingController extends GetxController {
       date: "Jan 28, 2026",
       packageSize: "Large (25kg)",
       priority: "urgent",
+      userPhone: "+1234567892",
     ),
     TrackingPackageModel(
       id: "#PKG-004",
@@ -109,6 +147,7 @@ class TransporterTrackingController extends GetxController {
       date: "Jan 30, 2026",
       packageSize: "Medium (10kg)",
       priority: "standard",
+      userPhone: "+1234567893",
     ),
   ].obs;
 
@@ -118,6 +157,14 @@ class TransporterTrackingController extends GetxController {
 
   void setFilterTab(int index) {
     selectedFilterTab.value = index;
+  }
+
+  void updatePackageStatus(String packageId, int newStatus) {
+    int index = packages.indexWhere((pkg) => pkg.id == packageId);
+    if (index != -1) {
+      packages[index] = packages[index].copyWith(currentStatusStep: newStatus);
+      packages.refresh();
+    }
   }
 
   List<TrackingPackageModel> get filteredPackages {

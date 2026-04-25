@@ -12,8 +12,13 @@ import '../../../MessagesScreen/report_issue_screen.dart';
 
 class TransporterTripDetailsView extends StatelessWidget {
   final TrackingPackageModel package;
+  final TransporterTrackingController controller;
 
-  const TransporterTripDetailsView({super.key, required this.package});
+  const TransporterTripDetailsView({
+    super.key,
+    required this.package,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -84,277 +89,283 @@ class TransporterTripDetailsView extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Column(
-            children: [
-              SizedBox(height: 10.h),
-              Container(
-                padding: EdgeInsets.all(20.r),
-                decoration: BoxDecoration(
-                  color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-                  borderRadius: BorderRadius.circular(20.r),
-                  boxShadow: [
-                    if (!isDarkMode)
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.04),
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
-                      ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    // Profile Info
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 20.r,
-                              backgroundImage: NetworkImage(package.userImage),
-                              onBackgroundImageError: (_, __) {},
-                              child: Icon(Icons.person, color: Colors.white, size: 20.sp),
-                            ),
-                            SizedBox(width: 12.w),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  package.userName,
-                                  style: GoogleFonts.manrope(
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: isDarkMode ? Colors.white : Colors.black,
-                                  ),
-                                ),
-                                Text(
-                                  package.id,
-                                  style: GoogleFonts.manrope(
-                                    fontSize: 12.sp,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+      body: Obx(() {
+        final currentPackage = controller.packages.firstWhere(
+          (pkg) => pkg.id == package.id,
+          orElse: () => package,
+        );
+        return SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Column(
+              children: [
+                SizedBox(height: 10.h),
+                Container(
+                  padding: EdgeInsets.all(20.r),
+                  decoration: BoxDecoration(
+                    color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+                    borderRadius: BorderRadius.circular(20.r),
+                    boxShadow: [
+                      if (!isDarkMode)
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
                         ),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                          decoration: BoxDecoration(
-                            color: _getStatusColor(package.currentStatusStep).withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: Text(
-                            _getStatusText(package.currentStatusStep),
-                            style: GoogleFonts.manrope(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.bold,
-                              color: _getStatusColor(package.currentStatusStep),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 24.h),
-                    Divider(color: isDarkMode ? Colors.white12 : Colors.grey.shade100, height: 1),
-                    SizedBox(height: 24.h),
-
-                    // Route Info
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          children: [
-                            SvgPicture.asset(AppIcons.departure, colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn), width: 16.w),
-                            Container(
-                              height: 24.h,
-                              width: 1,
-                              color: Colors.grey.shade300,
-                              margin: EdgeInsets.symmetric(vertical: 4.h),
-                            ),
-                            SvgPicture.asset(AppIcons.location, colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn), width: 16.w),
-                          ],
-                        ),
-                        SizedBox(width: 16.w),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'pickup_status'.tr,
-                                        style: GoogleFonts.manrope(
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.bold,
-                                          color: isDarkMode ? Colors.white : Colors.black,
-                                        ),
-                                      ),
-                                      Text("${package.fromCity} \u2022 ${package.toCity}", style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey)),
-                                    ],
-                                  ),
-                                  Text(package.fromTime, style: GoogleFonts.manrope(fontSize: 12.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
-                                ],
-                              ),
-                              SizedBox(height: 24.h),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'drop_off'.tr,
-                                        style: GoogleFonts.manrope(
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.bold,
-                                          color: isDarkMode ? Colors.white : Colors.black,
-                                        ),
-                                      ),
-                                      Text("${package.toCity} \u2022 ${package.fromCity}", style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey)),
-                                    ],
-                                  ),
-                                  Text(package.toTime, style: GoogleFonts.manrope(fontSize: 12.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 24.h),
-                    Divider(color: isDarkMode ? Colors.white12 : Colors.grey.shade100, height: 1),
-                    SizedBox(height: 24.h),
-
-                    // Package details List
-                    _buildDetailRow('date'.tr, package.date, isDarkMode),
-                    SizedBox(height: 16.h),
-                    _buildDetailRow('price'.tr, "€${package.price.toStringAsFixed(0)}", isDarkMode, isBold: true),
-                    SizedBox(height: 16.h),
-                    _buildDetailRow('package_size'.tr, package.packageSize, isDarkMode),
-                    SizedBox(height: 16.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('status'.tr, style: GoogleFonts.manrope(fontSize: 14.sp, color: Colors.grey)),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                          decoration: BoxDecoration(
-                            color: Colors.orange.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: Text(
-                            package.priority,
-                            style: GoogleFonts.manrope(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.orange,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 24.h),
-                    Divider(color: isDarkMode ? Colors.white12 : Colors.grey.shade100, height: 1),
-                    SizedBox(height: 24.h),
-
-                    // Timeline
-                    _buildStatusTimeline(package.currentStatusStep, isDarkMode),
-                    SizedBox(height: 24.h),
-
-                    // Mini Map 
-                    Container(
-                      height: 150.h,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: isDarkMode ? Colors.black26 : const Color(0xFFF0F0F0),
-                        borderRadius: BorderRadius.circular(16.r),
-                      ),
-                      child: Stack(
-                        alignment: Alignment.center,
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      // Profile Info
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(Icons.map, size: 80.sp, color: isDarkMode ? Colors.white10 : Colors.black12),
-                          Positioned(
-                            top: 40.h,
-                            left: 40.w,
-                            child: SvgPicture.asset(AppIcons.departure, colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn), width: 24.w),
-                          ),
-                          Positioned(
-                            bottom: 40.h,
-                            right: 40.w,
-                            child: SvgPicture.asset(AppIcons.location, colorFilter: const ColorFilter.mode(Colors.red, BlendMode.srcIn), width: 24.w),
-                          ),
-                          Positioned(
-                            bottom: 10.h,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.1),
-                                    blurRadius: 4,
-                                    offset: const Offset(0, 2),
-                                  )
-                                ],
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 20.r,
+                                backgroundImage: NetworkImage(currentPackage.userImage),
+                                onBackgroundImageError: (_, __) {},
+                                child: Icon(Icons.person, color: Colors.white, size: 20.sp),
                               ),
-                              child: Row(
+                              SizedBox(width: 12.w),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Icon(Icons.location_on, size: 14.sp, color: Colors.black),
-                                  SizedBox(width: 4.w),
                                   Text(
-                                    'open_full_map'.tr,
+                                    currentPackage.userName,
                                     style: GoogleFonts.manrope(
-                                      fontSize: 10.sp,
+                                      fontSize: 16.sp,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.black,
+                                      color: isDarkMode ? Colors.white : Colors.black,
+                                    ),
+                                  ),
+                                  Text(
+                                    currentPackage.id,
+                                    style: GoogleFonts.manrope(
+                                      fontSize: 12.sp,
+                                      color: Colors.grey,
                                     ),
                                   ),
                                 ],
                               ),
+                            ],
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                            decoration: BoxDecoration(
+                              color: _getStatusColor(currentPackage.currentStatusStep).withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(8.r),
                             ),
-                          )
+                            child: Text(
+                              _getStatusText(currentPackage.currentStatusStep),
+                              style: GoogleFonts.manrope(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold,
+                                color: _getStatusColor(currentPackage.currentStatusStep),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 30.h),
-              
-              // Bottom Huge Button
-              SizedBox(
-                width: double.infinity,
-                height: 55.h,
-                child: ElevatedButton(
-                  onPressed: () => _onCTAPressed(context, package),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: package.currentStatusStep == 3 ? Colors.green : const Color(0xFF4A80F0),
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                      SizedBox(height: 24.h),
+                      Divider(color: isDarkMode ? Colors.white12 : Colors.grey.shade100, height: 1),
+                      SizedBox(height: 24.h),
+
+                      // Route Info
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              SvgPicture.asset(AppIcons.departure, colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn), width: 16.w),
+                              Container(
+                                height: 24.h,
+                                width: 1,
+                                color: Colors.grey.shade300,
+                                margin: EdgeInsets.symmetric(vertical: 4.h),
+                              ),
+                              SvgPicture.asset(AppIcons.location, colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn), width: 16.w),
+                            ],
+                          ),
+                          SizedBox(width: 16.w),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'pickup_status'.tr,
+                                          style: GoogleFonts.manrope(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: isDarkMode ? Colors.white : Colors.black,
+                                          ),
+                                        ),
+                                        Text("${currentPackage.fromCity} \u2022 ${currentPackage.toCity}", style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey)),
+                                      ],
+                                    ),
+                                    Text(currentPackage.fromTime, style: GoogleFonts.manrope(fontSize: 12.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
+                                  ],
+                                ),
+                                SizedBox(height: 24.h),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'drop_off'.tr,
+                                          style: GoogleFonts.manrope(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: isDarkMode ? Colors.white : Colors.black,
+                                          ),
+                                        ),
+                                        Text("${currentPackage.toCity} \u2022 ${currentPackage.fromCity}", style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey)),
+                                      ],
+                                    ),
+                                    Text(currentPackage.toTime, style: GoogleFonts.manrope(fontSize: 12.sp, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : Colors.black)),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 24.h),
+                      Divider(color: isDarkMode ? Colors.white12 : Colors.grey.shade100, height: 1),
+                      SizedBox(height: 24.h),
+
+                      // Package details List
+                      _buildDetailRow('date'.tr, currentPackage.date, isDarkMode),
+                      SizedBox(height: 16.h),
+                      _buildDetailRow('price'.tr, "€${currentPackage.price.toStringAsFixed(0)}", isDarkMode, isBold: true),
+                      SizedBox(height: 16.h),
+                      _buildDetailRow('package_size'.tr, currentPackage.packageSize, isDarkMode),
+                      SizedBox(height: 16.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('status'.tr, style: GoogleFonts.manrope(fontSize: 14.sp, color: Colors.grey)),
+                          Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                            decoration: BoxDecoration(
+                              color: Colors.orange.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                            child: Text(
+                              currentPackage.priority,
+                              style: GoogleFonts.manrope(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.orange,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 24.h),
+                      Divider(color: isDarkMode ? Colors.white12 : Colors.grey.shade100, height: 1),
+                      SizedBox(height: 24.h),
+
+                      // Timeline
+                      _buildStatusTimeline(currentPackage.currentStatusStep, isDarkMode),
+                      SizedBox(height: 24.h),
+
+                      // Mini Map 
+                      Container(
+                        height: 150.h,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: isDarkMode ? Colors.black26 : const Color(0xFFF0F0F0),
+                          borderRadius: BorderRadius.circular(16.r),
+                        ),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Icon(Icons.map, size: 80.sp, color: isDarkMode ? Colors.white10 : Colors.black12),
+                            Positioned(
+                              top: 40.h,
+                              left: 40.w,
+                              child: SvgPicture.asset(AppIcons.departure, colorFilter: const ColorFilter.mode(Colors.blue, BlendMode.srcIn), width: 24.w),
+                            ),
+                            Positioned(
+                              bottom: 40.h,
+                              right: 40.w,
+                              child: SvgPicture.asset(AppIcons.location, colorFilter: const ColorFilter.mode(Colors.red, BlendMode.srcIn), width: 24.w),
+                            ),
+                            Positioned(
+                              bottom: 10.h,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20.r),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 4,
+                                      offset: const Offset(0, 2),
+                                    )
+                                  ],
+                                ),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.location_on, size: 14.sp, color: Colors.black),
+                                    SizedBox(width: 4.w),
+                                    Text(
+                                      'open_full_map'.tr,
+                                      style: GoogleFonts.manrope(
+                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  child: Text(
-                    _getCTAText(package.currentStatusStep),
-                    style: GoogleFonts.manrope(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                ),
+                SizedBox(height: 30.h),
+                
+                // Bottom Huge Button
+                SizedBox(
+                  width: double.infinity,
+                  height: 55.h,
+                  child: ElevatedButton(
+                    onPressed: () => _onCTAPressed(context, currentPackage),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: currentPackage.currentStatusStep == 3 ? Colors.green : const Color(0xFF4A80F0),
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                    ),
+                    child: Text(
+                      _getCTAText(currentPackage.currentStatusStep),
+                      style: GoogleFonts.manrope(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 40.h),
-            ],
+                SizedBox(height: 40.h),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 
@@ -382,12 +393,13 @@ class TransporterTripDetailsView extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(steps.length, (index) {
+            bool isReached = index <= currentStep;
             return Text(
               steps[index].tr,
               style: GoogleFonts.manrope(
                 fontSize: 10.sp,
-                fontWeight: index <= currentStep ? FontWeight.bold : FontWeight.normal,
-                color: index <= currentStep
+                fontWeight: isReached ? FontWeight.bold : FontWeight.normal,
+                color: isReached
                     ? (isDarkMode ? Colors.white : Colors.black)
                     : Colors.grey,
               ),
@@ -406,20 +418,38 @@ class TransporterTripDetailsView extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(steps.length, (index) {
-                bool isActive = index <= currentStep;
+                bool isReached = index <= currentStep;
+                bool isCompleted = index < currentStep;
                 return Container(
                   width: 14.w,
                   height: 14.w,
                   decoration: BoxDecoration(
-                    color: isActive ? Colors.white : Colors.grey.shade300,
+                    color: isCompleted ? const Color(0xFF4A80F0) : Colors.white,
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: isActive ? const Color(0xFF4A80F0) : Colors.transparent,
-                      width: 3.w,
+                      color: isReached ? const Color(0xFF4A80F0) : Colors.grey.shade300,
+                      width: isReached ? 3.w : 2.w,
                     ),
+                    boxShadow: [
+                      if (isReached)
+                        BoxShadow(
+                          color: const Color(0xFF4A80F0).withOpacity(0.2),
+                          blurRadius: 4,
+                          spreadRadius: 1,
+                        ),
+                    ],
                   ),
                 );
               }),
+            ),
+            // Blue active line
+            Positioned(
+              left: 0,
+              child: Container(
+                height: 2.h,
+                width: (Get.width - 80.w) * (currentStep / (steps.length - 1)),
+                color: const Color(0xFF4A80F0),
+              ),
             ),
           ],
         ),
@@ -439,17 +469,22 @@ class TransporterTripDetailsView extends StatelessWidget {
   void _onCTAPressed(BuildContext context, TrackingPackageModel package) {
     switch (package.currentStatusStep) {
       case 0:
-        showPickupConfirmationSheet(context, package);
+        showPickupConfirmationSheet(context, package, controller);
         break;
       case 1:
-        // Future logic to mark as in transit
+        controller.updatePackageStatus(package.id, 2);
+        Get.snackbar(
+          "Success",
+          "Package is now in transit!",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.blue,
+          colorText: Colors.white,
+        );
         break;
       case 2:
-        showDeliveryConfirmationSheet(context, package);
+        showDeliveryConfirmationSheet(context, package, controller);
         break;
-      case 3:
       default:
-        // Future logic to view proof of delivery
         break;
     }
   }

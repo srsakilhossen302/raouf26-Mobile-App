@@ -8,6 +8,7 @@ import 'delivery_confirmation_sheet.dart';
 void showPickupConfirmationSheet(
   BuildContext context,
   TrackingPackageModel package,
+  TransporterTrackingController controller,
 ) {
   bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
   // A simple standalone RxInt to manage the selected condition
@@ -250,6 +251,7 @@ void showPickupConfirmationSheet(
                       height: 55.h,
                       child: ElevatedButton(
                         onPressed: () {
+                          controller.updatePackageStatus(package.id, 1);
                           Get.back();
                           Get.snackbar(
                             "Success",

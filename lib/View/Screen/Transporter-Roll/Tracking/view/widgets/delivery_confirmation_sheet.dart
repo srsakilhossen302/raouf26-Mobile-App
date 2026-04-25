@@ -7,6 +7,7 @@ import '../../controller/transporter_tracking_controller.dart';
 void showDeliveryConfirmationSheet(
   BuildContext context,
   TrackingPackageModel package,
+  TransporterTrackingController controller,
 ) {
   bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
   final RxInt selectedConditionIndex = 0.obs;
@@ -363,6 +364,7 @@ void showDeliveryConfirmationSheet(
                       height: 55.h,
                       child: ElevatedButton(
                         onPressed: () {
+                          controller.updatePackageStatus(package.id, 3);
                           Get.back();
                           Get.snackbar(
                             "Success",
