@@ -70,6 +70,15 @@ class PublishTripsScreen extends StatelessWidget {
           }),
           SizedBox(width: 8.w),
         ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(2.h),
+          child: LinearProgressIndicator(
+            value: 0.15, // Decorative starting progress
+            backgroundColor: isDarkMode ? Colors.white10 : Colors.grey.shade100,
+            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF4A80F0)),
+            minHeight: 2.h,
+          ),
+        ),
       ),
       body: Column(
         children: [

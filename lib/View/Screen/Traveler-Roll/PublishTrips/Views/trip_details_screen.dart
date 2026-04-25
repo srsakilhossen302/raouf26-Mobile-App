@@ -49,10 +49,7 @@ class TripDetailsScreen extends StatelessWidget {
                         'time': '',
                         'isSupport': true,
                         'isUnread': false,
-                        'image': 'https://via.placeholder.com/150',
-                        'subtitle': '',
-                        'status': '',
-                        'role': 'all',
+                        'image': '',
                       },
                     ));
               }
@@ -107,6 +104,15 @@ class TripDetailsScreen extends StatelessWidget {
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
             color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(2.h),
+          child: LinearProgressIndicator(
+            value: 1.0,
+            backgroundColor: isDarkMode ? Colors.white10 : Colors.grey.shade100,
+            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF4A80F0)),
+            minHeight: 2.h,
           ),
         ),
       ),

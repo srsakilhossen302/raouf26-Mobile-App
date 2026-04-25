@@ -36,6 +36,18 @@ class PublishTripFlowScreen extends StatelessWidget {
             color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
           ),
         ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(2.h),
+          child: Obx(() {
+            double progress = (controller.currentStep.value + 1) / 7;
+            return LinearProgressIndicator(
+              value: progress,
+              backgroundColor: isDarkMode ? Colors.white10 : Colors.grey.shade100,
+              valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF4A80F0)),
+              minHeight: 2.h,
+            );
+          }),
+        ),
       ),
       body: Obx(() {
         switch (controller.currentStep.value) {
