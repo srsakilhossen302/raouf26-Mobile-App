@@ -8,6 +8,7 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/add_payment_m
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/add_bank_account_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/withdraw_funds_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/transaction_history_page.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/payout_methods_page.dart';
 
 class PaymentMethodPage extends StatelessWidget {
   const PaymentMethodPage({super.key});
@@ -408,7 +409,7 @@ class PaymentMethodPage extends StatelessWidget {
         ),
         SizedBox(height: 12.h),
         OutlinedButton(
-          onPressed: () => Get.to(() => const AddBankAccountPage()),
+          onPressed: () => Get.to(() => const PayoutMethodsPage()),
           style: OutlinedButton.styleFrom(
             side: BorderSide(color: const Color(0xFF0066FF).withOpacity(0.3)),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
