@@ -6,27 +6,25 @@ import 'package:get/get.dart';
 import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/withdraw_confirmation_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/withdraw_funds_controller.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/payout_methods_page.dart';
 
 class WithdrawFundsPage extends StatelessWidget {
   const WithdrawFundsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final WithdrawFundsController controller = Get.put(
-      WithdrawFundsController(),
-    );
+    final WithdrawFundsController controller = Get.put(WithdrawFundsController());
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode
-          ? const Color(0xFF121212)
-          : const Color(0xFFF8F9FB),
+      backgroundColor: isDarkMode ? const Color(0xFF121212) : const Color(0xFFF8F9FB),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios_new,
+            size: 20.sp,
             color: isDarkMode ? Colors.white : Colors.black,
           ),
           onPressed: () => Get.back(),
@@ -40,242 +38,240 @@ class WithdrawFundsPage extends StatelessWidget {
             color: isDarkMode ? Colors.white : Colors.black,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.help_outline,
+              color: isDarkMode ? Colors.white : Colors.black54,
+            ),
+          ),
+        ],
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 20.h),
-
-            // Available Balance Card
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(24.w),
-              decoration: BoxDecoration(
-                color: const Color(0xFF4A80F0),
-                borderRadius: BorderRadius.circular(16.r),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 10.h),
+                
+                // Available Balance Card
+                _buildAvailableBalanceCard(controller),
+                
+                SizedBox(height: 24.h),
+                
+                // Withdraw Amount Section
+                _buildWithdrawAmountSection(controller, isDarkMode),
+                
+                SizedBox(height: 24.h),
+                
+                // Select Payout Method Section
+                _buildPayoutMethodSelection(controller, isDarkMode),
+                
+                SizedBox(height: 100.h), // Space for bottom button
+              ],
+            ),
+          ),
+          
+          // Bottom Continue Button
+          Positioned(
+            bottom: 20.h,
+            left: 20.w,
+            right: 20.w,
+            child: ElevatedButton(
+              onPressed: () => Get.to(() => const WithdrawConfirmationPage()),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF0066FF),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r)),
+                minimumSize: Size(double.infinity, 56.h),
+                elevation: 0,
               ),
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Icon(Icons.send_rounded, size: 20.sp),
+                  SizedBox(width: 10.w),
                   Text(
-                    'available_balance'.tr,
+                    'Continue',
                     style: GoogleFonts.manrope(
-                      fontSize: 14.sp,
-                      color: Colors.white.withOpacity(0.8),
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
                     ),
-                  ),
-                  SizedBox(height: 8.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(2.r),
-                        child: Image.asset(
-                          "assets/images/image.png",
-                          width: 32.w,
-                          height: 20.h,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      SizedBox(width: 8.w),
-                      Text(
-                        '${controller.availableBalance.toStringAsFixed(2)} TND',
-                        style: GoogleFonts.manrope(
-                          fontSize: 32.sp,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
 
-            SizedBox(height: 32.h),
-
-            // Amount Input
-            Text(
-              'withdraw_amount'.tr,
-              style: GoogleFonts.manrope(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w700,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
+  Widget _buildAvailableBalanceCard(WithdrawFundsController controller) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(20.w),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          colors: [Color(0xFF0066FF), Color(0xFF004FC4)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(20.r),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF0066FF).withOpacity(0.25),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'available_balance'.tr,
+            style: GoogleFonts.manrope(
+              fontSize: 14.sp,
+              color: Colors.white.withOpacity(0.8),
+              fontWeight: FontWeight.w500,
             ),
-            SizedBox(height: 12.h),
-            TextField(
-              controller: controller.amountController,
-              keyboardType: TextInputType.number,
-              style: GoogleFonts.manrope(
-                fontSize: 24.sp,
-                fontWeight: FontWeight.w700,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
-              decoration: InputDecoration(
-                hintText: '0.00',
-                suffix: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(2.r),
-                      child: Image.asset(
-                        "assets/images/image.png",
-                        width: 24.w,
-                        height: 16.h,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    SizedBox(width: 4.w),
-                    Text(
-                      'TND',
-                      style: GoogleFonts.manrope(
-                        fontWeight: FontWeight.w600,
-                        color: isDarkMode ? Colors.white70 : Colors.black54,
-                      ),
-                    ),
-                  ],
+          ),
+          SizedBox(height: 8.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '${controller.availableBalance.toStringAsFixed(2)} TND',
+                style: GoogleFonts.manrope(
+                  fontSize: 32.sp,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white,
                 ),
-                filled: true,
-                fillColor: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-                border: OutlineInputBorder(
+              ),
+              Container(
+                padding: EdgeInsets.all(10.w),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.15),
                   borderRadius: BorderRadius.circular(12.r),
-                  borderSide: BorderSide.none,
                 ),
+                child: Icon(Icons.account_balance_wallet_outlined, color: Colors.white, size: 24.sp),
               ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildWithdrawAmountSection(WithdrawFundsController controller, bool isDarkMode) {
+    return Container(
+      padding: EdgeInsets.all(16.w),
+      decoration: BoxDecoration(
+        color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+        borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(color: isDarkMode ? Colors.white10 : const Color(0xFFEEEEEE)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'withdraw_amount'.tr,
+            style: GoogleFonts.manrope(
+              fontSize: 15.sp,
+              fontWeight: FontWeight.w700,
+              color: isDarkMode ? Colors.white : Colors.black,
             ),
-
-            SizedBox(height: 16.h),
-
-            // Quick Options
-            Obx(
-              () => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildQuickOption(
-                    '25%',
-                    isDarkMode,
-                    0.25,
-                    controller.selectedPercentage.value == 0.25,
-                    () => controller.setAmountByPercentage(0.25),
-                  ),
-                  _buildQuickOption(
-                    '50%',
-                    isDarkMode,
-                    0.50,
-                    controller.selectedPercentage.value == 0.50,
-                    () => controller.setAmountByPercentage(0.50),
-                  ),
-                  _buildQuickOption(
-                    '75%',
-                    isDarkMode,
-                    0.75,
-                    controller.selectedPercentage.value == 0.75,
-                    () => controller.setAmountByPercentage(0.75),
-                  ),
-                  _buildQuickOption(
-                    'Max',
-                    isDarkMode,
-                    1.0,
-                    controller.selectedPercentage.value == 1.0,
-                    () => controller.setAmountByPercentage(1.0),
-                  ),
-                ],
-              ),
+          ),
+          SizedBox(height: 16.h),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+            decoration: BoxDecoration(
+              color: isDarkMode ? const Color(0xFF2C2C2E) : Colors.white,
+              borderRadius: BorderRadius.circular(12.r),
+              border: Border.all(color: const Color(0xFF0066FF).withOpacity(0.5)),
             ),
-
-            SizedBox(height: 32.h),
-
-            // Payout Method Selection
-            Text(
-              'select_payout_method'.tr,
-              style: GoogleFonts.manrope(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w700,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
-            ),
-            SizedBox(height: 12.h),
-
-            Obx(
-              () => Column(
-                children: [
-                  _buildMethodTile(
-                    'Bank Account',
-                    '**** 8823',
-                    Icons.account_balance,
-                    isDarkMode,
-                    0,
-                    controller.selectedMethodIndex.value == 0,
-                    () => controller.selectMethod(0),
-                  ),
-                  SizedBox(height: 12.h),
-                  _buildMethodTile(
-                    'PayPal',
-                    'john.doe@email.com',
-                    AppIcons.payPal,
-                    isDarkMode,
-                    1,
-                    controller.selectedMethodIndex.value == 1,
-                    () => controller.selectMethod(1),
-                  ),
-                  SizedBox(height: 12.h),
-                  _buildMethodTile(
-                    'Google Pay',
-                    'john.doe@gmail.com',
-                    AppIcons.googlePay,
-                    isDarkMode,
-                    2,
-                    controller.selectedMethodIndex.value == 2,
-                    () => controller.selectMethod(2),
-                  ),
-                  SizedBox(height: 12.h),
-                  _buildMethodTile(
-                    'Stripe',
-                    'stripe_acc_123...',
-                    AppIcons.visaCard,
-                    isDarkMode,
-                    3,
-                    controller.selectedMethodIndex.value == 3,
-                    () => controller.selectMethod(3),
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 40.h),
-
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () => Get.to(() => const WithdrawConfirmationPage()),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4A80F0),
-                  padding: EdgeInsets.symmetric(vertical: 18.h),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                ),
-                child: Text(
-                  'withdraw_now'.tr,
+            child: Row(
+              children: [
+                Text(
+                  'TND',
                   style: GoogleFonts.manrope(
                     fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black26,
                   ),
                 ),
-              ),
+                SizedBox(width: 20.w),
+                Expanded(
+                  child: TextField(
+                    controller: controller.amountController,
+                    keyboardType: TextInputType.number,
+                    style: GoogleFonts.manrope(
+                      fontSize: 28.sp,
+                      fontWeight: FontWeight.w800,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    decoration: const InputDecoration(
+                      hintText: '0.00',
+                      border: InputBorder.none,
+                      isDense: true,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 40.h),
-          ],
-        ),
+          ),
+          SizedBox(height: 16.h),
+          Obx(
+            () => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildQuickOption(
+                  '25%',
+                  '${(controller.availableBalance * 0.25).toStringAsFixed(2)} TND',
+                  isDarkMode,
+                  0.25,
+                  controller.selectedPercentage.value == 0.25,
+                  () => controller.setAmountByPercentage(0.25),
+                ),
+                _buildQuickOption(
+                  '50%',
+                  '${(controller.availableBalance * 0.50).toStringAsFixed(2)} TND',
+                  isDarkMode,
+                  0.50,
+                  controller.selectedPercentage.value == 0.50,
+                  () => controller.setAmountByPercentage(0.50),
+                ),
+                _buildQuickOption(
+                  '75%',
+                  '${(controller.availableBalance * 0.75).toStringAsFixed(2)} TND',
+                  isDarkMode,
+                  0.75,
+                  controller.selectedPercentage.value == 0.75,
+                  () => controller.setAmountByPercentage(0.75),
+                ),
+                _buildQuickOption(
+                  'Max',
+                  '${controller.availableBalance.toStringAsFixed(2)} TND',
+                  isDarkMode,
+                  1.0,
+                  controller.selectedPercentage.value == 1.0,
+                  () => controller.setAmountByPercentage(1.0),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildQuickOption(
     String label,
+    String amount,
     bool isDarkMode,
     double value,
     bool isSelected,
@@ -284,88 +280,205 @@ class WithdrawFundsPage extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        width: 75.w,
+        padding: EdgeInsets.symmetric(vertical: 10.h),
         decoration: BoxDecoration(
           color: isSelected
-              ? const Color(0xFF4A80F0)
-              : (isDarkMode ? Colors.white.withOpacity(0.05) : Colors.white),
-          borderRadius: BorderRadius.circular(8.r),
+              ? const Color(0xFFE8F1FF)
+              : (isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF8F9FB)),
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
-            color: isSelected
-                ? const Color(0xFF4A80F0)
-                : Colors.grey.withOpacity(0.2),
+            color: isSelected ? const Color(0xFF0066FF) : Colors.transparent,
           ),
         ),
-        child: Text(
-          label,
-          style: GoogleFonts.manrope(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-            color: isSelected
-                ? Colors.white
-                : (isDarkMode ? Colors.white : Colors.black),
-          ),
+        child: Column(
+          children: [
+            Text(
+              label,
+              style: GoogleFonts.manrope(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w800,
+                color: isSelected ? const Color(0xFF0066FF) : (isDarkMode ? Colors.white70 : Colors.black),
+              ),
+            ),
+            SizedBox(height: 2.h),
+            Text(
+              amount,
+              style: GoogleFonts.manrope(
+                fontSize: 8.sp,
+                color: isSelected ? const Color(0xFF0066FF).withOpacity(0.6) : Colors.black26,
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildMethodTile(
-    String title,
-    String subtitle,
-    dynamic icon,
-    bool isDarkMode,
-    int index,
-    bool isSelected,
-    VoidCallback onTap,
-  ) {
+  Widget _buildPayoutMethodSelection(WithdrawFundsController controller, bool isDarkMode) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'select_payout_method'.tr,
+          style: GoogleFonts.manrope(
+            fontSize: 15.sp,
+            fontWeight: FontWeight.w700,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
+        SizedBox(height: 12.h),
+        Obx(
+          () => Column(
+            children: [
+              _buildMethodTile(
+                title: 'Bank Account',
+                subtitle: '•••• 8825',
+                icon: Icons.account_balance_outlined,
+                isDarkMode: isDarkMode,
+                isSelected: controller.selectedMethodIndex.value == 0,
+                onTap: () => controller.selectMethod(0),
+                hasTag: true,
+              ),
+              SizedBox(height: 12.h),
+              _buildMethodTile(
+                title: 'PayPal',
+                subtitle: 'steven@example.com',
+                svgIcon: AppIcons.payPal,
+                isDarkMode: isDarkMode,
+                isSelected: controller.selectedMethodIndex.value == 1,
+                onTap: () => controller.selectMethod(1),
+              ),
+              SizedBox(height: 12.h),
+              _buildMethodTile(
+                title: 'Google Pay',
+                subtitle: 'steven@example.com',
+                svgIcon: AppIcons.googlePay,
+                isDarkMode: isDarkMode,
+                isSelected: controller.selectedMethodIndex.value == 2,
+                onTap: () => controller.selectMethod(2),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 16.h),
+        OutlinedButton(
+          onPressed: () => Get.to(() => const PayoutMethodsPage()),
+          style: OutlinedButton.styleFrom(
+            side: BorderSide(color: const Color(0xFF0066FF).withOpacity(0.3)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+            minimumSize: Size(double.infinity, 50.h),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.add_circle_outline, color: const Color(0xFF0066FF), size: 20.sp),
+              SizedBox(width: 8.w),
+              Text(
+                'Add payout method',
+                style: GoogleFonts.manrope(
+                  fontSize: 14.sp,
+                  color: const Color(0xFF0066FF),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMethodTile({
+    required String title,
+    required String subtitle,
+    IconData? icon,
+    String? svgIcon,
+    required bool isDarkMode,
+    required bool isSelected,
+    required VoidCallback onTap,
+    bool hasTag = false,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
           color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-          borderRadius: BorderRadius.circular(12.r),
+          borderRadius: BorderRadius.circular(16.r),
           border: Border.all(
-            color: isSelected
-                ? const Color(0xFF4A80F0)
-                : Colors.grey.withOpacity(0.1),
-            width: isSelected ? 2 : 1,
+            color: isSelected ? const Color(0xFF0066FF) : (isDarkMode ? Colors.white10 : const Color(0xFFEEEEEE)),
           ),
         ),
         child: Row(
           children: [
-            if (icon is IconData)
-              Icon(
-                icon,
-                color: isSelected ? const Color(0xFF4A80F0) : Colors.grey,
-              )
-            else if (icon is String)
-              SvgPicture.asset(icon, width: 32.w, fit: BoxFit.contain),
-            SizedBox(width: 16.w),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: GoogleFonts.manrope(
-                    fontWeight: FontWeight.w700,
-                    color: isDarkMode ? Colors.white : Colors.black,
-                  ),
-                ),
-                Text(
-                  subtitle,
-                  style: GoogleFonts.manrope(
-                    fontSize: 12.sp,
-                    color: Colors.grey,
-                  ),
-                ),
-              ],
+            Container(
+              padding: EdgeInsets.all(10.w),
+              decoration: BoxDecoration(
+                color: const Color(0xFFE8F1FF),
+                shape: BoxShape.circle,
+              ),
+              child: svgIcon != null
+                  ? SvgPicture.asset(svgIcon, width: 24.sp, height: 24.sp)
+                  : Icon(icon, color: const Color(0xFF0066FF), size: 24.sp),
             ),
-            const Spacer(),
-            Icon(
-              isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
-              color: const Color(0xFF4A80F0),
+            SizedBox(width: 16.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        title,
+                        style: GoogleFonts.manrope(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w700,
+                          color: isDarkMode ? Colors.white : Colors.black,
+                        ),
+                      ),
+                      if (hasTag) ...[
+                        SizedBox(width: 8.w),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFE8F5E9),
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: Text(
+                            'Primary',
+                            style: GoogleFonts.manrope(
+                              fontSize: 10.sp,
+                              color: const Color(0xFF2E7D32),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                  Text(
+                    subtitle,
+                    style: GoogleFonts.manrope(
+                      fontSize: 13.sp,
+                      color: Colors.black26,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              width: 24.w,
+              height: 24.w,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: isSelected ? const Color(0xFF0066FF) : Colors.black12,
+                  width: 1,
+                ),
+                color: isSelected ? const Color(0xFF0066FF) : Colors.transparent,
+              ),
+              child: isSelected ? Icon(Icons.check, color: Colors.white, size: 14.sp) : null,
             ),
           ],
         ),
