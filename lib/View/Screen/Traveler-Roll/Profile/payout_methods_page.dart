@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
-import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/add_bank_account_page.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/add_payout_method_page.dart';
 
 class PayoutMethodsPage extends StatelessWidget {
   const PayoutMethodsPage({super.key});
@@ -153,7 +153,7 @@ class PayoutMethodsPage extends StatelessWidget {
             left: 20.w,
             right: 20.w,
             child: ElevatedButton(
-              onPressed: () => Get.to(() => const AddBankAccountPage()),
+              onPressed: () => Get.to(() => const AddPayoutMethodPage()),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF0066FF),
                 foregroundColor: Colors.white,
