@@ -142,7 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         _buildMenuItem(
                           'payments_wallet'.tr,
-                          "assets/icons/Payments & Wallet.svg",
+                          "assets/icons/Payments & Payouts.svg",
                           isDarkMode,
                           onTap: () => Get.to(() => const PaymentMethodPage()),
                         ),
@@ -675,7 +675,6 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
-  
 Widget _buildThemeToggle(bool isDarkMode) {
   final themeController = ThemeController.instance;
   return Column(
