@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../Widgets/custom_reject_button.dart';
 import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../../../../../Utils/AppImg/app_img.dart';
 import '../../../../Widget/custom_bottom_nav_bar.dart';
@@ -11,6 +12,7 @@ import '../../../../Widget/custom_transporter_bottom_nav_bar.dart';
 import '../Controllers/publish_trips_controller.dart';
 import '../Models/trip_model.dart';
 import '../Widgets/booking_details_modal.dart';
+import '../../../../Widgets/booking_request_card.dart';
 import 'publish_trip_flow_screen.dart';
 import 'trip_details_screen.dart';
 
@@ -710,263 +712,23 @@ class PublishTripsScreen extends StatelessWidget {
     bool isDarkMode,
     String status,
   ) {
-    Color statusColor;
-    Color statusBgColor;
-
-    switch (status) {
-      case "Accepted":
-        statusColor = const Color(0xFF039855);
-        statusBgColor = const Color(0xFFE7F6EC);
-        break;
-      case "Declined":
-        statusColor = const Color(0xFFD92D20);
-        statusBgColor = const Color(0xFFFEE4E2);
-        break;
-      default:
-        statusColor = const Color(0xFFF79009);
-        statusBgColor = const Color(0xFFFFFAEB);
-    }
-
-    return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
-      padding: EdgeInsets.all(20.w),
-      decoration: BoxDecoration(
-        color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 20.r,
-                backgroundImage: const NetworkImage(
-                  "https://i.pravatar.cc/150?u=mukaram",
-                ),
-              ),
-              SizedBox(width: 12.w),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Mukaram Hussain",
-                      style: GoogleFonts.manrope(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                        color: isDarkMode
-                            ? Colors.white
-                            : const Color(0xFF1A1A1A),
-                      ),
-                    ),
-                    Text(
-                      "2 hrs ago",
-                      style: GoogleFonts.manrope(
-                        fontSize: 12.sp,
-                        color: isDarkMode
-                            ? Colors.white60
-                            : const Color(0xFF9E9E9E),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  color: statusBgColor,
-                  borderRadius: BorderRadius.circular(20.r),
-                ),
-                child: Text(
-                  status,
-                  style: GoogleFonts.manrope(
-                    fontSize: 10.sp,
-                    fontWeight: FontWeight.w600,
-                    color: statusColor,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 20.h),
-          _buildRoutePoint(
-            icon: AppIcons.trackingNavbar,
-            city: "Tunisia",
-            date: "20 Jan",
-            time: "08:30 AM",
-            isFirst: true,
-            isDarkMode: isDarkMode,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20.w),
-            child: Container(
-              width: 1.w,
-              height: 30.h,
-              color: isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0),
-            ),
-          ),
-          _buildRoutePoint(
-            icon: AppIcons.location,
-            city: "France",
-            date: "20 Jan",
-            time: "10:45 PM",
-            isFirst: false,
-            isDarkMode: isDarkMode,
-          ),
-          SizedBox(height: 20.h),
-          const Divider(),
-          SizedBox(height: 10.h),
-          _buildRequestDetailRow("Package Size", "Medium (15kg)", isDarkMode),
-          _buildRequestDetailRow(
-            "Status",
-            "Urgent",
-            isDarkMode,
-            isUrgent: true,
-          ),
-          _buildRequestDetailRow(
-            "Total Estimate",
-            "150 TND",
-            isDarkMode,
-            isBold: true,
-          ),
-          SizedBox(height: 20.h),
-          if (status == "Accepted")
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 12.h),
-                  side: BorderSide(
-                    color: isDarkMode
-                        ? Colors.white24
-                        : const Color(0xFFE0E0E0),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                ),
-                child: Text(
-                  "View Details",
-                  style: GoogleFonts.manrope(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-                  ),
-                ),
-              ),
-            )
-          else
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 12.h),
-                      side: const BorderSide(color: Color(0xFFFFEAEA)),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                    ),
-                    child: Text(
-                      "Reject",
-                      style: GoogleFonts.manrope(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xFFFF3B3B),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 12.w),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () => _showBookingDetails(context),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF4A80F0),
-                      padding: EdgeInsets.symmetric(vertical: 12.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      elevation: 0,
-                    ),
-                    child: Text(
-                      "Accept",
-                      style: GoogleFonts.manrope(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-        ],
-      ),
+    final controller = Get.find<PublishTripsController>();
+    return BookingRequestCard(
+      userName: "Mukaram Hussain",
+      userImage: "https://i.pravatar.cc/150?u=mukaram",
+      timeAgo: "2 hrs ago",
+      status: status,
+      fromCity: "Tunisia",
+      toCity: "France",
+      fromDate: "20 Jan",
+      toDate: "20 Jan",
+      fromIcon: AppIcons.departure,
+      fromTime: "08:30 AM",
+      toTime: "10:45 PM",
+      packageSize: "Medium (15kg)",
+      packageStatus: "Urgent",
+      totalPrice: "150 TND",
     );
-  }
-
-  Widget _buildRequestDetailRow(
-    String label,
-    String value,
-    bool isDarkMode, {
-    bool isUrgent = false,
-    bool isBold = false,
-  }) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 8.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: GoogleFonts.manrope(
-              fontSize: 14.sp,
-              color: isDarkMode ? Colors.white38 : const Color(0xFF9E9E9E),
-            ),
-          ),
-          if (isUrgent)
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFFFAEB),
-                borderRadius: BorderRadius.circular(20.r),
-              ),
-              child: Text(
-                value,
-                style: GoogleFonts.manrope(
-                  fontSize: 10.sp,
-                  fontWeight: FontWeight.w600,
-                  color: const Color(0xFFF79009),
-                ),
-              ),
-            )
-          else
-            Text(
-              value,
-              style: GoogleFonts.manrope(
-                fontSize: 14.sp,
-                fontWeight: isBold ? FontWeight.w700 : FontWeight.w600,
-                color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-
-  void _showBookingDetails(BuildContext context) {
-    Get.to(() => const BookingDetailsScreen());
   }
 
   void _showFilters(BuildContext context) {
@@ -1466,4 +1228,6 @@ class PublishTripsScreen extends StatelessWidget {
       ),
     );
   }
+
 }
+

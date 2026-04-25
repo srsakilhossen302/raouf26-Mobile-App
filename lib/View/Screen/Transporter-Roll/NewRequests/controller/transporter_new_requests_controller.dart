@@ -100,4 +100,16 @@ class TransporterNewRequestsController extends GetxController {
       ],
     ),
   ].obs;
+
+  var selectedReason = "".obs;
+  final List<String> quickReasons = [
+    "Sorry, we are no longer available for this date.",
+    "The package size or weight is not suitable for my current capacity.",
+    "I have changed my travel route and can no longer fulfill this request.",
+    "Other"
+  ];
+
+  void setSelectedReason(String reason) {
+    selectedReason.value = reason;
+  }
 }

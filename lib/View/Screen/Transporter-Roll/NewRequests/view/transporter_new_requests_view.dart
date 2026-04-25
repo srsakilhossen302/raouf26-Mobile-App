@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../Utils/AppIcons/app_icons.dart';
+import '../../../../Widgets/booking_request_card.dart';
+import '../../../Traveler-Roll/PublishTrips/Widgets/booking_details_modal.dart';
 import '../controller/transporter_new_requests_controller.dart';
 
 class TransporterNewRequestsView extends StatelessWidget {
@@ -59,324 +61,26 @@ class NewRequestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 20.h),
-      padding: EdgeInsets.all(20.r),
-      decoration: BoxDecoration(
-        color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
-        boxShadow: [
-          if (!isDarkMode)
-            BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-        ],
-      ),
-      child: Column(
-        children: [
-          // Profile block
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 20.r,
-                backgroundImage: NetworkImage(request.userImage),
-                onBackgroundImageError: (_, __) {},
-                child: Icon(Icons.person, color: Colors.white, size: 20.sp),
-              ),
-              SizedBox(width: 12.w),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          request.userName,
-                          style: GoogleFonts.manrope(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
-                            color: isDarkMode ? Colors.white : Colors.black,
-                          ),
-                        ),
-                        SizedBox(width: 4.w),
-                        SvgPicture.asset(AppIcons.verifa, width: 14.w),
-                      ],
-                    ),
-                    SizedBox(height: 2.h),
-                    Text(
-                      request.timeAgo,
-                      style: GoogleFonts.manrope(
-                        fontSize: 12.sp,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  color: Colors.orange.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Text(
-                  request.status,
-                  style: GoogleFonts.manrope(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.orange,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 20.h),
-          Divider(
-              color: isDarkMode ? Colors.white12 : Colors.grey.shade100,
-              height: 1),
-          SizedBox(height: 20.h),
-          // Route block
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                children: [
-                  Icon(Icons.near_me_outlined, size: 20.sp, color: Colors.grey),
-                  Container(
-                    height: 24.h,
-                    width: 1,
-                    color: Colors.grey.shade300,
-                    margin: EdgeInsets.symmetric(vertical: 4.h),
-                  ),
-                  Icon(Icons.location_on_outlined,
-                      size: 20.sp, color: Colors.grey),
-                ],
-              ),
-              SizedBox(width: 16.w),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              request.fromCity,
-                              style: GoogleFonts.manrope(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold,
-                                color: isDarkMode ? Colors.white : Colors.black,
-                              ),
-                            ),
-                            Text(request.fromDate,
-                                style: GoogleFonts.manrope(
-                                    fontSize: 12.sp, color: Colors.grey)),
-                          ],
-                        ),
-                        Text(request.fromTime,
-                            style: GoogleFonts.manrope(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.bold,
-                                color:
-                                    isDarkMode ? Colors.white : Colors.black)),
-                      ],
-                    ),
-                    SizedBox(height: 24.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              request.toCity,
-                              style: GoogleFonts.manrope(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold,
-                                color: isDarkMode ? Colors.white : Colors.black,
-                              ),
-                            ),
-                            Text(request.toDate,
-                                style: GoogleFonts.manrope(
-                                    fontSize: 12.sp, color: Colors.grey)),
-                          ],
-                        ),
-                        Text(request.toTime,
-                            style: GoogleFonts.manrope(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.bold,
-                                color:
-                                    isDarkMode ? Colors.white : Colors.black)),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 20.h),
-          Divider(
-              color: isDarkMode ? Colors.white12 : Colors.grey.shade100,
-              height: 1),
-          SizedBox(height: 20.h),
-
-          // Details block
-          _buildDetailRow("Package Size", request.packageSize, isDarkMode),
-          SizedBox(height: 12.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Status",
-                  style: GoogleFonts.manrope(
-                      fontSize: 14.sp, color: Colors.grey)),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
-                decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Text(
-                  request.packageStatus,
-                  style: GoogleFonts.manrope(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.red,
-                  ),
-                ),
-              ),
-            ],
-          ),
-
-          // Render package photos if any exists (Solving the comment!)
-          if (request.packagePhotos.isNotEmpty) ...[
-            SizedBox(height: 16.h),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Package Details & Photos",
-                  style: GoogleFonts.manrope(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                    color: isDarkMode ? Colors.white : Colors.black87,
-                  ),
-                ),
-                SizedBox(height: 8.h),
-                SizedBox(
-                  height: 60.h,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: request.packagePhotos.length,
-                    separatorBuilder: (context, index) => SizedBox(width: 8.w),
-                    itemBuilder: (context, index) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(8.r),
-                        child: Image.network(
-                          request.packagePhotos[index],
-                          width: 60.h,
-                          height: 60.h,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              Container(
-                            width: 60.h,
-                            height: 60.h,
-                            color: Colors.grey.shade300,
-                            child: Icon(Icons.image_not_supported,
-                                color: Colors.grey.shade500),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ],
-
-          SizedBox(height: 16.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Total Estimate",
-                  style: GoogleFonts.manrope(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold,
-                      color: isDarkMode ? Colors.white : Colors.black)),
-              Text("€${request.totalEstimate.toStringAsFixed(0)}",
-                  style: GoogleFonts.manrope(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: isDarkMode ? Colors.white : Colors.black)),
-            ],
-          ),
-          SizedBox(height: 20.h),
-          // Actions block
-          Row(
-            children: [
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 14.h),
-                    side: BorderSide(color: Colors.redAccent.withOpacity(0.5)),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r)),
-                  ),
-                  child: Text(
-                    "Reject",
-                    style: GoogleFonts.manrope(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: 16.w),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 14.h),
-                    backgroundColor: const Color(0xFF4A80F0),
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r)),
-                  ),
-                  child: Text(
-                    "Accept",
-                    style: GoogleFonts.manrope(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDetailRow(String label, String value, bool isDarkMode) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(label,
-            style:
-                GoogleFonts.manrope(fontSize: 14.sp, color: Colors.grey)),
-        Text(value,
-            style: GoogleFonts.manrope(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                color: isDarkMode ? Colors.white : Colors.black)),
+    return BookingRequestCard(
+      userName: request.userName,
+      userImage: request.userImage,
+      timeAgo: request.timeAgo,
+      status: request.status,
+      fromCity: request.fromCity,
+      toCity: request.toCity,
+      fromDate: request.fromDate,
+      toDate: request.toDate,
+      fromTime: request.fromTime,
+      toTime: request.toTime,
+      packageSize: request.packageSize,
+      packageStatus: request.packageStatus,
+      packagePhotos: request.packagePhotos,
+      totalPrice: "€${request.totalEstimate.toStringAsFixed(0)}",
+      rejectionReasons: const [
+        "Sorry, we are no longer available for this date.",
+        "The package size or weight is not suitable for my current capacity.",
+        "I have changed my travel route and can no longer fulfill this request.",
+        "Other"
       ],
     );
   }

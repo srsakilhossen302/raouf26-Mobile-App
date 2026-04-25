@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:raouf26mobileapp/View/Screen/MessagesScreen/chat_controller.dart';
 import '../../../../Utils/AppIcons/app_icons.dart';
+import '../../Widgets/booking_request_card.dart';
+import '../../Widgets/custom_reject_button.dart';
 
 class ChatView extends StatelessWidget {
   final Map<String, dynamic> userData;
@@ -156,184 +158,32 @@ class ChatView extends StatelessWidget {
 
   Widget _buildBookingRequestCard(ChatController controller, bool isDarkMode) {
     final data = controller.userData;
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 20.h),
-      padding: EdgeInsets.all(16.r),
-      decoration: BoxDecoration(
-        color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.grey.shade50,
-        borderRadius: BorderRadius.circular(16.r),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    "Booking Request",
-                    style: GoogleFonts.manrope(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w700,
-                      color: isDarkMode ? Colors.white : Colors.black,
-                    ),
-                  ),
-                  SizedBox(width: 8.w),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8.w,
-                      vertical: 4.h,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.orange.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    child: Text(
-                      "Urgent",
-                      style: GoogleFonts.manrope(
-                        fontSize: 10.sp,
-                        color: Colors.orange,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Icon(Icons.edit_outlined, size: 20.sp, color: Colors.grey),
-            ],
-          ),
-          SizedBox(height: 20.h),
-          Text(
-            "Route",
-            style: GoogleFonts.manrope(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w700,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
-          ),
-          SizedBox(height: 12.h),
-          _buildRouteItem(
-            Icons.near_me_outlined,
-            data['from'] ?? "Tunisia",
-            "20 Jan",
-            "08:30 AM",
-            isDarkMode,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 12.w),
-            child: Text(
-              "⋮",
-              style: TextStyle(color: Colors.grey, fontSize: 20.sp),
-            ),
-          ),
-          _buildRouteItem(
-            Icons.location_on_outlined,
-            data['to'] ?? "France",
-            "20 Jan",
-            "10:45 PM",
-            isDarkMode,
-          ),
-
-          Divider(height: 32.h),
-
-          Text(
-            "Package Summary",
-            style: GoogleFonts.manrope(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w700,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
-          ),
-          SizedBox(height: 12.h),
-          _buildSummaryRow(
-            "Package Weight",
-            data['weight'] ?? "15kg",
-            isDarkMode,
-          ),
-          _buildSummaryRow(
-            "Delivery Time",
-            "Jan 29, 2026 – Jan 31, 2026",
-            isDarkMode,
-          ),
-
-          SizedBox(height: 12.h),
-          Text(
-            "Package Photos",
-            style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
-          ),
-          SizedBox(height: 8.h),
-          Row(
-            children: [
-              _buildPhoto('https://via.placeholder.com/100'),
-              SizedBox(width: 8.w),
-              _buildPhoto('https://via.placeholder.com/100'),
-            ],
-          ),
-
-          SizedBox(height: 20.h),
-          _buildSummaryRow(
-            "Status",
-            "Waiting Response",
-            isDarkMode,
-            statusColor: Colors.blue,
-          ),
-          _buildSummaryRow(
-            "Total Estimate",
-            data['price'] ?? "37.50 TND",
-            isDarkMode,
-            valueFontWeight: FontWeight.w700,
-          ),
-
-          if (controller.status.value == BookingStatus.pending) ...[
-            SizedBox(height: 24.h),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () =>
-                        _showRejectBottomSheet(controller, isDarkMode),
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.red),
-                      padding: EdgeInsets.symmetric(vertical: 14.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                    ),
-                    child: Text(
-                      "Reject",
-                      style: GoogleFonts.manrope(
-                        color: Colors.red,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 12.w),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () => controller.acceptBooking(),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF4A80F0),
-                      padding: EdgeInsets.symmetric(vertical: 14.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      elevation: 0,
-                    ),
-                    child: Text(
-                      "Accept",
-                      style: GoogleFonts.manrope(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20.h),
+      child: BookingRequestCard(
+        userName: userData['name'] ?? "User",
+        userImage: userData['image'] ?? "https://i.pravatar.cc/150",
+        timeAgo: "2 hrs ago",
+        status: controller.status.value == BookingStatus.pending
+            ? "Pending"
+            : (controller.status.value == BookingStatus.accepted
+                ? "Accepted"
+                : "Declined"),
+        fromCity: data['from'] ?? "Tunisia",
+        toCity: data['to'] ?? "France",
+        fromDate: "20 Jan",
+        toDate: "20 Jan",
+        fromTime: "08:30 AM",
+        toTime: "10:45 PM",
+        packageSize: data['weight'] ?? "15kg",
+        packageStatus: "Urgent",
+        packagePhotos: const [
+          'https://via.placeholder.com/100',
+          'https://via.placeholder.com/100'
         ],
+        totalPrice: data['price'] ?? "37.50 TND",
+        onAccept: () => controller.acceptBooking(),
+        onReject: () => _showRejectBottomSheet(controller, isDarkMode),
       ),
     );
   }

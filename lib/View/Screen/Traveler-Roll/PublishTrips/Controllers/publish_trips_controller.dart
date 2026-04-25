@@ -5,6 +5,12 @@ class PublishTripsController extends GetxController {
   final RxInt selectedTab = 0.obs;
   final RxInt requestSubTab = 0.obs;
   final RxString userRole = "".obs;
+  final RxString selectedReason = "".obs;
+  final List<String> quickReasons = [
+    "Sorry, we are no longer available for this date.",
+    "Unfortunately, all seats are already reserved.",
+    "We are unable to accept this request at the moment.",
+  ];
 
   @override
   void onInit() {
@@ -57,5 +63,17 @@ class PublishTripsController extends GetxController {
 
   void changeRequestSubTab(int index) {
     requestSubTab.value = index;
+  }
+
+  void selectReason(String reason) {
+    selectedReason.value = reason;
+  }
+
+  void rejectBooking() {
+    Get.snackbar(
+      "Booking Rejected",
+      "The request has been rejected successfully.",
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 }
