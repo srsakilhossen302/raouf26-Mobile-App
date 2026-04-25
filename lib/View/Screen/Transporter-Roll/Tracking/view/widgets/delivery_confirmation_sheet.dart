@@ -9,6 +9,7 @@ void showDeliveryConfirmationSheet(
   TrackingPackageModel package,
 ) {
   bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+  final RxInt selectedConditionIndex = 0.obs;
 
   showModalBottomSheet(
     context: context,
@@ -261,6 +262,48 @@ void showDeliveryConfirmationSheet(
                       ),
                     ),
                     SizedBox(height: 24.h),
+                    
+                    // Package Condition
+                    Text(
+                      'package_condition'.tr,
+                      style: GoogleFonts.manrope(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 16.h),
+                    Obx(
+                      () => Column(
+                        children: [
+                          _buildConditionRadioTile(
+                            'package_good'.tr,
+                            0,
+                            selectedConditionIndex,
+                            isDarkMode,
+                          ),
+                          SizedBox(height: 12.h),
+                          _buildConditionRadioTile(
+                            'minor_damage'.tr,
+                            1,
+                            selectedConditionIndex,
+                            isDarkMode,
+                          ),
+                          SizedBox(height: 12.h),
+                          _buildConditionRadioTile(
+                            'damaged_parcel'.tr,
+                            2,
+                            selectedConditionIndex,
+                            isDarkMode,
+                          ),
+                          if (selectedConditionIndex.value == 2) ...[
+                            SizedBox(height: 12.h),
+                            _buildUploadDamagePhoto(isDarkMode),
+                          ],
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 24.h),
 
                     // Add Note
                     RichText(
@@ -357,5 +400,133 @@ void showDeliveryConfirmationSheet(
         ),
       );
     },
+  );
+}
+
+Widget _buildConditionRadioTile(
+  String title,
+  int index,
+  RxInt selectedIndex,
+  bool isDarkMode,
+) {
+  bool isSelected = selectedIndex.value == index;
+  return GestureDetector(
+    onTap: () => selectedIndex.value = index,
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+      decoration: BoxDecoration(
+        color: isSelected
+            ? (isDarkMode
+                ? Colors.blue.withOpacity(0.05)
+                : const Color(0xFFF5F8FF))
+            : (isDarkMode
+                ? Colors.white.withOpacity(0.03)
+                : const Color(0xFFF9FAFB)),
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(
+          color: isSelected
+              ? const Color(0xFF4A80F0)
+              : (isDarkMode ? Colors.white10 : Colors.transparent),
+          width: 1.w,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: GoogleFonts.manrope(
+              fontSize: 14.sp,
+              color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+            ),
+          ),
+          Container(
+            width: 20.w,
+            height: 20.w,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: isSelected
+                    ? const Color(0xFF4A80F0)
+                    : (isDarkMode ? Colors.white24 : Colors.grey.shade300),
+                width: 1.5.w,
+              ),
+            ),
+            child: isSelected
+                ? Center(
+                    child: Container(
+                      width: 10.w,
+                      height: 10.w,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF4A80F0),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  )
+                : null,
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _buildUploadDamagePhoto(bool isDarkMode) {
+  return Container(
+    width: double.infinity,
+    padding: EdgeInsets.all(16.w),
+    decoration: BoxDecoration(
+      color: isDarkMode ? Colors.white.withOpacity(0.02) : Colors.white,
+      borderRadius: BorderRadius.circular(12.r),
+      border: Border.all(
+        color: isDarkMode ? Colors.white10 : Colors.grey.shade200,
+        style: BorderStyle.solid,
+      ),
+    ),
+    child: Container(
+      padding: EdgeInsets.symmetric(vertical: 16.h),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(
+          color: const Color(0xFF4A80F0).withOpacity(0.3),
+          style: BorderStyle.none,
+        ),
+      ),
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(12.w),
+            decoration: BoxDecoration(
+              color: const Color(0xFF4A80F0).withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Icon(
+              Icons.camera_alt_rounded,
+              color: const Color(0xFF4A80F0),
+              size: 24.sp,
+            ),
+          ),
+          SizedBox(height: 12.h),
+          Text(
+            'Upload Damage Photo',
+            style: GoogleFonts.manrope(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: const Color(0xFF4A80F0),
+            ),
+          ),
+          SizedBox(height: 4.h),
+          Text(
+            'Photo helps document damage',
+            style: GoogleFonts.manrope(
+              fontSize: 12.sp,
+              color: isDarkMode ? Colors.white38 : Colors.grey.shade500,
+            ),
+          ),
+        ],
+      ),
+    ),
   );
 }

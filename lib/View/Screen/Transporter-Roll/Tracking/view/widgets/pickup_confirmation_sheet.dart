@@ -11,8 +11,7 @@ void showPickupConfirmationSheet(
 ) {
   bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
   // A simple standalone RxInt to manage the selected condition
-  var selectedConditionIndex =
-      1.obs; // Default to minor visible damage selected for mockup
+  var selectedConditionIndex = 0.obs; // Default to Good condition
 
   showModalBottomSheet(
     context: context,
@@ -163,38 +162,42 @@ void showPickupConfirmationSheet(
 
                     // Package Condition
                     Text(
-                      'Package Condition',
+                      'package_condition'.tr,
                       style: GoogleFonts.manrope(
-                        fontSize: 15.sp,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w700,
                         color: isDarkMode ? Colors.white : Colors.black,
                       ),
                     ),
-                    SizedBox(height: 12.h),
+                    SizedBox(height: 16.h),
                     Obx(
-                      () => _buildConditionRadioTile(
-                        'package_good'.tr,
-                        0,
-                        selectedConditionIndex,
-                        isDarkMode,
-                      ),
-                    ),
-                    SizedBox(height: 8.h),
-                    Obx(
-                      () => _buildConditionRadioTile(
-                        'minor_damage'.tr,
-                        1,
-                        selectedConditionIndex,
-                        isDarkMode,
-                      ),
-                    ),
-                    SizedBox(height: 8.h),
-                    Obx(
-                      () => _buildConditionRadioTile(
-                        'damaged_parcel'.tr,
-                        2,
-                        selectedConditionIndex,
-                        isDarkMode,
+                      () => Column(
+                        children: [
+                          _buildConditionRadioTile(
+                            'package_good'.tr,
+                            0,
+                            selectedConditionIndex,
+                            isDarkMode,
+                          ),
+                          SizedBox(height: 12.h),
+                          _buildConditionRadioTile(
+                            'minor_damage'.tr,
+                            1,
+                            selectedConditionIndex,
+                            isDarkMode,
+                          ),
+                          SizedBox(height: 12.h),
+                          _buildConditionRadioTile(
+                            'damaged_parcel'.tr,
+                            2,
+                            selectedConditionIndex,
+                            isDarkMode,
+                          ),
+                          if (selectedConditionIndex.value == 2) ...[
+                            SizedBox(height: 12.h),
+                            _buildUploadDamagePhoto(isDarkMode),
+                          ],
+                        ],
                       ),
                     ),
                     SizedBox(height: 24.h),
@@ -299,8 +302,16 @@ Widget _buildConditionRadioTile(
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       decoration: BoxDecoration(
-        color: isDarkMode ? Colors.white10 : const Color(0xFFF8F9FB),
+        color: isSelected
+            ? (isDarkMode ? Colors.blue.withOpacity(0.05) : const Color(0xFFF5F8FF))
+            : (isDarkMode ? Colors.white.withOpacity(0.03) : const Color(0xFFF9FAFB)),
         borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(
+          color: isSelected
+              ? const Color(0xFF4A80F0)
+              : (isDarkMode ? Colors.white10 : Colors.transparent),
+          width: 1.w,
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -308,9 +319,9 @@ Widget _buildConditionRadioTile(
           Text(
             title,
             style: GoogleFonts.manrope(
-              fontSize: 13.sp,
-              color: isDarkMode ? Colors.white : Colors.black87,
-              fontWeight: FontWeight.w500,
+              fontSize: 14.sp,
+              color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
             ),
           ),
           Container(
@@ -320,10 +331,81 @@ Widget _buildConditionRadioTile(
               shape: BoxShape.circle,
               border: Border.all(
                 color: isSelected
-                    ? Colors.blue
-                    : (isDarkMode ? Colors.white38 : Colors.grey.shade400),
-                width: isSelected ? 5.w : 1.w,
+                    ? const Color(0xFF4A80F0)
+                    : (isDarkMode ? Colors.white24 : Colors.grey.shade300),
+                width: 1.5.w,
               ),
+            ),
+            child: isSelected
+                ? Center(
+                    child: Container(
+                      width: 10.w,
+                      height: 10.w,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF4A80F0),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  )
+                : null,
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget _buildUploadDamagePhoto(bool isDarkMode) {
+  return Container(
+    width: double.infinity,
+    padding: EdgeInsets.all(16.w),
+    decoration: BoxDecoration(
+      color: isDarkMode ? Colors.white.withOpacity(0.02) : Colors.white,
+      borderRadius: BorderRadius.circular(12.r),
+      border: Border.all(
+        color: isDarkMode ? Colors.white10 : Colors.grey.shade200,
+        style: BorderStyle.solid,
+      ),
+    ),
+    child: Container(
+      padding: EdgeInsets.symmetric(vertical: 16.h),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(
+          color: const Color(0xFF4A80F0).withOpacity(0.3),
+          style: BorderStyle.none, // We'll use a dotted border if possible, or just a simple light one
+        ),
+      ),
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(12.w),
+            decoration: BoxDecoration(
+              color: const Color(0xFF4A80F0).withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            child: Icon(
+              Icons.camera_alt_rounded,
+              color: const Color(0xFF4A80F0),
+              size: 24.sp,
+            ),
+          ),
+          SizedBox(height: 12.h),
+          Text(
+            'Upload Damage Photo',
+            style: GoogleFonts.manrope(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w600,
+              color: const Color(0xFF4A80F0),
+            ),
+          ),
+          SizedBox(height: 4.h),
+          Text(
+            'Photo helps document damage',
+            style: GoogleFonts.manrope(
+              fontSize: 12.sp,
+              color: isDarkMode ? Colors.white38 : Colors.grey.shade500,
             ),
           ),
         ],
