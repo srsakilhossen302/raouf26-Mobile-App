@@ -8,6 +8,7 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/add_payment_m
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/add_bank_account_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/withdraw_funds_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/transaction_history_page.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/deposit_methods_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/payout_methods_page.dart';
 
 class PaymentMethodPage extends StatelessWidget {
@@ -188,7 +189,7 @@ class PaymentMethodPage extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () => Get.to(() => const AddPaymentMethodPage()),
+                onTap: () => Get.to(() => const DepositMethodsPage()),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
                   decoration: BoxDecoration(
