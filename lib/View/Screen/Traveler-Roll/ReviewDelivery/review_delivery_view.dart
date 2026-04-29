@@ -28,182 +28,184 @@ class ReviewDeliveryView extends GetView<ReviewDeliveryController> {
           onPressed: () => Get.back(),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Review Delivery Details",
-              style: GoogleFonts.manrope(
-                fontSize: 22.sp,
-                fontWeight: FontWeight.w700,
-                color: isDarkMode ? Colors.white : Colors.black,
+      body: Obx(
+        () => SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Review Delivery Details",
+                style: GoogleFonts.manrope(
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.w700,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              "Please review your information before finding a transporter.",
-              style: GoogleFonts.manrope(
-                fontSize: 14.sp,
-                color: Colors.grey,
+              SizedBox(height: 8.h),
+              Text(
+                "Please review your information before finding a transporter.",
+                style: GoogleFonts.manrope(
+                  fontSize: 14.sp,
+                  color: Colors.grey,
+                ),
               ),
-            ),
-            SizedBox(height: 24.h),
+              SizedBox(height: 24.h),
 
-            // Package Details Section
-            _reviewSection(
-              title: "Package Details",
-              isDarkMode: isDarkMode,
-              onEdit: () => controller.editSection("Package"),
-              children: [
-                _reviewRow("Package Size", controller.packageSize.value),
-                _reviewRow("Exact Weight", controller.exactWeight.value),
-                _reviewRow(
-                  "Package Category",
-                  controller.packageCategory.value,
-                ),
-                _reviewRow("Package Size", controller.packageItems.value),
-                _reviewPhotosRow(),
-                _reviewRow(
-                  "Storage Period",
-                  controller.storagePeriod.value,
-                  color: const Color(0xFF4A80F0),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    controller.storageDays.value,
-                    style: GoogleFonts.manrope(
-                      fontSize: 12.sp,
-                      color: Colors.grey,
-                    ),
+              // Package Details Section
+              _reviewSection(
+                title: "Package Details",
+                isDarkMode: isDarkMode,
+                onEdit: () => controller.editSection("Package"),
+                children: [
+                  _reviewRow("Package Size", controller.packageSize.value),
+                  _reviewRow("Exact Weight", controller.exactWeight),
+                  _reviewRow(
+                    "Package Category",
+                    controller.packageCategory,
                   ),
-                ),
-              ],
-            ),
-
-            SizedBox(height: 16.h),
-
-            // Sender Details Section
-            _reviewSection(
-              title: "Sender Details",
-              isDarkMode: isDarkMode,
-              onEdit: () => controller.editSection("Sender"),
-              children: [
-                _reviewRow("Sender name", controller.senderName.value),
-                _reviewRow("Phone number", controller.senderPhone.value),
-                _reviewRow("Pickup address", controller.pickupAddress.value),
-              ],
-            ),
-
-            SizedBox(height: 16.h),
-
-            // Pickup Details Section
-            _reviewSection(
-              title: "Pickup Details",
-              isDarkMode: isDarkMode,
-              onEdit: () => controller.editSection("Pickup"),
-              children: [
-                _reviewRow("Pickup Date", "Jan 14, 2026"),
-                _reviewRow("Pickup Time", "2:30 PM"),
-                _reviewRow("Pickup Preference", "Sender's Address"),
-              ],
-            ),
-
-            SizedBox(height: 16.h),
-
-            // Delivery Details Section
-            _reviewSection(
-              title: "Delivery Details",
-              isDarkMode: isDarkMode,
-              onEdit: () => controller.editSection("Delivery"),
-              children: [
-                _reviewRow("Recipient name", controller.recipientName.value),
-                _reviewRow("Phone number", controller.recipientPhone.value),
-                _reviewRow(
-                  "Delivery address",
-                  controller.deliveryAddress.value,
-                ),
-                _reviewRow(
-                  "Delivery speed",
-                  controller.deliverySpeed.value,
-                  color: Colors.red,
-                ),
-                _reviewRow(
-                  "Delivery Preference",
-                  controller.deliveryPreference.value,
-                ),
-              ],
-            ),
-
-            SizedBox(height: 16.h),
-
-            // Delivery Route Section
-            _reviewSection(
-              title: "Delivery Route",
-              isDarkMode: isDarkMode,
-              showEdit: false,
-              children: [
-                Container(
-                  height: 140.h,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    image: const DecorationImage(
-                      image: NetworkImage(
-                        "https://static-maps.yandex.ru/1.x/?lang=en_US&ll=10.4000,36.3000&z=9&l=map&size=450,450",
+                  _reviewRow("Package Description", controller.packageItems.value),
+                  _reviewPhotosRow(),
+                  _reviewRow(
+                    "Storage Period",
+                    controller.storagePeriod.value,
+                    color: const Color(0xFF4A80F0),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      controller.storageDays,
+                      style: GoogleFonts.manrope(
+                        fontSize: 12.sp,
+                        color: Colors.grey,
                       ),
-                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 16.h),
+
+              // Sender Details Section
+              _reviewSection(
+                title: "Sender Details",
+                isDarkMode: isDarkMode,
+                onEdit: () => controller.editSection("Sender"),
+                children: [
+                  _reviewRow("Sender name", controller.senderName),
+                  _reviewRow("Phone number", controller.senderPhone),
+                  _reviewRow("Pickup address", controller.pickupAddress.value),
+                ],
+              ),
+
+              SizedBox(height: 16.h),
+
+              // Pickup Details Section
+              _reviewSection(
+                title: "Pickup Details",
+                isDarkMode: isDarkMode,
+                onEdit: () => controller.editSection("Pickup"),
+                children: [
+                  _reviewRow("Pickup Date", "Jan 14, 2026"),
+                  _reviewRow("Pickup Time", "2:30 PM"),
+                  _reviewRow("Pickup Preference", "Sender's Address"),
+                ],
+              ),
+
+              SizedBox(height: 16.h),
+
+              // Delivery Details Section
+              _reviewSection(
+                title: "Delivery Details",
+                isDarkMode: isDarkMode,
+                onEdit: () => controller.editSection("Delivery"),
+                children: [
+                  _reviewRow("Recipient name", controller.recipientName),
+                  _reviewRow("Phone number", controller.recipientPhone),
+                  _reviewRow(
+                    "Delivery address",
+                    controller.deliveryAddress.value,
+                  ),
+                  _reviewRow(
+                    "Delivery speed",
+                    controller.deliverySpeed.value,
+                    color: Colors.red,
+                  ),
+                  _reviewRow(
+                    "Delivery Preference",
+                    controller.deliveryPreference.value,
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 16.h),
+
+              // Delivery Route Section
+              _reviewSection(
+                title: "Delivery Route",
+                isDarkMode: isDarkMode,
+                showEdit: false,
+                children: [
+                  Container(
+                    height: 140.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12.r),
+                      image: const DecorationImage(
+                        image: NetworkImage(
+                          "https://static-maps.yandex.ru/1.x/?lang=en_US&ll=10.4000,36.3000&z=9&l=map&size=450,450",
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 16.h),
+                  _routeRow(
+                    Icons.near_me_outlined,
+                    "Pickup: ${controller.pickupAddress.value}",
+                  ),
+                  SizedBox(height: 12.h),
+                  _routeRow(
+                    Icons.location_on_outlined,
+                    "Delivery: ${controller.deliveryAddress.value}",
+                  ),
+                  const Divider(),
+                  _reviewRow(
+                    "Estimated Distance",
+                    controller.estimatedDistance.value,
+                    isBold: true,
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 32.h),
+
+              // Find Transporter Button
+              SizedBox(
+                width: double.infinity,
+                height: 56.h,
+                child: ElevatedButton(
+                  onPressed: () => Get.to(() => const TransportersView()),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4A80F0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: Text(
+                    "Find Transporter",
+                    style: GoogleFonts.manrope(
+                      color: Colors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
-                SizedBox(height: 16.h),
-                _routeRow(
-                  Icons.near_me_outlined,
-                  "Pickup: ${controller.pickupAddress.value}",
-                ),
-                SizedBox(height: 12.h),
-                _routeRow(
-                  Icons.location_on_outlined,
-                  "Delivery: ${controller.deliveryAddress.value}",
-                ),
-                const Divider(),
-                _reviewRow(
-                  "Estimated Distance",
-                  controller.estimatedDistance.value,
-                  isBold: true,
-                ),
-              ],
-            ),
-
-            SizedBox(height: 32.h),
-
-            // Find Transporter Button
-            SizedBox(
-              width: double.infinity,
-              height: 56.h,
-              child: ElevatedButton(
-                onPressed: () => Get.to(() => const TransportersView()),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4A80F0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  elevation: 0,
-                ),
-                child: Text(
-                  "Find Transporter",
-                  style: GoogleFonts.manrope(
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
               ),
-            ),
-            SizedBox(height: 30.h),
-          ],
+              SizedBox(height: 30.h),
+            ],
+          ),
         ),
       ),
     );

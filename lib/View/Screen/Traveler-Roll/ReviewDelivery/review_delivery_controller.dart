@@ -1,26 +1,34 @@
 import 'package:get/get.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/DeliveryInfo/delivery_info_view.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/PackageDetails/package_details_controller.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/PackageDetails/package_details_view.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/SenderDetails/sender_details_controller.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/SenderDetails/sender_details_view.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/DeliveryInfo/delivery_info_controller.dart';
 
 class ReviewDeliveryController extends GetxController {
-  // Mock Data for Review
-  final packageSize = "Medium (20-50 kg)".obs;
-  final exactWeight = "15 kg".obs;
-  final packageCategory = "Food".obs;
-  final packageItems = "Makrouna".obs;
-  final storagePeriod = "Jan 29, 2026 - Jan 31, 2026".obs;
-  final storageDays = "3 days of storage".obs;
-  
-  final senderName = "Mohamed Ali".obs;
-  final senderPhone = "+216 20123456".obs;
-  final pickupAddress = "20, Aryanah, Ariana, Tunisia".obs;
-  
-  final recipientName = "Alice Smith".obs;
-  final recipientPhone = "+216 06223344".obs;
-  final deliveryAddress = "40, Sidi Bou Said, Tunisia".obs;
-  final deliverySpeed = "Urgent".obs;
-  final deliveryPreference = "Recipient's Address".obs;
+  // Accessing other controllers
+  final packageCtrl = Get.find<PackageDetailsController>();
+  final senderCtrl = Get.find<SenderDetailsController>();
+  final deliveryCtrl = Get.find<DeliveryInfoController>();
+
+  // Reactive properties linked to original controllers
+  RxString get packageSize => packageCtrl.selectedSize;
+  String get exactWeight => packageCtrl.customWeight.value.isEmpty ? "0 kg" : "${packageCtrl.customWeight.value} kg";
+  String get packageCategory => packageCtrl.selectedCategories.join(", ");
+  RxString get packageItems => packageCtrl.packageContent;
+  RxString get storagePeriod => packageCtrl.storageDateRange;
+  String get storageDays => "${packageCtrl.storageDays.value} days of storage";
+
+  String get senderName => senderCtrl.senderNameController.text;
+  String get senderPhone => senderCtrl.phoneNumberController.text;
+  RxString get pickupAddress => senderCtrl.selectedAddress;
+
+  String get recipientName => deliveryCtrl.recipientNameController.text;
+  String get recipientPhone => deliveryCtrl.phoneNumberController.text;
+  RxString get deliveryAddress => deliveryCtrl.selectedAddress;
+  RxString get deliverySpeed => deliveryCtrl.selectedDeliverySpeed;
+  RxString get deliveryPreference => deliveryCtrl.selectedDeliveryPreference;
   
   final estimatedDistance = "25 km".obs;
 
@@ -30,16 +38,17 @@ class ReviewDeliveryController extends GetxController {
   
   void editSection(String section) {
     Get.log("Editing section: $section");
+    // Passing a flag to tell the views we are in "Edit Mode"
     switch (section) {
       case "Package":
-        Get.to(() => const PackageDetailsScreen());
+        Get.to(() => const PackageDetailsScreen(), arguments: {"editMode": true});
         break;
       case "Sender":
       case "Pickup":
-        Get.to(() => const SenderDetailsView());
+        Get.to(() => const SenderDetailsView(), arguments: {"editMode": true});
         break;
       case "Delivery":
-        Get.to(() => const DeliveryInfoView());
+        Get.to(() => const DeliveryInfoView(), arguments: {"editMode": true});
         break;
       default:
         Get.log("Unknown section: $section");

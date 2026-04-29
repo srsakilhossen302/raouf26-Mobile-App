@@ -217,7 +217,13 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
                 width: double.infinity,
                 height: 56.h,
                 child: ElevatedButton(
-                  onPressed: () => Get.to(() => const DeliveryInfoView()),
+                  onPressed: () {
+                    if (Get.arguments != null && Get.arguments["editMode"] == true) {
+                      Get.back();
+                    } else {
+                      Get.to(() => const DeliveryInfoView());
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4A80F0),
                     shape: RoundedRectangleBorder(

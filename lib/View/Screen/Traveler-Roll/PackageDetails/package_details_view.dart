@@ -263,7 +263,13 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                 width: double.infinity,
                 height: 52.h,
                 child: ElevatedButton(
-                  onPressed: () => Get.to(() => const SenderDetailsView()),
+                  onPressed: () {
+                    if (Get.arguments != null && Get.arguments["editMode"] == true) {
+                      Get.back();
+                    } else {
+                      Get.to(() => const SenderDetailsView());
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4A80F0),
                     shape: RoundedRectangleBorder(

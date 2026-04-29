@@ -432,7 +432,13 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
                 width: double.infinity,
                 height: 56.h,
                 child: ElevatedButton(
-                  onPressed: () => Get.to(() => const ReviewDeliveryView()),
+                  onPressed: () {
+                    if (Get.arguments != null && Get.arguments["editMode"] == true) {
+                      Get.back();
+                    } else {
+                      Get.to(() => const ReviewDeliveryView());
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF4A80F0),
                     shape: RoundedRectangleBorder(
