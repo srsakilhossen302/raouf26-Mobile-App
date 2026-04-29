@@ -1,9 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 enum BookingStatus { pending, accepted, rejected }
 
 class ChatController extends GetxController {
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> pickImage(ImageSource source) async {
+    try {
+      final XFile? image = await _picker.pickImage(source: source);
+      if (image != null) {
+        // In a real app, you would upload this image to a server
+        // For now, we'll just add a placeholder message to the chat
+        messages.add({
+          'isMe': true,
+          'text': "📷 Image sent",
+          'time': 'Just now',
+          'isRead': false,
+          'imagePath': image.path,
+        });
+      }
+    } catch (e) {
+      Get.snackbar("Error", "Could not pick image: $e");
+    }
+  }
   var status = BookingStatus.pending.obs;
   var messageController = "".obs;
   var selectedReason = "".obs;

@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:raouf26mobileapp/View/Screen/MessagesScreen/chat_controller.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../../Utils/AppIcons/app_icons.dart';
 import '../../Widgets/booking_request_card.dart';
 import '../../Widgets/custom_reject_button.dart';
@@ -146,7 +147,7 @@ class ChatView extends StatelessWidget {
             if (controller.status.value == BookingStatus.accepted)
               SafeArea(
                 bottom: true,
-                child: _buildMessageInput(controller, isDarkMode),
+                child: _buildMessageInput(context, controller, isDarkMode),
               ),
           ],
         );
@@ -402,7 +403,7 @@ class ChatView extends StatelessWidget {
     );
   }
 
-  Widget _buildMessageInput(ChatController controller, bool isDarkMode) {
+  Widget _buildMessageInput(BuildContext context, ChatController controller, bool isDarkMode) {
     final TextEditingController textController = TextEditingController();
     return Container(
       padding: EdgeInsets.all(20.r),
@@ -418,13 +419,16 @@ class ChatView extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            padding: EdgeInsets.all(12.r),
-            decoration: BoxDecoration(
-              color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade100,
-              shape: BoxShape.circle,
+          GestureDetector(
+            onTap: () => _showAttachmentMenu(context, controller, isDarkMode),
+            child: Container(
+              padding: EdgeInsets.all(12.r),
+              decoration: BoxDecoration(
+                color: isDarkMode ? Colors.grey.shade800 : Colors.grey.shade100,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.add, color: Colors.grey, size: 24.sp),
             ),
-            child: Icon(Icons.add, color: Colors.grey, size: 24.sp),
           ),
           SizedBox(width: 12.w),
           Expanded(
@@ -631,6 +635,91 @@ class ChatView extends StatelessWidget {
         ),
       ),
       isScrollControlled: true,
+    );
+  }
+
+  void _showAttachmentMenu(BuildContext context, ChatController controller, bool isDarkMode) {
+    Get.bottomSheet(
+      Container(
+        padding: EdgeInsets.all(24.r),
+        decoration: BoxDecoration(
+          color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "Send Attachment",
+              style: GoogleFonts.manrope(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w700,
+                color: isDarkMode ? Colors.white : Colors.black,
+              ),
+            ),
+            SizedBox(height: 24.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _attachmentOption(
+                  icon: Icons.camera_alt_rounded,
+                  label: "Camera",
+                  color: Colors.blue,
+                  onTap: () {
+                    Get.back();
+                    controller.pickImage(ImageSource.camera);
+                  },
+                  isDarkMode: isDarkMode,
+                ),
+                _attachmentOption(
+                  icon: Icons.photo_library_rounded,
+                  label: "Gallery",
+                  color: Colors.purple,
+                  onTap: () {
+                    Get.back();
+                    controller.pickImage(ImageSource.gallery);
+                  },
+                  isDarkMode: isDarkMode,
+                ),
+              ],
+            ),
+            SizedBox(height: 24.h),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _attachmentOption({
+    required IconData icon,
+    required String label,
+    required Color color,
+    required VoidCallback onTap,
+    required bool isDarkMode,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(16.r),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.1),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: color, size: 28.sp),
+          ),
+          SizedBox(height: 8.h),
+          Text(
+            label,
+            style: GoogleFonts.manrope(
+              fontSize: 14.sp,
+              fontWeight: FontWeight.w500,
+              color: isDarkMode ? Colors.white70 : Colors.black87,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
