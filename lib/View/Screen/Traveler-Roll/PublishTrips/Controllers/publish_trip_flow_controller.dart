@@ -5,6 +5,7 @@ import '../Models/trip_model.dart';
 class PublishTripFlowController extends GetxController {
   final RxInt currentStep = 0.obs;
   final RxBool isEditMode = false.obs;
+  final RxBool isFromDetailsScreen = false.obs;
   final RxInt targetStep = 0.obs;
   final Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
   final Rx<DateTime> focusedDate = DateTime.now().obs;
@@ -77,6 +78,17 @@ class PublishTripFlowController extends GetxController {
 
   void nextStep() {
     if (isEditMode.value) {
+      if (isFromDetailsScreen.value) {
+        // If we are at Price step (2), go to Travel Details (3) next instead of returning immediately
+        if (currentStep.value == 2) {
+          currentStep.value = 3;
+          return;
+        }
+        Get.back(); // Go back to TripDetailsScreen from other steps (like 3 or 1)
+        isEditMode.value = false;
+        isFromDetailsScreen.value = false;
+        return;
+      }
       currentStep.value = 6; // Go back to Review & Publish
       isEditMode.value = false;
       return;

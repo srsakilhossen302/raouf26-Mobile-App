@@ -6,9 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/PublishTrips/Controllers/publish_trip_flow_controller.dart';
 import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../Models/trip_model.dart';
+import 'package:raouf26mobileapp/View/Screen/MessagesScreen/chat_view.dart';
+import 'package:raouf26mobileapp/View/Screen/MessagesScreen/report_issue_screen.dart';
 import 'publish_trip_flow_screen.dart';
-import '../../../MessagesScreen/chat_view.dart';
-import '../../../MessagesScreen/report_issue_screen.dart';
 
 class TripDetailsScreen extends StatelessWidget {
   final TripModel trip;
@@ -20,13 +20,23 @@ class TripDetailsScreen extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: isDarkMode
-          ? const Color(0xFF121212)
-          : const Color(0xFFF9FAFB),
+      backgroundColor: isDarkMode ? const Color(0xFF121212) : const Color(0xFFF8F9FB),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: isDarkMode ? Colors.white : Colors.black),
+          onPressed: () => Get.back(),
+        ),
         centerTitle: true,
+        title: Text(
+          "Trip Details",
+          style: GoogleFonts.manrope(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w700,
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+        ),
         actions: [
           PopupMenuButton<int>(
             icon: Icon(
@@ -98,31 +108,15 @@ class TripDetailsScreen extends StatelessWidget {
             ],
           ),
         ],
-        title: Text(
-          "Trip Details",
-          style: GoogleFonts.manrope(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w700,
-            color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-          ),
-        ),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(2.h),
-          child: LinearProgressIndicator(
-            value: 1.0,
-            backgroundColor: isDarkMode ? Colors.white10 : Colors.grey.shade100,
-            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF4A80F0)),
-            minHeight: 2.h,
-          ),
-        ),
       ),
       body: Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              padding: EdgeInsets.all(24.w),
               child: Column(
                 children: [
+                  // Route Details Card
                   _buildDetailsCard(
                     title: "Route Details",
                     isDarkMode: isDarkMode,
@@ -131,17 +125,16 @@ class TripDetailsScreen extends StatelessWidget {
                       controller.populateFromTrip(trip);
                       controller.currentStep.value = 1;
                       controller.isEditMode.value = true;
-                      controller.targetStep.value = 1;
+                      controller.isFromDetailsScreen.value = true;
                       Get.to(() => const PublishTripFlowScreen());
                     },
                     child: Column(
                       children: [
-                        _buildRoutePoint(
-                          icon: AppIcons.trackingNavbar,
-                          city: trip.departureCity,
+                        _buildRouteRow(
+                          icon: Icons.near_me_outlined,
+                          location: trip.departureCity,
                           date: trip.departureDate,
                           time: trip.departureTime,
-                          isFirst: true,
                           isDarkMode: isDarkMode,
                         ),
                         Padding(
@@ -149,31 +142,25 @@ class TripDetailsScreen extends StatelessWidget {
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: Column(
-                              children: List.generate(
-                                3,
-                                (index) => Container(
-                                  width: 1.w,
-                                  height: 4.h,
-                                  margin: EdgeInsets.symmetric(vertical: 2.h),
-                                  color: isDarkMode
-                                      ? Colors.white24
-                                      : const Color(0xFFE0E0E0),
-                                ),
-                              ),
+                              children: List.generate(4, (index) => Container(
+                                width: 1.w,
+                                height: 3.h,
+                                margin: EdgeInsets.symmetric(vertical: 2.h),
+                                color: Colors.grey.shade300,
+                              )),
                             ),
                           ),
                         ),
-                        _buildRoutePoint(
-                          icon: AppIcons.location,
-                          city: trip.arrivalCity,
+                        _buildRouteRow(
+                          icon: Icons.location_on_outlined,
+                          location: trip.arrivalCity,
                           date: trip.arrivalDate,
                           time: trip.arrivalTime,
-                          isFirst: false,
                           isDarkMode: isDarkMode,
                         ),
-                        SizedBox(height: 20.h),
-                        const Divider(),
-                        SizedBox(height: 10.h),
+                        SizedBox(height: 16.h),
+                        const Divider(height: 1),
+                        SizedBox(height: 16.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -181,21 +168,18 @@ class TripDetailsScreen extends StatelessWidget {
                               "Stops",
                               style: GoogleFonts.manrope(
                                 fontSize: 14.sp,
-                                color: isDarkMode
-                                    ? Colors.white38
-                                    : const Color(0xFF9E9E9E),
+                                color: Colors.grey,
                               ),
                             ),
+                            SizedBox(width: 16.w),
                             Expanded(
                               child: Text(
                                 trip.stops,
                                 textAlign: TextAlign.right,
                                 style: GoogleFonts.manrope(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: isDarkMode
-                                      ? Colors.white
-                                      : const Color(0xFF1A1A1A),
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: isDarkMode ? Colors.white : Colors.black87,
                                 ),
                               ),
                             ),
@@ -204,7 +188,9 @@ class TripDetailsScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 16.h),
+                  SizedBox(height: 20.h),
+
+                  // Trip Details Card
                   _buildDetailsCard(
                     title: "Trip Details",
                     isDarkMode: isDarkMode,
@@ -213,36 +199,16 @@ class TripDetailsScreen extends StatelessWidget {
                       controller.populateFromTrip(trip);
                       controller.currentStep.value = 2;
                       controller.isEditMode.value = true;
-                      controller.targetStep.value = 5;
+                      controller.isFromDetailsScreen.value = true;
                       Get.to(() => const PublishTripFlowScreen());
                     },
                     child: Column(
                       children: [
-                        _buildDetailRow(
-                          "Departure Date & Time",
-                          "${trip.departureDate}, ${trip.departureTime}",
-                          isDarkMode,
-                        ),
-                        _buildDetailRow(
-                          "Arrival Date & Time",
-                          "${trip.arrivalDate}, ${trip.arrivalTime}",
-                          isDarkMode,
-                        ),
-                        _buildDetailRow(
-                          "Maximum Weight Available:",
-                          trip.maxWeight,
-                          isDarkMode,
-                        ),
-                        _buildDetailRow(
-                          "Price Per kg",
-                          trip.pricePerKg,
-                          isDarkMode,
-                        ),
-                        _buildDetailRow(
-                          "Travel Mode",
-                          trip.travelMode,
-                          isDarkMode,
-                        ),
+                        _buildDetailItem("Departure Date & Time", "${trip.departureDate} - ${trip.departureTime}", isDarkMode),
+                        _buildDetailItem("Arrival Date & Time", "${trip.arrivalDate} - ${trip.arrivalTime}", isDarkMode),
+                        _buildDetailItem("Maximum Weight Available:", trip.maxWeight, isDarkMode),
+                        _buildDetailItem("Price Per kg", trip.pricePerKg, isDarkMode),
+                        _buildDetailItem("Travel Mode", trip.travelMode, isDarkMode, showDivider: false),
                       ],
                     ),
                   ),
@@ -250,51 +216,43 @@ class TripDetailsScreen extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
+          
+          // Bottom Buttons
+          Container(
             padding: EdgeInsets.all(24.w),
+            color: isDarkMode ? Colors.transparent : Colors.white,
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 SizedBox(
                   width: double.infinity,
+                  height: 54.h,
                   child: ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF4A80F0),
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
                       elevation: 0,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
                     ),
                     child: Text(
                       "Complete Trip",
-                      style: GoogleFonts.manrope(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
+                      style: GoogleFonts.manrope(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Colors.white),
                     ),
                   ),
                 ),
                 SizedBox(height: 12.h),
                 SizedBox(
                   width: double.infinity,
+                  height: 54.h,
                   child: OutlinedButton(
                     onPressed: () {},
                     style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
                       side: const BorderSide(color: Color(0xFFFFEAEA)),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
                     ),
                     child: Text(
                       "Delete Trip",
-                      style: GoogleFonts.manrope(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xFFFF3B3B),
-                      ),
+                      style: GoogleFonts.manrope(fontSize: 16.sp, fontWeight: FontWeight.w700, color: const Color(0xFFFF3B3B)),
                     ),
                   ),
                 ),
@@ -306,17 +264,17 @@ class TripDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailsCard({
-    required String title,
-    required Widget child,
-    required bool isDarkMode,
-    VoidCallback? onEdit,
-  }) {
+  Widget _buildDetailsCard({required String title, required Widget child, required bool isDarkMode, VoidCallback? onEdit}) {
     return Container(
+      width: double.infinity,
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
+        borderRadius: BorderRadius.circular(20.r),
+        boxShadow: [
+          if (!isDarkMode)
+            BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4)),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -326,23 +284,15 @@ class TripDetailsScreen extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.manrope(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w700,
-                  color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-                ),
+                style: GoogleFonts.manrope(fontSize: 16.sp, fontWeight: FontWeight.w700, color: isDarkMode ? Colors.white : Colors.black),
               ),
               GestureDetector(
                 onTap: onEdit,
-                behavior: HitTestBehavior.opaque,
                 child: SvgPicture.asset(
                   AppIcons.edit,
                   width: 20.w,
                   height: 20.w,
-                  colorFilter: ColorFilter.mode(
-                    isDarkMode ? Colors.white60 : Colors.black54,
-                    BlendMode.srcIn,
-                  ),
+                  colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
                 ),
               ),
             ],
@@ -354,96 +304,62 @@ class TripDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailRow(String label, String value, bool isDarkMode) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 16.h),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Text(
-              label,
-              style: GoogleFonts.manrope(
-                fontSize: 14.sp,
-                color: isDarkMode ? Colors.white38 : const Color(0xFF9E9E9E),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              value,
-              textAlign: TextAlign.right,
-              style: GoogleFonts.manrope(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRoutePoint({
-    required String icon,
-    required String city,
-    required String date,
-    required String time,
-    required bool isFirst,
-    required bool isDarkMode,
-  }) {
+  Widget _buildRouteRow({required IconData icon, required String location, required String date, required String time, required bool isDarkMode}) {
     return Row(
       children: [
         Container(
           padding: EdgeInsets.all(8.w),
           decoration: BoxDecoration(
-            color: isDarkMode
-                ? const Color(0xFF2C2C2C)
-                : const Color(0xFFF5F7FA),
-            borderRadius: BorderRadius.circular(8.r),
+            color: isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF5F7FA),
+            shape: BoxShape.circle,
           ),
-          child: SvgPicture.asset(
-            icon,
-            width: 16.w,
-            height: 16.w,
-            colorFilter: ColorFilter.mode(
-              isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-              BlendMode.srcIn,
-            ),
-          ),
+          child: Icon(icon, size: 18.sp, color: Colors.black54),
         ),
-        SizedBox(width: 16.w),
+        SizedBox(width: 12.w),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                city,
-                style: GoogleFonts.manrope(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                  color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+              Text(location, style: GoogleFonts.manrope(fontSize: 14.sp, fontWeight: FontWeight.w700, color: isDarkMode ? Colors.white : Colors.black)),
+              Text(date, style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey)),
+            ],
+          ),
+        ),
+        Text(time, style: GoogleFonts.manrope(fontSize: 14.sp, fontWeight: FontWeight.w500, color: isDarkMode ? Colors.white : Colors.black87)),
+      ],
+    );
+  }
+
+  Widget _buildDetailItem(String label, String value, bool isDarkMode, {bool showDivider = true}) {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 12.h),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  label,
+                  style: GoogleFonts.manrope(fontSize: 14.sp, color: Colors.grey),
                 ),
               ),
-              Text(
-                date,
-                style: GoogleFonts.manrope(
-                  fontSize: 12.sp,
-                  color: isDarkMode ? Colors.white60 : const Color(0xFF9E9E9E),
+              SizedBox(width: 16.w),
+              Expanded(
+                child: Text(
+                  value,
+                  textAlign: TextAlign.right,
+                  style: GoogleFonts.manrope(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: isDarkMode ? Colors.white : Colors.black87,
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        Text(
-          time,
-          style: GoogleFonts.manrope(
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w500,
-            color: isDarkMode ? Colors.white70 : const Color(0xFF666666),
-          ),
-        ),
+        if (showDivider) Divider(height: 1, color: Colors.grey.withOpacity(0.1)),
       ],
     );
   }
