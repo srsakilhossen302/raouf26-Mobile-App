@@ -185,6 +185,7 @@ class PricesCapacityStep extends StatelessWidget {
             hint: "Enter Price",
             controller: controller.pricePerPackageController,
             isDarkMode: isDarkMode,
+            onChanged: (val) => controller.pricePerPackageText.value = val,
           ),
           SizedBox(height: 24.h),
 
@@ -231,6 +232,7 @@ class PricesCapacityStep extends StatelessWidget {
           SizedBox(height: 8.h),
           TextField(
             controller: controller.capacityController,
+            onChanged: (val) => controller.capacityText.value = val,
             style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
             decoration: InputDecoration(
               hintText: "Enter Weight e.g. 10 kg",
@@ -280,6 +282,7 @@ class PricesCapacityStep extends StatelessWidget {
     required String hint,
     required TextEditingController controller,
     required bool isDarkMode,
+    Function(String)? onChanged,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -295,6 +298,7 @@ class PricesCapacityStep extends StatelessWidget {
         SizedBox(height: 8.h),
         TextField(
           controller: controller,
+          onChanged: onChanged,
           style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
           decoration: InputDecoration(
             hintText: hint,

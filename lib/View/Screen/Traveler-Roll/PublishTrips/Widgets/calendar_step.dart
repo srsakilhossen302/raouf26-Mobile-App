@@ -67,60 +67,68 @@ class CalendarStep extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16.r),
                         ),
                         padding: EdgeInsets.all(16.w),
-                        child: TableCalendar(
-                          firstDay: DateTime.now().subtract(
-                            const Duration(days: 30),
-                          ),
-                          lastDay: DateTime.now().add(
-                            const Duration(days: 365),
-                          ),
-                          focusedDay: monthDate,
-                          currentDay: DateTime.now(),
-                          headerVisible: true,
-                          headerStyle: HeaderStyle(
-                            formatButtonVisible: false,
-                            titleCentered: false,
-                            titleTextStyle: GoogleFonts.manrope(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w700,
+                        child: Obx(() {
+                          // Dummy access to ensure GetX tracks the dependency
+                          controller.selectedDate.value;
+                          return TableCalendar(
+                            firstDay: DateTime.now().subtract(
+                              const Duration(days: 30),
                             ),
-                            leftChevronVisible: false,
-                            rightChevronVisible: false,
-                          ),
-                          daysOfWeekStyle: DaysOfWeekStyle(
-                            weekdayStyle: GoogleFonts.manrope(
-                              fontSize: 12.sp,
-                              color: Colors.grey,
+                            lastDay: DateTime.now().add(
+                              const Duration(days: 365),
                             ),
-                            weekendStyle: GoogleFonts.manrope(
-                              fontSize: 12.sp,
-                              color: Colors.grey,
+                            focusedDay: monthDate,
+                            currentDay: DateTime.now(),
+                            headerVisible: true,
+                            headerStyle: HeaderStyle(
+                              formatButtonVisible: false,
+                              titleCentered: false,
+                              titleTextStyle: GoogleFonts.manrope(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w700,
+                                color: isDarkMode ? Colors.white : Colors.black,
+                              ),
+                              leftChevronVisible: false,
+                              rightChevronVisible: false,
                             ),
-                          ),
-                          calendarStyle: CalendarStyle(
-                            defaultTextStyle: GoogleFonts.manrope(
-                              fontSize: 14.sp,
+                            daysOfWeekStyle: DaysOfWeekStyle(
+                              weekdayStyle: GoogleFonts.manrope(
+                                fontSize: 12.sp,
+                                color: Colors.grey,
+                              ),
+                              weekendStyle: GoogleFonts.manrope(
+                                fontSize: 12.sp,
+                                color: Colors.grey,
+                              ),
                             ),
-                            weekendTextStyle: GoogleFonts.manrope(
-                              fontSize: 14.sp,
+                            calendarStyle: CalendarStyle(
+                              defaultTextStyle: GoogleFonts.manrope(
+                                fontSize: 14.sp,
+                                color: isDarkMode ? Colors.white : Colors.black,
+                              ),
+                              weekendTextStyle: GoogleFonts.manrope(
+                                fontSize: 14.sp,
+                                color: isDarkMode ? Colors.white : Colors.black,
+                              ),
+                              selectedDecoration: const BoxDecoration(
+                                color: Color(0xFF4A80F0),
+                                shape: BoxShape.circle,
+                              ),
+                              selectedTextStyle: const TextStyle(color: Colors.white),
+                              todayDecoration: BoxDecoration(
+                                color: Color(0xFF4A80F0).withOpacity(0.1),
+                                shape: BoxShape.circle,
+                              ),
+                              outsideDaysVisible: false,
                             ),
-                            selectedDecoration: const BoxDecoration(
-                              color: Colors.black,
-                              shape: BoxShape.circle,
-                            ),
-                            todayDecoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.1),
-                              shape: BoxShape.circle,
-                            ),
-                            outsideDaysVisible: false,
-                          ),
-                          selectedDayPredicate: (day) =>
-                              isSameDay(controller.selectedDate.value, day),
-                          onDaySelected: (selectedDay, focusedDay) {
-                            controller.selectedDate.value = selectedDay;
-                            controller.focusedDate.value = focusedDay;
-                          },
-                        ),
+                            selectedDayPredicate: (day) =>
+                                isSameDay(controller.selectedDate.value, day),
+                            onDaySelected: (selectedDay, focusedDay) {
+                              controller.selectedDate.value = selectedDay;
+                              controller.focusedDate.value = focusedDay;
+                            },
+                          );
+                        }),
                       ),
                     );
                   },
@@ -201,7 +209,6 @@ class CalendarStep extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 12.w),
-                    // Clear selection button removed as per request to remove all back/close icons in flow
                   ],
                 ),
                 SizedBox(height: 16.h),
@@ -211,52 +218,55 @@ class CalendarStep extends StatelessWidget {
                     // Departure & Destination Card
                     Expanded(
                       flex: 4,
-                      child: _buildSelectionCard(
-                        isDarkMode: isDarkMode,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(8.w),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFF0F4FF),
-                                borderRadius: BorderRadius.circular(8.r),
+                      child: GestureDetector(
+                        onTap: () => controller.currentStep.value = 1,
+                        child: _buildSelectionCard(
+                          isDarkMode: isDarkMode,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.all(8.w),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFF0F4FF),
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: const Icon(
+                                  Icons.route_outlined,
+                                  color: Color(0xFF4A80F0),
+                                  size: 18,
+                                ),
                               ),
-                              child: const Icon(
-                                Icons.route_outlined,
-                                color: Color(0xFF4A80F0),
-                                size: 18,
+                              SizedBox(height: 12.h),
+                              Text(
+                                "Departure & Destination",
+                                style: GoogleFonts.manrope(
+                                  fontSize: 12.sp,
+                                  color: Colors.grey,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 12.h),
-                            Text(
-                              "Departure & Destination",
-                              style: GoogleFonts.manrope(
-                                fontSize: 12.sp,
-                                color: Colors.grey,
+                              SizedBox(height: 12.h),
+                              Obx(
+                                () => _buildMiniInput(
+                                  Icons.location_on,
+                                  controller.departureText.value.isEmpty
+                                      ? "Departure"
+                                      : controller.departureText.value,
+                                  isDarkMode,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 12.h),
-                            Obx(
-                              () => _buildMiniInput(
-                                Icons.location_on,
-                                controller.departureText.value.isEmpty
-                                    ? "Departure"
-                                    : controller.departureText.value,
-                                isDarkMode,
+                              SizedBox(height: 8.h),
+                              Obx(
+                                () => _buildMiniInput(
+                                  Icons.near_me,
+                                  controller.destinationText.value.isEmpty
+                                      ? "Destination"
+                                      : controller.destinationText.value,
+                                  isDarkMode,
+                                ),
                               ),
-                            ),
-                            SizedBox(height: 8.h),
-                            Obx(
-                              () => _buildMiniInput(
-                                Icons.near_me,
-                                controller.destinationText.value.isEmpty
-                                    ? "Destination"
-                                    : controller.destinationText.value,
-                                isDarkMode,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -266,58 +276,76 @@ class CalendarStep extends StatelessWidget {
                       flex: 4,
                       child: Column(
                         children: [
-                          _buildSelectionCard(
-                            isDarkMode: isDarkMode,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Set Price & Capacity",
-                                  style: GoogleFonts.manrope(
-                                    fontSize: 12.sp,
-                                    color: Colors.grey,
+                          GestureDetector(
+                            onTap: () => controller.currentStep.value = 2,
+                            child: _buildSelectionCard(
+                              isDarkMode: isDarkMode,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Set Price & Capacity",
+                                    style: GoogleFonts.manrope(
+                                      fontSize: 12.sp,
+                                      color: Colors.grey,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 12.h),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: _buildMiniTextField(
-                                        "Price/ kg",
-                                        isDarkMode,
+                                  SizedBox(height: 12.h),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Obx(
+                                          () => _buildMiniTextField(
+                                            controller.pricePerPackageText.value.isEmpty
+                                                ? "Price/ kg"
+                                                : "${controller.pricePerPackageText.value} ${controller.selectedCurrency.value}",
+                                            isDarkMode,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(width: 8.w),
-                                    Expanded(
-                                      child: _buildMiniTextField(
-                                        "e.g. 10 kg",
-                                        isDarkMode,
+                                      SizedBox(width: 8.w),
+                                      Expanded(
+                                        child: Obx(
+                                          () => _buildMiniTextField(
+                                            controller.capacityText.value.isEmpty
+                                                ? "e.g. 10 kg"
+                                                : "${controller.capacityText.value} kg",
+                                            isDarkMode,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           SizedBox(height: 12.h),
-                          _buildSelectionCard(
-                            isDarkMode: isDarkMode,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Set Travel Details",
-                                  style: GoogleFonts.manrope(
-                                    fontSize: 12.sp,
-                                    color: Colors.grey,
+                          GestureDetector(
+                            onTap: () => controller.currentStep.value = 3,
+                            child: _buildSelectionCard(
+                              isDarkMode: isDarkMode,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Set Travel Details",
+                                    style: GoogleFonts.manrope(
+                                      fontSize: 12.sp,
+                                      color: Colors.grey,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 12.h),
-                                _buildMiniTextField(
-                                  "e.g. flight, boat etc.",
-                                  isDarkMode,
-                                ),
-                              ],
+                                  SizedBox(height: 12.h),
+                                  Obx(
+                                    () => _buildMiniTextField(
+                                      controller.selectedTravelMode.value.isEmpty
+                                          ? "e.g. flight, boat etc."
+                                          : controller.selectedTravelMode.value,
+                                      isDarkMode,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -343,7 +371,9 @@ class CalendarStep extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDarkMode ? Colors.white.withOpacity(0.05) : Colors.white,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: const Color(0xFFF0F0F0)),
+        border: Border.all(
+          color: isDarkMode ? Colors.white10 : const Color(0xFFF0F0F0),
+        ),
       ),
       child: child,
     );
@@ -387,7 +417,13 @@ class CalendarStep extends StatelessWidget {
       ),
       child: Text(
         hint,
-        style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
+        overflow: TextOverflow.ellipsis,
+        style: GoogleFonts.manrope(
+          fontSize: 12.sp,
+          color: hint.contains("e.g.") || hint.contains("Price/")
+              ? Colors.grey
+              : (isDarkMode ? Colors.white : Colors.black),
+        ),
       ),
     );
   }

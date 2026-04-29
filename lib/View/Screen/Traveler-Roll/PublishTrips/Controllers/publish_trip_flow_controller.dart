@@ -23,9 +23,12 @@ class PublishTripFlowController extends GetxController {
   final RxString selectedCountryFlag = "🇹🇳".obs;
   final pricePerDocumentController = TextEditingController();
   final pricePerPackageController = TextEditingController();
+  final RxString pricePerDocumentText = "".obs;
+  final RxString pricePerPackageText = "".obs;
   final RxBool canCarryDocuments = false.obs;
   final RxBool canCarryPackages = true.obs;
   final capacityController = TextEditingController();
+  final RxString capacityText = "".obs;
 
   // Travel Details
   final RxString selectedTravelMode = "Flight".obs;
@@ -73,18 +76,10 @@ class PublishTripFlowController extends GetxController {
   }
 
   void nextStep() {
-    if (isEditMode.value && currentStep.value == targetStep.value) {
-      Get.back();
-      isEditMode.value = false;
-      return;
-    }
-
     if (currentStep.value == 0) {
-      if (departureTime.value.isNotEmpty && arrivalTime.value.isNotEmpty) {
-        currentStep.value = 2;
-      } else {
-        currentStep.value = 1;
-      }
+      currentStep.value = 5; // Go to Trip Rules & Details
+    } else if (currentStep.value == 1 || currentStep.value == 2 || currentStep.value == 3) {
+      currentStep.value = 0; // Return to main page with data
     } else if (currentStep.value < 6) {
       currentStep.value++;
     }
