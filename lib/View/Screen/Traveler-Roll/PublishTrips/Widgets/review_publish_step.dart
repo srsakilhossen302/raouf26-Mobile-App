@@ -46,6 +46,10 @@ class ReviewPublishStep extends StatelessWidget {
           _buildReviewCard(
             title: "Route Details",
             isDarkMode: isDarkMode,
+            onEdit: () {
+              controller.isEditMode.value = true;
+              controller.currentStep.value = 1;
+            },
             child: Column(
               children: [
                 // Map Placeholder
@@ -186,7 +190,10 @@ class ReviewPublishStep extends StatelessWidget {
           _buildReviewCard(
             title: "Date & Time",
             showEdit: true,
-            onEdit: () => controller.currentStep.value = 0,
+            onEdit: () {
+              controller.isEditMode.value = true;
+              controller.currentStep.value = 1;
+            },
             isDarkMode: isDarkMode,
             child: Column(
               children: [
@@ -218,7 +225,10 @@ class ReviewPublishStep extends StatelessWidget {
           _buildReviewCard(
             title: "Capacity Details",
             showEdit: true,
-            onEdit: () => controller.currentStep.value = 2,
+            onEdit: () {
+              controller.isEditMode.value = true;
+              controller.currentStep.value = 2;
+            },
             isDarkMode: isDarkMode,
             child: Column(
               children: [
@@ -242,7 +252,10 @@ class ReviewPublishStep extends StatelessWidget {
           _buildReviewCard(
             title: "Price Details",
             showEdit: true,
-            onEdit: () => controller.currentStep.value = 2,
+            onEdit: () {
+              controller.isEditMode.value = true;
+              controller.currentStep.value = 2;
+            },
             isDarkMode: isDarkMode,
             child: Column(
               children: [
@@ -268,7 +281,10 @@ class ReviewPublishStep extends StatelessWidget {
           _buildReviewCard(
             title: "Trip Rules & Notes",
             showEdit: true,
-            onEdit: () => controller.currentStep.value = 5,
+            onEdit: () {
+              controller.isEditMode.value = true;
+              controller.currentStep.value = 5;
+            },
             isDarkMode: isDarkMode,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

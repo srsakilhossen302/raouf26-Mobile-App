@@ -76,6 +76,12 @@ class PublishTripFlowController extends GetxController {
   }
 
   void nextStep() {
+    if (isEditMode.value) {
+      currentStep.value = 6; // Go back to Review & Publish
+      isEditMode.value = false;
+      return;
+    }
+
     if (currentStep.value == 0) {
       currentStep.value = 5; // Go to Trip Rules & Details
     } else if (currentStep.value == 1 || currentStep.value == 2 || currentStep.value == 3) {
