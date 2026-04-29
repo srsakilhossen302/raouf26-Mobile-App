@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/PackageDetails/package_details_controller.dart';
 
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/SenderDetails/sender_details_view.dart';
@@ -47,243 +48,242 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.r),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Package Information",
-              style: GoogleFonts.manrope(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w700,
-                color: isDarkMode ? Colors.white : Colors.black,
+      body: SafeArea(
+        bottom: true,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(20.r),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Package Information",
+                style: GoogleFonts.manrope(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w700,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              "Enter the size, weight, and photos of your package.",
-              style: GoogleFonts.manrope(
-                fontSize: 14.sp,
-                color: Colors.grey,
+              SizedBox(height: 8.h),
+              Text(
+                "Enter the size, weight, and photos of your package.",
+                style: GoogleFonts.manrope(fontSize: 14.sp, color: Colors.grey),
               ),
-            ),
-            SizedBox(height: 24.h),
-
-            // Exact Weight Section (Moved to first)
-            _sectionTitle("Exact Weight", isDarkMode),
-            SizedBox(height: 12.h),
-            _customTextField(
-              hintText: "Enter Custom Weight",
-              isDarkMode: isDarkMode,
-            ),
-
-            SizedBox(height: 24.h),
-            // Package Size Section
-            _sectionTitle("Package Size", isDarkMode),
-            SizedBox(height: 16.h),
-            Obx(
-              () => Column(
-                children: [
-                  _sizeOption("Small", "", isDarkMode),
-                  SizedBox(height: 12.h),
-                  _sizeOption("Medium", "", isDarkMode),
-                  SizedBox(height: 12.h),
-                  _sizeOption("Large", "", isDarkMode),
-                ],
+              SizedBox(height: 24.h),
+  
+              // Exact Weight Section (Moved to first)
+              _sectionTitle("Exact Weight", isDarkMode),
+              SizedBox(height: 12.h),
+              _customTextField(
+                hintText: "Enter Custom Weight",
+                isDarkMode: isDarkMode,
               ),
-            ),
-
-            SizedBox(height: 24.h),
-            _sectionTitle("Package Content", isDarkMode),
-            SizedBox(height: 12.h),
-            _customTextField(
-              hintText: "e.g. Decoration Pieces",
-              isDarkMode: isDarkMode,
-            ),
-
-            SizedBox(height: 24.h),
-            _sectionTitle("What Kind of Package?", isDarkMode),
-            Text(
-              "You can select multiple categories",
-              style: GoogleFonts.manrope(
-                fontSize: 12.sp,
-                color: Colors.grey,
-              ),
-            ),
-            SizedBox(height: 16.h),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Obx(
-                () => Row(
+  
+              SizedBox(height: 24.h),
+              // Package Size Section
+              _sectionTitle("Package Size", isDarkMode),
+              SizedBox(height: 16.h),
+              Obx(
+                () => Column(
                   children: [
-                    _categoryChip(
-                      "Food",
-                      "assets/icons/Food-Icons.svg",
-                      isDarkMode,
-                    ),
-                    SizedBox(width: 10.w),
-                    _categoryChip(
-                      "Clothes",
-                      "assets/icons/Clothes-icons.svg",
-                      isDarkMode,
-                    ),
-                    SizedBox(width: 10.w),
-                    _categoryChip(
-                      "Documents",
-                      "assets/icons/Documents-icons.svg",
-                      isDarkMode,
-                    ),
-                    SizedBox(width: 10.w),
-                    _categoryChip(
-                      "Medicines",
-                      "assets/icons/Medicines-icons.svg",
-                      isDarkMode,
-                    ),
-                    SizedBox(width: 10.w),
-                    _categoryChip(
-                      "Other",
-                      "assets/icons/Other-icons.svg",
-                      isDarkMode,
-                    ),
+                    _sizeOption("Small", "", isDarkMode),
+                    SizedBox(height: 12.h),
+                    _sizeOption("Medium", "", isDarkMode),
+                    SizedBox(height: 12.h),
+                    _sizeOption("Large", "", isDarkMode),
                   ],
                 ),
               ),
-            ),
-
-            SizedBox(height: 24.h),
-            _sectionTitle("Package Photos", isDarkMode),
-            Text(
-              "Please provide the photos of the package's exterior and interior for verification (Max 5 photos each).",
-              style: GoogleFonts.manrope(
-                fontSize: 12.sp,
-                color: Colors.grey,
+  
+              SizedBox(height: 24.h),
+              _sectionTitle("Package Content", isDarkMode),
+              SizedBox(height: 12.h),
+              _customTextField(
+                hintText: "e.g. Decoration Pieces",
+                isDarkMode: isDarkMode,
               ),
-            ),
-            SizedBox(height: 16.h),
-            _buildPhotoList(
-              "Exterior",
-              isDarkMode,
-              controller.exteriorImages,
-              true,
-            ),
-            SizedBox(height: 16.h),
-            _buildPhotoList(
-              "Interior",
-              isDarkMode,
-              controller.interiorImages,
-              false,
-            ),
-
-            SizedBox(height: 32.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Need storage until pickup?",
-                  style: GoogleFonts.manrope(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    color: isDarkMode ? Colors.white : Colors.black,
-                  ),
-                ),
-                Obx(
-                  () => Switch(
-                    value: controller.needStorage.value,
-                    onChanged: (val) => controller.toggleStorage(val),
-                    activeColor: const Color(0xFF4A80F0),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 12.h),
-            Container(
-              padding: EdgeInsets.all(16.r),
-              decoration: BoxDecoration(
-                color: isDarkMode
-                    ? Colors.white.withOpacity(0.05)
-                    : const Color(0xFFF9FAFB),
-                borderRadius: BorderRadius.circular(12.r),
+  
+              SizedBox(height: 24.h),
+              _sectionTitle("What Kind of Package?", isDarkMode),
+              Text(
+                "You can select multiple categories",
+                style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
               ),
-              child: Text(
-                "If your package is large or requires special handling (e.g. furniture), you may need to pay for storage until pickup.",
-                style: GoogleFonts.manrope(
-                  fontSize: 12.sp,
-                  color: Colors.grey.shade600,
-                  height: 1.5,
-                ),
-              ),
-            ),
-
-            SizedBox(height: 16.h),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-              decoration: BoxDecoration(
-                color: isDarkMode
-                    ? Colors.white.withOpacity(0.05)
-                    : const Color(0xFFF9FAFB),
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              SizedBox(height: 16.h),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Obx(
+                  () => Row(
                     children: [
-                      Text(
-                        "3 Days of Storage",
-                        style: GoogleFonts.manrope(
-                          fontSize: 10.sp,
-                          color: const Color(0xFF4A80F0),
-                          fontWeight: FontWeight.w600,
-                        ),
+                      _categoryChip(
+                        "Food",
+                        "assets/icons/Food-Icons.svg",
+                        isDarkMode,
                       ),
-                      Obx(
-                        () => Text(
-                          controller.storageDateRange.value,
-                          style: GoogleFonts.manrope(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w600,
-                            color: isDarkMode ? Colors.white : Colors.black87,
-                          ),
-                        ),
+                      SizedBox(width: 10.w),
+                      _categoryChip(
+                        "Clothes",
+                        "assets/icons/Clothes-icons.svg",
+                        isDarkMode,
+                      ),
+                      SizedBox(width: 10.w),
+                      _categoryChip(
+                        "Documents",
+                        "assets/icons/Documents-icons.svg",
+                        isDarkMode,
+                      ),
+                      SizedBox(width: 10.w),
+                      _categoryChip(
+                        "Medicines",
+                        "assets/icons/Medicines-icons.svg",
+                        isDarkMode,
+                      ),
+                      SizedBox(width: 10.w),
+                      _categoryChip(
+                        "Other",
+                        "assets/icons/Other-icons.svg",
+                        isDarkMode,
                       ),
                     ],
                   ),
-                  Icon(
-                    Icons.calendar_today_outlined,
-                    color: Colors.black54,
-                    size: 20.sp,
+                ),
+              ),
+  
+              SizedBox(height: 24.h),
+              _sectionTitle("Package Photos", isDarkMode),
+              Text(
+                "Please provide the photos of the package's exterior and interior for verification (Max 5 photos each).",
+                style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
+              ),
+              SizedBox(height: 16.h),
+              _buildPhotoList(
+                "Exterior",
+                isDarkMode,
+                controller.exteriorImages,
+                true,
+              ),
+              SizedBox(height: 16.h),
+              _buildPhotoList(
+                "Interior",
+                isDarkMode,
+                controller.interiorImages,
+                false,
+              ),
+  
+              SizedBox(height: 32.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Need storage until pickup?",
+                    style: GoogleFonts.manrope(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  Obx(
+                    () => Switch(
+                      value: controller.needStorage.value,
+                      onChanged: (val) => controller.toggleStorage(val),
+                      activeColor: const Color(0xFF4A80F0),
+                    ),
                   ),
                 ],
               ),
-            ),
-
-            SizedBox(height: 40.h),
-            SizedBox(
-              width: double.infinity,
-              height: 52.h,
-              child: ElevatedButton(
-                onPressed: () => Get.to(() => const SenderDetailsView()),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4A80F0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  elevation: 0,
+              SizedBox(height: 12.h),
+              Container(
+                padding: EdgeInsets.all(16.r),
+                decoration: BoxDecoration(
+                  color: isDarkMode
+                      ? Colors.white.withOpacity(0.05)
+                      : const Color(0xFFF9FAFB),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Text(
-                  "Continue",
+                  "If your package is large or requires special handling (e.g. furniture), you may need to pay for storage until pickup.",
                   style: GoogleFonts.manrope(
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 12.sp,
+                    color: Colors.grey.shade600,
+                    height: 1.5,
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 20.h),
-          ],
+  
+              SizedBox(height: 16.h),
+              GestureDetector(
+                onTap: () => _showDatePicker(context, isDarkMode),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+                  decoration: BoxDecoration(
+                    color: isDarkMode
+                        ? Colors.white.withOpacity(0.05)
+                        : const Color(0xFFF9FAFB),
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Obx(
+                            () => Text(
+                              "${controller.storageDays.value} Days of Storage",
+                              style: GoogleFonts.manrope(
+                                fontSize: 10.sp,
+                                color: const Color(0xFF4A80F0),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          Obx(
+                            () => Text(
+                              controller.storageDateRange.value,
+                              style: GoogleFonts.manrope(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
+                                color: isDarkMode ? Colors.white : Colors.black87,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Icon(
+                        Icons.calendar_today_outlined,
+                        color: Colors.black54,
+                        size: 20.sp,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+  
+              SizedBox(height: 40.h),
+              SizedBox(
+                width: double.infinity,
+                height: 52.h,
+                child: ElevatedButton(
+                  onPressed: () => Get.to(() => const SenderDetailsView()),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4A80F0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: Text(
+                    "Continue",
+                    style: GoogleFonts.manrope(
+                      color: Colors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20.h),
+            ],
+          ),
         ),
       ),
     );
@@ -557,6 +557,175 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
           ),
         ),
       ],
+    );
+  }
+
+  void _showDatePicker(BuildContext context, bool isDarkMode) {
+    DateTime focusedDay = controller.rangeStart.value ?? DateTime.now();
+    DateTime? tempStart = controller.rangeStart.value;
+    DateTime? tempEnd = controller.rangeEnd.value;
+    var isSelectingEnd = false.obs;
+
+    Get.bottomSheet(
+      StatefulBuilder(
+        builder: (context, setState) {
+          return Container(
+            padding: EdgeInsets.all(24.r),
+            decoration: BoxDecoration(
+              color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30.r),
+                topRight: Radius.circular(30.r),
+              ),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(width: 24),
+                    Obx(() => Text(
+                      isSelectingEnd.value ? "Select End Date" : "Select Start Date",
+                      style: GoogleFonts.manrope(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w700,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    )),
+                    GestureDetector(
+                      onTap: () => Get.back(),
+                      child: Icon(
+                        Icons.close,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                        size: 24.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h),
+                TableCalendar(
+                  firstDay: DateTime.utc(2020, 1, 1),
+                  lastDay: DateTime.utc(2030, 12, 31),
+                  focusedDay: focusedDay,
+                  selectedDayPredicate: (day) {
+                    if (isSelectingEnd.value) {
+                      return isSameDay(tempEnd, day) || isSameDay(tempStart, day);
+                    }
+                    return isSameDay(tempStart, day);
+                  },
+                  onDaySelected: (selectedDay, focusedDayUpdate) {
+                    setState(() {
+                      if (isSelectingEnd.value) {
+                        tempEnd = selectedDay;
+                      } else {
+                        tempStart = selectedDay;
+                      }
+                      focusedDay = focusedDayUpdate;
+                    });
+                  },
+                  headerStyle: HeaderStyle(
+                    formatButtonVisible: false,
+                    titleCentered: true,
+                    titleTextStyle: GoogleFonts.manrope(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    leftChevronIcon: Icon(
+                      Icons.chevron_left,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    rightChevronIcon: Icon(
+                      Icons.chevron_right,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  calendarStyle: CalendarStyle(
+                    todayDecoration: BoxDecoration(
+                      color: const Color(0xFF4A80F0).withOpacity(0.3),
+                      shape: BoxShape.circle,
+                    ),
+                    selectedDecoration: const BoxDecoration(
+                      color: Color(0xFF4A80F0),
+                      shape: BoxShape.circle,
+                    ),
+                    defaultTextStyle: GoogleFonts.manrope(
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    weekendTextStyle: GoogleFonts.manrope(
+                      color: isDarkMode ? Colors.white70 : Colors.black54,
+                    ),
+                    outsideTextStyle: GoogleFonts.manrope(
+                      color: isDarkMode ? Colors.white24 : Colors.grey.shade400,
+                    ),
+                  ),
+                  daysOfWeekStyle: DaysOfWeekStyle(
+                    weekdayStyle: GoogleFonts.manrope(
+                      color: Colors.grey,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    weekendStyle: GoogleFonts.manrope(
+                      color: isDarkMode
+                          ? Colors.redAccent.withOpacity(0.7)
+                          : Colors.redAccent,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 24.h),
+                SizedBox(
+                  width: double.infinity,
+                  height: 52.h,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (!isSelectingEnd.value) {
+                        if (tempStart != null) {
+                          setState(() {
+                            isSelectingEnd.value = true;
+                          });
+                        } else {
+                          Get.snackbar("Error", "Please select a start date");
+                        }
+                      } else {
+                        if (tempEnd != null) {
+                          if (tempEnd!.isBefore(tempStart!)) {
+                            Get.snackbar("Error", "End date must be after start date");
+                            return;
+                          }
+                          controller.updateDateRange(tempStart, tempEnd);
+                          Get.back();
+                        } else {
+                          Get.snackbar("Error", "Please select an end date");
+                        }
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF4A80F0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: Obx(() => Text(
+                      isSelectingEnd.value ? "Confirm End Date" : "Next: Select End Date",
+                      style: GoogleFonts.manrope(
+                        color: Colors.white,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    )),
+                  ),
+                ),
+                SizedBox(height: 10.h),
+              ],
+            ),
+          );
+        },
+      ),
+      isScrollControlled: true,
     );
   }
 }

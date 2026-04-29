@@ -37,190 +37,193 @@ class LogInScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 20.h),
-            Text(
-              "welcome_back".tr,
-              style: TextStyle(
-                fontSize: 28.sp,
-                fontWeight: FontWeight.bold,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              "sign_in_subtitle".tr,
-              style: TextStyle(
-                fontSize: 16.sp,
-                color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
-              ),
-            ),
-            SizedBox(height: 32.h),
-            Text(
-              "phone_number".tr,
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
-            ),
-            SizedBox(height: 12.h),
-            IntlPhoneField(
-              decoration: InputDecoration(
-                hintText: '00000000',
-                hintStyle: TextStyle(
-                  color: isDarkMode ? Colors.white24 : Colors.grey.shade400,
-                ),
-                filled: true,
-                fillColor: isDarkMode
-                    ? Colors.white.withOpacity(0.05)
-                    : Colors.grey.shade100,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 16.h,
+      body: SafeArea(
+        bottom: true,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 20.h),
+              Text(
+                "welcome_back".tr,
+                style: TextStyle(
+                  fontSize: 28.sp,
+                  fontWeight: FontWeight.bold,
+                  color: isDarkMode ? Colors.white : Colors.black,
                 ),
               ),
-              initialCountryCode: 'TN',
-              onChanged: (phone) {
-                // Handle phone number change
-              },
-              dropdownIconPosition: IconPosition.trailing,
-              showCountryFlag: true,
-              style: TextStyle(
-                color: isDarkMode ? Colors.white : Colors.black,
-                fontSize: 16.sp,
+              SizedBox(height: 8.h),
+              Text(
+                "sign_in_subtitle".tr,
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
+                ),
               ),
-              dropdownTextStyle: TextStyle(
-                color: isDarkMode ? Colors.white : Colors.black,
-                fontSize: 16.sp,
+              SizedBox(height: 32.h),
+              Text(
+                "phone_number".tr,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
-            ),
-            SizedBox(height: 12.h),
-            Align(
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                onTap: () => Get.to(() => const IssueWithNumberScreen()),
-                child: Text(
-                  "Issue with number?",
-                  style: TextStyle(
-                    color: const Color(0xFF4A80F0),
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
+              SizedBox(height: 12.h),
+              IntlPhoneField(
+                decoration: InputDecoration(
+                  hintText: '00000000',
+                  hintStyle: TextStyle(
+                    color: isDarkMode ? Colors.white24 : Colors.grey.shade400,
                   ),
-                ),
-              ),
-            ),
-            SizedBox(height: 12.h),
-            SizedBox(
-              width: double.infinity,
-              height: 55.h,
-              child: ElevatedButton(
-                onPressed: () => Get.to(() => const EnterPasswordScreen()),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4A80F0),
-                  shape: RoundedRectangleBorder(
+                  filled: true,
+                  fillColor: isDarkMode
+                      ? Colors.white.withOpacity(0.05)
+                      : Colors.grey.shade100,
+                  border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
+                    borderSide: BorderSide.none,
                   ),
-                  elevation: 0,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 16.h,
+                  ),
                 ),
-                child: Text(
-                  "Log In",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
+                initialCountryCode: 'TN',
+                onChanged: (phone) {
+                  // Handle phone number change
+                },
+                dropdownIconPosition: IconPosition.trailing,
+                showCountryFlag: true,
+                style: TextStyle(
+                  color: isDarkMode ? Colors.white : Colors.black,
+                  fontSize: 16.sp,
+                ),
+                dropdownTextStyle: TextStyle(
+                  color: isDarkMode ? Colors.white : Colors.black,
+                  fontSize: 16.sp,
                 ),
               ),
-            ),
-            SizedBox(height: 40.h),
-            Row(
-              children: [
-                Expanded(
-                  child: Divider(
-                    color: isDarkMode ? Colors.white24 : Colors.grey.shade300,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+              SizedBox(height: 12.h),
+              Align(
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  onTap: () => Get.to(() => const IssueWithNumberScreen()),
                   child: Text(
-                    "log_in_with".tr,
+                    "Issue with number?",
                     style: TextStyle(
+                      color: const Color(0xFF4A80F0),
                       fontSize: 14.sp,
-                      color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
+                      fontWeight: FontWeight.w500,
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Divider(
-                    color: isDarkMode ? Colors.white24 : Colors.grey.shade300,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 32.h),
-            _socialButton(
-              isDarkMode: isDarkMode,
-              icon: AppIcons.google,
-              label: "continue_with_google".tr,
-              onTap: () {},
-            ),
-            SizedBox(height: 16.h),
-            _socialButton(
-              isDarkMode: isDarkMode,
-              icon: AppIcons.apple,
-              label: "continue_with_apple".tr,
-              onTap: () {},
-            ),
-            SizedBox(height: 16.h),
-            _socialButton(
-              isDarkMode: isDarkMode,
-              icon: AppIcons.whatsapp,
-              label: "continue_with_whatsapp".tr,
-              onTap: () {},
-            ),
-            SizedBox(height: 16.h),
-            _socialButton(
-              isDarkMode: isDarkMode,
-              icon: AppIcons.facebook,
-              label: "continue_with_facebook".tr,
-              onTap: () {},
-            ),
-            SizedBox(height: 20.h),
-            Center(
-              child: GestureDetector(
-                onTap: () => Get.to(() => const SignUpScreen()),
-                child: RichText(
-                  text: TextSpan(
-                    text: "${"create_account_prompt".tr} ",
-                    style: TextStyle(
-                      color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
-                      fontSize: 14.sp,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: "sign_up".tr,
-                        style: TextStyle(
-                          color: const Color(0xFF4A80F0),
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 20.h),
-          ],
+              SizedBox(height: 12.h),
+              SizedBox(
+                width: double.infinity,
+                height: 55.h,
+                child: ElevatedButton(
+                  onPressed: () => Get.to(() => const EnterPasswordScreen()),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4A80F0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: Text(
+                    "Log In",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 40.h),
+              Row(
+                children: [
+                  Expanded(
+                    child: Divider(
+                      color: isDarkMode ? Colors.white24 : Colors.grey.shade300,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Text(
+                      "log_in_with".tr,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Divider(
+                      color: isDarkMode ? Colors.white24 : Colors.grey.shade300,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 32.h),
+              _socialButton(
+                isDarkMode: isDarkMode,
+                icon: AppIcons.google,
+                label: "continue_with_google".tr,
+                onTap: () {},
+              ),
+              SizedBox(height: 16.h),
+              _socialButton(
+                isDarkMode: isDarkMode,
+                icon: AppIcons.apple,
+                label: "continue_with_apple".tr,
+                onTap: () {},
+              ),
+              SizedBox(height: 16.h),
+              _socialButton(
+                isDarkMode: isDarkMode,
+                icon: AppIcons.whatsapp,
+                label: "continue_with_whatsapp".tr,
+                onTap: () {},
+              ),
+              SizedBox(height: 16.h),
+              _socialButton(
+                isDarkMode: isDarkMode,
+                icon: AppIcons.facebook,
+                label: "continue_with_facebook".tr,
+                onTap: () {},
+              ),
+              SizedBox(height: 20.h),
+              Center(
+                child: GestureDetector(
+                  onTap: () => Get.to(() => const SignUpScreen()),
+                  child: RichText(
+                    text: TextSpan(
+                      text: "${"create_account_prompt".tr} ",
+                      style: TextStyle(
+                        color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
+                        fontSize: 14.sp,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: "sign_up".tr,
+                          style: TextStyle(
+                            color: const Color(0xFF4A80F0),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20.h),
+            ],
+          ),
         ),
       ),
     );

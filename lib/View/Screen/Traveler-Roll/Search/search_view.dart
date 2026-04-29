@@ -31,494 +31,497 @@ class SearchScreen extends GetView<TravelerSearchController> {
       floatingActionButton: CustomBottomNavBar.buildFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomBottomNavBar(selectedIndex: 2),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Blue Header
-            Stack(
-              children: [
-                Container(
-                  height: 220.h,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                    ),
-                    color: const Color(0xFF4A80F0),
-                    image: DecorationImage(
-                      image: AssetImage(AppImg.dashboardBg),
-                      fit: BoxFit.cover,
+      body: SafeArea(
+        bottom: true,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Blue Header
+              Stack(
+                children: [
+                  Container(
+                    height: 220.h,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      ),
+                      color: const Color(0xFF4A80F0),
+                      image: DecorationImage(
+                        image: AssetImage(AppImg.dashboardBg),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
-                ),
-                SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20.w,
-                      vertical: 10.h,
-                    ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 20.h),
-                        // User Profile Header
-                        GestureDetector(
-                          onTap: () => Get.to(() => const ProfilePage()),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Row(
+                  SafeArea(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20.w,
+                        vertical: 10.h,
+                      ),
+                      child: Column(
+                        children: [
+                          SizedBox(height: 20.h),
+                          // User Profile Header
+                          GestureDetector(
+                            onTap: () => Get.to(() => const ProfilePage()),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 24.r,
+                                        backgroundImage: const NetworkImage(
+                                          "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+                                        ),
+                                      ),
+                                      SizedBox(width: 12.w),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Hi, Zain Malik",
+                                              style: GoogleFonts.manrope(
+                                                color: Colors.white,
+                                                fontSize: 16.sp,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
+                                            Text(
+                                              "Where would you like to send your package?",
+                                              style: GoogleFonts.manrope(
+                                                color: Colors.white.withOpacity(0.8),
+                                                fontSize: 12.sp,
+                                              ),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Row(
                                   children: [
-                                    CircleAvatar(
-                                      radius: 24.r,
-                                      backgroundImage: const NetworkImage(
-                                        "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+                                    GestureDetector(
+                                      onTap: () => Get.to(() => const CameraScanScreen()),
+                                      child: Container(
+                                        padding: EdgeInsets.all(10.r),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.2),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Icon(
+                                          Icons.qr_code_scanner,
+                                          color: Colors.white,
+                                          size: 24.sp,
+                                        ),
                                       ),
                                     ),
                                     SizedBox(width: 12.w),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            "Hi, Zain Malik",
-                                            style: GoogleFonts.manrope(
-                                              color: Colors.white,
-                                              fontSize: 16.sp,
-                                              fontWeight: FontWeight.w700,
-                                            ),
-                                          ),
-                                          Text(
-                                            "Where would you like to send your package?",
-                                            style: GoogleFonts.manrope(
-                                              color: Colors.white.withOpacity(0.8),
-                                              fontSize: 12.sp,
-                                            ),
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ],
+                                    GestureDetector(
+                                      onTap: () => Get.to(() => const TransporterNotificationsView()),
+                                      child: Container(
+                                        padding: EdgeInsets.all(10.r),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.2),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Icon(
+                                          Icons.notifications_none,
+                                          color: Colors.white,
+                                          size: 24.sp,
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
-                              ),
-                              Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () => Get.to(() => const CameraScanScreen()),
-                                    child: Container(
-                                      padding: EdgeInsets.all(10.r),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.2),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Icon(
-                                        Icons.qr_code_scanner,
-                                        color: Colors.white,
-                                        size: 24.sp,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 12.w),
-                                  GestureDetector(
-                                    onTap: () => Get.to(() => const TransporterNotificationsView()),
-                                    child: Container(
-                                      padding: EdgeInsets.all(10.r),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.2),
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Icon(
-                                        Icons.notifications_none,
-                                        color: Colors.white,
-                                        size: 24.sp,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
 
-                // Route Input Card
-                Padding(
-                  padding: EdgeInsets.only(top: 140.h, left: 20.w, right: 20.w),
-                  child: Container(
-                    padding: EdgeInsets.all(20.r),
-                    decoration: BoxDecoration(
-                      color: isDarkMode
-                          ? const Color(0xFF1E1E1E)
-                          : Colors.white,
-                      borderRadius: BorderRadius.circular(24.r),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
-                          blurRadius: 20,
-                          offset: const Offset(0, 10),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Set Your Route",
-                          style: GoogleFonts.manrope(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                            color: isDarkMode ? Colors.white : Colors.black87,
+                  // Route Input Card
+                  Padding(
+                    padding: EdgeInsets.only(top: 140.h, left: 20.w, right: 20.w),
+                    child: Container(
+                      padding: EdgeInsets.all(20.r),
+                      decoration: BoxDecoration(
+                        color: isDarkMode
+                            ? const Color(0xFF1E1E1E)
+                            : Colors.white,
+                        borderRadius: BorderRadius.circular(24.r),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.05),
+                            blurRadius: 20,
+                            offset: const Offset(0, 10),
                           ),
-                        ),
-                        SizedBox(height: 20.h),
-                        // Route Inputs
-                        Container(
-                          padding: EdgeInsets.all(16.r),
-                          decoration: BoxDecoration(
-                            color: isDarkMode
-                                ? Colors.white.withOpacity(0.03)
-                                : const Color(0xFFF9FAFB),
-                            borderRadius: BorderRadius.circular(16.r),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Obx(
-                                () => GestureDetector(
-                                  onTap: () async {
-                                    var result = await Get.to(
-                                      () => const MapPickerScreen(
-                                        title: "Pickup Point",
-                                      ),
-                                    );
-                                    if (result != null) {
-                                      controller.updatePickUp(result);
-                                    }
-                                  },
-                                  behavior: HitTestBehavior.opaque,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.all(10.r),
-                                        decoration: BoxDecoration(
-                                          color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-                                          shape: BoxShape.circle,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.05),
-                                              blurRadius: 10,
-                                            ),
-                                          ],
-                                        ),
-                                        child: SvgPicture.asset(
-                                          AppIcons.delivery,
-                                          colorFilter: ColorFilter.mode(
-                                            isDarkMode ? Colors.white : Colors.black87,
-                                            BlendMode.srcIn,
-                                          ),
-                                          width: 20.sp,
-                                          height: 20.sp,
-                                        ),
-                                      ),
-                                      SizedBox(width: 16.w),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Pick Up",
-                                              style: GoogleFonts.manrope(
-                                                fontSize: 12.sp,
-                                                color: isDarkMode ? Colors.white54 : Colors.grey.shade300,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            SizedBox(height: 2.h),
-                                            Text(
-                                              controller.pickUpAddress.value == "Where should it be picked up?" || controller.pickUpAddress.value.isEmpty 
-                                                  ? "Where should it be picked up?" 
-                                                  : controller.pickUpAddress.value,
-                                              style: GoogleFonts.manrope(
-                                                fontSize: 14.sp,
-                                                color: controller.pickUpAddress.value == "Where should it be picked up?" || controller.pickUpAddress.value.isEmpty
-                                                    ? Colors.grey.shade400
-                                                    : (isDarkMode ? Colors.white : Colors.black87),
-                                                fontWeight: controller.pickUpAddress.value == "Where should it be picked up?" || controller.pickUpAddress.value.isEmpty ? FontWeight.w500 : FontWeight.w600,
-                                              ),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 19.w, top: 4.h, bottom: 4.h),
-                                child: Column(
-                                  children: List.generate(
-                                    3,
-                                    (index) => Container(
-                                      margin: EdgeInsets.symmetric(
-                                        vertical: 3.h,
-                                      ),
-                                      width: 1.w,
-                                      height: 5.h,
-                                      color: isDarkMode ? Colors.white24 : Colors.grey,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Obx(
-                                () => GestureDetector(
-                                  onTap: () async {
-                                    var result = await Get.to(
-                                      () => const MapPickerScreen(
-                                        title: "Drop Point",
-                                      ),
-                                    );
-                                    if (result != null) {
-                                      controller.updateDrop(result);
-                                    }
-                                  },
-                                  behavior: HitTestBehavior.opaque,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        padding: EdgeInsets.all(10.r),
-                                        decoration: BoxDecoration(
-                                          color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-                                          shape: BoxShape.circle,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.05),
-                                              blurRadius: 10,
-                                            ),
-                                          ],
-                                        ),
-                                        child: SvgPicture.asset(
-                                          AppIcons.location,
-                                          colorFilter: ColorFilter.mode(
-                                            isDarkMode ? Colors.white : Colors.black87,
-                                            BlendMode.srcIn,
-                                          ),
-                                          width: 20.sp,
-                                          height: 20.sp,
-                                        ),
-                                      ),
-                                      SizedBox(width: 16.w),
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Drop",
-                                              style: GoogleFonts.manrope(
-                                                fontSize: 12.sp,
-                                                color: isDarkMode ? Colors.white54 : Colors.grey.shade300,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            SizedBox(height: 2.h),
-                                            Text(
-                                              controller.dropAddress.value == "Where should it be delivered?" || controller.dropAddress.value.isEmpty
-                                                  ? "Where should it be delivered?"
-                                                  : controller.dropAddress.value,
-                                              style: GoogleFonts.manrope(
-                                                fontSize: 14.sp,
-                                                color: controller.dropAddress.value == "Where should it be delivered?" || controller.dropAddress.value.isEmpty
-                                                    ? Colors.grey.shade400
-                                                    : (isDarkMode ? Colors.white : Colors.black87),
-                                                fontWeight: controller.dropAddress.value == "Where should it be delivered?" || controller.dropAddress.value.isEmpty ? FontWeight.w500 : FontWeight.w600,
-                                              ),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 20.h),
-                        // Date Selection
-                        Text(
-                          "Pickup Date",
-                          style: GoogleFonts.manrope(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w600,
-                            color: isDarkMode ? Colors.white : Colors.black87,
-                          ),
-                        ),
-                        SizedBox(height: 12.h),
-                        GestureDetector(
-                          onTap: () => _showDatePicker(context, isDarkMode),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16.w,
-                              vertical: 14.h,
+                        ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Set Your Route",
+                            style: GoogleFonts.manrope(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600,
+                              color: isDarkMode ? Colors.white : Colors.black87,
                             ),
+                          ),
+                          SizedBox(height: 20.h),
+                          // Route Inputs
+                          Container(
+                            padding: EdgeInsets.all(16.r),
                             decoration: BoxDecoration(
                               color: isDarkMode
                                   ? Colors.white.withOpacity(0.03)
                                   : const Color(0xFFF9FAFB),
-                              borderRadius: BorderRadius.circular(12.r),
+                              borderRadius: BorderRadius.circular(16.r),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Obx(
-                                  () => Text(
-                                    controller.selectedDateStr.value,
-                                    style: GoogleFonts.manrope(
-                                      fontSize: 14.sp,
-                                      color:
-                                          controller.selectedDateStr.value ==
-                                              "Choose pickup date"
-                                          ? Colors.grey.shade400
-                                          : (isDarkMode
-                                                ? Colors.white
-                                                : Colors.black87),
-                                      fontWeight:
-                                          controller.selectedDateStr.value ==
-                                              "Choose pickup date"
-                                          ? FontWeight.w500
-                                          : FontWeight.w600,
+                                  () => GestureDetector(
+                                    onTap: () async {
+                                      var result = await Get.to(
+                                        () => const MapPickerScreen(
+                                          title: "Pickup Point",
+                                        ),
+                                      );
+                                      if (result != null) {
+                                        controller.updatePickUp(result);
+                                      }
+                                    },
+                                    behavior: HitTestBehavior.opaque,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.all(10.r),
+                                          decoration: BoxDecoration(
+                                            color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+                                            shape: BoxShape.circle,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.05),
+                                                blurRadius: 10,
+                                              ),
+                                            ],
+                                          ),
+                                          child: SvgPicture.asset(
+                                            AppIcons.delivery,
+                                            colorFilter: ColorFilter.mode(
+                                              isDarkMode ? Colors.white : Colors.black87,
+                                              BlendMode.srcIn,
+                                            ),
+                                            width: 20.sp,
+                                            height: 20.sp,
+                                          ),
+                                        ),
+                                        SizedBox(width: 16.w),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Pick Up",
+                                                style: GoogleFonts.manrope(
+                                                  fontSize: 12.sp,
+                                                  color: isDarkMode ? Colors.white54 : Colors.grey.shade300,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              SizedBox(height: 2.h),
+                                              Text(
+                                                controller.pickUpAddress.value == "Where should it be picked up?" || controller.pickUpAddress.value.isEmpty 
+                                                    ? "Where should it be picked up?" 
+                                                    : controller.pickUpAddress.value,
+                                                style: GoogleFonts.manrope(
+                                                  fontSize: 14.sp,
+                                                  color: controller.pickUpAddress.value == "Where should it be picked up?" || controller.pickUpAddress.value.isEmpty
+                                                      ? Colors.grey.shade400
+                                                      : (isDarkMode ? Colors.white : Colors.black87),
+                                                  fontWeight: controller.pickUpAddress.value == "Where should it be picked up?" || controller.pickUpAddress.value.isEmpty ? FontWeight.w500 : FontWeight.w600,
+                                                ),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
-                                SvgPicture.asset(
-                                  AppIcons.date,
-                                  colorFilter: ColorFilter.mode(
-                                    isDarkMode ? Colors.white54 : Colors.black87,
-                                    BlendMode.srcIn,
+                                Padding(
+                                  padding: EdgeInsets.only(left: 19.w, top: 4.h, bottom: 4.h),
+                                  child: Column(
+                                    children: List.generate(
+                                      3,
+                                      (index) => Container(
+                                        margin: EdgeInsets.symmetric(
+                                          vertical: 3.h,
+                                        ),
+                                        width: 1.w,
+                                        height: 5.h,
+                                        color: isDarkMode ? Colors.white24 : Colors.grey,
+                                      ),
+                                    ),
                                   ),
-                                  width: 20.sp,
-                                  height: 20.sp,
+                                ),
+                                Obx(
+                                  () => GestureDetector(
+                                    onTap: () async {
+                                      var result = await Get.to(
+                                        () => const MapPickerScreen(
+                                          title: "Drop Point",
+                                        ),
+                                      );
+                                      if (result != null) {
+                                        controller.updateDrop(result);
+                                      }
+                                    },
+                                    behavior: HitTestBehavior.opaque,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.all(10.r),
+                                          decoration: BoxDecoration(
+                                            color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+                                            shape: BoxShape.circle,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.05),
+                                                blurRadius: 10,
+                                              ),
+                                            ],
+                                          ),
+                                          child: SvgPicture.asset(
+                                            AppIcons.location,
+                                            colorFilter: ColorFilter.mode(
+                                              isDarkMode ? Colors.white : Colors.black87,
+                                              BlendMode.srcIn,
+                                            ),
+                                            width: 20.sp,
+                                            height: 20.sp,
+                                          ),
+                                        ),
+                                        SizedBox(width: 16.w),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Drop",
+                                                style: GoogleFonts.manrope(
+                                                  fontSize: 12.sp,
+                                                  color: isDarkMode ? Colors.white54 : Colors.grey.shade300,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              SizedBox(height: 2.h),
+                                              Text(
+                                                controller.dropAddress.value == "Where should it be delivered?" || controller.dropAddress.value.isEmpty
+                                                    ? "Where should it be delivered?"
+                                                    : controller.dropAddress.value,
+                                                style: GoogleFonts.manrope(
+                                                  fontSize: 14.sp,
+                                                  color: controller.dropAddress.value == "Where should it be delivered?" || controller.dropAddress.value.isEmpty
+                                                      ? Colors.grey.shade400
+                                                      : (isDarkMode ? Colors.white : Colors.black87),
+                                                  fontWeight: controller.dropAddress.value == "Where should it be delivered?" || controller.dropAddress.value.isEmpty ? FontWeight.w500 : FontWeight.w600,
+                                                ),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                        SizedBox(height: 24.h),
-                        // Continue Button
-                        SizedBox(
-                          width: double.infinity,
-                          height: 52.h,
-                          child: ElevatedButton(
-                            onPressed: () =>
-                                Get.to(() => const PackageDetailsScreen()),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF4A80F0),
-                              shape: RoundedRectangleBorder(
+                          SizedBox(height: 20.h),
+                          // Date Selection
+                          Text(
+                            "Pickup Date",
+                            style: GoogleFonts.manrope(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600,
+                              color: isDarkMode ? Colors.white : Colors.black87,
+                            ),
+                          ),
+                          SizedBox(height: 12.h),
+                          GestureDetector(
+                            onTap: () => _showDatePicker(context, isDarkMode),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 16.w,
+                                vertical: 14.h,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isDarkMode
+                                    ? Colors.white.withOpacity(0.03)
+                                    : const Color(0xFFF9FAFB),
                                 borderRadius: BorderRadius.circular(12.r),
                               ),
-                              elevation: 0,
-                            ),
-                            child: Text(
-                              "Continue",
-                              style: GoogleFonts.manrope(
-                                color: Colors.white,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w700,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Obx(
+                                    () => Text(
+                                      controller.selectedDateStr.value,
+                                      style: GoogleFonts.manrope(
+                                        fontSize: 14.sp,
+                                        color:
+                                            controller.selectedDateStr.value ==
+                                                "Choose pickup date"
+                                            ? Colors.grey.shade400
+                                            : (isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black87),
+                                        fontWeight:
+                                            controller.selectedDateStr.value ==
+                                                "Choose pickup date"
+                                            ? FontWeight.w500
+                                            : FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  SvgPicture.asset(
+                                    AppIcons.date,
+                                    colorFilter: ColorFilter.mode(
+                                      isDarkMode ? Colors.white54 : Colors.black87,
+                                      BlendMode.srcIn,
+                                    ),
+                                    width: 20.sp,
+                                    height: 20.sp,
+                                  ),
+                                ],
                               ),
+                            ),
+                          ),
+                          SizedBox(height: 24.h),
+                          // Continue Button
+                          SizedBox(
+                            width: double.infinity,
+                            height: 52.h,
+                            child: ElevatedButton(
+                              onPressed: () =>
+                                  Get.to(() => const PackageDetailsScreen()),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFF4A80F0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                elevation: 0,
+                              ),
+                              child: Text(
+                                "Continue",
+                                style: GoogleFonts.manrope(
+                                  color: Colors.white,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 24.h),
+
+              // Recent Rides Section
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Recent Rides",
+                          style: GoogleFonts.manrope(
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.w700,
+                            color: isDarkMode ? Colors.white : Colors.black87,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "See all",
+                            style: GoogleFonts.manrope(
+                              fontSize: 12.sp,
+                              color: Colors.grey,
                             ),
                           ),
                         ),
                       ],
                     ),
-                  ),
+                    SizedBox(height: 12.h),
+                    _recentRideItem(
+                      "Tunis",
+                      "Paris",
+                      "14 Jan",
+                      "2:30 PM",
+                      isDarkMode,
+                    ),
+                    SizedBox(height: 12.h),
+                    _recentRideItem(
+                      "Tunis",
+                      "Maseille",
+                      "14 Jan",
+                      "2:30 PM",
+                      isDarkMode,
+                    ),
+                    SizedBox(height: 12.h),
+                    _recentRideItem(
+                      "Tunis",
+                      "Rome",
+                      "14 Jan",
+                      "2:30 PM",
+                      isDarkMode,
+                    ),
+                    SizedBox(height: 12.h),
+                    _recentRideItem(
+                      "Tunis",
+                      "London",
+                      "14 Jan",
+                      "2:30 PM",
+                      isDarkMode,
+                    ),
+                    _recentRideItem(
+                      "Tunis",
+                      "Italy",
+                      "14 Jan",
+                      "2:30 PM",
+                      isDarkMode,
+                    ),
+                    SizedBox(height: 20.h),
+                  ],
                 ),
-              ],
-            ),
-
-            SizedBox(height: 24.h),
-
-            // Recent Rides Section
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Recent Rides",
-                        style: GoogleFonts.manrope(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w700,
-                          color: isDarkMode ? Colors.white : Colors.black87,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "See all",
-                          style: GoogleFonts.manrope(
-                            fontSize: 12.sp,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 12.h),
-                  _recentRideItem(
-                    "Tunis",
-                    "Paris",
-                    "14 Jan",
-                    "2:30 PM",
-                    isDarkMode,
-                  ),
-                  SizedBox(height: 12.h),
-                  _recentRideItem(
-                    "Tunis",
-                    "Maseille",
-                    "14 Jan",
-                    "2:30 PM",
-                    isDarkMode,
-                  ),
-                  SizedBox(height: 12.h),
-                  _recentRideItem(
-                    "Tunis",
-                    "Rome",
-                    "14 Jan",
-                    "2:30 PM",
-                    isDarkMode,
-                  ),
-                  SizedBox(height: 12.h),
-                  _recentRideItem(
-                    "Tunis",
-                    "London",
-                    "14 Jan",
-                    "2:30 PM",
-                    isDarkMode,
-                  ),
-                  _recentRideItem(
-                    "Tunis",
-                    "Italy",
-                    "14 Jan",
-                    "2:30 PM",
-                    isDarkMode,
-                  ),
-                  SizedBox(height: 20.h),
-                ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

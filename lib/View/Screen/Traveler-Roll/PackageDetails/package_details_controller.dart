@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 
 class PackageDetailsController extends GetxController {
   final ImagePicker _picker = ImagePicker();
@@ -25,7 +26,10 @@ class PackageDetailsController extends GetxController {
   final RxBool needStorage = false.obs;
 
   // Storage Dates
-  final RxString storageDateRange = "1-29-2026 - 1-31-2026".obs;
+  final RxString storageDateRange = "Select Date Range".obs;
+  final Rxn<DateTime> rangeStart = Rxn<DateTime>();
+  final Rxn<DateTime> rangeEnd = Rxn<DateTime>();
+  final RxInt storageDays = 0.obs;
 
   Future<void> pickImage(bool isExterior) async {
     if (isExterior) {
@@ -78,5 +82,22 @@ class PackageDetailsController extends GetxController {
 
   void toggleStorage(bool value) {
     needStorage.value = value;
+  }
+
+  void updateDateRange(DateTime? start, DateTime? end) {
+    rangeStart.value = start;
+    rangeEnd.value = end;
+
+    if (start != null && end != null) {
+      int days = end.difference(start).inDays + 1;
+      storageDays.value = days;
+      storageDateRange.value = "${DateFormat('M-dd-yyyy').format(start)} - ${DateFormat('M-dd-yyyy').format(end)}";
+    } else if (start != null) {
+      storageDays.value = 1;
+      storageDateRange.value = DateFormat('M-dd-yyyy').format(start);
+    } else {
+      storageDays.value = 0;
+      storageDateRange.value = "Select Date Range";
+    }
   }
 }

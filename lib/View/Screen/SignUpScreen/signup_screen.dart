@@ -36,176 +36,179 @@ class SignUpScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 20.h),
-            Text(
-              "create_your_account".tr,
-              style: TextStyle(
-                fontSize: 28.sp,
-                fontWeight: FontWeight.bold,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              "signup_subtitle".tr,
-              style: TextStyle(
-                fontSize: 16.sp,
-                color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
-              ),
-            ),
-            SizedBox(height: 32.h),
-            _inputLabel(label: "full_name".tr, isDarkMode: isDarkMode),
-            SizedBox(height: 12.h),
-            _textField(hint: "full_name".tr, isDarkMode: isDarkMode),
-            SizedBox(height: 20.h),
-            _inputLabel(label: "email".tr, isDarkMode: isDarkMode),
-            SizedBox(height: 12.h),
-            _textField(hint: "email".tr, isDarkMode: isDarkMode),
-            SizedBox(height: 20.h),
-            _inputLabel(label: "phone_number".tr, isDarkMode: isDarkMode),
-            SizedBox(height: 12.h),
-            IntlPhoneField(
-              decoration: InputDecoration(
-                hintText: '00000000',
-                hintStyle: TextStyle(
-                  color: isDarkMode ? Colors.white24 : Colors.grey.shade400,
-                ),
-                filled: true,
-                fillColor: isDarkMode
-                    ? Colors.white.withOpacity(0.05)
-                    : Colors.grey.shade100,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16.w,
-                  vertical: 16.h,
+      body: SafeArea(
+        bottom: true,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 20.h),
+              Text(
+                "create_your_account".tr,
+                style: TextStyle(
+                  fontSize: 28.sp,
+                  fontWeight: FontWeight.bold,
+                  color: isDarkMode ? Colors.white : Colors.black,
                 ),
               ),
-              initialCountryCode: 'TN',
-              onChanged: (phone) {
-                // Handle phone number change
-              },
-              dropdownIconPosition: IconPosition.trailing,
-              showCountryFlag: true,
-              style: TextStyle(
-                color: isDarkMode ? Colors.white : Colors.black,
-                fontSize: 16.sp,
+              SizedBox(height: 8.h),
+              Text(
+                "signup_subtitle".tr,
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
+                ),
               ),
-              dropdownTextStyle: TextStyle(
-                color: isDarkMode ? Colors.white : Colors.black,
-                fontSize: 16.sp,
-              ),
-            ),
-            SizedBox(height: 32.h),
-            SizedBox(
-              width: double.infinity,
-              height: 55.h,
-              child: ElevatedButton(
-                onPressed: () => Get.to(() => const AgreeToTermsScreen()),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4A80F0),
-                  shape: RoundedRectangleBorder(
+              SizedBox(height: 32.h),
+              _inputLabel(label: "full_name".tr, isDarkMode: isDarkMode),
+              SizedBox(height: 12.h),
+              _textField(hint: "full_name".tr, isDarkMode: isDarkMode),
+              SizedBox(height: 20.h),
+              _inputLabel(label: "email".tr, isDarkMode: isDarkMode),
+              SizedBox(height: 12.h),
+              _textField(hint: "email".tr, isDarkMode: isDarkMode),
+              SizedBox(height: 20.h),
+              _inputLabel(label: "phone_number".tr, isDarkMode: isDarkMode),
+              SizedBox(height: 12.h),
+              IntlPhoneField(
+                decoration: InputDecoration(
+                  hintText: '00000000',
+                  hintStyle: TextStyle(
+                    color: isDarkMode ? Colors.white24 : Colors.grey.shade400,
+                  ),
+                  filled: true,
+                  fillColor: isDarkMode
+                      ? Colors.white.withOpacity(0.05)
+                      : Colors.grey.shade100,
+                  border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12.r),
+                    borderSide: BorderSide.none,
                   ),
-                  elevation: 0,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 16.h,
+                  ),
                 ),
-                child: Text(
-                  "Sign Up",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
+                initialCountryCode: 'TN',
+                onChanged: (phone) {
+                  // Handle phone number change
+                },
+                dropdownIconPosition: IconPosition.trailing,
+                showCountryFlag: true,
+                style: TextStyle(
+                  color: isDarkMode ? Colors.white : Colors.black,
+                  fontSize: 16.sp,
+                ),
+                dropdownTextStyle: TextStyle(
+                  color: isDarkMode ? Colors.white : Colors.black,
+                  fontSize: 16.sp,
                 ),
               ),
-            ),
-            SizedBox(height: 40.h),
-            Row(
-              children: [
-                Expanded(
-                  child: Divider(
-                    color: isDarkMode ? Colors.white24 : Colors.grey.shade300,
+              SizedBox(height: 32.h),
+              SizedBox(
+                width: double.infinity,
+                height: 55.h,
+                child: ElevatedButton(
+                  onPressed: () => Get.to(() => const AgreeToTermsScreen()),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4A80F0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    elevation: 0,
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Text(
-                    "log_in_with".tr, // Reusing key
+                    "Sign Up",
                     style: TextStyle(
-                      fontSize: 14.sp,
-                      color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
+                      color: Colors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Divider(
-                    color: isDarkMode ? Colors.white24 : Colors.grey.shade300,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 32.h),
-            _socialButton(
-              isDarkMode: isDarkMode,
-              icon: AppIcons.google,
-              label: "continue_with_google".tr,
-              onTap: () {},
-            ),
-            SizedBox(height: 16.h),
-            _socialButton(
-              isDarkMode: isDarkMode,
-              icon: AppIcons.apple,
-              label: "continue_with_apple".tr,
-              onTap: () {},
-            ),
-            SizedBox(height: 16.h),
-            _socialButton(
-              isDarkMode: isDarkMode,
-              icon: AppIcons.whatsapp,
-              label: "continue_with_whatsapp".tr,
-              onTap: () {},
-            ),
-            SizedBox(height: 16.h),
-            _socialButton(
-              isDarkMode: isDarkMode,
-              icon: AppIcons.facebook,
-              label: "continue_with_facebook".tr,
-              onTap: () {},
-            ),
-            SizedBox(height: 20.h),
-            Center(
-              child: GestureDetector(
-                onTap: () => Get.to(() => const LogInScreen()),
-                child: RichText(
-                  text: TextSpan(
-                    text: "${"already_have_account".tr} ",
-                    style: TextStyle(
-                      color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
-                      fontSize: 14.sp,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: "log_in".tr,
-                        style: TextStyle(
-                          color: const Color(0xFF4A80F0),
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 30.h),
-          ],
+              SizedBox(height: 40.h),
+              Row(
+                children: [
+                  Expanded(
+                    child: Divider(
+                      color: isDarkMode ? Colors.white24 : Colors.grey.shade300,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: Text(
+                      "log_in_with".tr, // Reusing key
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Divider(
+                      color: isDarkMode ? Colors.white24 : Colors.grey.shade300,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 32.h),
+              _socialButton(
+                isDarkMode: isDarkMode,
+                icon: AppIcons.google,
+                label: "continue_with_google".tr,
+                onTap: () {},
+              ),
+              SizedBox(height: 16.h),
+              _socialButton(
+                isDarkMode: isDarkMode,
+                icon: AppIcons.apple,
+                label: "continue_with_apple".tr,
+                onTap: () {},
+              ),
+              SizedBox(height: 16.h),
+              _socialButton(
+                isDarkMode: isDarkMode,
+                icon: AppIcons.whatsapp,
+                label: "continue_with_whatsapp".tr,
+                onTap: () {},
+              ),
+              SizedBox(height: 16.h),
+              _socialButton(
+                isDarkMode: isDarkMode,
+                icon: AppIcons.facebook,
+                label: "continue_with_facebook".tr,
+                onTap: () {},
+              ),
+              SizedBox(height: 20.h),
+              Center(
+                child: GestureDetector(
+                  onTap: () => Get.to(() => const LogInScreen()),
+                  child: RichText(
+                    text: TextSpan(
+                      text: "${"already_have_account".tr} ",
+                      style: TextStyle(
+                        color: isDarkMode ? Colors.white70 : Colors.grey.shade600,
+                        fontSize: 14.sp,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: "log_in".tr,
+                          style: TextStyle(
+                            color: const Color(0xFF4A80F0),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 30.h),
+            ],
+          ),
         ),
       ),
     );
