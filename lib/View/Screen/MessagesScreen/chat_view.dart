@@ -128,7 +128,7 @@ class ChatView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Column(
                   children: [
-                    _buildCommunicationWarning(isDarkMode),
+                      _buildCommunicationWarning(isDarkMode),
 
                     if (controller.status.value != BookingStatus.accepted &&
                         userData['isSupport'] != true)

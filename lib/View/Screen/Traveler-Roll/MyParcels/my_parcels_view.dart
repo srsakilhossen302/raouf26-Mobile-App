@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import '../../../Widget/custom_bottom_nav_bar.dart';
+import '../../MessagesScreen/chat_view.dart';
 import 'my_parcels_controller.dart';
 
 class MyParcelsScreen extends GetView<MyParcelsController> {
@@ -488,12 +489,26 @@ class CustomParcelCard extends StatelessWidget {
             SizedBox(height: 16.h),
           ],
 
-          // Message Button
           SizedBox(
             width: double.infinity,
             height: 48.h,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(
+                  () => ChatView(
+                    userData: {
+                      'name': name,
+                      'image':
+                          "https://i.pravatar.cc/150?u=a042581f4e29026704d", // In real app, get from parcel data
+                      'from': from,
+                      'to': to,
+                      'weight': "15kg",
+                      'price': total,
+                      'directContact': true,
+                    },
+                  ),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4A80F0),
                 shape: RoundedRectangleBorder(
