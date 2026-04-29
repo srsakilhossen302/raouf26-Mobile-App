@@ -26,9 +26,9 @@ class ChatController extends GetxController {
 
   void setUserData(Map<String, dynamic> data) {
     userData.value = data;
-    if (data['isSupport'] == true) {
+    if (data['isSupport'] == true || data['directContact'] == true) {
       status.value = BookingStatus.accepted;
-      if (messages.isEmpty) {
+      if (messages.isEmpty && data['isSupport'] == true) {
         messages.add({
           'isMe': false,
           'text': data['message'] ?? 'How can we help you?',

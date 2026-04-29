@@ -412,6 +412,7 @@ class TransporterDetailsView extends StatelessWidget {
                               'to': transporter.to,
                               'weight': "15kg", // Default or from search
                               'price': transporter.estimatedTotal,
+                              'directContact': true,
                             },
                           ),
                         );
