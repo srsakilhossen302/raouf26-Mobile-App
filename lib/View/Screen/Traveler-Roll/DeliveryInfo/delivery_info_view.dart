@@ -49,473 +49,410 @@ class DeliveryInfoView extends GetView<DeliveryInfoController> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.r),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Delivery Information",
-              style: GoogleFonts.manrope(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w700,
-                color: isDarkMode ? Colors.white : Colors.black,
+      body: SafeArea(
+        bottom: true,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(20.r),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Delivery Information",
+                style: GoogleFonts.manrope(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w700,
+                  color: isDarkMode ? Colors.white : Colors.black,
+                ),
               ),
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              "Enter recipient details and choose delivery options.",
-              style: GoogleFonts.manrope(
-                fontSize: 14.sp,
-                color: Colors.grey,
+              SizedBox(height: 8.h),
+              Text(
+                "Enter recipient details and choose delivery options.",
+                style: GoogleFonts.manrope(
+                  fontSize: 14.sp,
+                  color: Colors.grey,
+                ),
               ),
-            ),
-            SizedBox(height: 24.h),
+              SizedBox(height: 24.h),
 
-            // Who Are You Sending to? Section
-            _sectionTitle("Who Are You Sending to?", isDarkMode),
-            SizedBox(height: 16.h),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  _inviteNewCircle(isDarkMode),
-                  SizedBox(width: 20.w),
-                  ...controller.contacts.map(
-                    (contact) => Padding(
-                      padding: EdgeInsets.only(right: 20.w),
-                      child: _contactCircle(
-                        contact['name']!,
-                        contact['image']!,
-                        isDarkMode,
+              // Who Are You Sending to? Section
+              _sectionTitle("Who Are You Sending to?", isDarkMode),
+              SizedBox(height: 16.h),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    _inviteNewCircle(isDarkMode),
+                    SizedBox(width: 20.w),
+                    ...controller.contacts.map(
+                      (contact) => Padding(
+                        padding: EdgeInsets.only(right: 20.w),
+                        child: _contactCircle(
+                          contact['name']!,
+                          contact['image']!,
+                          isDarkMode,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
 
-            SizedBox(height: 24.h),
+              SizedBox(height: 24.h),
 
-            // Recipient's Name Field
-            _sectionTitle("Recipient's Name", isDarkMode, subtitle: "Receiver needs a Sendit account to track this parcel."),
-            SizedBox(height: 12.h),
-            _customTextField(
-              controller: controller.recipientNameController,
-              hintText: "Enter Recipient's Name",
-              suffixIcon: AppIcons.partion,
-              isDarkMode: isDarkMode,
-            ),
-
-            SizedBox(height: 20.h),
-
-            // Phone Number Field
-            _sectionTitle("Phone Number", isDarkMode),
-            SizedBox(height: 12.h),
-            _phoneTextField(isDarkMode),
-
-            SizedBox(height: 24.h),
-
-            // Map Section
-            Container(
-              decoration: BoxDecoration(
-                color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
-                borderRadius: BorderRadius.circular(16.r),
+              // Recipient's Name Field
+              _sectionTitle("Recipient's Name", isDarkMode, subtitle: "Receiver needs a Sendit account to track this parcel."),
+              SizedBox(height: 12.h),
+              _customTextField(
+                controller: controller.recipientNameController,
+                hintText: "Enter Recipient's Name",
+                suffixIcon: AppIcons.partion,
+                isDarkMode: isDarkMode,
               ),
-              child: Column(
-                children: [
-                  // Mock Map Container
-                  Container(
-                    height: 160.h,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(16.r),
-                      ),
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          "https://static-maps.yandex.ru/1.x/?lang=en_US&ll=10.6346,35.8256&z=13&l=map&size=450,450",
+
+              SizedBox(height: 20.h),
+
+              // Phone Number Field
+              _sectionTitle("Phone Number", isDarkMode),
+              SizedBox(height: 12.h),
+              _phoneTextField(isDarkMode),
+
+              SizedBox(height: 24.h),
+
+              // Map Section
+              Container(
+                decoration: BoxDecoration(
+                  color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                child: Column(
+                  children: [
+                    // Mock Map Container
+                    Container(
+                      height: 160.h,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(16.r),
                         ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Center(
-                      child: ElevatedButton.icon(
-                        onPressed: () => controller.adjustLocation(),
-                        icon: const Icon(
-                          Icons.location_on_outlined,
-                          size: 18,
-                          color: Colors.black,
+                        image: const DecorationImage(
+                          image: NetworkImage(
+                            "https://static-maps.yandex.ru/1.x/?lang=en_US&ll=10.6346,35.8256&z=13&l=map&size=450,450",
+                          ),
+                          fit: BoxFit.cover,
                         ),
-                        label: Text(
-                          "Adjust Location",
-                          style: GoogleFonts.manrope(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w600,
+                      ),
+                      child: Center(
+                        child: ElevatedButton.icon(
+                          onPressed: () => controller.adjustLocation(),
+                          icon: const Icon(
+                            Icons.location_on_outlined,
+                            size: 18,
                             color: Colors.black,
                           ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.r),
+                          label: Text(
+                            "Adjust Location",
+                            style: GoogleFonts.manrope(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black,
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  // Address Bar
-                  Padding(
-                    padding: EdgeInsets.all(12.r),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(8.r),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
-                                blurRadius: 4,
-                                spreadRadius: 1,
-                              ),
-                            ],
-                          ),
-                          child: Icon(
-                            Icons.location_on_outlined,
-                            color: Colors.grey,
-                            size: 20.sp,
-                          ),
-                        ),
-                        SizedBox(width: 12.w),
-                        Expanded(
-                          child: Obx(
-                            () => Text(
-                              controller.selectedAddress.value,
-                              style: GoogleFonts.manrope(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                                color: isDarkMode ? Colors.white : Colors.black,
-                              ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            elevation: 2,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.r),
                             ),
                           ),
                         ),
-                        SvgPicture.asset(
-                          AppIcons.save,
-                          width: 20.w,
-                          height: 20.h,
+                      ),
+                    ),
+                    // Address Bar
+                    Padding(
+                      padding: EdgeInsets.all(12.r),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(8.r),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  blurRadius: 4,
+                                  spreadRadius: 1,
+                                ),
+                              ],
+                            ),
+                            child: Icon(
+                              Icons.location_on_outlined,
+                              color: Colors.grey,
+                              size: 20.sp,
+                            ),
+                          ),
+                          SizedBox(width: 12.w),
+                          Expanded(
+                            child: Obx(
+                              () => Text(
+                                controller.selectedAddress.value,
+                                style: GoogleFonts.manrope(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: isDarkMode ? Colors.white : Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SvgPicture.asset(
+                            AppIcons.save,
+                            width: 20.w,
+                            height: 20.h,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 24.h),
+
+              // Pickup Method
+              _sectionTitle("Pickup Method", isDarkMode),
+              SizedBox(height: 8.h),
+              Text(
+                "How should the package be collected?",
+                style: GoogleFonts.manrope(
+                  fontSize: 12.sp,
+                  color: Colors.grey,
+                ),
+              ),
+              SizedBox(height: 16.h),
+              Obx(
+                () => Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _selectionChip(
+                            label: controller.pickupMethodOptions[0],
+                            isSelected:
+                                controller.selectedPickupMethod.value ==
+                                controller.pickupMethodOptions[0],
+                            onTap: () => controller.setPickupMethod(
+                              controller.pickupMethodOptions[0],
+                            ),
+                            isDarkMode: isDarkMode,
+                          ),
+                        ),
+                        SizedBox(width: 10.w),
+                        Expanded(
+                          child: _selectionChip(
+                            label: controller.pickupMethodOptions[1],
+                            isSelected:
+                                controller.selectedPickupMethod.value ==
+                                controller.pickupMethodOptions[1],
+                            onTap: () => controller.setPickupMethod(
+                              controller.pickupMethodOptions[1],
+                            ),
+                            isDarkMode: isDarkMode,
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 24.h),
-
-            // Pickup Method
-            _sectionTitle("Pickup Method", isDarkMode),
-            SizedBox(height: 8.h),
-            Text(
-              "How should the package be collected?",
-              style: GoogleFonts.manrope(
-                fontSize: 12.sp,
-                color: Colors.grey,
-              ),
-            ),
-            SizedBox(height: 16.h),
-            Obx(
-              () => Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _selectionChip(
-                          label: controller.pickupMethodOptions[0],
-                          isSelected:
-                              controller.selectedPickupMethod.value ==
-                              controller.pickupMethodOptions[0],
-                          onTap: () => controller.setPickupMethod(
-                            controller.pickupMethodOptions[0],
-                          ),
-                          isDarkMode: isDarkMode,
-                        ),
-                      ),
-                      SizedBox(width: 10.w),
-                      Expanded(
-                        child: _selectionChip(
-                          label: controller.pickupMethodOptions[1],
-                          isSelected:
-                              controller.selectedPickupMethod.value ==
-                              controller.pickupMethodOptions[1],
-                          onTap: () => controller.setPickupMethod(
-                            controller.pickupMethodOptions[1],
-                          ),
-                          isDarkMode: isDarkMode,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10.h),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _selectionChip(
-                          label: controller.pickupMethodOptions[2],
-                          isSelected:
-                              controller.selectedPickupMethod.value ==
+                    SizedBox(height: 10.h),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _selectionChip(
+                            label: controller.pickupMethodOptions[2],
+                            isSelected:
+                                controller.selectedPickupMethod.value ==
+                                controller.pickupMethodOptions[2],
+                            onTap: () => controller.setPickupMethod(
                               controller.pickupMethodOptions[2],
-                          onTap: () => controller.setPickupMethod(
-                            controller.pickupMethodOptions[2],
+                            ),
+                            isDarkMode: isDarkMode,
                           ),
-                          isDarkMode: isDarkMode,
                         ),
-                      ),
-                      const Expanded(child: SizedBox()),
-                    ],
-                  ),
+                        const Expanded(child: SizedBox()),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 24.h),
+
+              // Delivery Options
+              Row(
+                children: [
+                  _sectionTitle("Delivery Options", isDarkMode),
+                  SizedBox(width: 8.w),
                 ],
               ),
-            ),
-
-            SizedBox(height: 24.h),
-
-            // // Delivery Method
-            // _sectionTitle("Delivery Method", isDarkMode),
-            // SizedBox(height: 8.h),
-            // Text(
-            //   "How should the package reach the receiver?",
-            //   style: GoogleFonts.manrope(
-            //     fontSize: 12.sp,
-            //     color: Colors.grey,
-            //   ),
-            // ),
-            // SizedBox(height: 16.h),
-            // Obx(
-            //   () => Column(
-            //     children: [
-            //       Row(
-            //         children: [
-            //           Expanded(
-            //             child: _selectionChip(
-            //               label: controller.deliveryMethodOptions[0],
-            //               isSelected:
-            //                   controller.selectedDeliveryMethod.value ==
-            //                   controller.deliveryMethodOptions[0],
-            //               onTap: () => controller.setDeliveryMethod(
-            //                 controller.deliveryMethodOptions[0],
-            //               ),
-            //               isDarkMode: isDarkMode,
-            //             ),
-            //           ),
-            //           SizedBox(width: 10.w),
-            //           Expanded(
-            //             child: _selectionChip(
-            //               label: controller.deliveryMethodOptions[1],
-            //               isSelected:
-            //                   controller.selectedDeliveryMethod.value ==
-            //                   controller.deliveryMethodOptions[1],
-            //               onTap: () => controller.setDeliveryMethod(
-            //                 controller.deliveryMethodOptions[1],
-            //               ),
-            //               isDarkMode: isDarkMode,
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //       SizedBox(height: 10.h),
-            //       Row(
-            //         children: [
-            //           Expanded(
-            //             child: _selectionChip(
-            //               label: controller.deliveryMethodOptions[2],
-            //               isSelected:
-            //                   controller.selectedDeliveryMethod.value ==
-            //                   controller.deliveryMethodOptions[2],
-            //               onTap: () => controller.setDeliveryMethod(
-            //                 controller.deliveryMethodOptions[2],
-            //               ),
-            //               isDarkMode: isDarkMode,
-            //             ),
-            //           ),
-            //           const Expanded(child: SizedBox()),
-            //         ],
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            SizedBox(height: 24.h),
-
-            // Delivery Options
-            Row(
-              children: [
-                _sectionTitle("Delivery Options", isDarkMode),
-                SizedBox(width: 8.w),
-              ],
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              "Select delivery speed and preferred carrier type.",
-              style: GoogleFonts.manrope(
-                fontSize: 12.sp,
-                color: Colors.grey,
+              SizedBox(height: 8.h),
+              Text(
+                "Select delivery speed and preferred carrier type.",
+                style: GoogleFonts.manrope(
+                  fontSize: 12.sp,
+                  color: Colors.grey,
+                ),
               ),
-            ),
-            SizedBox(height: 24.h),
+              SizedBox(height: 24.h),
 
-            // Delivery Speed
-            Text(
-              "Delivery Speed",
-              style: GoogleFonts.manrope(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: isDarkMode ? Colors.white : Colors.black87,
+              // Delivery Speed
+              Text(
+                "Delivery Speed",
+                style: GoogleFonts.manrope(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: isDarkMode ? Colors.white : Colors.black87,
+                ),
               ),
-            ),
-            SizedBox(height: 12.h),
-            Obx(
-              () => Row(
-                children: [
-                  Expanded(
-                    child: _selectionChip(
-                      label: controller.deliverySpeedOptions[0],
-                      isSelected:
-                          controller.selectedDeliverySpeed.value ==
+              SizedBox(height: 12.h),
+              Obx(
+                () => Row(
+                  children: [
+                    Expanded(
+                      child: _selectionChip(
+                        label: controller.deliverySpeedOptions[0],
+                        isSelected:
+                            controller.selectedDeliverySpeed.value ==
+                            controller.deliverySpeedOptions[0],
+                        onTap: () => controller.setDeliverySpeed(
                           controller.deliverySpeedOptions[0],
-                      onTap: () => controller.setDeliverySpeed(
-                        controller.deliverySpeedOptions[0],
+                        ),
+                        isDarkMode: isDarkMode,
                       ),
-                      isDarkMode: isDarkMode,
                     ),
-                  ),
-                  SizedBox(width: 8.w),
-                  Expanded(
-                    child: _selectionChip(
-                      label: controller.deliverySpeedOptions[1],
-                      isSelected:
-                          controller.selectedDeliverySpeed.value ==
+                    SizedBox(width: 8.w),
+                    Expanded(
+                      child: _selectionChip(
+                        label: controller.deliverySpeedOptions[1],
+                        isSelected:
+                            controller.selectedDeliverySpeed.value ==
+                            controller.deliverySpeedOptions[1],
+                        onTap: () => controller.setDeliverySpeed(
                           controller.deliverySpeedOptions[1],
-                      onTap: () => controller.setDeliverySpeed(
-                        controller.deliverySpeedOptions[1],
+                        ),
+                        isDarkMode: isDarkMode,
                       ),
-                      isDarkMode: isDarkMode,
                     ),
-                  ),
-                  SizedBox(width: 8.w),
-                  Expanded(
-                    child: _selectionChip(
-                      label: controller.deliverySpeedOptions[2],
-                      isSelected:
-                          controller.selectedDeliverySpeed.value ==
+                    SizedBox(width: 8.w),
+                    Expanded(
+                      child: _selectionChip(
+                        label: controller.deliverySpeedOptions[2],
+                        isSelected:
+                            controller.selectedDeliverySpeed.value ==
+                            controller.deliverySpeedOptions[2],
+                        onTap: () => controller.setDeliverySpeed(
                           controller.deliverySpeedOptions[2],
-                      onTap: () => controller.setDeliverySpeed(
-                        controller.deliverySpeedOptions[2],
+                        ),
+                        isDarkMode: isDarkMode,
                       ),
-                      isDarkMode: isDarkMode,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
 
-            SizedBox(height: 24.h),
+              SizedBox(height: 24.h),
 
-            // Delivery Handed Over Preference
-            Text(
-              "Preferred Delivery",
-              style: GoogleFonts.manrope(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: isDarkMode ? Colors.white : Colors.black87,
+              // Delivery Handed Over Preference
+              Text(
+                "Preferred Delivery",
+                style: GoogleFonts.manrope(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w500,
+                  color: isDarkMode ? Colors.white : Colors.black87,
+                ),
               ),
-            ),
-            SizedBox(height: 6.h),
-            Text(
-              "Tell us how you’d prefer to receive it. We’ll consider this when possible.",
-              style: GoogleFonts.manrope(
-                fontSize: 12.sp,
-                color: Colors.grey,
+              SizedBox(height: 6.h),
+              Text(
+                "Tell us how you’d prefer to receive it. We’ll consider this when possible.",
+                style: GoogleFonts.manrope(
+                  fontSize: 12.sp,
+                  color: Colors.grey,
+                ),
               ),
-            ),
-            SizedBox(height: 12.h),
-            Obx(
-              () => Row(
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: _selectionChip(
-                      label: controller.deliveryPreferenceOptions[0],
-                      isSelected:
-                          controller.selectedDeliveryPreference.value ==
+              SizedBox(height: 12.h),
+              Obx(
+                () => Row(
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: _selectionChip(
+                        label: controller.deliveryPreferenceOptions[0],
+                        isSelected:
+                            controller.selectedDeliveryPreference.value ==
+                            controller.deliveryPreferenceOptions[0],
+                        onTap: () => controller.setDeliveryPreference(
                           controller.deliveryPreferenceOptions[0],
-                      onTap: () => controller.setDeliveryPreference(
-                        controller.deliveryPreferenceOptions[0],
+                        ),
+                        isDarkMode: isDarkMode,
                       ),
-                      isDarkMode: isDarkMode,
                     ),
-                  ),
-                  SizedBox(width: 8.w),
-                  Expanded(
-                    flex: 5,
-                    child: _selectionChip(
-                      label: controller.deliveryPreferenceOptions[1],
-                      isSelected:
-                          controller.selectedDeliveryPreference.value ==
+                    SizedBox(width: 8.w),
+                    Expanded(
+                      flex: 5,
+                      child: _selectionChip(
+                        label: controller.deliveryPreferenceOptions[1],
+                        isSelected:
+                            controller.selectedDeliveryPreference.value ==
+                            controller.deliveryPreferenceOptions[1],
+                        onTap: () => controller.setDeliveryPreference(
                           controller.deliveryPreferenceOptions[1],
-                      onTap: () => controller.setDeliveryPreference(
-                        controller.deliveryPreferenceOptions[1],
+                        ),
+                        isDarkMode: isDarkMode,
                       ),
-                      isDarkMode: isDarkMode,
                     ),
-                  ),
-                  SizedBox(width: 8.w),
-                  Expanded(
-                    flex: 4,
-                    child: _selectionChip(
-                      label: controller.deliveryPreferenceOptions[2],
-                      isSelected:
-                          controller.selectedDeliveryPreference.value ==
+                    SizedBox(width: 8.w),
+                    Expanded(
+                      flex: 4,
+                      child: _selectionChip(
+                        label: controller.deliveryPreferenceOptions[2],
+                        isSelected:
+                            controller.selectedDeliveryPreference.value ==
+                            controller.deliveryPreferenceOptions[2],
+                        onTap: () => controller.setDeliveryPreference(
                           controller.deliveryPreferenceOptions[2],
-                      onTap: () => controller.setDeliveryPreference(
-                        controller.deliveryPreferenceOptions[2],
+                        ),
+                        isDarkMode: isDarkMode,
                       ),
-                      isDarkMode: isDarkMode,
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 32.h),
+
+              // Main Continue Button
+              SizedBox(
+                width: double.infinity,
+                height: 56.h,
+                child: ElevatedButton(
+                  onPressed: () => Get.to(() => const ReviewDeliveryView()),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4A80F0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: Text(
+                    "Continue",
+                    style: GoogleFonts.manrope(
+                      color: Colors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 32.h),
-
-            // Main Continue Button
-            SizedBox(
-              width: double.infinity,
-              height: 56.h,
-              child: ElevatedButton(
-                onPressed: () => Get.to(() => const ReviewDeliveryView()),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4A80F0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  elevation: 0,
-                ),
-                child: Text(
-                  "Continue",
-                  style: GoogleFonts.manrope(
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20.h),
-          ],
+              SizedBox(height: 20.h),
+            ],
+          ),
         ),
       ),
     );

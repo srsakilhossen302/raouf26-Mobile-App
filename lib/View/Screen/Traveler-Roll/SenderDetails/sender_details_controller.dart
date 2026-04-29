@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../Search/map_picker_screen.dart';
 
 class SenderDetailsController extends GetxController {
   final senderNameController = TextEditingController();
@@ -13,9 +14,11 @@ class SenderDetailsController extends GetxController {
     phoneNumberController.text = "00000000";
   }
   
-  void adjustLocation() {
-    // Logic to open map picker
-    Get.log("Adjust Location clicked");
+  Future<void> adjustLocation() async {
+    var result = await Get.to(() => const MapPickerScreen(title: "Adjust Location"));
+    if (result != null && result is String) {
+      selectedAddress.value = result;
+    }
   }
 
   @override

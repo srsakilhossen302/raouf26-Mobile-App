@@ -43,203 +43,201 @@ class SenderDetailsView extends GetView<SenderDetailsController> {
             height: 1.h,
             alignment: Alignment.centerLeft,
             child: Container(
-              width: 0.6.sw, // Second step out of 3
+              width: 0.6.sw,
               color: const Color(0xFF4A80F0),
             ),
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(20.r),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Sender Details",
-              style: GoogleFonts.manrope(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w700,
-                color: isDarkMode ? Colors.white : Colors.black,
-              ),
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              "Add the sender's information and pickup details.",
-              style: GoogleFonts.manrope(
-                fontSize: 14.sp,
-                color: Colors.grey,
-              ),
-            ),
-            SizedBox(height: 24.h),
-
-            // Sender Name Field
-            _sectionTitle("Sender Name", isDarkMode),
-            SizedBox(height: 12.h),
-            _customTextField(
-              controller: controller.senderNameController,
-              hintText: "Enter Sender Name",
-              suffixIcon: AppIcons.partion,
-              isDarkMode: isDarkMode,
-            ),
-
-            SizedBox(height: 20.h),
-
-            // Phone Number Field
-            _sectionTitle("Phone Number", isDarkMode),
-            SizedBox(height: 12.h),
-            _phoneTextField(isDarkMode),
-
-            SizedBox(height: 20.h),
-
-            // Use My Details Button
-            SizedBox(
-              width: double.infinity,
-              height: 56.h,
-              child: OutlinedButton(
-                onPressed: () => controller.useMyDetails(),
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Colors.grey.shade300),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                ),
-                child: Text(
-                  "Use My Details",
-                  style: GoogleFonts.manrope(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    color: isDarkMode ? Colors.white : Colors.black,
-                  ),
+      body: SafeArea(
+        bottom: true,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(20.r),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Sender Details",
+                style: GoogleFonts.manrope(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w700,
+                  color: isDarkMode ? Colors.white : Colors.black,
                 ),
               ),
-            ),
-
-            SizedBox(height: 24.h),
-
-            // Map Section
-            Container(
-              decoration: BoxDecoration(
-                color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
-                borderRadius: BorderRadius.circular(16.r),
+              SizedBox(height: 8.h),
+              Text(
+                "Add the sender's information and pickup details.",
+                style: GoogleFonts.manrope(
+                  fontSize: 14.sp,
+                  color: Colors.grey,
+                ),
               ),
-              child: Column(
-                children: [
-                  // Mock Map Container
-                  Container(
-                    height: 160.h,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(16.r),
-                      ),
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                          "https://static-maps.yandex.ru/1.x/?lang=en_US&ll=10.1658,36.8665&z=13&l=map&size=450,450",
-                        ),
-                        fit: BoxFit.cover,
-                      ),
+              SizedBox(height: 24.h),
+
+              _sectionTitle("Sender Name", isDarkMode),
+              SizedBox(height: 12.h),
+              _customTextField(
+                controller: controller.senderNameController,
+                hintText: "Enter Sender Name",
+                suffixIcon: AppIcons.partion,
+                isDarkMode: isDarkMode,
+              ),
+
+              SizedBox(height: 20.h),
+
+              _sectionTitle("Phone Number", isDarkMode),
+              SizedBox(height: 12.h),
+              _phoneTextField(isDarkMode),
+
+              SizedBox(height: 20.h),
+
+              SizedBox(
+                width: double.infinity,
+                height: 56.h,
+                child: OutlinedButton(
+                  onPressed: () => controller.useMyDetails(),
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(color: Colors.grey.shade300),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
                     ),
-                    child: Center(
-                      child: ElevatedButton.icon(
-                        onPressed: () => controller.adjustLocation(),
-                        icon: const Icon(
-                          Icons.location_on_outlined,
-                          size: 18,
-                          color: Colors.black,
+                  ),
+                  child: Text(
+                    "Use My Details",
+                    style: GoogleFonts.manrope(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 24.h),
+
+              // Map Section (Restored Design)
+              Container(
+                decoration: BoxDecoration(
+                  color: isDarkMode ? Colors.grey.shade900 : Colors.grey.shade50,
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 160.h,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(16.r),
                         ),
-                        label: Text(
-                          "Adjust Location",
-                          style: GoogleFonts.manrope(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w600,
+                        image: const DecorationImage(
+                          image: NetworkImage(
+                            "https://static-maps.yandex.ru/1.x/?lang=en_US&ll=10.1658,36.8665&z=13&l=map&size=450,450",
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Center(
+                        child: ElevatedButton.icon(
+                          onPressed: () => controller.adjustLocation(),
+                          icon: const Icon(
+                            Icons.location_on_outlined,
+                            size: 18,
                             color: Colors.black,
                           ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.white,
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.r),
+                          label: Text(
+                            "Adjust Location",
+                            style: GoogleFonts.manrope(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black,
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  // Address Bar
-                  Padding(
-                    padding: EdgeInsets.all(12.r),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(8.r),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
-                                blurRadius: 4,
-                                spreadRadius: 1,
-                              ),
-                            ],
-                          ),
-                          child: Icon(
-                            Icons.near_me_outlined,
-                            color: Colors.grey,
-                            size: 20.sp,
-                          ),
-                        ),
-                        SizedBox(width: 12.w),
-                        Expanded(
-                          child: Obx(
-                            () => Text(
-                              controller.selectedAddress.value,
-                              style: GoogleFonts.manrope(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w500,
-                                color: isDarkMode ? Colors.white : Colors.black,
-                              ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            elevation: 2,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.r),
                             ),
                           ),
                         ),
-                        SvgPicture.asset(
-                          AppIcons.save,
-                          width: 20.w,
-                          height: 20.h,
-                        ),
-                      ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(12.r),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(8.r),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  blurRadius: 4,
+                                  spreadRadius: 1,
+                                ),
+                              ],
+                            ),
+                            child: Icon(
+                              Icons.near_me_outlined,
+                              color: Colors.grey,
+                              size: 20.sp,
+                            ),
+                          ),
+                          SizedBox(width: 12.w),
+                          Expanded(
+                            child: Obx(
+                              () => Text(
+                                controller.selectedAddress.value,
+                                style: GoogleFonts.manrope(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: isDarkMode ? Colors.white : Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SvgPicture.asset(
+                            AppIcons.save,
+                            width: 20.w,
+                            height: 20.h,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: 32.h),
+
+              SizedBox(
+                width: double.infinity,
+                height: 56.h,
+                child: ElevatedButton(
+                  onPressed: () => Get.to(() => const DeliveryInfoView()),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4A80F0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: Text(
+                    "Continue",
+                    style: GoogleFonts.manrope(
+                      color: Colors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 32.h),
-
-            // Main Continue Button
-            SizedBox(
-              width: double.infinity,
-              height: 56.h,
-              child: ElevatedButton(
-                onPressed: () => Get.to(() => const DeliveryInfoView()),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4A80F0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                  elevation: 0,
-                ),
-                child: Text(
-                  "Continue",
-                  style: GoogleFonts.manrope(
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 20.h),
+            ],
+          ),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../Search/map_picker_screen.dart';
 
 class DeliveryInfoController extends GetxController {
   final recipientNameController = TextEditingController();
@@ -52,8 +53,11 @@ class DeliveryInfoController extends GetxController {
   void setPickupMethod(String method) => selectedPickupMethod.value = method;
   void setDeliveryMethod(String method) => selectedDeliveryMethod.value = method;
   
-  void adjustLocation() {
-    Get.log("Adjust Location clicked in Delivery Info");
+  Future<void> adjustLocation() async {
+    var result = await Get.to(() => const MapPickerScreen(title: "Adjust Location"));
+    if (result != null && result is String) {
+      selectedAddress.value = result;
+    }
   }
 
   @override
