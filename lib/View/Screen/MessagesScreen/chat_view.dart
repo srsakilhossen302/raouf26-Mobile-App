@@ -15,7 +15,6 @@ class ChatView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Delete existing controller to ensure fresh state for new user
     if (Get.isRegistered<ChatController>()) {
       Get.delete<ChatController>();
     }
@@ -88,12 +87,32 @@ class ChatView extends StatelessWidget {
           ],
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
+          PopupMenuButton<String>(
             icon: Icon(
               Icons.more_vert,
               color: isDarkMode ? Colors.white : Colors.black,
             ),
+            onSelected: (value) {
+              if (value == 'clear') {
+                controller.messages.clear();
+              } else if (value == 'report') {
+                Get.snackbar("Report", "User reported successfully.");
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              const PopupMenuItem(
+                value: 'report',
+                child: Text('Report User'),
+              ),
+              const PopupMenuItem(
+                value: 'block',
+                child: Text('Block User'),
+              ),
+              const PopupMenuItem(
+                value: 'clear',
+                child: Text('Clear Chat'),
+              ),
+            ],
           ),
         ],
       ),
@@ -121,7 +140,10 @@ class ChatView extends StatelessWidget {
               ),
             ),
             if (controller.status.value == BookingStatus.accepted)
-              _buildMessageInput(controller, isDarkMode),
+              SafeArea(
+                bottom: true,
+                child: _buildMessageInput(controller, isDarkMode),
+              ),
           ],
         );
       }),
@@ -409,7 +431,11 @@ class ChatView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24.r),
               ),
               child: TextField(
-                controller: textController,
+                controller: controller.messageTextController,
+                onSubmitted: (val) {
+                  controller.sendMessage(val);
+                  controller.messageTextController.clear();
+                },
                 decoration: InputDecoration(
                   hintText: "Type a message ...",
                   hintStyle: GoogleFonts.manrope(
@@ -424,8 +450,8 @@ class ChatView extends StatelessWidget {
           SizedBox(width: 12.w),
           GestureDetector(
             onTap: () {
-              controller.sendMessage(textController.text);
-              textController.clear();
+              controller.sendMessage(controller.messageTextController.text);
+              controller.messageTextController.clear();
             },
             child: Container(
               padding: EdgeInsets.all(12.r),

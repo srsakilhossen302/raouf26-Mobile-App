@@ -8,6 +8,13 @@ class ChatController extends GetxController {
   var messageController = "".obs;
   var selectedReason = "".obs;
   var userData = <String, dynamic>{}.obs;
+  final TextEditingController messageTextController = TextEditingController();
+
+  @override
+  void onClose() {
+    messageTextController.dispose();
+    super.onClose();
+  }
 
   final List<String> quickReasons = [
     "Sorry, we are no longer available for this date.",
