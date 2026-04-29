@@ -31,10 +31,8 @@ class SearchScreen extends GetView<TravelerSearchController> {
       floatingActionButton: CustomBottomNavBar.buildFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomBottomNavBar(selectedIndex: 2),
-      body: SafeArea(
-        bottom: true,
-        child: SingleChildScrollView(
-          child: Column(
+      body: SingleChildScrollView(
+        child: Column(
             children: [
               // Blue Header
               Stack(
@@ -523,7 +521,6 @@ class SearchScreen extends GetView<TravelerSearchController> {
             ],
           ),
         ),
-      ),
     );
   }
 
