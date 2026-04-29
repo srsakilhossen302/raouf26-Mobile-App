@@ -17,6 +17,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
   bool isTypeMode = true;
   bool isAgreed = false;
   final TextEditingController signatureController = TextEditingController();
+  List<Offset?> signaturePoints = [];
 
   @override
   Widget build(BuildContext context) {
@@ -100,31 +101,25 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
             ),
             SizedBox(height: 24.h),
 
-            // Signature Confirmation Card
+            // Signature Card
             _buildSectionCard(
-              title: "Signature Confirmation",
+              title: "Signature",
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Type or draw your signature to confirm and authorize this agreement.",
-                    style: GoogleFonts.manrope(
-                      fontSize: 12.sp,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  SizedBox(height: 16.h),
-                  // Toggle Button
                   Container(
+                    padding: EdgeInsets.all(4.w),
                     decoration: BoxDecoration(
                       color: widget.isDarkMode
-                          ? Colors.white10
+                          ? Colors.white.withOpacity(0.05)
                           : const Color(0xFFF5F7FA),
                       borderRadius: BorderRadius.circular(12.r),
                     ),
                     child: Row(
                       children: [
-                        Expanded(child: _buildToggleButton("Type", isTypeMode)),
+                        Expanded(
+                          child: _buildToggleButton("Type", isTypeMode),
+                        ),
                         Expanded(
                           child: _buildToggleButton("Draw", !isTypeMode),
                         ),
@@ -133,15 +128,16 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
                   ),
                   SizedBox(height: 16.h),
                   Text(
-                    isTypeMode ? "Type Your Signature" : "Draw Your Signature",
+                    isTypeMode ? "Type your name" : "Draw your signature",
                     style: GoogleFonts.manrope(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w600,
+                      color: widget.isDarkMode ? Colors.white70 : Colors.black87,
                     ),
                   ),
                   SizedBox(height: 12.h),
                   Container(
-                    height: 100.h,
+                    height: 120.h,
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: widget.isDarkMode
@@ -161,12 +157,58 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
                               border: InputBorder.none,
                               contentPadding: EdgeInsets.all(16.w),
                             ),
-                            style: GoogleFonts.manrope(fontSize: 16.sp),
+                            style: GoogleFonts.manrope(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w500,
+                              color: widget.isDarkMode ? Colors.white : Colors.black,
+                            ),
                           )
-                        : const Center(
-                            child: Text(
-                              "Draw Area",
-                              style: TextStyle(color: Colors.grey),
+                        : GestureDetector(
+                            onPanUpdate: (details) {
+                              setState(() {
+                                signaturePoints.add(details.localPosition);
+                              });
+                            },
+                            onPanEnd: (details) {
+                              signaturePoints.add(null);
+                            },
+                            child: Stack(
+                              children: [
+                                CustomPaint(
+                                  painter: SignaturePainter(signaturePoints, widget.isDarkMode),
+                                  size: Size.infinite,
+                                ),
+                                Positioned(
+                                  right: 8,
+                                  top: 8,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        signaturePoints.clear();
+                                      });
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(4.w),
+                                      decoration: BoxDecoration(
+                                        color: Colors.red.withOpacity(0.1),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Icon(
+                                        Icons.clear,
+                                        size: 14.sp,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                if (signaturePoints.isEmpty)
+                                  const Center(
+                                    child: Text(
+                                      "Draw Signature Here",
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                  ),
+                              ],
                             ),
                           ),
                   ),
@@ -177,15 +219,13 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
 
             // Legal Acceptance Checkbox
             Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: 24.w,
                   width: 24.w,
                   child: Checkbox(
                     value: isAgreed,
-                    onChanged: (value) =>
-                        setState(() => isAgreed = value ?? false),
+                    onChanged: (val) => setState(() => isAgreed = val ?? false),
                     activeColor: const Color(0xFF4A80F0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4.r),
@@ -194,53 +234,45 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
                 ),
                 SizedBox(width: 12.w),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () => setState(() => isAgreed = !isAgreed),
-                    child: Text(
-                      "I have read and agree to the Digital agreements and legal acceptance terms.",
-                      style: GoogleFonts.manrope(
-                        fontSize: 13.sp,
-                        color: widget.isDarkMode
-                            ? Colors.white70
-                            : Colors.black87,
-                        height: 1.4,
-                      ),
+                  child: Text(
+                    "I have read and agree to the Transport Agreement",
+                    style: GoogleFonts.manrope(
+                      fontSize: 13.sp,
+                      color: widget.isDarkMode ? Colors.white70 : Colors.black87,
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 24.h),
+            SizedBox(height: 32.h),
 
-            // Sign & Activate Button
+            // Confirm Button
             SizedBox(
               width: double.infinity,
+              height: 56.h,
               child: ElevatedButton(
-                onPressed: isAgreed
+                onPressed: (isAgreed &&
+                        (isTypeMode
+                            ? signatureController.text.isNotEmpty
+                            : signaturePoints.isNotEmpty))
                     ? () {
-                        Get.bottomSheet(
-                          TripPublishedPage(isDarkMode: widget.isDarkMode),
-                          isScrollControlled: true,
-                          backgroundColor: Colors.transparent,
-                          barrierColor: Colors.black.withOpacity(0.5), // Semi-transparent background
-                        );
+                        Get.to(() => TripPublishedPage(isDarkMode: widget.isDarkMode));
                       }
-                    : null, // Disabled if not agreed
+                    : null,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF4A80F0),
-                  padding: EdgeInsets.symmetric(vertical: 18.h),
+                  foregroundColor: Colors.white,
+                  disabledBackgroundColor: Colors.grey.shade300,
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.r),
                   ),
-                  elevation: 0,
-                  disabledBackgroundColor: Colors.grey.withOpacity(0.3),
                 ),
                 child: Text(
-                  "Sign & Activate",
+                  "Confirm & Publish",
                   style: GoogleFonts.manrope(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
-                    color: isAgreed ? Colors.white : Colors.white70,
                   ),
                 ),
               ),
@@ -255,12 +287,10 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
   Widget _buildSectionCard({required String title, required Widget child}) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
-        color: widget.isDarkMode
-            ? Colors.white.withOpacity(0.05)
-            : Colors.white,
-        borderRadius: BorderRadius.circular(16.r),
+        color: widget.isDarkMode ? Colors.white.withOpacity(0.05) : Colors.white,
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           if (!widget.isDarkMode)
             BoxShadow(
@@ -276,8 +306,9 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
           Text(
             title,
             style: GoogleFonts.manrope(
-              fontSize: 15.sp,
+              fontSize: 16.sp,
               fontWeight: FontWeight.w700,
+              color: widget.isDarkMode ? Colors.white : Colors.black,
             ),
           ),
           SizedBox(height: 16.h),
@@ -287,7 +318,7 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
     );
   }
 
-  Widget _buildTermItem(String title, String desc) {
+  Widget _buildTermItem(String title, String content) {
     return Padding(
       padding: EdgeInsets.only(bottom: 16.h),
       child: Column(
@@ -298,14 +329,15 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
             style: GoogleFonts.manrope(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
+              color: widget.isDarkMode ? Colors.white : Colors.black87,
             ),
           ),
           SizedBox(height: 4.h),
           Text(
-            desc,
+            content,
             style: GoogleFonts.manrope(
-              fontSize: 12.sp,
-              color: Colors.grey,
+              fontSize: 13.sp,
+              color: widget.isDarkMode ? Colors.white70 : Colors.black54,
               height: 1.5,
             ),
           ),
@@ -314,57 +346,44 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
     );
   }
 
-  Widget _buildValidityOption(String label) {
-    bool isSelected = selectedValidity == label;
+  Widget _buildValidityOption(String title) {
+    bool isSelected = selectedValidity == title;
     return GestureDetector(
-      onTap: () => setState(() => selectedValidity = label),
+      onTap: () {
+        setState(() {
+          selectedValidity = title;
+        });
+      },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         decoration: BoxDecoration(
+          color: isSelected
+              ? const Color(0xFF4A80F0).withOpacity(0.1)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
             color: isSelected
                 ? const Color(0xFF4A80F0)
                 : Colors.grey.withOpacity(0.2),
           ),
-          color: isSelected
-              ? const Color(0xFF4A80F0).withOpacity(0.05)
-              : Colors.transparent,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            Icon(
+              isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
+              color: isSelected ? const Color(0xFF4A80F0) : Colors.grey,
+              size: 20.sp,
+            ),
+            SizedBox(width: 12.w),
             Text(
-              label,
+              title,
               style: GoogleFonts.manrope(
                 fontSize: 14.sp,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                color: isSelected
+                    ? const Color(0xFF4A80F0)
+                    : (widget.isDarkMode ? Colors.white70 : Colors.black87),
               ),
-            ),
-            Container(
-              width: 20.w,
-              height: 20.w,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: isSelected
-                      ? const Color(0xFF4A80F0)
-                      : Colors.grey.withOpacity(0.3),
-                  width: 2,
-                ),
-              ),
-              child: isSelected
-                  ? Center(
-                      child: Container(
-                        width: 10.w,
-                        height: 10.w,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFF4A80F0),
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    )
-                  : null,
             ),
           ],
         ),
@@ -394,4 +413,28 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
       ),
     );
   }
+}
+
+class SignaturePainter extends CustomPainter {
+  final List<Offset?> points;
+  final bool isDarkMode;
+
+  SignaturePainter(this.points, this.isDarkMode);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..color = isDarkMode ? Colors.white : Colors.black
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = 3.0;
+
+    for (int i = 0; i < points.length - 1; i++) {
+      if (points[i] != null && points[i + 1] != null) {
+        canvas.drawLine(points[i]!, points[i + 1]!, paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(SignaturePainter oldDelegate) => true;
 }
