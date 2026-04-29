@@ -72,7 +72,11 @@ class ChatView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 4.w),
-                    Icon(Icons.check_circle, color: Colors.blue, size: 16.sp),
+                    SvgPicture.asset(
+                      AppIcons.verifa,
+                      width: 16.w,
+                      height: 16.h,
+                    ),
                   ],
                 ),
                 Text(
