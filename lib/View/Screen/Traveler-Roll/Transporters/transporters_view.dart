@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporters_controller.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporter_details_view.dart';
+import 'package:raouf26mobileapp/View/Widget/custom_bottom_nav_bar.dart';
 import 'package:raouf26mobileapp/utils/appicons/app_icons.dart';
 
 class TransportersView extends GetView<TransportersController> {
@@ -20,16 +21,15 @@ class TransportersView extends GetView<TransportersController> {
       backgroundColor: isDarkMode
           ? const Color(0xFF121212)
           : Colors.grey.shade50,
+      floatingActionButton: CustomBottomNavBar.buildFloatingActionButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: const CustomBottomNavBar(
+        selectedIndex: 2,
+      ), // Index 2 for Search context
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
-          onPressed: () => Get.back(),
-        ),
+        automaticallyImplyLeading: false, // Prevents default back button
         title: Text(
           "Transporters",
           style: GoogleFonts.manrope(
@@ -269,11 +269,16 @@ class TransportersView extends GetView<TransportersController> {
               ),
               if (transporter.isBestMatch)
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 6.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 6.h,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFFE8F1FF),
                     borderRadius: BorderRadius.circular(20.r),
-                    border: Border.all(color: const Color(0xFF4A80F0).withOpacity(0.1)),
+                    border: Border.all(
+                      color: const Color(0xFF4A80F0).withOpacity(0.1),
+                    ),
                     boxShadow: [
                       BoxShadow(
                         color: const Color(0xFF4A80F0).withOpacity(0.05),
@@ -311,7 +316,10 @@ class TransportersView extends GetView<TransportersController> {
                 )
               else
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 4.h),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 4.h,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.blue.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12.r),
@@ -414,10 +422,7 @@ class TransportersView extends GetView<TransportersController> {
             children: [
               Text(
                 "Also traveling to ${transporter.alsoTravelingTo.join(', ')}",
-                style: GoogleFonts.manrope(
-                  fontSize: 12.sp,
-                  color: Colors.grey,
-                ),
+                style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
               ),
             ],
           ),
@@ -451,10 +456,7 @@ class TransportersView extends GetView<TransportersController> {
               ),
               Text(
                 date,
-                style: GoogleFonts.manrope(
-                  fontSize: 11.sp,
-                  color: Colors.grey,
-                ),
+                style: GoogleFonts.manrope(fontSize: 11.sp, color: Colors.grey),
               ),
             ],
           ),
@@ -707,10 +709,7 @@ class TransportersView extends GetView<TransportersController> {
             SizedBox(width: 4.w),
             Text(
               subtitle,
-              style: GoogleFonts.manrope(
-                fontSize: 12.sp,
-                color: Colors.grey,
-              ),
+              style: GoogleFonts.manrope(fontSize: 12.sp, color: Colors.grey),
             ),
           ],
         ],
@@ -750,7 +749,8 @@ class TransportersView extends GetView<TransportersController> {
                   ),
                   SizedBox(height: 20.h),
                   ...currencies.map((currency) {
-                    bool isSelected = controller.selectedCurrency.value == currency["code"];
+                    bool isSelected =
+                        controller.selectedCurrency.value == currency["code"];
                     return ListTile(
                       onTap: () {
                         controller.selectedCurrency.value = currency["code"]!;
@@ -763,7 +763,9 @@ class TransportersView extends GetView<TransportersController> {
                       title: Text(
                         currency["name"]!,
                         style: GoogleFonts.manrope(
-                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+                          fontWeight: isSelected
+                              ? FontWeight.w700
+                              : FontWeight.w500,
                           color: isDarkMode ? Colors.white : Colors.black,
                         ),
                       ),
@@ -771,7 +773,9 @@ class TransportersView extends GetView<TransportersController> {
                         currency["code"]!,
                         style: GoogleFonts.manrope(
                           fontWeight: FontWeight.w700,
-                          color: isSelected ? const Color(0xFF4A80F0) : Colors.grey,
+                          color: isSelected
+                              ? const Color(0xFF4A80F0)
+                              : Colors.grey,
                         ),
                       ),
                       selected: isSelected,
@@ -797,10 +801,10 @@ class TransportersView extends GetView<TransportersController> {
                 controller.selectedCurrency.value == "EUR"
                     ? "🇪🇺"
                     : controller.selectedCurrency.value == "USD"
-                        ? "🇺🇸"
-                        : controller.selectedCurrency.value == "GBP"
-                            ? "🇬🇧"
-                            : "🇹🇳",
+                    ? "🇺🇸"
+                    : controller.selectedCurrency.value == "GBP"
+                    ? "🇬🇧"
+                    : "🇹🇳",
                 style: TextStyle(fontSize: 20.sp),
               ),
               SizedBox(width: 12.w),
@@ -836,10 +840,7 @@ class TransportersView extends GetView<TransportersController> {
                   : DateFormat(
                       'dd MMM, yyyy',
                     ).format(controller.selectedDate.value!),
-              style: GoogleFonts.manrope(
-                color: Colors.grey,
-                fontSize: 14.sp,
-              ),
+              style: GoogleFonts.manrope(color: Colors.grey, fontSize: 14.sp),
             ),
             const Spacer(),
             Icon(
