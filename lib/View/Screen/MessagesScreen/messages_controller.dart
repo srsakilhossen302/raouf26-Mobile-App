@@ -14,7 +14,11 @@ class MessagesController extends GetxController {
 
   Future<void> refreshRole() async {
     final role = await SharedPreferenceHelper.getUserRole();
-    userRole.value = role ?? "Traveler";
+    if (role != null) {
+      userRole.value = role;
+    } else {
+      userRole.value = "Traveler";
+    }
     debugPrint("Current User Role in MessagesController: ${userRole.value}");
   }
 

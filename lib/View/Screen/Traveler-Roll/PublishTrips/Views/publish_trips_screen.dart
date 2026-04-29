@@ -102,15 +102,21 @@ class PublishTripsScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: Obx(
-        () => controller.userRole.value == "Transporter"
-            ? CustomTransporterBottomNavBar.buildFloatingActionButton()
-            : CustomBottomNavBar.buildFloatingActionButton(),
+        () {
+          if (controller.userRole.value == "Transporter" || controller.userRole.value == "") {
+            return CustomTransporterBottomNavBar.buildFloatingActionButton();
+          }
+          return CustomBottomNavBar.buildFloatingActionButton();
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Obx(
-        () => controller.userRole.value == "Transporter"
-            ? const CustomTransporterBottomNavBar(selectedIndex: 4)
-            : const CustomBottomNavBar(selectedIndex: 4),
+        () {
+          if (controller.userRole.value == "Transporter" || controller.userRole.value == "") {
+            return const CustomTransporterBottomNavBar(selectedIndex: 4);
+          }
+          return const CustomBottomNavBar(selectedIndex: 4);
+        },
       ),
     );
   }
