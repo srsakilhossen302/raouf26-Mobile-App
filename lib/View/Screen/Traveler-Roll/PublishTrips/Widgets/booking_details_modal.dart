@@ -18,154 +18,170 @@ class BookingDetailsScreen extends StatelessWidget {
       backgroundColor: isDarkMode
           ? const Color(0xFF121212)
           : const Color(0xFFF9FAFB),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: Icon(
-            Icons.arrow_back,
-            color: isDarkMode ? Colors.white : Colors.black,
+      body: Column(
+        children: [
+          // Custom Header
+          SafeArea(
+            bottom: false,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Get.back(),
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Text(
+                        "booking_details".tr,
+                        style: GoogleFonts.manrope(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w700,
+                          color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                        ),
+                      ),
+                    ),
+                  ),
+                  PopupMenuButton<int>(
+                    icon: Icon(
+                      Icons.more_vert,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    offset: const Offset(0, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+                    onSelected: (value) {
+                      if (value == 0) {
+                        Get.to(() => const ReportIssueScreen());
+                      } else if (value == 1) {
+                        // Handle Cancel booking
+                      } else if (value == 2) {
+                        Get.to(() => const ChatView(
+                              userData: {
+                                'name': 'Sendit Support',
+                                'message': '24/7 available! How can we help you?',
+                                'time': '',
+                                'isSupport': true,
+                                'isUnread': false,
+                                'image': 'https://via.placeholder.com/150',
+                                'subtitle': '',
+                                'status': '',
+                                'role': 'all',
+                                'isClient': false,
+                              },
+                            ));
+                      }
+                    },
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        value: 0,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.report_problem_outlined,
+                              size: 20.sp,
+                              color: isDarkMode ? Colors.white70 : Colors.black87,
+                            ),
+                            SizedBox(width: 12.w),
+                            Text(
+                              "report_an_issue".tr,
+                              style: GoogleFonts.manrope(
+                                fontSize: 14.sp,
+                                color: isDarkMode ? Colors.white70 : Colors.black87,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 1,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.cancel_outlined,
+                              size: 20.sp,
+                              color: Colors.redAccent,
+                            ),
+                            SizedBox(width: 12.w),
+                            Text(
+                              "cancel_booking".tr,
+                              style: GoogleFonts.manrope(
+                                fontSize: 14.sp,
+                                color: Colors.redAccent,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: 2,
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.headset_mic_outlined,
+                              size: 20.sp,
+                              color: isDarkMode ? Colors.white70 : Colors.black87,
+                            ),
+                            SizedBox(width: 12.w),
+                            Text(
+                              "contact_support".tr,
+                              style: GoogleFonts.manrope(
+                                fontSize: 14.sp,
+                                color: isDarkMode ? Colors.white70 : Colors.black87,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-        actions: [
-          PopupMenuButton<int>(
-            icon: Icon(
-              Icons.more_vert,
-              color: isDarkMode ? Colors.white : Colors.black,
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Column(
+                children: [
+                  SizedBox(height: 16.h),
+                  // Success message
+                  _buildSuccessMessage(isDarkMode),
+                  SizedBox(height: 24.h),
+
+                  // Booking Status Card
+                  _buildBookingStatus(isDarkMode),
+                  SizedBox(height: 16.h),
+
+                  // Client Info Card
+                  _buildClientInfo(isDarkMode),
+                  SizedBox(height: 16.h),
+
+                  // Parcel Information Card
+                  _buildParcelInfo(isDarkMode),
+                  SizedBox(height: 16.h),
+
+                  // Route Details Card
+                  _buildRouteDetails(isDarkMode),
+                  SizedBox(height: 16.h),
+
+                  // Payment Details Card
+                  _buildPaymentDetails(isDarkMode),
+                  SizedBox(height: 40.h),
+                ],
+              ),
             ),
-            offset: const Offset(0, 50),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
-            onSelected: (value) {
-              if (value == 0) {
-                Get.to(() => const ReportIssueScreen());
-              } else if (value == 1) {
-                // Handle Cancel booking
-              } else if (value == 2) {
-                Get.to(() => const ChatView(
-                      userData: {
-                        'name': 'Sendit Support',
-                        'message': '24/7 available! How can we help you?',
-                        'time': '',
-                        'isSupport': true,
-                        'isUnread': false,
-                        'image': 'https://via.placeholder.com/150',
-                        'subtitle': '',
-                        'status': '',
-                        'role': 'all',
-                      },
-                    ));
-              }
-            },
-            itemBuilder: (context) => [
-              PopupMenuItem(
-                value: 0,
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.report_problem_outlined,
-                      size: 20.sp,
-                      color: isDarkMode ? Colors.white70 : Colors.black87,
-                    ),
-                    SizedBox(width: 12.w),
-                    Text(
-                      "report_an_issue".tr,
-                      style: GoogleFonts.manrope(
-                        fontSize: 14.sp,
-                        color: isDarkMode ? Colors.white70 : Colors.black87,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              PopupMenuItem(
-                value: 1,
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.cancel_outlined,
-                      size: 20.sp,
-                      color: Colors.redAccent,
-                    ),
-                    SizedBox(width: 12.w),
-                    Text(
-                      "cancel_booking".tr,
-                      style: GoogleFonts.manrope(
-                        fontSize: 14.sp,
-                        color: Colors.redAccent,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              PopupMenuItem(
-                value: 2,
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.headset_mic_outlined,
-                      size: 20.sp,
-                      color: isDarkMode ? Colors.white70 : Colors.black87,
-                    ),
-                    SizedBox(width: 12.w),
-                    Text(
-                      "contact_support".tr,
-                      style: GoogleFonts.manrope(
-                        fontSize: 14.sp,
-                        color: isDarkMode ? Colors.white70 : Colors.black87,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
           ),
         ],
-        title: Text(
-          "booking_details".tr,
-          style: GoogleFonts.manrope(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w700,
-            color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-          ),
-        ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: Column(
-          children: [
-            SizedBox(height: 16.h),
-            // Success message
-            _buildSuccessMessage(isDarkMode),
-            SizedBox(height: 24.h),
-
-            // Booking Status Card
-            _buildBookingStatus(isDarkMode),
-            SizedBox(height: 16.h),
-
-            // Client Info Card
-            _buildClientInfo(isDarkMode),
-            SizedBox(height: 16.h),
-
-            // Parcel Information Card
-            _buildParcelInfo(isDarkMode),
-            SizedBox(height: 16.h),
-
-            // Route Details Card
-            _buildRouteDetails(isDarkMode),
-            SizedBox(height: 16.h),
-
-            // Payment Details Card
-            _buildPaymentDetails(isDarkMode),
-            SizedBox(height: 40.h),
-          ],
-        ),
-      ),
-      bottomNavigationBar: Container(
+      bottomNavigationBar: SafeArea(
+        child: Container(
         padding: EdgeInsets.all(24.w),
         decoration: BoxDecoration(
           color: isDarkMode ? const Color(0xFF121212) : Colors.white,
@@ -199,7 +215,7 @@ class BookingDetailsScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      ))
     );
   }
 

@@ -17,86 +17,96 @@ class BookingRequestView extends GetView<BookingRequestController> {
 
     return Scaffold(
       backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
-          onPressed: () => Get.back(),
-        ),
-        title: Row(
-          children: [
-            Stack(
-              children: [
-                CircleAvatar(
-                  radius: 20.r,
-                  backgroundImage: NetworkImage(
-                    controller.transporterImage.value,
-                  ),
-                ),
-                Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: Container(
-                    width: 10.w,
-                    height: 10.h,
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 2),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(width: 12.w),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      controller.transporterName.value,
-                      style: GoogleFonts.manrope(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w700,
-                        color: isDarkMode ? Colors.white : Colors.black,
-                      ),
-                    ),
-                    SizedBox(width: 4.w),
-                    SvgPicture.asset(
-                      AppIcons.verifa,
-                      width: 14.w,
-                      height: 14.h,
-                    ),
-                  ],
-                ),
-                Text(
-                  "Online",
-                  style: GoogleFonts.manrope(
-                    fontSize: 12.sp,
-                    color: Colors.grey,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            onPressed: () => Get.to(() => const ConversationDetailsView()),
-            icon: Icon(
-              Icons.info_outline,
-              color: isDarkMode ? Colors.white : Colors.black,
-            ),
-          ),
-        ],
-      ),
       body: Column(
         children: [
+          // Custom Header with SafeArea
+          SafeArea(
+            bottom: false,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 8.h),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    onPressed: () => Get.back(),
+                  ),
+                  Expanded(
+                    child: Row(
+                      children: [
+                        Stack(
+                          children: [
+                            CircleAvatar(
+                              radius: 20.r,
+                              backgroundImage: NetworkImage(
+                                controller.transporterImage.value,
+                              ),
+                            ),
+                            Positioned(
+                              right: 0,
+                              bottom: 0,
+                              child: Container(
+                                width: 10.w,
+                                height: 10.h,
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: Colors.white, width: 2),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: 12.w),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    controller.transporterName.value,
+                                    style: GoogleFonts.manrope(
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: isDarkMode ? Colors.white : Colors.black,
+                                    ),
+                                  ),
+                                  SizedBox(width: 4.w),
+                                  SvgPicture.asset(
+                                    AppIcons.verifa,
+                                    width: 14.w,
+                                    height: 14.h,
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                "Online",
+                                style: GoogleFonts.manrope(
+                                  fontSize: 12.sp,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => Get.to(() => const ConversationDetailsView()),
+                    icon: Icon(
+                      Icons.info_outline,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.all(20.r),
@@ -356,25 +366,27 @@ class BookingRequestView extends GetView<BookingRequestController> {
             ),
           ),
           // Cancel Button
-          Padding(
-            padding: EdgeInsets.all(24.r),
-            child: SizedBox(
-              width: double.infinity,
-              height: 56.h,
-              child: OutlinedButton(
-                onPressed: () => controller.cancelReservation(),
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Colors.grey.shade300),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsets.all(24.r),
+              child: SizedBox(
+                width: double.infinity,
+                height: 56.h,
+                child: OutlinedButton(
+                  onPressed: () => controller.cancelReservation(),
+                  style: OutlinedButton.styleFrom(
+                    side: BorderSide(color: Colors.grey.shade300),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
                   ),
-                ),
-                child: Text(
-                  "Cancel Reservation",
-                  style: GoogleFonts.manrope(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                  child: Text(
+                    "Cancel Reservation",
+                    style: GoogleFonts.manrope(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),

@@ -288,10 +288,11 @@ class BookingRequestCard extends StatelessWidget {
           color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Center(
               child: Container(
                 width: 40.w,
@@ -468,6 +469,7 @@ class BookingRequestCard extends StatelessWidget {
             SizedBox(height: 12.h),
           ],
         ),
+      ),
       ),
       isScrollControlled: true,
     );
