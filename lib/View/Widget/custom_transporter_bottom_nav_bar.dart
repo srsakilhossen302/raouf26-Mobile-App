@@ -14,11 +14,9 @@ class CustomTransporterBottomNavBar extends StatelessWidget {
 
   const CustomTransporterBottomNavBar({super.key, required this.selectedIndex});
 
-  static Widget buildFloatingActionButton() {
+  static Widget buildFloatingActionButton(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () {
-        // Post trip or other logic for transporters
-      },
+      onPressed: () => PublishTripsScreen.showHowItWorks(context),
       backgroundColor: const Color(0xFF4A80F0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30.r),

@@ -26,64 +26,78 @@ class PublishTripsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: Obx(() {
-          String title = "Publish Trips";
-          if (controller.selectedTab.value == 1) title = "Trips";
-          if (controller.selectedTab.value == 2) title = "Requests";
-          return Text(
-            title,
-            style: GoogleFonts.manrope(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w700,
-              color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-            ),
-          );
-        }),
-        actions: [
-          Obx(() {
-            if (controller.selectedTab.value == 0) {
-              return IconButton(
-                onPressed: () => _showHowItWorks(context),
-                icon: Icon(
-                  Icons.info_outline,
-                  color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-                  size: 24.sp,
-                ),
-              );
-            } else if (controller.selectedTab.value == 1) {
-              return IconButton(
-                onPressed: () => _showFilters(context),
-                icon: SvgPicture.asset(
-                  AppIcons.filters,
-                  width: 24.w,
-                  height: 24.w,
-                  colorFilter: ColorFilter.mode(
-                    isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-                    BlendMode.srcIn,
-                  ),
-                ),
-              );
-            }
-            return const SizedBox.shrink();
-          }),
-          SizedBox(width: 8.w),
-        ],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(2.h),
-          child: LinearProgressIndicator(
-            value: 0.15, // Decorative starting progress
-            backgroundColor: isDarkMode ? Colors.white10 : Colors.grey.shade100,
-            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF4A80F0)),
-            minHeight: 2.h,
-          ),
-        ),
-      ),
       body: Column(
         children: [
+          // Custom Header with SafeArea
+          SafeArea(
+            bottom: false,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                  child: Row(
+                    children: [
+                      // Leading / Spacer to maintain center alignment if needed
+                      SizedBox(width: 48.w), 
+                      
+                      // Title
+                      Expanded(
+                        child: Obx(() {
+                          String title = "Publish Trips";
+                          if (controller.selectedTab.value == 1) title = "Trips";
+                          if (controller.selectedTab.value == 2) title = "Requests";
+                          return Text(
+                            title,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.manrope(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.w700,
+                              color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                            ),
+                          );
+                        }),
+                      ),
+
+                      // Actions
+                      Obx(() {
+                        if (controller.selectedTab.value == 0) {
+                          return IconButton(
+                            onPressed: () => showHowItWorks(context),
+                            icon: Icon(
+                              Icons.info_outline,
+                              color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                              size: 24.sp,
+                            ),
+                          );
+                        } else if (controller.selectedTab.value == 1) {
+                          return IconButton(
+                            onPressed: () => _showFilters(context),
+                            icon: SvgPicture.asset(
+                              AppIcons.filters,
+                              width: 24.w,
+                              height: 24.w,
+                              colorFilter: ColorFilter.mode(
+                                isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                          );
+                        }
+                        return SizedBox(width: 48.w); // Spacer for Requests tab
+                      }),
+                    ],
+                  ),
+                ),
+                // Decorative Progress Indicator
+                LinearProgressIndicator(
+                  value: 0.15,
+                  backgroundColor: isDarkMode ? Colors.white10 : Colors.grey.shade100,
+                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF4A80F0)),
+                  minHeight: 2.h,
+                ),
+              ],
+            ),
+          ),
           _buildTabBar(controller, isDarkMode),
           Expanded(
             child: Obx(() {
@@ -104,7 +118,7 @@ class PublishTripsScreen extends StatelessWidget {
       floatingActionButton: Obx(
         () {
           if (controller.userRole.value == "Transporter" || controller.userRole.value == "") {
-            return CustomTransporterBottomNavBar.buildFloatingActionButton();
+            return CustomTransporterBottomNavBar.buildFloatingActionButton(context);
           }
           return CustomBottomNavBar.buildFloatingActionButton();
         },
@@ -236,7 +250,7 @@ class PublishTripsScreen extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () => _showHowItWorks(context),
+              onPressed: () => showHowItWorks(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF4A80F0),
                 padding: EdgeInsets.symmetric(vertical: 16.h),
@@ -1105,7 +1119,7 @@ class PublishTripsScreen extends StatelessWidget {
     return months[month - 1];
   }
 
-  void _showHowItWorks(BuildContext context) {
+  static void showHowItWorks(BuildContext context) {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     showModalBottomSheet(
       context: context,
@@ -1118,9 +1132,10 @@ class PublishTripsScreen extends StatelessWidget {
           borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
         ),
         padding: EdgeInsets.all(24.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -1174,10 +1189,10 @@ class PublishTripsScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16.h),
-            _buildLearnItem("How to publish your trip", isDarkMode),
-            _buildLearnItem("How to set prices and capacity", isDarkMode),
-            _buildLearnItem("How to accept delivery requests", isDarkMode),
-            _buildLearnItem("How you get paid", isDarkMode),
+            buildLearnItem("How to publish your trip", isDarkMode),
+            buildLearnItem("How to set prices and capacity", isDarkMode),
+            buildLearnItem("How to accept delivery requests", isDarkMode),
+            buildLearnItem("How you get paid", isDarkMode),
             const Spacer(),
             SizedBox(
               width: double.infinity,
@@ -1206,10 +1221,11 @@ class PublishTripsScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
-  Widget _buildLearnItem(String text, bool isDarkMode) {
+  static Widget buildLearnItem(String text, bool isDarkMode) {
     return Padding(
       padding: EdgeInsets.only(bottom: 12.h),
       child: Row(

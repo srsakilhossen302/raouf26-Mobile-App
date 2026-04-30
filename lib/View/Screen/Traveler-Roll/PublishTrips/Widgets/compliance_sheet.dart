@@ -144,9 +144,10 @@ class ComplianceSheet extends StatelessWidget {
           color: isDarkMode ? const Color(0xFF1A1A1A) : Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             // Header: Info Icon & Close Icon
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -239,6 +240,7 @@ class ComplianceSheet extends StatelessWidget {
             SizedBox(height: 20.h),
           ],
         ),
+      ),
       );
     });
   }

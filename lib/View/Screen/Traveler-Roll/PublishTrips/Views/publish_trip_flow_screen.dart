@@ -87,65 +87,67 @@ class PublishTripFlowScreen extends StatelessWidget {
             return const SizedBox();
         }
       }),
-      bottomNavigationBar: Obx(() {
-        if (controller.currentStep.value == 1 ||
-            controller.currentStep.value == 2 ||
-            controller.currentStep.value == 3) {
-          return const SizedBox();
-        }
+      bottomNavigationBar: SafeArea(
+        child: Obx(() {
+          if (controller.currentStep.value == 1 ||
+              controller.currentStep.value == 2 ||
+              controller.currentStep.value == 3) {
+            return const SizedBox();
+          }
 
-        if (controller.currentStep.value == 0 &&
-            controller.selectedDate.value == null) {
+          if (controller.currentStep.value == 0 &&
+              controller.selectedDate.value == null) {
+            return Padding(
+              padding: EdgeInsets.all(24.w),
+              child: ElevatedButton(
+                onPressed: null, // Disabled when no date selected
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF4A80F0).withOpacity(0.5),
+                  padding: EdgeInsets.symmetric(vertical: 16.h),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                ),
+                child: const Text("Next", style: TextStyle(color: Colors.white)),
+              ),
+            );
+          }
+
           return Padding(
             padding: EdgeInsets.all(24.w),
             child: ElevatedButton(
-              onPressed: null, // Disabled when no date selected
+              onPressed: () {
+                if (controller.currentStep.value == 6) {
+                  // Show Compliance Flow in a big popup (Bottom Sheet)
+                  ComplianceSheet.show(isDarkMode);
+                } else {
+                  controller.nextStep();
+                }
+              },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF4A80F0).withOpacity(0.5),
+                backgroundColor: const Color(0xFF4A80F0),
                 padding: EdgeInsets.symmetric(vertical: 16.h),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.r),
                 ),
+                elevation: 0,
               ),
-              child: const Text("Next", style: TextStyle(color: Colors.white)),
+              child: Text(
+                controller.currentStep.value == 6
+                    ? "Publish My Trip"
+                    : controller.currentStep.value == 5
+                    ? "Review"
+                    : "Next",
+                style: GoogleFonts.manrope(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
             ),
           );
-        }
-
-        return Padding(
-          padding: EdgeInsets.all(24.w),
-          child: ElevatedButton(
-            onPressed: () {
-              if (controller.currentStep.value == 6) {
-                // Show Compliance Flow in a big popup (Bottom Sheet)
-                ComplianceSheet.show(isDarkMode);
-              } else {
-                controller.nextStep();
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF4A80F0),
-              padding: EdgeInsets.symmetric(vertical: 16.h),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              elevation: 0,
-            ),
-            child: Text(
-              controller.currentStep.value == 6
-                  ? "Publish My Trip"
-                  : controller.currentStep.value == 5
-                  ? "Review"
-                  : "Next",
-              style: GoogleFonts.manrope(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        );
-      }),
+        }),
+      ),
     );
   }
 }

@@ -218,45 +218,47 @@ class TripDetailsScreen extends StatelessWidget {
           ),
           
           // Bottom Buttons
-          Container(
-            padding: EdgeInsets.all(24.w),
-            color: isDarkMode ? Colors.transparent : Colors.white,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: 54.h,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF4A80F0),
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
-                    ),
-                    child: Text(
-                      "Complete Trip",
-                      style: GoogleFonts.manrope(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Colors.white),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                SizedBox(
-                  width: double.infinity,
-                  height: 54.h,
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Color(0xFFFFEAEA)),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
-                    ),
-                    child: Text(
-                      "Delete Trip",
-                      style: GoogleFonts.manrope(fontSize: 16.sp, fontWeight: FontWeight.w700, color: const Color(0xFFFF3B3B)),
+          SafeArea(
+            child: Container(
+              padding: EdgeInsets.all(24.w),
+              color: isDarkMode ? Colors.transparent : Colors.white,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: 54.h,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4A80F0),
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                      ),
+                      child: Text(
+                        "Complete Trip",
+                        style: GoogleFonts.manrope(fontSize: 16.sp, fontWeight: FontWeight.w700, color: Colors.white),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                  SizedBox(height: 12.h),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 54.h,
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Color(0xFFFFEAEA)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+                      ),
+                      child: Text(
+                        "Delete Trip",
+                        style: GoogleFonts.manrope(fontSize: 16.sp, fontWeight: FontWeight.w700, color: const Color(0xFFFF3B3B)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

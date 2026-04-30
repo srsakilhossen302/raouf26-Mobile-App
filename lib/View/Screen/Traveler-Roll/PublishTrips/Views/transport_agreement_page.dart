@@ -38,7 +38,8 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body: SafeArea(
+        child: SingleChildScrollView(
         padding: EdgeInsets.all(24.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -281,7 +282,8 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
           ],
         ),
       ),
-    );
+    ),
+  );
   }
 
   Widget _buildSectionCard({required String title, required Widget child}) {
