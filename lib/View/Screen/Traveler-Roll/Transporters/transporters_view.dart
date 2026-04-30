@@ -26,39 +26,41 @@ class TransportersView extends GetView<TransportersController> {
       bottomNavigationBar: const CustomBottomNavBar(
         selectedIndex: 2,
       ), // Index 2 for Search context
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        automaticallyImplyLeading: false, // Prevents default back button
-        title: Text(
-          "Transporters",
-          style: GoogleFonts.manrope(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w700,
-            color: isDarkMode ? Colors.white : Colors.black,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 16.w),
-            child: GestureDetector(
-              onTap: () => _showFilterBottomSheet(context, isDarkMode),
-              child: SvgPicture.asset(
-                AppIcons.filters,
-                width: 24.w,
-                height: 24.h,
-                colorFilter: ColorFilter.mode(
-                  isDarkMode ? Colors.white : Colors.black,
-                  BlendMode.srcIn,
-                ),
+      body: Column(
+        children: [
+          // Custom Header
+          SafeArea(
+            bottom: false,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(width: 24.w), // Spacer for center alignment
+                  Text(
+                    "Transporters",
+                    style: GoogleFonts.manrope(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => _showFilterBottomSheet(context, isDarkMode),
+                    child: SvgPicture.asset(
+                      AppIcons.filters,
+                      width: 24.w,
+                      height: 24.h,
+                      colorFilter: ColorFilter.mode(
+                        isDarkMode ? Colors.white : Colors.black,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-        ],
-      ),
-      body: Column(
-        children: [
           // Search Bar
           Padding(
             padding: EdgeInsets.all(20.r),
@@ -485,9 +487,10 @@ class TransportersView extends GetView<TransportersController> {
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
         ),
         padding: EdgeInsets.all(20.r),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -658,6 +661,7 @@ class TransportersView extends GetView<TransportersController> {
             ),
           ],
         ),
+      ),
       ),
     );
   }
