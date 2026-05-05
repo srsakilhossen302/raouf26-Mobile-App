@@ -188,7 +188,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           isDarkMode,
                           onTap: () => Get.to(
                             () =>
-                                TransportAgreementPage(isDarkMode: isDarkMode),
+                                TransportAgreementPage(isDarkMode: isDarkMode, fromProfile: true,),
                           ),
                         ),
                       ],

@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'trip_published_page.dart';
+import 'transport_agreement_success_page.dart';
 
 class TransportAgreementPage extends StatefulWidget {
   final bool isDarkMode;
-  const TransportAgreementPage({super.key, required this.isDarkMode});
+  final bool fromProfile;
+  const TransportAgreementPage({super.key, required this.isDarkMode, this.fromProfile = false});
 
   @override
   State<TransportAgreementPage> createState() => _TransportAgreementPageState();
@@ -257,7 +259,11 @@ class _TransportAgreementPageState extends State<TransportAgreementPage> {
                             ? signatureController.text.isNotEmpty
                             : signaturePoints.isNotEmpty))
                     ? () {
-                        Get.to(() => TripPublishedPage(isDarkMode: widget.isDarkMode));
+                        if (widget.fromProfile) {
+                          Get.to(() => TransportAgreementSuccessPage(isDarkMode: widget.isDarkMode));
+                        } else {
+                          Get.to(() => TripPublishedPage(isDarkMode: widget.isDarkMode));
+                        }
                       }
                     : null,
                 style: ElevatedButton.styleFrom(
