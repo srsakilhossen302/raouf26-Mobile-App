@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import 'cancellation_request_page.dart';
+import 'cancellation_not_available_page.dart';
 
 class TransportAgreementSuccessPage extends StatelessWidget {
   final bool isDarkMode;
@@ -38,7 +40,7 @@ class TransportAgreementSuccessPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(flex: 2),
-              
+
               // Success Checkmark Icon with Concentric Circles
               Center(
                 child: Container(
@@ -98,16 +100,28 @@ class TransportAgreementSuccessPage extends StatelessWidget {
                   height: 1.5,
                 ),
               ),
-              
+
               const Spacer(flex: 3),
 
               // Agreement Council Button
               _buildActionButton(
-                "Agreement cancel",
+                "Agreement cancelation request",
                 const Color(0xFF4A80F0),
                 Colors.white,
                 onPressed: () {
-                  Get.back(); // or wherever "Agreement Council" should lead
+                  // Static check for demonstration (we'll integrate backend later)
+                  bool hasActiveItems = false;
+
+                  if (hasActiveItems) {
+                    Get.to(
+                      () =>
+                          CancellationNotAvailablePage(isDarkMode: isDarkMode),
+                    );
+                  } else {
+                    Get.to(
+                      () => CancellationRequestPage(isDarkMode: isDarkMode),
+                    );
+                  }
                 },
               ),
               SizedBox(height: 24.h),

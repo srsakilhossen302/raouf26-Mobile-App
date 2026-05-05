@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import 'trip_published_page.dart';
-import 'transport_agreement_success_page.dart';
+import '../../Profile/Cancellation/transport_agreement_success_page.dart';
 
 class TransportAgreementPage extends StatefulWidget {
   final bool isDarkMode;

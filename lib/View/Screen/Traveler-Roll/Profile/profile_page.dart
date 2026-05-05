@@ -23,6 +23,7 @@ import '../../../Widget/custom_transporter_bottom_nav_bar.dart';
 import '../Search/search_view.dart';
 import 'role_transition_screen.dart';
 import '../../MessagesScreen/report_issue_screen.dart';
+import 'Cancellation/contract_canceled_page.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
