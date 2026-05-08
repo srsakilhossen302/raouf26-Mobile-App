@@ -25,7 +25,8 @@ class TransporterHomeScreen extends StatelessWidget {
       backgroundColor: isDarkMode
           ? const Color(0xFF121212)
           : const Color(0xFFF8F9FB),
-      floatingActionButton: CustomTransporterBottomNavBar.buildFloatingActionButton(context),
+      floatingActionButton:
+          CustomTransporterBottomNavBar.buildFloatingActionButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomTransporterBottomNavBar(
         selectedIndex: 0,

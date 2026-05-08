@@ -12,15 +12,22 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
 
-  // Auto detect initial locale
+  // Load saved locale or auto detect
   Locale initialLocale = const Locale('en', 'US');
-  Locale? deviceLocale = Get.deviceLocale;
-  if (deviceLocale != null) {
-    String langCode = deviceLocale.languageCode.toLowerCase();
-    if (langCode == 'ar') {
-      initialLocale = const Locale('ar', 'AR');
-    } else if (langCode == 'fr') {
-      initialLocale = const Locale('fr', 'FR');
+  final savedLangCode = prefs.getString('languageCode');
+  final savedCountryCode = prefs.getString('countryCode');
+
+  if (savedLangCode != null && ['en', 'ar', 'fr'].contains(savedLangCode)) {
+    initialLocale = Locale(savedLangCode, savedCountryCode ?? '');
+  } else {
+    Locale? deviceLocale = Get.deviceLocale;
+    if (deviceLocale != null) {
+      String langCode = deviceLocale.languageCode.toLowerCase();
+      if (langCode == 'ar') {
+        initialLocale = const Locale('ar', 'AR');
+      } else if (langCode == 'fr') {
+        initialLocale = const Locale('fr', 'FR');
+      }
     }
   }
 
@@ -56,10 +63,7 @@ class MyApp extends StatelessWidget {
             locale: initialLocale ?? const Locale('en', 'US'),
             fallbackLocale: const Locale('en', 'US'),
             builder: (context, child) {
-              return Directionality(
-                textDirection: TextDirection.ltr,
-                child: child!,
-              );
+              return child!;
             },
             theme: ThemeData(
               brightness: Brightness.light,

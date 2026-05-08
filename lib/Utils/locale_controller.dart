@@ -16,7 +16,20 @@ class LocaleController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    autoDetectLocale();
+    _loadSavedLocale();
+  }
+
+  Future<void> _loadSavedLocale() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedLangCode = prefs.getString('languageCode');
+    final savedCountryCode = prefs.getString('countryCode');
+
+    if (savedLangCode != null && _supportedLanguages.contains(savedLangCode)) {
+      currentLocale.value = Locale(savedLangCode, savedCountryCode ?? '');
+      Get.updateLocale(currentLocale.value);
+    } else {
+      autoDetectLocale();
+    }
   }
 
   void autoDetectLocale() {
@@ -43,5 +56,17 @@ class LocaleController extends GetxController {
     
     // Apply locale
     Get.updateLocale(currentLocale.value);
+  }
+
+  Future<void> changeLocale(String langCode, String countryCode) async {
+    if (_supportedLanguages.contains(langCode)) {
+      final locale = Locale(langCode, countryCode);
+      currentLocale.value = locale;
+      Get.updateLocale(locale);
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('languageCode', langCode);
+      await prefs.setString('countryCode', countryCode);
+    }
   }
 }

@@ -54,15 +54,19 @@ class TransporterTrackingView extends StatelessWidget {
           SizedBox(width: 10.w),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: const Color(0xFF4A80F0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.r),
-        ),
-        elevation: 4,
-        child: Icon(Icons.add, color: Colors.white, size: 28.sp),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+
+      //   },
+      //   backgroundColor: const Color(0xFF4A80F0),
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.circular(30.r),
+      //   ),
+      //   elevation: 4,
+      //   child: Icon(Icons.add, color: Colors.white, size: 28.sp),
+      // ),
+      floatingActionButton:
+          CustomTransporterBottomNavBar.buildFloatingActionButton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const CustomTransporterBottomNavBar(
         selectedIndex: 1,

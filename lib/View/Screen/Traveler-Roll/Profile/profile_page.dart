@@ -14,6 +14,7 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/accessibility
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_verification_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/document_verification_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/trips_shipments_page.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/language_page.dart';
 
 import '../../../../helper/shared_preference_helper.dart';
 import '../../../Widget/custom_bottom_nav_bar.dart';
@@ -158,6 +159,12 @@ class _ProfilePageState extends State<ProfilePage> {
                           "assets/icons/Accessibility.svg",
                           isDarkMode,
                           onTap: () => Get.to(() => const AccessibilityPage()),
+                        ),
+                        _buildMenuItem(
+                          'languages'.tr,
+                          "assets/icons/Languages.svg",
+                          isDarkMode,
+                          onTap: () => Get.to(() => const LanguagePage()),
                         ),
                         // _buildThemeToggle(isDarkMode),
                       ],
