@@ -249,15 +249,16 @@ class MessagesScreen extends StatelessWidget {
         () {
           // If role is still loading or is Transporter, show the plus icon
           if (controller.userRole.value == "Transporter" || controller.userRole.value == "") {
-            return FloatingActionButton(
-              onPressed: () => _showCreateDialog(context, isDarkMode),
-              backgroundColor: const Color(0xFF4A80F0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.r),
-              ),
-              elevation: 4,
-              child: Icon(Icons.add, color: Colors.white, size: 28.sp),
-            );
+            //         return FloatingActionButton(
+            //   onPressed: () => _showCreateDialog(context, isDarkMode),
+            //   backgroundColor: const Color(0xFF4A80F0),
+            //   shape: RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.circular(30.r),
+            //   ),
+            //   elevation: 4,
+            //   child: Icon(Icons.add, color: Colors.white, size: 28.sp),
+            // );
+            return CustomTransporterBottomNavBar.buildFloatingActionButton(context);
           }
           // Only show search icon if role is explicitly NOT Transporter
           return CustomBottomNavBar.buildFloatingActionButton();
