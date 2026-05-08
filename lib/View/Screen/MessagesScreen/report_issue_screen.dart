@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class ReportIssueScreen extends StatefulWidget {
   const ReportIssueScreen({super.key});
@@ -140,12 +141,9 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
             SizedBox(height: 12.h),
             GestureDetector(
               onTap: () {
-                Get.snackbar(
-                  "Coming Soon",
-                  "Image upload feature is under development",
-                  snackPosition: SnackPosition.BOTTOM,
-                  backgroundColor: Colors.blueAccent,
-                  colorText: Colors.white,
+                CustomSnackbar.info(
+                  title: "Coming Soon",
+                  message: "Image upload feature is under development",
                 );
               },
               child: Container(
@@ -183,22 +181,16 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
               child: ElevatedButton(
                 onPressed: () {
                   if (descriptionController.text.trim().isEmpty) {
-                    Get.snackbar(
-                      "Error",
-                      "Please describe the issue",
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.redAccent,
-                      colorText: Colors.white,
+                    CustomSnackbar.error(
+                      title: "Error",
+                      message: "Please describe the issue",
                     );
                     return;
                   }
                   Get.back();
-                  Get.snackbar(
-                    "Success",
-                    "Your report has been submitted successfully",
-                    snackPosition: SnackPosition.BOTTOM,
-                    backgroundColor: Colors.green,
-                    colorText: Colors.white,
+                  CustomSnackbar.success(
+                    title: "Success",
+                    message: "Your report has been submitted successfully",
                   );
                 },
                 style: ElevatedButton.styleFrom(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Models/trip_model.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class PublishTripFlowController extends GetxController {
   final RxInt currentStep = 0.obs;
@@ -118,66 +119,45 @@ class PublishTripFlowController extends GetxController {
   bool validateTrip() {
     // 1. Check Date
     if (selectedDate.value == null) {
-      Get.snackbar("Error", "Please select a travel date.",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      CustomSnackbar.error(title: "Error", message: "Please select a travel date.");
       return false;
     }
 
     // 2. Check Departure & Destination
     if (departureController.text.isEmpty ||
         destinationController.text.isEmpty) {
-      Get.snackbar(
-          "Error", "Please provide both departure and destination cities.",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      CustomSnackbar.error(title: "Error", message: "Please provide both departure and destination cities.");
       return false;
     }
 
     // 3. Check Travel Times
     if (departureTime.value.isEmpty || arrivalTime.value.isEmpty) {
-      Get.snackbar("Error", "Please set your departure and arrival times.",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      CustomSnackbar.error(title: "Error", message: "Please set your departure and arrival times.");
       return false;
     }
 
     // 4. Check Capacity
     if (capacityController.text.isEmpty) {
-      Get.snackbar("Error", "Please specify the suitcase capacity.",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      CustomSnackbar.error(title: "Error", message: "Please specify the suitcase capacity.");
       return false;
     }
 
     // 5. Check Pricing
     if (!canCarryDocuments.value && !canCarryPackages.value) {
-      Get.snackbar(
-          "Error",
-          "Please select at least one item type (Packages or Documents).",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      CustomSnackbar.error(
+          title: "Error",
+          message: "Please select at least one item type (Packages or Documents).",
+      );
       return false;
     }
 
     if (canCarryDocuments.value && pricePerDocumentController.text.isEmpty) {
-      Get.snackbar("Error", "Please set a price for document delivery.",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      CustomSnackbar.error(title: "Error", message: "Please set a price for document delivery.");
       return false;
     }
 
     if (canCarryPackages.value && pricePerPackageController.text.isEmpty) {
-      Get.snackbar("Error", "Please set a price per kg for package delivery.",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white);
+      CustomSnackbar.error(title: "Error", message: "Please set a price per kg for package delivery.");
       return false;
     }
 

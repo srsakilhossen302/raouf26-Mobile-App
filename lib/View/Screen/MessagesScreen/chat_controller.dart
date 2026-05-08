@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 enum BookingStatus { pending, accepted, rejected }
 
@@ -22,7 +23,7 @@ class ChatController extends GetxController {
         });
       }
     } catch (e) {
-      Get.snackbar("Error", "Could not pick image: $e");
+      CustomSnackbar.error(title: "Error", message: "Could not pick image: $e");
     }
   }
   var status = BookingStatus.pending.obs;
@@ -90,12 +91,9 @@ class ChatController extends GetxController {
   void sendMessage(String text) {
     if (text.trim().isNotEmpty) {
       if (_containsSensitiveInfo(text)) {
-        Get.snackbar(
-          "Security Warning",
-          "For your protection, please keep communication inside the app. Avoid sharing contact information directly.",
-          backgroundColor: Colors.red.withOpacity(0.8),
-          colorText: Colors.white,
-          duration: const Duration(seconds: 4),
+        CustomSnackbar.warning(
+          title: "Security Warning",
+          message: "For your protection, please keep communication inside the app. Avoid sharing contact information directly.",
         );
         return;
       }

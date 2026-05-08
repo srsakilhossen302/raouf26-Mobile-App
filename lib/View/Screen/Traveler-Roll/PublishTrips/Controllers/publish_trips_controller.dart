@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import '../../../../../helper/shared_preference_helper.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class PublishTripsController extends GetxController {
   final RxInt selectedTab = 0.obs;
@@ -70,10 +71,9 @@ class PublishTripsController extends GetxController {
   }
 
   void rejectBooking() {
-    Get.snackbar(
-      "Booking Rejected",
-      "The request has been rejected successfully.",
-      snackPosition: SnackPosition.BOTTOM,
+    CustomSnackbar.success(
+      title: "Booking Rejected",
+      message: "The request has been rejected successfully.",
     );
   }
 }

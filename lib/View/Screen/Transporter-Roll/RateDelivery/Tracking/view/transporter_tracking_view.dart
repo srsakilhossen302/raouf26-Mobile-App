@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../../Utils/AppIcons/app_icons.dart';
-import '../../../../Widget/custom_transporter_bottom_nav_bar.dart';
+import '../../../../../../Utils/AppIcons/app_icons.dart';
+import '../../../../../Widget/custom_transporter_bottom_nav_bar.dart';
 import '../controller/transporter_tracking_controller.dart';
 import 'widgets/tracking_list_widget.dart';
 import 'widgets/tracking_map_widget.dart';

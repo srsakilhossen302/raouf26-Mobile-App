@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raouf26mobileapp/Utils/AppIcons/app_icons.dart';
 import '../Controllers/publish_trip_flow_controller.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class TripRulesStep extends StatelessWidget {
   final PublishTripFlowController controller;
@@ -381,12 +382,9 @@ class TripRulesStep extends StatelessWidget {
                       if (controller.selectedWhatYouAccept.length < 3) {
                         controller.selectedWhatYouAccept.add(option["label"]);
                       } else {
-                        Get.snackbar(
-                          "Selection Limit",
-                          "You can only select up to 3 items.",
-                          snackPosition: SnackPosition.BOTTOM,
-                          backgroundColor: Colors.redAccent.withOpacity(0.8),
-                          colorText: Colors.white,
+                        CustomSnackbar.error(
+                          title: "Selection Limit",
+                          message: "You can only select up to 3 items.",
                         );
                       }
                     }

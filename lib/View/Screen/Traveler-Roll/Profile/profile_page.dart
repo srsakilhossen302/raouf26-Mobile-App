@@ -15,6 +15,7 @@ import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/account_verif
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/document_verification_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/trips_shipments_page.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/language_page.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 import '../../../../helper/shared_preference_helper.dart';
 import '../../../Widget/custom_bottom_nav_bar.dart';
@@ -77,12 +78,9 @@ class _ProfilePageState extends State<ProfilePage> {
           floatingActionButton: isTransporter
               ? FloatingActionButton(
                   onPressed: () {
-                    Get.snackbar(
-                      "Action",
-                      "Post a new trip feature coming soon!",
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: const Color(0xFF4A80F0),
-                      colorText: Colors.white,
+                    CustomSnackbar.info(
+                      title: "Action",
+                      message: "Post a new trip feature coming soon!",
                     );
                   },
                   backgroundColor: const Color(0xFF4A80F0),
@@ -233,40 +231,36 @@ class _ProfilePageState extends State<ProfilePage> {
                           'help_center'.tr,
                           "assets/icons/Help Center.svg",
                           isDarkMode,
-                          onTap: () => Get.snackbar(
-                            "Help Center",
-                            "Opening help center...",
-                            snackPosition: SnackPosition.BOTTOM,
+                          onTap: () => CustomSnackbar.info(
+                            title: "Help Center",
+                            message: "Opening help center...",
                           ),
                         ),
                         _buildMenuItem(
                           'terms_of_service'.tr,
                           "assets/icons/Terms of Service.svg",
                           isDarkMode,
-                          onTap: () => Get.snackbar(
-                            "Terms of Service",
-                            "Displaying terms of service...",
-                            snackPosition: SnackPosition.BOTTOM,
+                          onTap: () => CustomSnackbar.info(
+                            title: "Terms of Service",
+                            message: "Displaying terms of service...",
                           ),
                         ),
                         _buildMenuItem(
                           'privacy_policy'.tr,
                           "assets/icons/Privacy Policy.svg",
                           isDarkMode,
-                          onTap: () => Get.snackbar(
-                            "Privacy Policy",
-                            "Displaying privacy policy...",
-                            snackPosition: SnackPosition.BOTTOM,
+                          onTap: () => CustomSnackbar.info(
+                            title: "Privacy Policy",
+                            message: "Displaying privacy policy...",
                           ),
                         ),
                         _buildMenuItem(
                           'rate_sendit_app'.tr,
                           "assets/icons/Rate Sendit App.svg",
                           isDarkMode,
-                          onTap: () => Get.snackbar(
-                            "Rate App",
-                            "Redirecting to store...",
-                            snackPosition: SnackPosition.BOTTOM,
+                          onTap: () => CustomSnackbar.info(
+                            title: "Rate App",
+                            message: "Redirecting to store...",
                           ),
                         ),
                         _buildMenuItem(
@@ -317,10 +311,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                     onPressed: () {
                                       // Add actual logout logic here (clear prefs, etc.)
                                       Get.back();
-                                      Get.snackbar(
-                                        "Logged Out",
-                                        "You have been successfully logged out",
-                                        snackPosition: SnackPosition.BOTTOM,
+                                      CustomSnackbar.success(
+                                        title: "Logged Out",
+                                        message: "You have been successfully logged out",
                                       );
                                     },
                                     child: Text(

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 import '../Views/transport_agreement_page.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class ComplianceFlowController extends GetxController {
   final RxInt currentStep = 0.obs;
@@ -92,10 +93,9 @@ class ComplianceFlowController extends GetxController {
       currentStep.value++;
     } else {
       Get.back();
-      Get.snackbar(
-        "Success",
-        "Trip Published Successfully!",
-        snackPosition: SnackPosition.BOTTOM,
+      CustomSnackbar.success(
+        title: "Success",
+        message: "Trip Published Successfully!",
       );
     }
   }

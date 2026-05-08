@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../Screen/Traveler-Roll/PublishTrips/Widgets/booking_details_modal.dart';
 import 'custom_reject_button.dart';
+import '../../../../../Utils/custom_snackbar.dart';
 
 class BookingRequestCard extends StatelessWidget {
   final String userName;
@@ -438,12 +439,9 @@ class BookingRequestCard extends StatelessWidget {
                     onPressed: () {
                       Get.back();
                       // Built-in success message
-                      Get.snackbar(
-                        "Request Rejected",
-                        "The request has been declined.",
-                        backgroundColor: Colors.redAccent,
-                        colorText: Colors.white,
-                        snackPosition: SnackPosition.BOTTOM,
+                      CustomSnackbar.error(
+                        title: "Request Rejected",
+                        message: "The request has been declined.",
                       );
                     },
                     style: ElevatedButton.styleFrom(

@@ -10,6 +10,7 @@ import 'package:raouf26mobileapp/View/Screen/MessagesScreen/chat_view.dart';
 import 'package:raouf26mobileapp/View/Screen/MessagesScreen/archive_view.dart';
 import 'package:raouf26mobileapp/View/Widget/custom_bottom_nav_bar.dart';
 import 'package:raouf26mobileapp/View/Widget/custom_transporter_bottom_nav_bar.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class MessagesScreen extends StatelessWidget {
   const MessagesScreen({super.key});
@@ -61,12 +62,9 @@ class MessagesScreen extends StatelessWidget {
               if (value == 0) {
                 Get.to(() => const ArchiveView());
               } else if (value == 1) {
-                Get.snackbar(
-                  "Give Feedback",
-                  "Feedback feature is coming soon!",
-                  snackPosition: SnackPosition.BOTTOM,
-                  backgroundColor: Colors.blueAccent,
-                  colorText: Colors.white,
+                CustomSnackbar.info(
+                  title: "Give Feedback",
+                  message: "Feedback feature is coming soon!",
                 );
               }
             },
@@ -467,12 +465,9 @@ class MessagesScreen extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     Get.back();
-                    Get.snackbar(
-                      "Success",
-                      "$type created successfully!",
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: Colors.green,
-                      colorText: Colors.white,
+                    CustomSnackbar.success(
+                      title: "Success",
+                      message: "$type created successfully!",
                     );
                   },
                   style: ElevatedButton.styleFrom(

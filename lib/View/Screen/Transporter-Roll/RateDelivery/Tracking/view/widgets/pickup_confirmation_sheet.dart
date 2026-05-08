@@ -3,14 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../controller/transporter_tracking_controller.dart';
+import 'delivery_confirmation_sheet.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
-void showDeliveryConfirmationSheet(
+void showPickupConfirmationSheet(
   BuildContext context,
   TrackingPackageModel package,
   TransporterTrackingController controller,
 ) {
   bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-  final RxInt selectedConditionIndex = 0.obs;
+  // A simple standalone RxInt to manage the selected condition
+  var selectedConditionIndex = 0.obs; // Default to Good condition
 
   showModalBottomSheet(
     context: context,
@@ -45,7 +48,7 @@ void showDeliveryConfirmationSheet(
                   ),
                   SizedBox(width: 12.w),
                   Text(
-                    'Delivery Confirmation (${package.id})',
+                    'Pickup Confirmation (${package.id})',
                     style: GoogleFonts.manrope(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
@@ -64,7 +67,7 @@ void showDeliveryConfirmationSheet(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Confirm Delivery',
+                      'Confirm Pickup',
                       style: GoogleFonts.manrope(
                         fontSize: 22.sp,
                         fontWeight: FontWeight.w700,
@@ -73,12 +76,10 @@ void showDeliveryConfirmationSheet(
                     ),
                     SizedBox(height: 8.h),
                     Text(
-                      'Are you sure you want to mark this package as delivered?',
+                      'Are you sure you want to mark this package as picked up?',
                       style: GoogleFonts.manrope(
                         fontSize: 14.sp,
-                        color: isDarkMode
-                            ? Colors.white60
-                            : Colors.grey.shade600,
+                        color: isDarkMode ? Colors.white60 : Colors.grey.shade600,
                         height: 1.4,
                       ),
                     ),
@@ -95,17 +96,15 @@ void showDeliveryConfirmationSheet(
                     ),
                     SizedBox(height: 4.h),
                     Text(
-                      'Scan the parcel QR code to confirm delivery.\nIf unavailable, upload proof manually.',
+                      'Scan the parcel QR code to confirm pickup.\nIf unavailable, upload proof manually.',
                       style: GoogleFonts.manrope(
                         fontSize: 13.sp,
-                        color: isDarkMode
-                            ? Colors.white38
-                            : Colors.grey.shade500,
+                        color: isDarkMode ? Colors.white38 : Colors.grey.shade500,
                         height: 1.4,
                       ),
                     ),
                     SizedBox(height: 20.h),
-
+                    
                     // Scan QR Code Button
                     SizedBox(
                       width: double.infinity,
@@ -114,11 +113,7 @@ void showDeliveryConfirmationSheet(
                         onPressed: () {
                           // QR Scanner logic
                         },
-                        icon: Icon(
-                          Icons.qr_code_scanner_rounded,
-                          color: Colors.white,
-                          size: 22.sp,
-                        ),
+                        icon: Icon(Icons.qr_code_scanner_rounded, color: Colors.white, size: 22.sp),
                         label: Text(
                           'Scan QR Code',
                           style: GoogleFonts.manrope(
@@ -137,7 +132,7 @@ void showDeliveryConfirmationSheet(
                       ),
                     ),
                     SizedBox(height: 12.h),
-
+                    
                     // Upload Proof Button
                     SizedBox(
                       width: double.infinity,
@@ -146,11 +141,7 @@ void showDeliveryConfirmationSheet(
                         onPressed: () {
                           // Image picker logic
                         },
-                        icon: Icon(
-                          Icons.camera_alt_outlined,
-                          color: Colors.grey,
-                          size: 22.sp,
-                        ),
+                        icon: Icon(Icons.camera_alt_outlined, color: Colors.grey, size: 22.sp),
                         label: Text(
                           'Upload Proof Instead',
                           style: GoogleFonts.manrope(
@@ -160,9 +151,7 @@ void showDeliveryConfirmationSheet(
                           ),
                         ),
                         style: OutlinedButton.styleFrom(
-                          backgroundColor: isDarkMode
-                              ? Colors.white.withOpacity(0.05)
-                              : const Color(0xFFF8F9FB),
+                          backgroundColor: isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF8F9FB),
                           side: BorderSide.none,
                           elevation: 0,
                           shape: RoundedRectangleBorder(
@@ -173,97 +162,6 @@ void showDeliveryConfirmationSheet(
                     ),
                     SizedBox(height: 24.h),
 
-                    // Recipient Name
-                    Text(
-                      'Recipient Name',
-                      style: GoogleFonts.manrope(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w700,
-                        color: isDarkMode ? Colors.white : Colors.black,
-                      ),
-                    ),
-                    SizedBox(height: 12.h),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: isDarkMode
-                            ? Colors.white.withOpacity(0.05)
-                            : const Color(0xFFF8F9FB),
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      child: TextField(
-                        style: TextStyle(
-                          color: isDarkMode ? Colors.white : Colors.black,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: package.userName.isNotEmpty
-                              ? package.userName
-                              : 'Mukaram H.',
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14.sp,
-                          ),
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16.w,
-                            vertical: 16.h,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 24.h),
-
-                    // Signature
-                    RichText(
-                      text: TextSpan(
-                        text: 'Signature',
-                        style: GoogleFonts.manrope(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w700,
-                          color: isDarkMode ? Colors.white : Colors.black,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: '(Optional)',
-                            style: GoogleFonts.manrope(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 12.h),
-                    Container(
-                      height: 100.h,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: isDarkMode
-                            ? Colors.white.withOpacity(0.05)
-                            : const Color(0xFFF8F9FB),
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      child: TextField(
-                        maxLines: null,
-                        style: TextStyle(
-                          color: isDarkMode ? Colors.white : Colors.black,
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'Type here...',
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14.sp,
-                          ),
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16.w,
-                            vertical: 16.h,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 24.h),
-                    
                     // Package Condition
                     Text(
                       'package_condition'.tr,
@@ -329,49 +227,36 @@ void showDeliveryConfirmationSheet(
                     ),
                     SizedBox(height: 12.h),
                     Container(
-                      height: 80.h,
+                      height: 100.h,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: isDarkMode
-                            ? Colors.white.withOpacity(0.05)
-                            : const Color(0xFFF8F9FB),
+                        color: isDarkMode ? Colors.white.withOpacity(0.05) : const Color(0xFFF8F9FB),
                         borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: TextField(
                         maxLines: null,
-                        style: TextStyle(
-                          color: isDarkMode ? Colors.white : Colors.black,
-                        ),
+                        style: TextStyle(color: isDarkMode ? Colors.white : Colors.black),
                         decoration: InputDecoration(
                           hintText: 'Type here...',
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14.sp,
-                          ),
+                          hintStyle: TextStyle(color: Colors.grey, fontSize: 14.sp),
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16.w,
-                            vertical: 16.h,
-                          ),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                         ),
                       ),
                     ),
                     SizedBox(height: 40.h),
 
-                    // Confirm Delivery Button
+                    // Confirm Pickup Button
                     SizedBox(
                       width: double.infinity,
                       height: 55.h,
                       child: ElevatedButton(
                         onPressed: () {
-                          controller.updatePackageStatus(package.id, 3);
+                          controller.updatePackageStatus(package.id, 1);
                           Get.back();
-                          Get.snackbar(
-                            "Success",
-                            "Package delivered successfully!",
-                            snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: Colors.green,
-                            colorText: Colors.white,
+                          CustomSnackbar.success(
+                            title: "Success",
+                            message: "Package picked up successfully!",
                           );
                         },
                         style: ElevatedButton.styleFrom(
@@ -382,7 +267,7 @@ void showDeliveryConfirmationSheet(
                           ),
                         ),
                         child: Text(
-                          'Confirm Delivery',
+                          'Confirm Pickup',
                           style: GoogleFonts.manrope(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
@@ -418,12 +303,8 @@ Widget _buildConditionRadioTile(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       decoration: BoxDecoration(
         color: isSelected
-            ? (isDarkMode
-                ? Colors.blue.withOpacity(0.05)
-                : const Color(0xFFF5F8FF))
-            : (isDarkMode
-                ? Colors.white.withOpacity(0.03)
-                : const Color(0xFFF9FAFB)),
+            ? (isDarkMode ? Colors.blue.withOpacity(0.05) : const Color(0xFFF5F8FF))
+            : (isDarkMode ? Colors.white.withOpacity(0.03) : const Color(0xFFF9FAFB)),
         borderRadius: BorderRadius.circular(12.r),
         border: Border.all(
           color: isSelected
@@ -493,7 +374,7 @@ Widget _buildUploadDamagePhoto(bool isDarkMode) {
         borderRadius: BorderRadius.circular(8.r),
         border: Border.all(
           color: const Color(0xFF4A80F0).withOpacity(0.3),
-          style: BorderStyle.none,
+          style: BorderStyle.none, // We'll use a dotted border if possible, or just a simple light one
         ),
       ),
       child: Column(

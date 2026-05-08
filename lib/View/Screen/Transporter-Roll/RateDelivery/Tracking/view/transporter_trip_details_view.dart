@@ -3,12 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../../Utils/AppIcons/app_icons.dart';
+import '../../../../../../Utils/AppIcons/app_icons.dart';
 import '../controller/transporter_tracking_controller.dart';
 import 'widgets/pickup_confirmation_sheet.dart';
 import 'widgets/delivery_confirmation_sheet.dart';
-import '../../../MessagesScreen/chat_view.dart';
-import '../../../MessagesScreen/report_issue_screen.dart';
+import '../../../../MessagesScreen/chat_view.dart';
+import '../../../../MessagesScreen/report_issue_screen.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class TransporterTripDetailsView extends StatelessWidget {
   final TrackingPackageModel package;
@@ -473,12 +474,9 @@ class TransporterTripDetailsView extends StatelessWidget {
         break;
       case 1:
         controller.updatePackageStatus(package.id, 2);
-        Get.snackbar(
-          "Success",
-          "Package is now in transit!",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.blue,
-          colorText: Colors.white,
+        CustomSnackbar.success(
+          title: "Success",
+          message: "Package is now in transit!",
         );
         break;
       case 2:

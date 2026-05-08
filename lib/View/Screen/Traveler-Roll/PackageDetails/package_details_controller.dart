@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class PackageDetailsController extends GetxController {
   final ImagePicker _picker = ImagePicker();
@@ -34,17 +35,17 @@ class PackageDetailsController extends GetxController {
   Future<void> pickImage(bool isExterior) async {
     if (isExterior) {
       if (exteriorImages.length >= 5) {
-        Get.snackbar(
-          "Limit Reached",
-          "You can only upload up to 5 exterior photos.",
+        CustomSnackbar.error(
+          title: "Limit Reached",
+          message: "You can only upload up to 5 exterior photos.",
         );
         return;
       }
     } else {
       if (interiorImages.length >= 5) {
-        Get.snackbar(
-          "Limit Reached",
-          "You can only upload up to 5 interior photos.",
+        CustomSnackbar.error(
+          title: "Limit Reached",
+          message: "You can only upload up to 5 interior photos.",
         );
         return;
       }

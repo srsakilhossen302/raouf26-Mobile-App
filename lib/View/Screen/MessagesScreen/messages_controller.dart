@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../helper/shared_preference_helper.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class MessagesController extends GetxController {
   var selectedTab = 0.obs; // 0 for All, 1 for Traveler, 2 for Client
@@ -133,27 +134,17 @@ class MessagesController extends GetxController {
   void archiveMessage(Map<String, dynamic> message) {
     messages.remove(message);
     archivedMessages.add(message);
-    Get.snackbar(
-      "Archived",
-      "Conversation archived",
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Get.theme.brightness == Brightness.dark
-          ? Colors.grey.shade900
-          : Colors.white,
-      colorText: Get.theme.brightness == Brightness.dark
-          ? Colors.white
-          : Colors.black,
+    CustomSnackbar.info(
+      title: "Archived",
+      message: "Conversation archived",
     );
   }
 
   void deleteMessage(Map<String, dynamic> message) {
     messages.remove(message);
-    Get.snackbar(
-      "Deleted",
-      "Conversation deleted",
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.red.withOpacity(0.1),
-      colorText: Colors.red,
+    CustomSnackbar.error(
+      title: "Deleted",
+      message: "Conversation deleted",
     );
   }
 }

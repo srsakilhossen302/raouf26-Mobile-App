@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../Utils/AppImg/app_img.dart';
 import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../../../../Widget/custom_transporter_bottom_nav_bar.dart';
-import '../../Tracking/view/transporter_tracking_view.dart';
+import '../../RateDelivery/Tracking/view/transporter_tracking_view.dart';
 import '../controller/transporter_home_controller.dart';
 import '../../Notifications/view/transporter_notifications_view.dart';
 import '../../NewRequests/view/transporter_new_requests_view.dart';

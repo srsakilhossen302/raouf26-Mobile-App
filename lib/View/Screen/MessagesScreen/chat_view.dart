@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../Utils/AppIcons/app_icons.dart';
 import '../../Widgets/booking_request_card.dart';
 import '../../Widgets/custom_reject_button.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class ChatView extends StatelessWidget {
   final Map<String, dynamic> userData;
@@ -101,7 +102,7 @@ class ChatView extends StatelessWidget {
               if (value == 'clear') {
                 controller.messages.clear();
               } else if (value == 'report') {
-                Get.snackbar("Report", "User reported successfully.");
+                CustomSnackbar.success(title: "Report", message: "User reported successfully.");
               }
             },
             itemBuilder: (BuildContext context) => [

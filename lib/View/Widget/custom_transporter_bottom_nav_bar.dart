@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../Utils/AppIcons/app_icons.dart';
 import '../Screen/MessagesScreen/messages_view.dart';
 import '../Screen/Transporter-Roll/Home/view/transporter_home_view.dart';
-import '../Screen/Transporter-Roll/Tracking/view/transporter_tracking_view.dart';
+import '../Screen/Transporter-Roll/RateDelivery/Tracking/view/transporter_tracking_view.dart';
 import '../Screen/Traveler-Roll/PublishTrips/Views/publish_trips_screen.dart';
 
 class CustomTransporterBottomNavBar extends StatelessWidget {

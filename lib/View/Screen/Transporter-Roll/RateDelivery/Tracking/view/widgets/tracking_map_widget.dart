@@ -3,14 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../../../Utils/AppIcons/app_icons.dart';
-import '../../../../MessagesScreen/chat_view.dart';
+import '../../../../../../../Utils/AppIcons/app_icons.dart';
+import '../../../../../MessagesScreen/chat_view.dart';
 import '../../controller/transporter_tracking_controller.dart';
 import '../transporter_trip_details_view.dart';
 import 'pickup_confirmation_sheet.dart';
 import 'delivery_confirmation_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'voice_call_sheet.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class TrackingMapWidget extends StatelessWidget {
   final TransporterTrackingController controller;
@@ -117,7 +118,7 @@ class TrackingMapWidget extends StatelessWidget {
                                       if (await canLaunchUrl(url)) {
                                         await launchUrl(url);
                                       } else {
-                                        Get.snackbar("Error", "Could not launch maps");
+                                        CustomSnackbar.error(title: "Error", message: "Could not launch maps");
                                       }
                                     },
                                   ),
@@ -352,12 +353,9 @@ class TrackingMapWidget extends StatelessWidget {
       case 1:
         // Transition to In Transit
         controller.updatePackageStatus(package.id, 2);
-        Get.snackbar(
-          "Success",
-          "Package is now in transit!",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.blue,
-          colorText: Colors.white,
+        CustomSnackbar.success(
+          title: "Success",
+          message: "Package is now in transit!",
         );
         break;
       case 2:

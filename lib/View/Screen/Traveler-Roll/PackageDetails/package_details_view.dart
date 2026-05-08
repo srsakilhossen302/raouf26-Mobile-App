@@ -8,6 +8,7 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/PackageDetails/package_details_controller.dart';
 
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/SenderDetails/sender_details_view.dart';
+import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class PackageDetailsScreen extends GetView<PackageDetailsController> {
   const PackageDetailsScreen({super.key});
@@ -693,18 +694,18 @@ class PackageDetailsScreen extends GetView<PackageDetailsController> {
                             isSelectingEnd.value = true;
                           });
                         } else {
-                          Get.snackbar("Error", "Please select a start date");
+                          CustomSnackbar.error(title: "Error", message: "Please select a start date");
                         }
                       } else {
                         if (tempEnd != null) {
                           if (tempEnd!.isBefore(tempStart!)) {
-                            Get.snackbar("Error", "End date must be after start date");
+                            CustomSnackbar.error(title: "Error", message: "End date must be after start date");
                             return;
                           }
                           controller.updateDateRange(tempStart, tempEnd);
                           Get.back();
                         } else {
-                          Get.snackbar("Error", "Please select an end date");
+                          CustomSnackbar.error(title: "Error", message: "Please select an end date");
                         }
                       }
                     },
