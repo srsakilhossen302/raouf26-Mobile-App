@@ -9,6 +9,7 @@ import '../../../../Utils/AppIcons/app_icons.dart';
 import '../../Widgets/booking_request_card.dart';
 import '../../Widgets/custom_reject_button.dart';
 import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
+import 'report_issue_screen.dart';
 
 class ChatView extends StatelessWidget {
   final Map<String, dynamic> userData;
@@ -93,30 +94,72 @@ class ChatView extends StatelessWidget {
           ],
         ),
         actions: [
-          PopupMenuButton<String>(
+          PopupMenuButton<int>(
             icon: Icon(
               Icons.more_vert,
               color: isDarkMode ? Colors.white : Colors.black,
             ),
+            offset: const Offset(0, 50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+            color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
             onSelected: (value) {
-              if (value == 'clear') {
-                controller.messages.clear();
-              } else if (value == 'report') {
-                CustomSnackbar.success(title: "Report", message: "User reported successfully.");
+              if (value == 0) {
+                Get.to(() => const ReportIssueScreen());
+              } else if (value == 1) {
+                Get.to(() => const ChatView(
+                      userData: {
+                        'name': 'Sendit Support',
+                        'message': '24/7 available! How can we help you?',
+                        'time': '',
+                        'isSupport': true,
+                        'isUnread': false,
+                        'image': '',
+                      },
+                    ));
               }
             },
             itemBuilder: (BuildContext context) => [
-              const PopupMenuItem(
-                value: 'report',
-                child: Text('Report User'),
+              PopupMenuItem(
+                value: 0,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.report_problem_outlined,
+                      size: 20.sp,
+                      color: isDarkMode ? Colors.white70 : Colors.black87,
+                    ),
+                    SizedBox(width: 12.w),
+                    Text(
+                      "report_an_issue".tr,
+                      style: GoogleFonts.manrope(
+                        fontSize: 14.sp,
+                        color: isDarkMode ? Colors.white70 : Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              const PopupMenuItem(
-                value: 'block',
-                child: Text('Block User'),
-              ),
-              const PopupMenuItem(
-                value: 'clear',
-                child: Text('Clear Chat'),
+              PopupMenuItem(
+                value: 1,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.headset_mic_outlined,
+                      size: 20.sp,
+                      color: isDarkMode ? Colors.white70 : Colors.black87,
+                    ),
+                    SizedBox(width: 12.w),
+                    Text(
+                      "contact_support".tr,
+                      style: GoogleFonts.manrope(
+                        fontSize: 14.sp,
+                        color: isDarkMode ? Colors.white70 : Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
