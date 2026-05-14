@@ -14,6 +14,7 @@ import 'search_controller.dart';
 import 'map_picker_screen.dart';
 import '../PackageDetails/package_details_view.dart';
 import '../Profile/camera_scan_screen.dart';
+import 'recent_rides_view.dart';
 import '../../Transporter-Roll/Notifications/view/transporter_notifications_view.dart';
 
 class SearchScreen extends GetView<TravelerSearchController> {
@@ -550,7 +551,7 @@ class SearchScreen extends GetView<TravelerSearchController> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () => Get.to(() => const RecentRidesView()),
                         child: Text(
                           "See all",
                           style: GoogleFonts.manrope(
