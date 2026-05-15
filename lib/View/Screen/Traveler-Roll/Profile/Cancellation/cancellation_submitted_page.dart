@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+import 'package:raouf26mobileapp/View/Screen/MessagesScreen/chat_view.dart';
 
 import 'contract_canceled_page.dart';
 
@@ -205,7 +206,18 @@ class CancellationSubmittedPage extends StatelessWidget {
                 width: double.infinity,
                 height: 56.h,
                 child: OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => const ChatView(
+                          userData: {
+                            'name': 'Sendit Support',
+                            'message': '24/7 available! How can we help you?',
+                            'time': '',
+                            'isSupport': true,
+                            'isUnread': false,
+                            'image': 'https://via.placeholder.com/150',
+                          },
+                        ));
+                  },
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(color: Colors.grey.withOpacity(0.1)),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
