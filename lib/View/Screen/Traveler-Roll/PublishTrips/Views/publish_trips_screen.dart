@@ -279,17 +279,44 @@ class PublishTripsScreen extends StatelessWidget {
     final controller = Get.find<PublishTripsController>();
     return Column(
       children: [
-        _buildSubTabBar(isDarkMode),
+        _buildSubTabBar(controller, isDarkMode),
         _buildFilterChips(controller, isDarkMode),
-        Expanded(
-          child: ListView.builder(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-            itemCount: 2,
-            itemBuilder: (context, index) {
-              return _buildTripCard(context, isDarkMode);
-            },
-          ),
-        ),
+        Obx(() {
+          // subTab: 0=All, 1=Published, 2=Drafts
+          // For now showing 2 cards for All/Published and 0 for Drafts as placeholder
+          final int itemCount = controller.selectedSubTab.value == 2 ? 0 : 2;
+          if (itemCount == 0) {
+            return Expanded(
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.edit_note_outlined,
+                        size: 56, color: Colors.grey.shade400),
+                    SizedBox(height: 12.h),
+                    Text(
+                      "No drafts yet",
+                      style: GoogleFonts.manrope(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
+          return Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+              itemCount: itemCount,
+              itemBuilder: (context, index) {
+                return _buildTripCard(context, isDarkMode);
+              },
+            ),
+          );
+        }),
       ],
     );
   }
@@ -392,43 +419,48 @@ class PublishTripsScreen extends StatelessWidget {
     return null;
   }
 
-  Widget _buildSubTabBar(bool isDarkMode) {
+  Widget _buildSubTabBar(PublishTripsController controller, bool isDarkMode) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
-      child: Row(
+      child: Obx(() => Row(
         children: [
-          _buildSubTabItem("All", true, isDarkMode),
+          _buildSubTabItem("All", 0, controller, isDarkMode),
           SizedBox(width: 10.w),
-          _buildSubTabItem("Publish", false, isDarkMode),
+          _buildSubTabItem("Published", 1, controller, isDarkMode),
           SizedBox(width: 10.w),
-          _buildSubTabItem("Drafts", false, isDarkMode),
+          _buildSubTabItem("Drafts", 2, controller, isDarkMode),
         ],
-      ),
+      )),
     );
   }
 
-  Widget _buildSubTabItem(String label, bool isSelected, bool isDarkMode) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
-      decoration: BoxDecoration(
-        color: isSelected
-            ? (isDarkMode ? Colors.white : Colors.black)
-            : Colors.transparent,
-        borderRadius: BorderRadius.circular(8.r),
-        border: Border.all(
+  Widget _buildSubTabItem(String label, int index, PublishTripsController controller, bool isDarkMode) {
+    final bool isSelected = controller.selectedSubTab.value == index;
+    return GestureDetector(
+      onTap: () => controller.changeSubTab(index),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
+        decoration: BoxDecoration(
           color: isSelected
               ? (isDarkMode ? Colors.white : Colors.black)
-              : (isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0)),
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(8.r),
+          border: Border.all(
+            color: isSelected
+                ? (isDarkMode ? Colors.white : Colors.black)
+                : (isDarkMode ? Colors.white24 : const Color(0xFFE0E0E0)),
+          ),
         ),
-      ),
-      child: Text(
-        label,
-        style: GoogleFonts.manrope(
-          fontSize: 14.sp,
-          fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-          color: isSelected
-              ? (isDarkMode ? Colors.black : Colors.white)
-              : (isDarkMode ? Colors.white70 : const Color(0xFF9E9E9E)),
+        child: Text(
+          label,
+          style: GoogleFonts.manrope(
+            fontSize: 13.sp,
+            fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+            color: isSelected
+                ? (isDarkMode ? Colors.black : Colors.white)
+                : (isDarkMode ? Colors.white70 : const Color(0xFF9E9E9E)),
+          ),
         ),
       ),
     );

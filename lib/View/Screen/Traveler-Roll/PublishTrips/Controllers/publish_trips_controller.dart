@@ -5,6 +5,7 @@ import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 class PublishTripsController extends GetxController {
   final RxInt selectedTab = 0.obs;
   final RxInt requestSubTab = 0.obs;
+  final RxInt selectedSubTab = 0.obs; // 0=All, 1=Published, 2=Drafts
   final RxString userRole = "".obs;
   final RxString selectedReason = "".obs;
   final List<String> quickReasons = [
@@ -60,6 +61,10 @@ class PublishTripsController extends GetxController {
 
   void changeTab(int index) {
     selectedTab.value = index;
+  }
+
+  void changeSubTab(int index) {
+    selectedSubTab.value = index;
   }
 
   void changeRequestSubTab(int index) {
