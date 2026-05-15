@@ -18,11 +18,11 @@ class CalendarStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Expanded(
+        Positioned.fill(
           child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 250.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -124,8 +124,10 @@ class CalendarStep extends StatelessWidget {
                             selectedDayPredicate: (day) =>
                                 isSameDay(controller.selectedDate.value, day),
                             onDaySelected: (selectedDay, focusedDay) {
-                              controller.selectedDate.value = selectedDay;
-                              controller.focusedDate.value = focusedDay;
+                              if (controller.selectedDate.value == null) {
+                                controller.selectedDate.value = selectedDay;
+                                controller.focusedDate.value = focusedDay;
+                              }
                             },
                           );
                         }),
@@ -139,9 +141,13 @@ class CalendarStep extends StatelessWidget {
         ),
 
         // Selection UI (Image 2)
-        Obx(() {
-          if (controller.selectedDate.value == null) return const SizedBox();
-          return Container(
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Obx(() {
+            if (controller.selectedDate.value == null) return const SizedBox();
+            return Container(
             padding: EdgeInsets.all(24.w),
             decoration: BoxDecoration(
               color: isDarkMode ? const Color(0xFF1A1A1A) : Colors.white,
@@ -160,51 +166,32 @@ class CalendarStep extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    GestureDetector(
-                      onTap: () => controller.currentStep.value = 1,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 24.w,
-                          vertical: 12.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF1A1A1A),
-                          borderRadius: BorderRadius.circular(12.r),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              DateFormat('EEE, d MMM')
-                                  .format(controller.selectedDate.value!)
-                                  .toUpperCase(),
-                              style: GoogleFonts.manrope(
-                                color: Colors.white,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
+                    Flexible(
+                      child: GestureDetector(
+                        onTap: () => controller.currentStep.value = 1,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20.w,
+                            vertical: 12.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF1A1A1A),
+                            borderRadius: BorderRadius.circular(12.r),
+                          ),
+                          child: Text(
+                            [
+                              DateFormat('EEE, d MMM').format(controller.selectedDate.value!).toUpperCase(),
+                              if (controller.departureTime.value.isNotEmpty) "Dep. ${controller.departureTime.value}",
+                              if (controller.arrivalTime.value.isNotEmpty) "Arr. ${controller.arrivalTime.value}",
+                            ].join(" • "),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.manrope(
+                              color: Colors.white,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
                             ),
-                            if (controller.departureTime.value.isNotEmpty) ...[
-                              Text(
-                                " - Dep. ${controller.departureTime.value}",
-                                style: GoogleFonts.manrope(
-                                  color: Colors.white,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                            if (controller.arrivalTime.value.isNotEmpty) ...[
-                              Text(
-                                " - Arr. ${controller.arrivalTime.value}",
-                                style: GoogleFonts.manrope(
-                                  color: Colors.white,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ],
+                          ),
                         ),
                       ),
                     ),
@@ -358,7 +345,8 @@ class CalendarStep extends StatelessWidget {
             ),
           );
         }),
-      ],
+      ),
+    ],
     );
   }
 
