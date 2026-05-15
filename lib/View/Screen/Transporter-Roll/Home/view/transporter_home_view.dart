@@ -22,6 +22,7 @@ class TransporterHomeScreen extends StatelessWidget {
     bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: isDarkMode
           ? const Color(0xFF121212)
           : const Color(0xFFF8F9FB),

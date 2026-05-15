@@ -72,6 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
         final bool isTraveler = currentRole == "Traveler";
 
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: isDarkMode
               ? const Color(0xFF121212)
               : const Color(0xFFF8F9FB),
