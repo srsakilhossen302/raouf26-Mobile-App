@@ -70,7 +70,7 @@ class PublishTripsScreen extends StatelessWidget {
                               size: 24.sp,
                             ),
                           );
-                        } else if (controller.selectedTab.value == 1) {
+                        } else if (controller.selectedTab.value == 1 || controller.selectedTab.value == 2) {
                           return IconButton(
                             onPressed: () => _showFilters(context),
                             icon: SvgPicture.asset(
@@ -84,7 +84,7 @@ class PublishTripsScreen extends StatelessWidget {
                             ),
                           );
                         }
-                        return SizedBox(width: 48.w); // Spacer for Requests tab
+                        return SizedBox(width: 48.w); // Fallback spacer
                       }),
                     ],
                   ),
