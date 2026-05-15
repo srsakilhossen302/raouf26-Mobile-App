@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporters_controller.dart';
 import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Transporters/transporter_details_view.dart';
 import 'package:raouf26mobileapp/View/Widget/custom_bottom_nav_bar.dart';
@@ -553,7 +554,10 @@ class TransportersView extends GetView<TransportersController> {
                     SizedBox(height: 24.h),
                     _filterTitle("Travel Date", isDarkMode),
                     SizedBox(height: 12.h),
-                    _datePickerField(isDarkMode),
+                    GestureDetector(
+                      onTap: () => _showDatePicker(context, isDarkMode),
+                      child: _datePickerField(isDarkMode),
+                    ),
                     SizedBox(height: 24.h),
                     _filterTitle("Price Range", isDarkMode),
                     SizedBox(height: 12.h),
@@ -825,6 +829,149 @@ class TransportersView extends GetView<TransportersController> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showDatePicker(BuildContext context, bool isDarkMode) {
+    DateTime focusedDay = controller.selectedDate.value ?? DateTime.now();
+    DateTime? tempSelectedDay = controller.selectedDate.value;
+
+    Get.bottomSheet(
+      StatefulBuilder(
+        builder: (context, setState) {
+          return Container(
+            padding: EdgeInsets.all(24.r),
+            decoration: BoxDecoration(
+              color: isDarkMode ? const Color(0xFF1E1E1E) : Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30.r),
+                topRight: Radius.circular(30.r),
+              ),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(width: 24),
+                    Text(
+                      "Select a Date",
+                      style: GoogleFonts.manrope(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w700,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => Get.back(),
+                      child: Icon(
+                        Icons.close,
+                        color: isDarkMode ? Colors.white : Colors.black,
+                        size: 24.sp,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h),
+                TableCalendar(
+                  firstDay: DateTime.utc(2020, 1, 1),
+                  lastDay: DateTime.utc(2030, 12, 31),
+                  focusedDay: focusedDay,
+                  selectedDayPredicate: (day) =>
+                      isSameDay(tempSelectedDay, day),
+                  onDaySelected: (selectedDay, focusedDayUpdate) {
+                    setState(() {
+                      tempSelectedDay = selectedDay;
+                      focusedDay = focusedDayUpdate;
+                    });
+                  },
+                  headerStyle: HeaderStyle(
+                    formatButtonVisible: false,
+                    titleCentered: true,
+                    titleTextStyle: GoogleFonts.manrope(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w700,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    leftChevronIcon: Icon(
+                      Icons.chevron_left,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    rightChevronIcon: Icon(
+                      Icons.chevron_right,
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                  ),
+                  calendarStyle: CalendarStyle(
+                    todayDecoration: BoxDecoration(
+                      color: const Color(0xFF4A80F0).withOpacity(0.3),
+                      shape: BoxShape.circle,
+                    ),
+                    selectedDecoration: const BoxDecoration(
+                      color: Color(0xFF4A80F0),
+                      shape: BoxShape.circle,
+                    ),
+                    defaultTextStyle: GoogleFonts.manrope(
+                      color: isDarkMode ? Colors.white : Colors.black,
+                    ),
+                    weekendTextStyle: GoogleFonts.manrope(
+                      color: isDarkMode ? Colors.white70 : Colors.black54,
+                    ),
+                    outsideTextStyle: GoogleFonts.manrope(
+                      color: isDarkMode ? Colors.white24 : Colors.grey.shade400,
+                    ),
+                  ),
+                  daysOfWeekStyle: DaysOfWeekStyle(
+                    weekdayStyle: GoogleFonts.manrope(
+                      color: Colors.grey,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    weekendStyle: GoogleFonts.manrope(
+                      color: isDarkMode
+                          ? Colors.redAccent.withOpacity(0.7)
+                          : Colors.redAccent,
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 24.h),
+                SafeArea(
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 52.h,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        controller.updateDate(tempSelectedDay ?? focusedDay);
+                        Get.back();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4A80F0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.r),
+                        ),
+                        elevation: 0,
+                      ),
+                      child: Text(
+                        "Confirm",
+                        style: GoogleFonts.manrope(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10.h),
+              ],
+            ),
+          );
+        },
+      ),
+      isScrollControlled: true,
     );
   }
 

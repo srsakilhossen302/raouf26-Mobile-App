@@ -55,6 +55,10 @@ class TransportersController extends GetxController {
   final RxBool isStorageRequired = true.obs;
   final RxBool isNoStorageNeeded = false.obs;
 
+  void updateDate(DateTime date) {
+    selectedDate.value = date;
+  }
+
   void resetFilters() {
     isTravelerSelected.value = true;
     isTransporterSelected.value = false;
