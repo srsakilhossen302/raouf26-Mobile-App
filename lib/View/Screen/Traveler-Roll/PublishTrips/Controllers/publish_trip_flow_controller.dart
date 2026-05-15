@@ -33,7 +33,7 @@ class PublishTripFlowController extends GetxController {
   final RxString capacityText = "".obs;
 
   // Travel Details
-  final RxString selectedTravelMode = "Flight".obs;
+  final RxString selectedTravelMode = "".obs;
   final RxString selectedAirline = "Select Airline".obs;
   final flightNumberController = TextEditingController();
 
@@ -77,7 +77,59 @@ class PublishTripFlowController extends GetxController {
     }
   }
 
+  final RxString travelDetailsSummary = "".obs;
+
+  void updateTravelDetailsSummary() {
+    if (selectedTravelMode.value.isEmpty) {
+      travelDetailsSummary.value = "";
+      return;
+    }
+    String details = selectedTravelMode.value;
+    switch (selectedTravelMode.value) {
+      case "Flight":
+        if (flightNumberController.text.isNotEmpty) {
+          details += ", ${flightNumberController.text}";
+        } else if (selectedAirline.value != "Select Airline") {
+          details += ", ${selectedAirline.value}";
+        }
+        break;
+      case "Car":
+        if (selectedVehicleType.value != "Select Vehicle Type") {
+          details += ", ${selectedVehicleType.value}";
+        }
+        if (licensePlateController.text.isNotEmpty) {
+          details += " (${licensePlateController.text})";
+        }
+        break;
+      case "Train":
+        if (trainNumberController.text.isNotEmpty) {
+          details += ", ${trainNumberController.text}";
+        }
+        break;
+      case "Bus":
+        if (busNumberController.text.isNotEmpty) {
+          details += ", ${busNumberController.text}";
+        }
+        break;
+      case "Boat":
+        if (vesselNameController.text.isNotEmpty) {
+          details += ", ${vesselNameController.text}";
+        }
+        break;
+      case "Other":
+        if (otherDescriptionController.text.isNotEmpty) {
+          details += ", ${otherDescriptionController.text}";
+        }
+        break;
+    }
+    travelDetailsSummary.value = details;
+  }
+
   void nextStep() {
+    if (currentStep.value == 3) {
+      updateTravelDetailsSummary();
+    }
+    
     if (isEditMode.value) {
       if (isFromDetailsScreen.value) {
         // If we are at Price step (2), go to Travel Details (3) next instead of returning immediately

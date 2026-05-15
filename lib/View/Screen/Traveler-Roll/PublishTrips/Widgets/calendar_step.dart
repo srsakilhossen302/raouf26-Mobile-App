@@ -338,9 +338,9 @@ class CalendarStep extends StatelessWidget {
                                   SizedBox(height: 12.h),
                                   Obx(
                                     () => _buildMiniTextField(
-                                      controller.selectedTravelMode.value.isEmpty
+                                      controller.travelDetailsSummary.value.isEmpty
                                           ? "e.g. flight, boat etc."
-                                          : controller.selectedTravelMode.value,
+                                          : controller.travelDetailsSummary.value,
                                       isDarkMode,
                                     ),
                                   ),

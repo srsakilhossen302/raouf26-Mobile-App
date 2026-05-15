@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import '../Controllers/publish_trip_flow_controller.dart';
 
 class TripSummaryStep extends StatelessWidget {
@@ -42,27 +44,39 @@ class TripSummaryStep extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: _buildSummaryBox(
-                  "Departure & Destination",
-                  "Tunisia",
-                  Icons.location_on,
-                  isDarkMode,
+                child: Obx(
+                  () => _buildSummaryBox(
+                    "Departure & Destination",
+                    controller.departureText.value.isEmpty || controller.destinationText.value.isEmpty
+                        ? "Not set"
+                        : "${controller.departureText.value} → ${controller.destinationText.value}",
+                    Icons.location_on,
+                    isDarkMode,
+                  ),
                 ),
               ),
               SizedBox(width: 16.w),
               Expanded(
                 child: Column(
                   children: [
-                    _buildSummaryMiniBox(
-                      "Set Price & Capacity",
-                      "Price / kg",
-                      isDarkMode,
+                    Obx(
+                      () => _buildSummaryMiniBox(
+                        "Set Price & Capacity",
+                        controller.pricePerPackageText.value.isEmpty || controller.capacityText.value.isEmpty
+                            ? "Price / kg"
+                            : "${controller.pricePerPackageText.value} ${controller.selectedCurrency.value} - ${controller.capacityText.value} kg",
+                        isDarkMode,
+                      ),
                     ),
                     SizedBox(height: 12.h),
-                    _buildSummaryMiniBox(
-                      "Set Travel Details",
-                      "e.g. flight, boat etc.",
-                      isDarkMode,
+                    Obx(
+                      () => _buildSummaryMiniBox(
+                        "Set Travel Details",
+                        controller.travelDetailsSummary.value.isEmpty
+                            ? "e.g. flight, boat etc."
+                            : controller.travelDetailsSummary.value,
+                        isDarkMode,
+                      ),
                     ),
                   ],
                 ),
@@ -92,11 +106,15 @@ class TripSummaryStep extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "February, 2026",
-                style: GoogleFonts.manrope(
-                  fontWeight: FontWeight.w700,
-                  color: isDarkMode ? Colors.white : Colors.black,
+              Obx(
+                () => Text(
+                  controller.selectedDate.value != null
+                      ? DateFormat('MMMM, yyyy').format(controller.selectedDate.value!)
+                      : "Date not set",
+                  style: GoogleFonts.manrope(
+                    fontWeight: FontWeight.w700,
+                    color: isDarkMode ? Colors.white : Colors.black,
+                  ),
                 ),
               ),
               const Icon(Icons.calendar_today, size: 16, color: Colors.grey),
