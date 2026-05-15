@@ -3,13 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../../../../Utils/AppIcons/app_icons.dart';
 import '../../../../../MessagesScreen/chat_view.dart';
 import '../../controller/transporter_tracking_controller.dart';
 import '../transporter_trip_details_view.dart';
 import 'pickup_confirmation_sheet.dart';
 import 'delivery_confirmation_sheet.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../delivery_confirmation_page.dart';
+import '../delivery_completed_page.dart';
 import 'voice_call_sheet.dart';
 import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
@@ -341,7 +343,7 @@ class TrackingMapWidget extends StatelessWidget {
         return 'confirm_delivery'.tr;
       case 3:
       default:
-        return 'view_proof'.tr;
+        return 'View Delivery Summary';
     }
   }
 
@@ -359,7 +361,10 @@ class TrackingMapWidget extends StatelessWidget {
         );
         break;
       case 2:
-        showDeliveryConfirmationSheet(context, package, controller);
+        Get.to(() => DeliveryConfirmationPage(package: package, controller: controller));
+        break;
+      case 3:
+        Get.to(() => DeliveryCompletedPage(package: package));
         break;
       default:
         break;

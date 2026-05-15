@@ -8,6 +8,8 @@ import '../../controller/transporter_tracking_controller.dart';
 import '../transporter_trip_details_view.dart';
 import 'pickup_confirmation_sheet.dart';
 import 'delivery_confirmation_sheet.dart';
+import '../delivery_confirmation_page.dart';
+import '../delivery_completed_page.dart';
 import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class TrackingListWidget extends StatelessWidget {
@@ -441,7 +443,7 @@ class TrackingListWidget extends StatelessWidget {
       case 0: return 'Mark as Picked Up';
       case 1: return 'Mark in Transit';
       case 2: return 'Mark as Delivered';
-      case 3: default: return 'View Proof';
+      case 3: default: return 'View Delivery Summary';
     }
   }
 
@@ -459,7 +461,10 @@ class TrackingListWidget extends StatelessWidget {
         );
         break;
       case 2:
-        showDeliveryConfirmationSheet(context, package, controller);
+        Get.to(() => DeliveryConfirmationPage(package: package, controller: controller));
+        break;
+      case 3:
+        Get.to(() => DeliveryCompletedPage(package: package));
         break;
       default:
         break;
