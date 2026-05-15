@@ -118,7 +118,7 @@ class PublishTripsScreen extends StatelessWidget {
       ),
       floatingActionButton: Obx(
         () {
-          if (controller.userRole.value == "Transporter" || controller.userRole.value == "") {
+          if (controller.userRole.value == "Transporter") {
             return CustomTransporterBottomNavBar.buildFloatingActionButton(context);
           }
           return CustomBottomNavBar.buildFloatingActionButton();
@@ -127,7 +127,7 @@ class PublishTripsScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Obx(
         () {
-          if (controller.userRole.value == "Transporter" || controller.userRole.value == "") {
+          if (controller.userRole.value == "Transporter") {
             return const CustomTransporterBottomNavBar(selectedIndex: 4);
           }
           return const CustomBottomNavBar(selectedIndex: 4);

@@ -6,7 +6,7 @@ class PublishTripsController extends GetxController {
   final RxInt selectedTab = 0.obs;
   final RxInt requestSubTab = 0.obs;
   final RxInt selectedSubTab = 0.obs; // 0=All, 1=Published, 2=Drafts
-  final RxString userRole = "".obs;
+  final RxString userRole = "Traveler".obs;
   final RxString selectedReason = "".obs;
   final List<String> quickReasons = [
     "Sorry, we are no longer available for this date.",

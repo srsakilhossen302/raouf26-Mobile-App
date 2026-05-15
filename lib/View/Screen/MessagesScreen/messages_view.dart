@@ -247,7 +247,7 @@ class MessagesScreen extends StatelessWidget {
       floatingActionButton: Obx(
         () {
           // If role is still loading or is Transporter, show the plus icon
-          if (controller.userRole.value == "Transporter" || controller.userRole.value == "") {
+          if (controller.userRole.value == "Transporter") {
             //         return FloatingActionButton(
             //   onPressed: () => _showCreateDialog(context, isDarkMode),
             //   backgroundColor: const Color(0xFF4A80F0),
@@ -266,7 +266,7 @@ class MessagesScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Obx(
         () {
-          if (controller.userRole.value == "Transporter" || controller.userRole.value == "") {
+          if (controller.userRole.value == "Transporter") {
             return const CustomTransporterBottomNavBar(selectedIndex: 3);
           }
           return const CustomBottomNavBar(selectedIndex: 3);
