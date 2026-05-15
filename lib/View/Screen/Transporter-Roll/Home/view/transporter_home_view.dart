@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:raouf26mobileapp/View/Screen/Traveler-Roll/Profile/camera_scan_screen.dart';
 import '../../../../../Utils/AppImg/app_img.dart';
 import '../../../../../Utils/AppIcons/app_icons.dart';
 import '../../../../Widget/custom_transporter_bottom_nav_bar.dart';
@@ -166,7 +167,7 @@ class TransporterHomeScreen extends StatelessWidget {
                         // QR Code Icon
                         GestureDetector(
                           onTap: () {
-                            // QR Scanner logic
+                            Get.to(() => const CameraScanScreen());
                           },
                           child: Container(
                             padding: EdgeInsets.all(10.r),
