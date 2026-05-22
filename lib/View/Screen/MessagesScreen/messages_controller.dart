@@ -5,7 +5,7 @@ import 'package:raouf26mobileapp/Utils/custom_snackbar.dart';
 
 class MessagesController extends GetxController {
   var selectedTab = 0.obs; // 0 for All, 1 for Traveler, 2 for Client
-  var userRole = "Traveler".obs;
+  var userRole = SharedPreferenceHelper.getCachedUserRole().obs;
 
   @override
   void onInit() {

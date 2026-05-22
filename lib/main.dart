@@ -7,10 +7,14 @@ import 'View/Screen/SplashScreen/splash_screen.dart';
 import 'Utils/Localizations/app_translations.dart';
 import 'Utils/locale_controller.dart';
 import 'Utils/theme_controller.dart';
+import 'helper/shared_preference_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
+  
+  // Pre-load user role cache
+  await SharedPreferenceHelper.getUserRole();
 
   // Load saved locale or auto detect
   Locale initialLocale = const Locale('en', 'US');
