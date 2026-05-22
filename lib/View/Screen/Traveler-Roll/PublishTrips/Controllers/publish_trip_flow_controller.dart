@@ -9,6 +9,7 @@ class PublishTripFlowController extends GetxController {
   final RxBool isFromDetailsScreen = false.obs;
   final RxInt targetStep = 0.obs;
   final Rx<DateTime?> selectedDate = Rx<DateTime?>(null);
+  final Rx<DateTime?> returnDate = Rx<DateTime?>(null);
   final Rx<DateTime> focusedDate = DateTime.now().obs;
 
   final departureController = TextEditingController();
@@ -166,6 +167,7 @@ class PublishTripFlowController extends GetxController {
 
   void clearSelection() {
     selectedDate.value = null;
+    returnDate.value = null;
   }
 
   bool validateTrip() {

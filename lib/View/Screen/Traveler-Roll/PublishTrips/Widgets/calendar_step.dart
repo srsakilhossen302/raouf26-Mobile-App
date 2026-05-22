@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../Controllers/publish_trip_flow_controller.dart';
 
-class CalendarStep extends StatelessWidget {
+class CalendarStep extends StatefulWidget {
   final PublishTripFlowController controller;
   final bool isDarkMode;
 
@@ -15,6 +15,61 @@ class CalendarStep extends StatelessWidget {
     required this.controller,
     required this.isDarkMode,
   });
+
+  @override
+  State<CalendarStep> createState() => _CalendarStepState();
+}
+
+class _CalendarStepState extends State<CalendarStep> with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  double _dragOffset = 0.0;
+  late final double _maxDragOffset;
+
+  @override
+  void initState() {
+    super.initState();
+    _maxDragOffset = 265.h;
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _animateTo(double target) {
+    final double start = _dragOffset;
+    _animationController.stop();
+    _animationController.reset();
+
+    final Animation<double> animation = Tween<double>(
+      begin: start,
+      end: target,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOutCubic,
+    ));
+
+    animation.addListener(() {
+      setState(() {
+        _dragOffset = animation.value;
+      });
+    });
+
+    _animationController.forward();
+  }
+
+  void _toggleExpanded() {
+    if (_dragOffset > _maxDragOffset / 2) {
+      _animateTo(0.0);
+    } else {
+      _animateTo(_maxDragOffset);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +86,7 @@ class CalendarStep extends StatelessWidget {
                   style: GoogleFonts.manrope(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.w700,
-                    color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                    color: widget.isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
                   ),
                 ),
                 SizedBox(height: 8.h),
@@ -39,7 +94,7 @@ class CalendarStep extends StatelessWidget {
                   "List your journey and accept delivery requests from trusted senders.",
                   style: GoogleFonts.manrope(
                     fontSize: 14.sp,
-                    color: isDarkMode
+                    color: widget.isDarkMode
                         ? Colors.white70
                         : const Color(0xFF666666),
                   ),
@@ -61,7 +116,7 @@ class CalendarStep extends StatelessWidget {
                       padding: EdgeInsets.only(bottom: 24.h),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: isDarkMode
+                          color: widget.isDarkMode
                               ? Colors.white.withOpacity(0.05)
                               : const Color(0xFFF9F9F9),
                           borderRadius: BorderRadius.circular(16.r),
@@ -69,7 +124,8 @@ class CalendarStep extends StatelessWidget {
                         padding: EdgeInsets.all(16.w),
                         child: Obx(() {
                           // Dummy access to ensure GetX tracks the dependency
-                          controller.selectedDate.value;
+                          widget.controller.selectedDate.value;
+                          widget.controller.returnDate.value;
                           return TableCalendar(
                             firstDay: DateTime.now().subtract(
                               const Duration(days: 30),
@@ -86,7 +142,7 @@ class CalendarStep extends StatelessWidget {
                               titleTextStyle: GoogleFonts.manrope(
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.w700,
-                                color: isDarkMode ? Colors.white : Colors.black,
+                                color: widget.isDarkMode ? Colors.white : Colors.black,
                               ),
                               leftChevronVisible: false,
                               rightChevronVisible: false,
@@ -104,11 +160,11 @@ class CalendarStep extends StatelessWidget {
                             calendarStyle: CalendarStyle(
                               defaultTextStyle: GoogleFonts.manrope(
                                 fontSize: 14.sp,
-                                color: isDarkMode ? Colors.white : Colors.black,
+                                color: widget.isDarkMode ? Colors.white : Colors.black,
                               ),
                               weekendTextStyle: GoogleFonts.manrope(
                                 fontSize: 14.sp,
-                                color: isDarkMode ? Colors.white : Colors.black,
+                                color: widget.isDarkMode ? Colors.white : Colors.black,
                               ),
                               selectedDecoration: const BoxDecoration(
                                 color: Color(0xFF4A80F0),
@@ -116,17 +172,72 @@ class CalendarStep extends StatelessWidget {
                               ),
                               selectedTextStyle: const TextStyle(color: Colors.white),
                               todayDecoration: BoxDecoration(
-                                color: Color(0xFF4A80F0).withOpacity(0.1),
+                                color: const Color(0xFF4A80F0).withOpacity(0.1),
                                 shape: BoxShape.circle,
                               ),
                               outsideDaysVisible: false,
                             ),
-                            selectedDayPredicate: (day) =>
-                                isSameDay(controller.selectedDate.value, day),
+                            selectedDayPredicate: (day) {
+                              return isSameDay(widget.controller.selectedDate.value, day) ||
+                                  isSameDay(widget.controller.returnDate.value, day);
+                            },
+                            calendarBuilders: CalendarBuilders(
+                              defaultBuilder: (context, day, focusedDay) {
+                                final controller = widget.controller;
+                                if (controller.selectedDate.value != null &&
+                                    controller.returnDate.value != null &&
+                                    day.isAfter(controller.selectedDate.value!) &&
+                                    day.isBefore(controller.returnDate.value!)) {
+                                  // Highlight range between selected departure and return dates
+                                  return Container(
+                                    margin: const EdgeInsets.symmetric(vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF4A80F0).withOpacity(0.15),
+                                      shape: BoxShape.rectangle,
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      '${day.day}',
+                                      style: GoogleFonts.manrope(
+                                        fontSize: 14.sp,
+                                        color: widget.isDarkMode ? Colors.white : Colors.black,
+                                      ),
+                                    ),
+                                  );
+                                }
+                                return null;
+                              },
+                            ),
                             onDaySelected: (selectedDay, focusedDay) {
+                              final controller = widget.controller;
                               if (controller.selectedDate.value == null) {
                                 controller.selectedDate.value = selectedDay;
                                 controller.focusedDate.value = focusedDay;
+                                _animateTo(0.0);
+                              } else if (controller.returnDate.value == null) {
+                                if (selectedDay.isAfter(controller.selectedDate.value!)) {
+                                  controller.returnDate.value = selectedDay;
+                                  controller.focusedDate.value = focusedDay;
+                                  _animateTo(0.0);
+                                } else {
+                                  controller.selectedDate.value = selectedDay;
+                                  controller.focusedDate.value = focusedDay;
+                                }
+                              } else {
+                                if (isSameDay(controller.returnDate.value, selectedDay)) {
+                                  controller.returnDate.value = null;
+                                } else if (isSameDay(controller.selectedDate.value, selectedDay)) {
+                                  controller.selectedDate.value = null;
+                                  controller.returnDate.value = null;
+                                } else if (selectedDay.isAfter(controller.selectedDate.value!)) {
+                                  controller.returnDate.value = selectedDay;
+                                  controller.focusedDate.value = focusedDay;
+                                  _animateTo(0.0);
+                                } else {
+                                  controller.selectedDate.value = selectedDay;
+                                  controller.returnDate.value = null;
+                                  controller.focusedDate.value = focusedDay;
+                                }
                               }
                             },
                           );
@@ -140,213 +251,276 @@ class CalendarStep extends StatelessWidget {
           ),
         ),
 
-        // Selection UI (Image 2)
+        // Selection UI (Draggable Bottom Sheet)
         Positioned(
-          bottom: 0,
+          bottom: -_dragOffset,
           left: 0,
           right: 0,
           child: Obx(() {
-            if (controller.selectedDate.value == null) return const SizedBox();
+            if (widget.controller.selectedDate.value == null) return const SizedBox();
             return Container(
-            padding: EdgeInsets.all(24.w),
-            decoration: BoxDecoration(
-              color: isDarkMode ? const Color(0xFF1A1A1A) : Colors.white,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 20,
-                  offset: const Offset(0, -5),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Flexible(
-                      child: GestureDetector(
-                        onTap: () => controller.currentStep.value = 1,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20.w,
-                            vertical: 12.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF1A1A1A),
-                            borderRadius: BorderRadius.circular(12.r),
-                          ),
-                          child: Text(
-                            [
-                              DateFormat('EEE, d MMM').format(controller.selectedDate.value!).toUpperCase(),
-                              if (controller.departureTime.value.isNotEmpty) "Dep. ${controller.departureTime.value}",
-                              if (controller.arrivalTime.value.isNotEmpty) "Arr. ${controller.arrivalTime.value}",
-                            ].join(" • "),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.manrope(
-                              color: Colors.white,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 12.w),
-                  ],
-                ),
-                SizedBox(height: 16.h),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Departure & Destination Card
-                    Expanded(
-                      flex: 4,
-                      child: GestureDetector(
-                        onTap: () => controller.currentStep.value = 1,
-                        child: _buildSelectionCard(
-                          isDarkMode: isDarkMode,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(8.w),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFF0F4FF),
-                                  borderRadius: BorderRadius.circular(8.r),
-                                ),
-                                child: const Icon(
-                                  Icons.route_outlined,
-                                  color: Color(0xFF4A80F0),
-                                  size: 18,
-                                ),
-                              ),
-                              SizedBox(height: 12.h),
-                              Text(
-                                "Departure & Destination",
-                                style: GoogleFonts.manrope(
-                                  fontSize: 12.sp,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              SizedBox(height: 12.h),
-                              Obx(
-                                () => _buildMiniInput(
-                                  Icons.location_on,
-                                  controller.departureText.value.isEmpty
-                                      ? "Departure"
-                                      : controller.departureText.value,
-                                  isDarkMode,
-                                ),
-                              ),
-                              SizedBox(height: 8.h),
-                              Obx(
-                                () => _buildMiniInput(
-                                  Icons.near_me,
-                                  controller.destinationText.value.isEmpty
-                                      ? "Destination"
-                                      : controller.destinationText.value,
-                                  isDarkMode,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 12.w),
-                    // Right Column
-                    Expanded(
-                      flex: 4,
+              padding: EdgeInsets.fromLTRB(24.w, 12.h, 24.w, 24.w),
+              decoration: BoxDecoration(
+                color: widget.isDarkMode ? const Color(0xFF1A1A1A) : Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, -5),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Drag Handle Area
+                  GestureDetector(
+                    onVerticalDragUpdate: (details) {
+                      setState(() {
+                        _dragOffset += details.primaryDelta!;
+                        _dragOffset = _dragOffset.clamp(0.0, _maxDragOffset);
+                      });
+                    },
+                    onVerticalDragEnd: (details) {
+                      double velocity = details.primaryVelocity ?? 0;
+                      if (velocity > 300 || _dragOffset > _maxDragOffset / 2) {
+                        _animateTo(_maxDragOffset);
+                      } else {
+                        _animateTo(0.0);
+                      }
+                    },
+                    behavior: HitTestBehavior.opaque,
+                    child: Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.only(bottom: 12.h),
                       child: Column(
                         children: [
-                          GestureDetector(
-                            onTap: () => controller.currentStep.value = 2,
-                            child: _buildSelectionCard(
-                              isDarkMode: isDarkMode,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Set Price & Capacity",
-                                    style: GoogleFonts.manrope(
-                                      fontSize: 12.sp,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                  SizedBox(height: 12.h),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: Obx(
-                                          () => _buildMiniTextField(
-                                            controller.pricePerPackageText.value.isEmpty
-                                                ? "Price/ kg"
-                                                : "${controller.pricePerPackageText.value} ${controller.selectedCurrency.value}",
-                                            isDarkMode,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 8.w),
-                                      Expanded(
-                                        child: Obx(
-                                          () => _buildMiniTextField(
-                                            controller.capacityText.value.isEmpty
-                                                ? "e.g. 10 kg"
-                                                : "${controller.capacityText.value} kg",
-                                            isDarkMode,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                          // Centered Horizontal Pill
+                          Center(
+                            child: Container(
+                              width: 48.w,
+                              height: 5.h,
+                              decoration: BoxDecoration(
+                                color: widget.isDarkMode ? Colors.white24 : Colors.black12,
+                                borderRadius: BorderRadius.circular(2.5.r),
                               ),
                             ),
                           ),
                           SizedBox(height: 12.h),
-                          GestureDetector(
-                            onTap: () => controller.currentStep.value = 3,
-                            child: _buildSelectionCard(
-                              isDarkMode: isDarkMode,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Set Travel Details",
-                                    style: GoogleFonts.manrope(
-                                      fontSize: 12.sp,
-                                      color: Colors.grey,
+                          // Date display row
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Flexible(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    if (_dragOffset > _maxDragOffset / 2) {
+                                      _animateTo(0.0);
+                                    }
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 20.w,
+                                      vertical: 12.h,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF1A1A1A),
+                                      borderRadius: BorderRadius.circular(12.r),
+                                    ),
+                                    child: Text(
+                                      [
+                                        DateFormat('EEE, d MMM').format(widget.controller.selectedDate.value!).toUpperCase(),
+                                        if (widget.controller.returnDate.value != null)
+                                          "RET. ${DateFormat('EEE, d MMM').format(widget.controller.returnDate.value!).toUpperCase()}",
+                                        if (widget.controller.departureTime.value.isNotEmpty) "Dep. ${widget.controller.departureTime.value}",
+                                        if (widget.controller.arrivalTime.value.isNotEmpty) "Arr. ${widget.controller.arrivalTime.value}",
+                                      ].join(" • "),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: GoogleFonts.manrope(
+                                        color: Colors.white,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
-                                  SizedBox(height: 12.h),
-                                  Obx(
-                                    () => _buildMiniTextField(
-                                      controller.travelDetailsSummary.value.isEmpty
-                                          ? "e.g. flight, boat etc."
-                                          : controller.travelDetailsSummary.value,
-                                      isDarkMode,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
+                              SizedBox(width: 12.w),
+                            ],
                           ),
                         ],
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: 24.h),
-              ],
-            ),
-          );
-        }),
-      ),
-    ],
+                  ),
+                  SizedBox(height: 16.h),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Departure & Destination Card
+                      Expanded(
+                        flex: 4,
+                        child: GestureDetector(
+                          onTap: () {
+                            if (_dragOffset > _maxDragOffset / 2) {
+                              _animateTo(0.0);
+                            } else {
+                              widget.controller.currentStep.value = 1;
+                            }
+                          },
+                          child: _buildSelectionCard(
+                            isDarkMode: widget.isDarkMode,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(8.w),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFF0F4FF),
+                                    borderRadius: BorderRadius.circular(8.r),
+                                  ),
+                                  child: const Icon(
+                                    Icons.route_outlined,
+                                    color: Color(0xFF4A80F0),
+                                    size: 18,
+                                  ),
+                                ),
+                                SizedBox(height: 12.h),
+                                Text(
+                                  "Departure & Destination",
+                                  style: GoogleFonts.manrope(
+                                    fontSize: 12.sp,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                SizedBox(height: 12.h),
+                                Obx(
+                                  () => _buildMiniInput(
+                                    Icons.location_on,
+                                    widget.controller.departureText.value.isEmpty
+                                        ? "Departure"
+                                        : widget.controller.departureText.value,
+                                    widget.isDarkMode,
+                                  ),
+                                ),
+                                SizedBox(height: 8.h),
+                                Obx(
+                                  () => _buildMiniInput(
+                                    Icons.near_me,
+                                    widget.controller.destinationText.value.isEmpty
+                                        ? "Destination"
+                                        : widget.controller.destinationText.value,
+                                    widget.isDarkMode,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 12.w),
+                      // Right Column
+                      Expanded(
+                        flex: 4,
+                        child: Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                if (_dragOffset > _maxDragOffset / 2) {
+                                  _animateTo(0.0);
+                                } else {
+                                  widget.controller.currentStep.value = 2;
+                                }
+                              },
+                              child: _buildSelectionCard(
+                                isDarkMode: widget.isDarkMode,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Set Price & Capacity",
+                                      style: GoogleFonts.manrope(
+                                        fontSize: 12.sp,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    SizedBox(height: 12.h),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Obx(
+                                            () => _buildMiniTextField(
+                                              widget.controller.pricePerPackageText.value.isEmpty
+                                                  ? "Price/ kg"
+                                                  : "${widget.controller.pricePerPackageText.value} ${widget.controller.selectedCurrency.value}",
+                                              widget.isDarkMode,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(width: 8.w),
+                                        Expanded(
+                                          child: Obx(
+                                            () => _buildMiniTextField(
+                                              widget.controller.capacityText.value.isEmpty
+                                                  ? "e.g. 10 kg"
+                                                  : "${widget.controller.capacityText.value} kg",
+                                              widget.isDarkMode,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 12.h),
+                            GestureDetector(
+                              onTap: () {
+                                if (_dragOffset > _maxDragOffset / 2) {
+                                  _animateTo(0.0);
+                                } else {
+                                  widget.controller.currentStep.value = 3;
+                                }
+                              },
+                              child: _buildSelectionCard(
+                                isDarkMode: widget.isDarkMode,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Set Travel Details",
+                                      style: GoogleFonts.manrope(
+                                        fontSize: 12.sp,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    SizedBox(height: 12.h),
+                                    Obx(
+                                      () => _buildMiniTextField(
+                                        widget.controller.travelDetailsSummary.value.isEmpty
+                                            ? "e.g. flight, boat etc."
+                                            : widget.controller.travelDetailsSummary.value,
+                                        widget.isDarkMode,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 24.h),
+                ],
+              ),
+            );
+          }),
+        ),
+      ],
     );
   }
 
