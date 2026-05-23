@@ -28,25 +28,25 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
 
-    // 1. Entrance animation controller (elastic scale, rotation, fade-in)
+    // 1. Entrance animation controller (smooth minimalist fade & scale-in)
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1400),
+      duration: const Duration(milliseconds: 1000),
     );
 
-    // Springy elastic scale-up entrance animation
-    _scaleAnimation = Tween<double>(begin: 0.3, end: 1.0).animate(
+    // Smooth, minimalist scale-up entrance animation
+    _scaleAnimation = Tween<double>(begin: 0.9, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Curves.elasticOut,
+        curve: Curves.easeOutCubic,
       ),
     );
 
-    // Elegant initial rotation settling down
-    _rotationAnimation = Tween<double>(begin: -0.15, end: 0.0).animate(
+    // Static rotation (no rotation for a clean minimalist look)
+    _rotationAnimation = Tween<double>(begin: 0.0, end: 0.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Curves.elasticOut,
+        curve: Curves.linear,
       ),
     );
 
@@ -54,26 +54,26 @@ class _SplashScreenState extends State<SplashScreen>
     _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.0, 0.4, curve: Curves.easeIn),
+        curve: const Interval(0.0, 0.6, curve: Curves.easeIn),
       ),
     );
 
-    // 2. Continuous breathing & floating animation controller
+    // 2. Continuous slow, subtle breathing & floating animation controller
     _breathingController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1800),
+      duration: const Duration(milliseconds: 3000),
     );
 
-    // Gentle pulse scale between 0.93 and 1.07
-    _pulseAnimation = Tween<double>(begin: 0.93, end: 1.07).animate(
+    // Extremely subtle pulse scale between 0.98 and 1.02
+    _pulseAnimation = Tween<double>(begin: 0.98, end: 1.02).animate(
       CurvedAnimation(
         parent: _breathingController,
         curve: Curves.easeInOut,
       ),
     );
 
-    // Smooth vertical floating between -6px and 6px
-    _floatAnimation = Tween<double>(begin: -6.0, end: 6.0).animate(
+    // Extremely subtle vertical floating between -3px and 3px
+    _floatAnimation = Tween<double>(begin: -3.0, end: 3.0).animate(
       CurvedAnimation(
         parent: _breathingController,
         curve: Curves.easeInOut,
@@ -108,8 +108,8 @@ class _SplashScreenState extends State<SplashScreen>
         fit: StackFit.expand,
         children: [
           // Background Image
-          Image.asset(
-            "assets/images/Home-img-1.png",
+          SvgPicture.asset(
+            "assets/icons/Home.svg",
             fit: BoxFit.cover,
           ),
 
@@ -133,7 +133,7 @@ class _SplashScreenState extends State<SplashScreen>
                       child: Opacity(
                         opacity: opacity,
                         child: SvgPicture.asset(
-                          "assets/icons/Logo2.svg",
+                          "assets/icons/Logo.svg",
                           width: 75.w,
                           height: 75.w,
                         ),

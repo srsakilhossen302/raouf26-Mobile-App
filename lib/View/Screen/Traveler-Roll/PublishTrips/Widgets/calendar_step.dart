@@ -28,7 +28,7 @@ class _CalendarStepState extends State<CalendarStep> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _maxDragOffset = 265.h;
+    _maxDragOffset = 450.h;
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
@@ -63,12 +63,31 @@ class _CalendarStepState extends State<CalendarStep> with SingleTickerProviderSt
     _animationController.forward();
   }
 
-  void _toggleExpanded() {
-    if (_dragOffset > _maxDragOffset / 2) {
-      _animateTo(0.0);
-    } else {
-      _animateTo(_maxDragOffset);
-    }
+  void _animateToDismiss(double target) {
+    final double start = _dragOffset;
+    _animationController.stop();
+    _animationController.reset();
+
+    final Animation<double> animation = Tween<double>(
+      begin: start,
+      end: target,
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeOutCubic,
+    ));
+
+    animation.addListener(() {
+      setState(() {
+        _dragOffset = animation.value;
+      });
+    });
+
+    _animationController.forward().then((_) {
+      widget.controller.clearSelection();
+      setState(() {
+        _dragOffset = 0.0;
+      });
+    });
   }
 
   @override
@@ -101,150 +120,143 @@ class _CalendarStepState extends State<CalendarStep> with SingleTickerProviderSt
                 ),
                 SizedBox(height: 24.h),
 
-                // Calendar List
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 4, // Show 4 months
-                  itemBuilder: (context, index) {
-                    DateTime monthDate = DateTime(
-                      DateTime.now().year,
-                      DateTime.now().month + index,
-                      1,
-                    );
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 24.h),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: widget.isDarkMode
-                              ? Colors.white.withOpacity(0.05)
-                              : const Color(0xFFF9F9F9),
-                          borderRadius: BorderRadius.circular(16.r),
-                        ),
-                        padding: EdgeInsets.all(16.w),
-                        child: Obx(() {
-                          // Dummy access to ensure GetX tracks the dependency
-                          widget.controller.selectedDate.value;
-                          widget.controller.returnDate.value;
-                          return TableCalendar(
-                            firstDay: DateTime.now().subtract(
-                              const Duration(days: 30),
-                            ),
-                            lastDay: DateTime.now().add(
-                              const Duration(days: 365),
-                            ),
-                            focusedDay: monthDate,
-                            currentDay: DateTime.now(),
-                            headerVisible: true,
-                            headerStyle: HeaderStyle(
-                              formatButtonVisible: false,
-                              titleCentered: false,
-                              titleTextStyle: GoogleFonts.manrope(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w700,
-                                color: widget.isDarkMode ? Colors.white : Colors.black,
-                              ),
-                              leftChevronVisible: false,
-                              rightChevronVisible: false,
-                            ),
-                            daysOfWeekStyle: DaysOfWeekStyle(
-                              weekdayStyle: GoogleFonts.manrope(
-                                fontSize: 12.sp,
-                                color: Colors.grey,
-                              ),
-                              weekendStyle: GoogleFonts.manrope(
-                                fontSize: 12.sp,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            calendarStyle: CalendarStyle(
-                              defaultTextStyle: GoogleFonts.manrope(
-                                fontSize: 14.sp,
-                                color: widget.isDarkMode ? Colors.white : Colors.black,
-                              ),
-                              weekendTextStyle: GoogleFonts.manrope(
-                                fontSize: 14.sp,
-                                color: widget.isDarkMode ? Colors.white : Colors.black,
-                              ),
-                              selectedDecoration: const BoxDecoration(
-                                color: Color(0xFF4A80F0),
-                                shape: BoxShape.circle,
-                              ),
-                              selectedTextStyle: const TextStyle(color: Colors.white),
-                              todayDecoration: BoxDecoration(
-                                color: const Color(0xFF4A80F0).withOpacity(0.1),
-                                shape: BoxShape.circle,
-                              ),
-                              outsideDaysVisible: false,
-                            ),
-                            selectedDayPredicate: (day) {
-                              return isSameDay(widget.controller.selectedDate.value, day) ||
-                                  isSameDay(widget.controller.returnDate.value, day);
-                            },
-                            calendarBuilders: CalendarBuilders(
-                              defaultBuilder: (context, day, focusedDay) {
-                                final controller = widget.controller;
-                                if (controller.selectedDate.value != null &&
-                                    controller.returnDate.value != null &&
-                                    day.isAfter(controller.selectedDate.value!) &&
-                                    day.isBefore(controller.returnDate.value!)) {
-                                  // Highlight range between selected departure and return dates
-                                  return Container(
-                                    margin: const EdgeInsets.symmetric(vertical: 4),
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xFF4A80F0).withOpacity(0.15),
-                                      shape: BoxShape.rectangle,
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      '${day.day}',
-                                      style: GoogleFonts.manrope(
-                                        fontSize: 14.sp,
-                                        color: widget.isDarkMode ? Colors.white : Colors.black,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                return null;
-                              },
-                            ),
-                            onDaySelected: (selectedDay, focusedDay) {
-                              final controller = widget.controller;
-                              if (controller.selectedDate.value == null) {
-                                controller.selectedDate.value = selectedDay;
-                                controller.focusedDate.value = focusedDay;
-                                _animateTo(0.0);
-                              } else if (controller.returnDate.value == null) {
-                                if (selectedDay.isAfter(controller.selectedDate.value!)) {
-                                  controller.returnDate.value = selectedDay;
-                                  controller.focusedDate.value = focusedDay;
-                                  _animateTo(0.0);
-                                } else {
-                                  controller.selectedDate.value = selectedDay;
-                                  controller.focusedDate.value = focusedDay;
-                                }
-                              } else {
-                                if (isSameDay(controller.returnDate.value, selectedDay)) {
-                                  controller.returnDate.value = null;
-                                } else if (isSameDay(controller.selectedDate.value, selectedDay)) {
-                                  controller.selectedDate.value = null;
-                                  controller.returnDate.value = null;
-                                } else if (selectedDay.isAfter(controller.selectedDate.value!)) {
-                                  controller.returnDate.value = selectedDay;
-                                  controller.focusedDate.value = focusedDay;
-                                  _animateTo(0.0);
-                                } else {
-                                  controller.selectedDate.value = selectedDay;
-                                  controller.returnDate.value = null;
-                                  controller.focusedDate.value = focusedDay;
-                                }
-                              }
-                            },
-                          );
-                        }),
+                // Calendar Container
+                Container(
+                  decoration: BoxDecoration(
+                    color: widget.isDarkMode
+                        ? Colors.white.withOpacity(0.05)
+                        : const Color(0xFFF9F9F9),
+                    borderRadius: BorderRadius.circular(16.r),
+                  ),
+                  padding: EdgeInsets.all(16.w),
+                  child: Obx(() {
+                    return TableCalendar(
+                      firstDay: DateTime.now().subtract(
+                        const Duration(days: 30),
                       ),
+                      lastDay: DateTime.now().add(
+                        const Duration(days: 365),
+                      ),
+                      focusedDay: widget.controller.focusedDate.value,
+                      currentDay: DateTime.now(),
+                      headerVisible: true,
+                      headerStyle: HeaderStyle(
+                        formatButtonVisible: false,
+                        titleCentered: true,
+                        titleTextStyle: GoogleFonts.manrope(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w700,
+                          color: widget.isDarkMode ? Colors.white : Colors.black,
+                        ),
+                        leftChevronIcon: Icon(
+                          Icons.chevron_left,
+                          color: widget.isDarkMode ? Colors.white : Colors.black,
+                        ),
+                        rightChevronIcon: Icon(
+                          Icons.chevron_right,
+                          color: widget.isDarkMode ? Colors.white : Colors.black,
+                        ),
+                        leftChevronVisible: true,
+                        rightChevronVisible: true,
+                      ),
+                      onPageChanged: (focusedDay) {
+                        widget.controller.focusedDate.value = focusedDay;
+                      },
+                      daysOfWeekStyle: DaysOfWeekStyle(
+                        weekdayStyle: GoogleFonts.manrope(
+                          fontSize: 12.sp,
+                          color: Colors.grey,
+                        ),
+                        weekendStyle: GoogleFonts.manrope(
+                          fontSize: 12.sp,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      calendarStyle: CalendarStyle(
+                        defaultTextStyle: GoogleFonts.manrope(
+                          fontSize: 14.sp,
+                          color: widget.isDarkMode ? Colors.white : Colors.black,
+                        ),
+                        weekendTextStyle: GoogleFonts.manrope(
+                          fontSize: 14.sp,
+                          color: widget.isDarkMode ? Colors.white : Colors.black,
+                        ),
+                        selectedDecoration: const BoxDecoration(
+                          color: Color(0xFF4A80F0),
+                          shape: BoxShape.circle,
+                        ),
+                        selectedTextStyle: const TextStyle(color: Colors.white),
+                        todayDecoration: BoxDecoration(
+                          color: const Color(0xFF4A80F0).withOpacity(0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        outsideDaysVisible: false,
+                      ),
+                      selectedDayPredicate: (day) {
+                        return isSameDay(widget.controller.selectedDate.value, day) ||
+                            isSameDay(widget.controller.returnDate.value, day);
+                      },
+                      calendarBuilders: CalendarBuilders(
+                        defaultBuilder: (context, day, focusedDay) {
+                          final controller = widget.controller;
+                          if (controller.selectedDate.value != null &&
+                              controller.returnDate.value != null &&
+                              day.isAfter(controller.selectedDate.value!) &&
+                              day.isBefore(controller.returnDate.value!)) {
+                            // Highlight range between selected departure and return dates
+                            return Container(
+                              margin: const EdgeInsets.symmetric(vertical: 4),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF4A80F0).withOpacity(0.15),
+                                shape: BoxShape.rectangle,
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                '${day.day}',
+                                style: GoogleFonts.manrope(
+                                  fontSize: 14.sp,
+                                  color: widget.isDarkMode ? Colors.white : Colors.black,
+                                ),
+                              ),
+                            );
+                          }
+                          return null;
+                        },
+                      ),
+                      onDaySelected: (selectedDay, focusedDay) {
+                        final controller = widget.controller;
+                        if (controller.selectedDate.value == null) {
+                          controller.selectedDate.value = selectedDay;
+                          controller.focusedDate.value = focusedDay;
+                          _animateTo(0.0);
+                        } else if (controller.returnDate.value == null) {
+                          if (selectedDay.isAfter(controller.selectedDate.value!)) {
+                            controller.returnDate.value = selectedDay;
+                            controller.focusedDate.value = focusedDay;
+                            _animateTo(0.0);
+                          } else {
+                            controller.selectedDate.value = selectedDay;
+                            controller.focusedDate.value = focusedDay;
+                          }
+                        } else {
+                          if (isSameDay(controller.returnDate.value, selectedDay)) {
+                            controller.returnDate.value = null;
+                          } else if (isSameDay(controller.selectedDate.value, selectedDay)) {
+                            controller.selectedDate.value = null;
+                            controller.returnDate.value = null;
+                          } else if (selectedDay.isAfter(controller.selectedDate.value!)) {
+                            controller.returnDate.value = selectedDay;
+                            controller.focusedDate.value = focusedDay;
+                            _animateTo(0.0);
+                          } else {
+                            controller.selectedDate.value = selectedDay;
+                            controller.returnDate.value = null;
+                            controller.focusedDate.value = focusedDay;
+                          }
+                        }
+                      },
                     );
-                  },
+                  }),
                 ),
               ],
             ),
@@ -284,8 +296,8 @@ class _CalendarStepState extends State<CalendarStep> with SingleTickerProviderSt
                     },
                     onVerticalDragEnd: (details) {
                       double velocity = details.primaryVelocity ?? 0;
-                      if (velocity > 300 || _dragOffset > _maxDragOffset / 2) {
-                        _animateTo(_maxDragOffset);
+                      if (velocity > 200 || _dragOffset > 120.h) {
+                        _animateToDismiss(_maxDragOffset);
                       } else {
                         _animateTo(0.0);
                       }
@@ -315,7 +327,7 @@ class _CalendarStepState extends State<CalendarStep> with SingleTickerProviderSt
                               Flexible(
                                 child: GestureDetector(
                                   onTap: () {
-                                    if (_dragOffset > _maxDragOffset / 2) {
+                                    if (_dragOffset > 50.0) {
                                       _animateTo(0.0);
                                     }
                                   },
@@ -363,7 +375,7 @@ class _CalendarStepState extends State<CalendarStep> with SingleTickerProviderSt
                         flex: 4,
                         child: GestureDetector(
                           onTap: () {
-                            if (_dragOffset > _maxDragOffset / 2) {
+                            if (_dragOffset > 50.0) {
                               _animateTo(0.0);
                             } else {
                               widget.controller.currentStep.value = 1;
@@ -427,7 +439,7 @@ class _CalendarStepState extends State<CalendarStep> with SingleTickerProviderSt
                           children: [
                             GestureDetector(
                               onTap: () {
-                                if (_dragOffset > _maxDragOffset / 2) {
+                                if (_dragOffset > 50.0) {
                                   _animateTo(0.0);
                                 } else {
                                   widget.controller.currentStep.value = 2;
@@ -478,7 +490,7 @@ class _CalendarStepState extends State<CalendarStep> with SingleTickerProviderSt
                             SizedBox(height: 12.h),
                             GestureDetector(
                               onTap: () {
-                                if (_dragOffset > _maxDragOffset / 2) {
+                                if (_dragOffset > 50.0) {
                                   _animateTo(0.0);
                                 } else {
                                   widget.controller.currentStep.value = 3;
