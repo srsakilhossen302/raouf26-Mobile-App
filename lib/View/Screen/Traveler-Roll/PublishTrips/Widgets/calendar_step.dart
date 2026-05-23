@@ -95,41 +95,47 @@ class _CalendarStepState extends State<CalendarStep> with SingleTickerProviderSt
     return Stack(
       children: [
         Positioned.fill(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 250.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Publish Your Trip",
-                  style: GoogleFonts.manrope(
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w700,
-                    color: widget.isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+          child: Obx(() {
+            final hasSelectedDate = widget.controller.selectedDate.value != null;
+            return SingleChildScrollView(
+              padding: EdgeInsets.only(
+                left: 24.w,
+                right: 24.w,
+                bottom: hasSelectedDate ? 450.h : 120.h,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Publish Your Trip",
+                    style: GoogleFonts.manrope(
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w700,
+                      color: widget.isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                    ),
                   ),
-                ),
-                SizedBox(height: 8.h),
-                Text(
-                  "List your journey and accept delivery requests from trusted senders.",
-                  style: GoogleFonts.manrope(
-                    fontSize: 14.sp,
-                    color: widget.isDarkMode
-                        ? Colors.white70
-                        : const Color(0xFF666666),
+                  SizedBox(height: 8.h),
+                  Text(
+                    "List your journey and accept delivery requests from trusted senders.",
+                    style: GoogleFonts.manrope(
+                      fontSize: 14.sp,
+                      color: widget.isDarkMode
+                          ? Colors.white70
+                          : const Color(0xFF666666),
+                    ),
                   ),
-                ),
-                SizedBox(height: 24.h),
+                  SizedBox(height: 24.h),
 
-                // Calendar Container
-                Container(
-                  decoration: BoxDecoration(
-                    color: widget.isDarkMode
-                        ? Colors.white.withOpacity(0.05)
-                        : const Color(0xFFF9F9F9),
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                  padding: EdgeInsets.all(16.w),
-                  child: Obx(() {
+                  // Calendar Container
+                  Container(
+                    decoration: BoxDecoration(
+                      color: widget.isDarkMode
+                          ? Colors.white.withOpacity(0.05)
+                          : const Color(0xFFF9F9F9),
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
+                    padding: EdgeInsets.all(16.w),
+                    child: Obx(() {
                     return TableCalendar(
                       firstDay: DateTime.now().subtract(
                         const Duration(days: 30),
@@ -260,8 +266,9 @@ class _CalendarStepState extends State<CalendarStep> with SingleTickerProviderSt
                 ),
               ],
             ),
-          ),
-        ),
+          );
+        }),
+      ),
 
         // Selection UI (Draggable Bottom Sheet)
         Positioned(
